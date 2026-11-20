@@ -465,6 +465,14 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .pistes button[aria-pressed="true"]{background:var(--teinte);border-color:var(--bocage)}
 @media (max-width:860px){.quoi{grid-template-columns:1fr 1fr}}
 
+.avertissement{background:#FBF6DA;border-left:5px solid var(--colza);border-radius:0;padding:.7rem 1rem;font-size:.97rem;max-width:62ch;margin-top:1rem}
+.carnet{background:#fff;border:3px solid var(--bocage);border-radius:16px;padding:1.3rem 1.5rem;margin:2rem 0}
+.carnet-ligne{border-bottom:1px solid #CFE3E1;padding:.6rem 0}
+.carnet-ligne strong{color:var(--encre)}
+.carnet-ligne p{margin:.2rem 0 0;white-space:pre-line}
+.defi textarea{margin-top:.3rem;background:#fff}
+.defi .lab-like{margin-top:1rem}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -585,8 +593,9 @@ const JEU = [
 ];
 
 const PORTES = [
+  {id:"simplement",t:"Reconnaître quelqu’un, simplement",d:"Un merci précis, un « j’ai vu que tu… ». Sans badge.",c:"var(--prairie)"},
   {id:"faire",t:"Faire reconnaître ce que je fais",d:"Sur l’exploitation, dans l’établissement, en stage ou ailleurs.",c:"var(--colza)"},
-  {id:"reconnaitre",t:"Reconnaître quelqu’un",d:"Ton maître de stage, un camarade, un adulte, un partenaire.",c:"var(--lin)"},
+  {id:"reconnaitre",t:"Reconnaître quelqu’un avec un badge",d:"Ton maître de stage, un camarade, un adulte, un partenaire.",c:"var(--lin)"},
   {id:"demander",t:"Demander à être reconnu",d:"Oser demander à quelqu’un de témoigner.",c:"var(--ciel)"},
   {id:"creer",t:"Créer un badge avec d’autres",d:"Inventer le badge qui manque dans ton établissement.",c:"var(--pomme)"},
   {id:"role",t:"Faire reconnaître mon rôle",d:"Délégué, éco-délégué, sentinelle, élu de l’ALESA, passeur…",c:"var(--ardoise)"}
@@ -751,9 +760,10 @@ accueil(){
       <h1>Reconnaître, ça se fait de mille façons.</h1>
       <p class="intro">Un merci, une confiance, un conseil demandé… et parfois, un badge. Ici, tu découvres comment reconnaître et être reconnu, à ta façon.</p>
       <div class="actions">
-        <a class="btn plein" href="#mille-facons">Je découvre</a>
-        <a class="btn" href="#parcours">Je connais déjà les badges</a>
+        <a class="btn plein" href="#mille-facons">Réfléchir à la reconnaissance</a>
+        <a class="btn" href="#formes">Découvrir les badges numériques</a>
       </div>
+      <p class="avertissement">Les badges n’ont de sens qu’après avoir réfléchi à la reconnaissance. Ne commence par « Découvrir les badges numériques » que si tu as déjà fait ce temps de réflexion, par exemple lors d’un premier atelier.</p>
       <p class="lien-adultes">Vous êtes maître de stage, enseignant, formatrice ? La reconnaissance est une relation : <a href="#adultes">une page est faite pour vous</a>.</p>
     </div>
     <div class="prairie" aria-hidden="true">${html.join("")}</div>
@@ -1246,6 +1256,7 @@ VUES.adultes=()=>`<div class="wrap vue">
   <h2>La reconnaissance est une relation. Vous en faites partie.</h2>
   <p class="intro">Maîtres de stage et d’apprentissage, enseignants, formatrices et formateurs, équipes de vie scolaire, agents de l’exploitation, partenaires : cette page est pour vous. Le reste du site s’adresse aux apprenants, en les tutoyant.</p>
   <div class="adultes">
+    <section><h3>Avant le badge, la reconnaissance</h3><p>Le site commence par un temps de réflexion, sans badge. Un apprenant est bien plus que ses notes : on reconnaît ce qu’il a appris, ce qu’il sait faire, ses qualités, ses engagements, son chemin. La reconnaissance vient de lui-même, des autres, des organisations, de la société, et d’abord de ce qui est dû à tout être humain. Toutes ces reconnaissances ont de la valeur, sans se mesurer sur la même échelle : c’est ce qui les distingue de la note et de la certification. Chacun en est acteur. Le badge n’arrive qu’ensuite, quand une reconnaissance a besoin d’être rendue visible, de circuler et d’évoluer. <a href="#mille-facons">Voir ce temps de réflexion</a>.</p></section>
     <section><h3>Maîtres de stage et d’apprentissage : votre regard compte en premier</h3><p>Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Quelques lignes de votre part sur son badge pèsent plus qu’une appréciation générale. Votre rôle mérite lui aussi d’être reconnu : par les apprenants que vous accueillez, et par l’établissement qui vous les confie.</p></section>
     <section><h3>Trois regards sur un même badge</h3><p>Le professionnel voit le métier. L’enseignant ou le formateur voit le lien avec la formation. L’apprenant dit ce qu’il fait. Le badge rend visible le regard de chacun, et la relation va dans les deux sens. Deux exemples sont sur la page <a href="#ecrire-endossement">« Endosser, c’est reconnaître par écrit »</a>.</p></section>
     <section><h3>Répondre à une demande d’endossement</h3><p>Un apprenant peut vous demander de témoigner sur son badge. Quelques lignes suffisent, si elles disent :</p>
@@ -1387,7 +1398,7 @@ VUES["ce-qui-est-reconnu"]=()=>`<div class="wrap vue">
 function texteReponses(){return "Ce qu’on peut me reconnaître\n\n"+ECRIRE.map(e=>e.q+"\n"+((document.getElementById("e-"+e.id)||{}).value||"")).join("\n\n");}
 document.addEventListener("click",async e=>{
   const pi=e.target.closest("[data-piste]");
-  if(pi){const ta=document.getElementById("e-"+pi.dataset.piste);ta.value=ta.value?ta.value.replace(/\s*$/,"")+", "+pi.textContent:pi.textContent.charAt(0).toUpperCase()+pi.textContent.slice(1);pi.setAttribute("aria-pressed","true");return;}
+  if(pi){const ta=document.getElementById("e-"+pi.dataset.piste);ta.value=ta.value?ta.value.replace(/\s*$/,"")+", "+pi.textContent:pi.textContent.charAt(0).toUpperCase()+pi.textContent.slice(1);pi.setAttribute("aria-pressed","true");REFLEXIONS[ta.id]=ta.value;return;}
   const st=document.getElementById("statut-reponses");
   if(e.target.closest("#copier-reponses")){const txt=texteReponses(),sec=document.getElementById("secours-reponses");
     try{await navigator.clipboard.writeText(txt);st.textContent="Réponses copiées.";sec.classList.remove("on");}
@@ -1451,7 +1462,15 @@ VUES.acteur=()=>`<div class="wrap vue">
     <div class="reco"><h3>Pour toi</h3><ul><li>Oser dire ce que tu fais, avec des mots précis.</li><li>Garder des traces de ce que tu réussis.</li><li>Demander un regard à ceux qui t’ont vu agir.</li></ul></div>
     <div class="reco"><h3>Pour les autres</h3><ul><li>Remarquer ce qu’ils font.</li><li>Leur dire, précisément : « Merci d’avoir… », « J’ai vu que tu… ».</li><li>Témoigner pour eux quand ça compte.</li></ul></div>
   </div>
-  <div class="defi"><h3>Le défi du jour</h3><p id="defi-texte">${DEFIS[0]}</p><button type="button" class="btn petit" id="defi-autre">Une autre idée</button><p class="note">Pas besoin de badge pour ça.</p></div>
+  <div class="defi"><h3>Le défi du jour</h3><p id="defi-texte">${DEFIS[0]}</p><button type="button" class="btn petit" id="defi-autre">Une autre idée</button><label for="r-qui-reco" class="lab-like">Qui vas-tu reconnaître aujourd’hui, et comment ?</label><textarea id="r-qui-reco"></textarea><p class="note">Pas besoin de badge pour ça.</p></div>
+  <section class="carnet" aria-labelledby="titre-carnet">
+    <h3 id="titre-carnet">Mon carnet de reconnaissance</h3>
+    <p>Tout ce que tu as écrit pendant ce temps de réflexion, réuni au même endroit. Garde-le si tu veux : rien n’est enregistré, tout disparaît quand tu fermes la page.</p>
+    <div id="carnet-apercu">${Object.entries(GARDE).filter(([k])=>k!=="r-qui-reco").map(([k,q])=>`<div class="carnet-ligne"><strong>${q}</strong><p>${REFLEXIONS[k]?esc(REFLEXIONS[k]):`<span class="a-remplir">Pas encore de réponse</span>`}</p></div>`).join("")}</div>
+    <div class="actions"><button type="button" class="btn petit" id="copier-carnet">Copier mon carnet</button><button type="button" class="btn petit" id="telecharger-carnet">Télécharger en .txt</button></div>
+    <p class="statut" id="statut-carnet" aria-live="polite"></p>
+    <div class="copie-secours" id="secours-carnet"><textarea readonly></textarea></div>
+  </section>
   <p class="message-fort">Mais comment reconnaître ? Sous quelle forme ?</p>
   ${suite("ce-que-ca-fait","Ce que la reconnaissance fait","formes","Les formes de la reconnaissance")}
 </div>`;
@@ -1459,6 +1478,7 @@ VUES.acteur=()=>`<div class="wrap vue">
 /* ================= TEMPS 2 : RENDRE VISIBLE ================= */
 VUES.formes=()=>`<div class="wrap vue">
   <p class="temps">Temps 2 sur 3, rendre visible</p>
+  <p class="avertissement" id="arrivee-directe" hidden>Tu arrives directement ici ? Les badges n’ont de sens qu’après avoir réfléchi à la reconnaissance. Si tu ne l’as pas encore fait, <a href="#mille-facons">commence par là</a>.</p>
   <h2>La reconnaissance prend mille formes.</h2>
   <p class="intro">Un sourire, une poignée de main, un prix, un diplôme… Passe-les au crible de quatre questions. Que reste-t-il d’un sourire un an après ? Et d’un diplôme ?</p>
   <div class="table-formes"><table>
@@ -1504,7 +1524,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">10 min</span><div><strong>Qui reconnaît</strong><p>Parcourir <a href="#qui-reconnait">les cercles</a>, de soi à la société, jusqu’au cercle de tout être humain : s’y arrêter. Laisser un temps d’écriture individuelle : « Qui t’a reconnu cette semaine ? T’es-tu reconnu ? »</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Égales, mais pas mesurables</strong><p>Faire <a href="#egales">ranger les cinq reconnaissances</a> à deux ou trois volontaires, puis comparer leurs ordres. Débat : peut-on comparer un sourire et un diplôme ?</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Noté, certifié, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
-    <li><span class="duree">15 min</span><div><strong>Ce que ça fait, et qui agit</strong><p>Lire <a href="#ce-que-ca-fait">les témoignages</a>, recueillir des ressentis, puis présenter <a href="#acteur">le défi du jour</a>. Chacun choisit une personne à reconnaître avant la fin de la journée.</p></div></li>
+    <li><span class="duree">15 min</span><div><strong>Ce que ça fait, et qui agit</strong><p>Lire <a href="#ce-que-ca-fait">les témoignages</a>, recueillir des ressentis, puis présenter <a href="#acteur">le défi du jour</a>. Chacun choisit une personne à reconnaître avant la fin de la journée. Inviter ceux qui le souhaitent à copier ou télécharger leur carnet de reconnaissance.</p></div></li>
   </ol>
   <p class="pause">Pause, 10 min</p>
   <h3 class="sous-titre">Temps 2 : Rendre visible (50 min)</h3>
@@ -1529,6 +1549,49 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <div class="suite pas-imprime"><a class="btn" href="#adultes">Retour à la page adultes</a><a class="btn plein" href="#mille-facons">Commencer le parcours</a></div>
 </div>`;
 Object.assign(T,{animer:0});
+/* ---------- reconnaître simplement, sans badge ---------- */
+const FORMES_SIMPLES=["Le dire en face","Un petit mot écrit","Un message","Le dire devant les autres","Lui demander conseil"];
+const SIMPLE={qui:"",vu:"",effet:"",forme:""};
+function phraseSimple(){const q=SIMPLE.qui||"[prénom]",vu=SIMPLE.vu||"[ce que tu as vu]",ef=SIMPLE.effet;return `${q}, merci d’avoir ${vu}.${ef?` ${ef.charAt(0).toUpperCase()+ef.slice(1)}${/[.!?]$/.test(ef)?"":"."}`:""}`;}
+VUES.simplement=()=>`<div class="wrap vue">
+  <p class="fil"><a href="#parcours">Les parcours</a> › Reconnaître quelqu’un, simplement</p>
+  <h2>Reconnaître quelqu’un, simplement.</h2>
+  <p class="intro">Pas besoin de badge. Un merci précis, dit au bon moment, est déjà une reconnaissance forte. Ce qui le rend fort : il dit exactement ce que tu as vu.</p>
+  <div class="mesure">
+    <div><h3>Un merci vague</h3><p>« Merci, t’es sympa. »</p></div>
+    <div class="reco"><h3>Un merci précis</h3><p>« Merci d’avoir pris ma place à l’astreinte samedi. Grâce à toi, j’ai pu aller voir ma grand-mère. »</p></div>
+  </div>
+  <div class="atelier">
+    <form class="form-badge" id="form-simple" novalidate>
+      <ol class="sections-form">
+        <li><h3>À qui ?</h3><div class="ch"><label for="s-qui">Son prénom</label><input type="text" id="s-qui" data-s="qui" placeholder="Léo"></div></li>
+        <li><h3>Ce que tu as vu</h3><div class="ch"><label for="s-vu">Merci d’avoir…</label><input type="text" id="s-vu" data-s="vu" placeholder="pris ma place à l’astreinte samedi"></div></li>
+        <li><h3>Ce que ça a changé</h3><div class="ch"><label for="s-effet">Pour toi, ou pour les autres (facultatif)</label><input type="text" id="s-effet" data-s="effet" placeholder="grâce à toi, j’ai pu aller voir ma grand-mère"></div></li>
+        <li><h3>Comment le dire</h3><fieldset class="ch radios"><legend>Choisis la forme</legend>${FORMES_SIMPLES.map(f=>`<label><input type="radio" name="s-forme" data-s="forme" value="${f}"> ${f}</label>`).join("")}</fieldset></li>
+      </ol>
+    </form>
+    <aside class="apercu"><h3>Ta phrase</h3><div class="message-apercu"><p class="msg-a" id="simple-forme">${SIMPLE.forme||"Choisis une forme"}</p><pre id="simple-phrase">${esc(phraseSimple())}</pre></div>
+      <div class="actions"><button type="button" class="btn petit" id="copier-simple">Copier la phrase</button></div><p class="statut" id="statut-simple" aria-live="polite"></p></aside>
+  </div>
+  <p class="message-fort">Et maintenant, dis-le. C’est tout.</p>
+  <p class="prose">Si ce que cette personne a fait compte vraiment pour son parcours, tu pourras aller plus loin : <a href="#reco-pair">endosser son badge</a> ou <a href="#reconnaitre">lui émettre un badge de reconnaissance</a>.</p>
+  <div class="suite"><a class="btn" href="#parcours">Toutes les portes</a><a class="btn plein" href="#acteur">Revoir le défi du jour</a></div>
+</div>`;
+Object.assign(T,{simplement:3});
+document.addEventListener("input",e=>{const k=e.target.dataset&&e.target.dataset.s;if(!k)return;SIMPLE[k]=e.target.value;const p=document.getElementById("simple-phrase");if(p)p.textContent=phraseSimple();const f=document.getElementById("simple-forme");if(f)f.textContent=SIMPLE.forme||"Choisis une forme";});
+document.addEventListener("change",e=>{const k=e.target.dataset&&e.target.dataset.s;if(k==="forme"){SIMPLE.forme=e.target.value;document.getElementById("simple-forme").textContent=SIMPLE.forme;}});
+async function copierTexte(txt,stId,secId){const st=document.getElementById(stId),sec=secId?document.getElementById(secId):null;
+  try{await navigator.clipboard.writeText(txt);st.textContent="Copié.";if(sec)sec.classList.remove("on");}
+  catch(err){if(sec){sec.classList.add("on");const ta=sec.querySelector("textarea");ta.value=txt;ta.focus();ta.select();}st.textContent="La copie automatique n’a pas marché"+(sec?" : le texte est sélectionné ci-dessous.":".");}}
+async function telechargerTexte(nom,txt,stId){const st=document.getElementById(stId);
+  try{if(DL){await DL.save({filename:nom,data:txt});}else{const url=URL.createObjectURL(new Blob([txt],{type:"text/plain;charset=utf-8"}));const l=document.createElement("a");l.href=url;l.download=nom;document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}st.textContent="Fichier téléchargé.";}
+  catch(err){st.textContent="Le téléchargement n’a pas marché : utilise « Copier ».";}}
+document.addEventListener("click",e=>{
+  if(e.target.closest("#copier-simple"))copierTexte(phraseSimple(),"statut-simple");
+  if(e.target.closest("#copier-carnet"))copierTexte(texteCarnet(),"statut-carnet","secours-carnet");
+  if(e.target.closest("#telecharger-carnet"))telechargerTexte("mon-carnet-de-reconnaissance.txt",texteCarnet(),"statut-carnet");
+});
+
 BUILD.reconnaissance.btn="Construire le badge de reconnaissance";
 
 const BROUILLONS={};
@@ -1627,6 +1690,11 @@ function brancherConstruire(pid){
 }
 
 /* ================= ROUTAGE ================= */
+const REFLEXIONS={};
+const GARDE={"r1":"La dernière fois qu’on t’a reconnu sans le dire ?","r2":"La dernière fois que toi, tu as reconnu quelqu’un ?","e-soi":"Que te reconnais-tu à toi-même ?","e-autre":"Que peux-tu reconnaître à quelqu’un ?","e-orga":"Que peut te reconnaître ton établissement, ou ton entreprise de stage ?","e-societe":"Que peuvent te reconnaître ton territoire, la société, ton pays ?","r-qui1":"Qui t’a reconnu cette semaine ? Dans quel cercle était-il ?","r-ressenti":"Comment t’es-tu senti la dernière fois qu’on t’a reconnu ?","r-qui-reco":"Qui vais-je reconnaître aujourd’hui, et comment ?"};
+document.addEventListener("input",e=>{if(e.target.id&&GARDE[e.target.id]!==undefined)REFLEXIONS[e.target.id]=e.target.value;});
+let VUE_PRECEDENTE="";
+function texteCarnet(){return "MON CARNET DE RECONNAISSANCE\nÉcrit avec « Mille façons de reconnaître »\n\n"+Object.entries(GARDE).map(([k,q])=>q+"\n"+(REFLEXIONS[k]||"(pas de réponse)")).join("\n\n");}
 function afficher(){
   let v=(location.hash||"#accueil").slice(1);
   const cons=v.startsWith("construire-")&&TYPE_BUILD[v.slice(11)]?v.slice(11):null;
@@ -1640,6 +1708,9 @@ function afficher(){
     if(n===t) a.setAttribute("aria-current","step"); else if(n<t&&t>0) a.classList.add("fait");
   });
   if(cons) brancherConstruire(cons); else brancher(v);
+  Object.keys(GARDE).forEach(k=>{const el=document.getElementById(k);if(el&&REFLEXIONS[k])el.value=REFLEXIONS[k];});
+  const av=document.getElementById("arrivee-directe");if(av&&!["acteur","boussole","badge-cest-quoi"].includes(VUE_PRECEDENTE))av.hidden=false;
+  VUE_PRECEDENTE=v;
   window.scrollTo(0,0);
   if(v!=="accueil") $app.focus({preventScroll:true});
 }
