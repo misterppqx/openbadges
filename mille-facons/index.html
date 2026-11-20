@@ -473,6 +473,16 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .defi textarea{margin-top:.3rem;background:#fff}
 .defi .lab-like{margin-top:1rem}
 
+.bn{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;margin:1.5rem 0}
+.bn-visuel{margin:0;text-align:center}
+.bn-visuel img{width:220px;height:220px;border-radius:50%;box-shadow:0 0 0 5px #fff,0 0 0 8px var(--bocage)}
+.bn-visuel figcaption{font-size:.92rem;color:var(--doux);margin-top:.8rem}
+.bn-points{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.bn-points > div{background:var(--teinte);border-radius:14px;padding:1rem 1.2rem}
+.bn-points h3{font-size:1.15rem;margin-bottom:.3rem}
+.bn-points p{margin:0}
+@media (max-width:860px){.bn,.bn-points{grid-template-columns:1fr}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -788,9 +798,9 @@ accueil(){
 },
 boussole(){
   return `<div class="wrap vue">
-    <p class="temps">Temps 2 sur 3, la boussole</p>
+    <p class="temps">Temps 2 sur 3, avant d’agir</p>
     <h2>Est-ce que ça mérite un badge ?</h2>
-    <p class="intro">Le sourire et le merci se suffisent à eux-mêmes. Mais certaines reconnaissances ont besoin d’être rendues visibles. Pense à quelque chose que tu fais ou que tu as fait, et réponds à ces quatre questions, sans réfléchir trop longtemps.</p>
+    <p class="intro">Tu sais maintenant ce qu’est un badge. Mais tout ne mérite pas un badge : le sourire et le merci se suffisent à eux-mêmes. Pense à quelque chose que tu fais ou que tu as fait, et réponds à ces quatre questions, sans réfléchir trop longtemps.</p>
     <form class="boussole" id="form-boussole">${BOUSSOLE.map((q,i)=>`
       <fieldset><legend>${q}</legend>
         <div class="choix-bin">
@@ -800,14 +810,14 @@ boussole(){
       </fieldset>`).join("")}
     </form>
     <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux quatre questions pour voir où tu en es.</p></div>
-    ${suite("formes","Les formes de la reconnaissance","badge-cest-quoi","Un badge, c’est quoi ?")}
+    ${suite("jeu","Devine la famille","parcours","Passer à l’action")}
   </div>`;
 },
 "badge-cest-quoi"(){
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, le badge</p>
     <h2>Un badge, c’est quoi ?</h2>
-    <p class="intro">Une image numérique qui dit ce que tu fais, avec des preuves et des témoignages à l’intérieur. Retourne les cartes pour comprendre ce qui le rend différent d’une note ou d’une attestation.</p>
+    <p class="intro">Regardons de plus près. Retourne les cartes pour comprendre ce qui rend un badge différent d’une note ou d’une attestation, puis ouvre un vrai badge.</p>
     <div class="cartes">${CARTES.map((c,i)=>`
       <button class="carte" type="button" aria-pressed="false" data-carte="${i}">
         <span class="face recto"><span class="titre-carte">${c.t}</span><span class="indice">Retourner la carte</span></span>
@@ -815,7 +825,7 @@ boussole(){
       </button>`).join("")}
     </div>
     ${vueAnatomie()}
-    ${suite("boussole","La boussole","familles","Les familles de badges")}
+    ${suite("badge-numerique","Le badge numérique","familles","Les familles de badges")}
   </div>`;
 },
 familles(){
@@ -872,7 +882,7 @@ jeu(){
       </li>`).join("")}
     </ol>
     <p class="score" id="score" aria-live="polite"></p>
-    ${suite("ecrire-endossement","Écrire un endossement","parcours","Passer aux parcours")}
+    ${suite("ecrire-endossement","Écrire un endossement","boussole","Est-ce que ça mérite un badge ?")}
   </div>`;
 },
 parcours(){
@@ -1489,9 +1499,9 @@ VUES.formes=()=>`<div class="wrap vue">
   <p class="legende-formes"><span><i class="pt pt-oui"></i>oui</span><span><i class="pt pt-parfois"></i>parfois</span><span><i class="pt pt-non"></i>non</span></p>
   <div class="mesure">
     <div><h3>Les formes légères</h3><p>Le sourire, la poignée de main, le merci n’ont besoin de rien de plus. Ils sont parfaits comme ils sont : garde-les ainsi.</p></div>
-    <div class="reco"><h3>Quand il faut rendre visible</h3><p>Quand une reconnaissance doit compter dans ton parcours personnel, scolaire ou professionnel, te suivre, et grandir avec les regards des autres, il faut une forme qui le permette. C’est là que le badge est pertinent : il dure, il se montre, il circule, il évolue, et il reste à toi.</p></div>
+    <div class="reco"><h3>Quand il faut rendre visible</h3><p>Quand une reconnaissance doit compter dans ton parcours personnel, scolaire ou professionnel, te suivre, et grandir avec les regards des autres, il faut une forme qui le permette. Dans le tableau, une seule forme coche les quatre cases : le badge numérique. Tu ne sais pas encore ce que c’est ? C’est normal : on le découvre juste après.</p></div>
   </div>
-  ${suite("acteur","Acteur de la reconnaissance","boussole","Est-ce que ça mérite un badge ?")}
+  ${suite("acteur","Acteur de la reconnaissance","badge-numerique","Découvrir le badge numérique")}
 </div>`;
 Object.assign(T,{"ce-qui-est-reconnu":1,"qui-reconnait":1,egales:1,"ce-que-ca-fait":1,acteur:1,formes:2});
 
@@ -1509,7 +1519,7 @@ document.addEventListener("click",e=>{
 VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <p class="temps">Pour les adultes</p>
   <h2>Animer un atelier de découverte</h2>
-  <p class="intro">Une séance longue, d’environ 2 h 40 pause comprise, pour découvrir la reconnaissance puis les badges, en lycée agricole comme en MFR. Le site sert de support : projeté pour le groupe, puis sur téléphone ou ordinateur pour chacun.</p>
+  <p class="intro">Une séance longue, d’environ 2 h 45 pause comprise, pour découvrir la reconnaissance puis les badges, en lycée agricole comme en MFR. Le site sert de support : projeté pour le groupe, puis sur téléphone ou ordinateur pour chacun.</p>
   <div class="actions pas-imprime"><button class="btn plein" type="button" id="btn-imprimer">Imprimer cette fiche</button></div>
   <div class="anim-cadre">
     <div><h3>Pour qui</h3><p>Un groupe de 8 à 30 apprenants, idéalement au retour d’une période de stage ou d’alternance.</p></div>
@@ -1527,12 +1537,13 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">15 min</span><div><strong>Ce que ça fait, et qui agit</strong><p>Lire <a href="#ce-que-ca-fait">les témoignages</a>, recueillir des ressentis, puis présenter <a href="#acteur">le défi du jour</a>. Chacun choisit une personne à reconnaître avant la fin de la journée. Inviter ceux qui le souhaitent à copier ou télécharger leur carnet de reconnaissance.</p></div></li>
   </ol>
   <p class="pause">Pause, 10 min</p>
-  <h3 class="sous-titre">Temps 2 : Rendre visible (50 min)</h3>
+  <h3 class="sous-titre">Temps 2 : Rendre visible (55 min)</h3>
   <ol class="deroule">
     <li><span class="duree">10 min</span><div><strong>Les formes de la reconnaissance</strong><p>Passer <a href="#formes">les formes au crible</a> avec le groupe. Faire formuler la conclusion par les apprenants : quand faut-il rendre visible ?</p></div></li>
-    <li><span class="duree">5 min</span><div><strong>La boussole</strong><p>Chacun pense à une reconnaissance qui compte et répond aux questions de <a href="#boussole">la boussole</a>.</p></div></li>
+    <li><span class="duree">5 min</span><div><strong>Le badge numérique</strong><p>Présenter <a href="#badge-numerique">ce qu’est un badge</a> à partir d’objets connus (écusson, médaille de club). Partir du principe que personne ne connaît.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Ouvre un badge</strong><p>Projeter <a href="#badge-cest-quoi">les deux badges</a>. Montrer qu’un badge de projet est le même pour tous, mais que chacun y raconte sa part.</p></div></li>
     <li><span class="duree">25 min</span><div><strong>Les trois regards, par groupes de trois</strong><p>Chaque groupe choisit une situation de stage vécue par l’un d’eux. Un joue le professionnel, un le formateur, un l’apprenant. Chacun écrit son regard avec les quatre ingrédients de <a href="#ecrire-endossement">l’endossement</a>. Mise en commun : qu’est-ce que chaque regard voit que les autres ne voient pas ?</p></div></li>
+    <li><span class="duree">5 min</span><div><strong>La boussole</strong><p>Maintenant qu’on sait ce qu’est un badge : chacun pense à une reconnaissance qui compte et se demande, avec <a href="#boussole">la boussole</a>, si elle mérite un badge.</p></div></li>
   </ol>
   <h3 class="sous-titre">Temps 3 : Agir (35 min)</h3>
   <ol class="deroule">
@@ -1549,6 +1560,29 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <div class="suite pas-imprime"><a class="btn" href="#adultes">Retour à la page adultes</a><a class="btn plein" href="#mille-facons">Commencer le parcours</a></div>
 </div>`;
 Object.assign(T,{animer:0});
+VUES["badge-numerique"]=()=>`<div class="wrap vue">
+  <p class="temps">Temps 2 sur 3, rendre visible</p>
+  <h2>Un badge numérique, c’est quoi ?</h2>
+  <p class="intro">Tu connais les écussons cousus sur une veste, ou les médailles d’un club. Un badge numérique, c’est un peu pareil, mais en numérique, et avec toute l’histoire à l’intérieur.</p>
+  <div class="bn">
+    <figure class="bn-visuel"><img src="${BADGE_ECO}" alt="Le badge « Je suis écoresponsable » de l’enseignement agricole"><figcaption>Un vrai badge de l’enseignement agricole</figcaption></figure>
+    <div class="bn-points">
+      <div><h3>Une image…</h3><p>On la voit d’un coup d’œil, comme un écusson.</p></div>
+      <div><h3>… avec des informations à l’intérieur</h3><p>Ce que le badge reconnaît, qui l’a délivré, à qui, quand. Et parfois des preuves (photos, récits) et des témoignages de personnes qui ont vu.</p></div>
+      <div><h3>Qui peut en créer ?</h3><p>Tout le monde : toi, un groupe, un établissement, une entreprise, une association. Pas seulement une école.</p></div>
+      <div><h3>Où est-il rangé ?</h3><p>Dans un espace en ligne à toi, comme une collection. Il te suit, même quand tu quittes l’établissement.</p></div>
+      <div><h3>Comment le montrer ?</h3><p>Par un lien, dans un CV, un portfolio, un dossier de candidature. C’est toi qui choisis à qui.</p></div>
+      <div><h3>Pourquoi « ouvert » ?</h3><p>Les badges suivent un format commun, Open Badges : ils se lisent et se vérifient partout, quelle que soit la plateforme qui les a créés.</p></div>
+    </div>
+  </div>
+  <div class="mesure">
+    <div><h3>Ce que ce n’est pas</h3><ul><li>Pas une note : personne ne te classe.</li><li>Pas un diplôme : il ne remplace pas la certification.</li><li>Pas une obligation : tu décides d’en avoir ou non.</li><li>Pas un « like » : il dit quelque chose de précis, et quelqu’un en témoigne.</li></ul></div>
+    <div class="reco"><h3>Ce que c’est</h3><p>Une façon de rendre visible une reconnaissance qui compte, pour qu’elle dure, qu’elle circule avec toi, et qu’elle grandisse avec le regard des autres. Il coche les quatre cases du tableau des formes : il dure, il se montre, il circule, il évolue.</p></div>
+  </div>
+  ${suite("formes","Les formes de la reconnaissance","badge-cest-quoi","Regarder un badge de plus près")}
+</div>`;
+Object.assign(T,{"badge-numerique":2});
+
 /* ---------- reconnaître simplement, sans badge ---------- */
 const FORMES_SIMPLES=["Le dire en face","Un petit mot écrit","Un message","Le dire devant les autres","Lui demander conseil"];
 const SIMPLE={qui:"",vu:"",effet:"",forme:""};
@@ -1709,7 +1743,7 @@ function afficher(){
   });
   if(cons) brancherConstruire(cons); else brancher(v);
   Object.keys(GARDE).forEach(k=>{const el=document.getElementById(k);if(el&&REFLEXIONS[k])el.value=REFLEXIONS[k];});
-  const av=document.getElementById("arrivee-directe");if(av&&!["acteur","boussole","badge-cest-quoi"].includes(VUE_PRECEDENTE))av.hidden=false;
+  const av=document.getElementById("arrivee-directe");if(av&&!["acteur","badge-numerique"].includes(VUE_PRECEDENTE))av.hidden=false;
   VUE_PRECEDENTE=v;
   window.scrollTo(0,0);
   if(v!=="accueil") $app.focus({preventScroll:true});
@@ -1725,7 +1759,7 @@ function brancher(v){
       const oui=r.reduce((s,x)=>s+ +x.value,0);
       if(oui<=1){out.className="verdict inf";out.innerHTML=`<p><strong>Ça peut rester informel.</strong>Et c’est très bien comme ça. Un merci, une confiance, un souvenir : pas besoin de badge.</p>`;}
       else if(oui===2){out.className="verdict peut";out.innerHTML=`<p><strong>Peut-être.</strong>Tu peux laisser mûrir. Si ça continue ou si quelqu’un d’autre le remarque, un badge pourra avoir du sens.</p>`;}
-      else{out.className="verdict badge";out.innerHTML=`<p><strong>Un badge peut t’être utile.</strong>Ça compte, ça dure, d’autres peuvent en témoigner. Découvre ce qu’est un badge, puis choisis un parcours.</p>`;}
+      else{out.className="verdict badge";out.innerHTML=`<p><strong>Un badge peut t’être utile.</strong>Ça compte, ça dure, d’autres peuvent en témoigner. Passe à l’action : choisis un parcours puis choisis un parcours.</p>`;}
     });
   }
   if(v==="badge-cest-quoi"){
