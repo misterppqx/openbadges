@@ -370,6 +370,14 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .endos-regard{display:inline-block;font-size:.8rem;font-weight:700;color:var(--bocage);background:var(--teinte);border-radius:6px;padding:0 .45rem;margin-bottom:.15rem}
 @media (max-width:860px){.regards{grid-template-columns:1fr}}
 
+.autres-porteurs{margin-top:1.2rem;background:var(--teinte);border-radius:14px;padding:1.1rem 1.3rem}
+.autres-porteurs h3{margin:0 0 .6rem;font-size:1.15rem}
+.autres-porteurs ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.autres-porteurs li{display:flex;gap:.7rem;align-items:flex-start;background:#fff;border-radius:12px;padding:.8rem}
+.autres-porteurs li svg{flex:none}
+.autres-porteurs li span{display:block;font-size:.9rem;color:var(--doux);margin-top:.3rem}
+@media (max-width:860px){.autres-porteurs ul{grid-template-columns:1fr}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -428,10 +436,10 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 /* ================= DONNÉES ================= */
 const FAMILLES = {
   individuel:{nom:"Individuel",c:"var(--colza)",court:"Ce que toi, tu sais faire ou as fait.",ex:"« Je sais conduire la traite seul. »",qui:"Tu le crées toi-même, ou quelqu’un te le propose."},
-  collectif:{nom:"Collectif",c:"var(--pomme)",court:"Ce qu’un groupe a fait ensemble.",ex:"« Notre classe a monté le marché de producteurs de l’établissement. »",qui:"Le groupe le crée, et chacun peut le garder dans ses badges."},
+  collectif:{nom:"Collectif",c:"var(--pomme)",court:"Un badge de projet, proposé à toutes les personnes qui y ont participé.",ex:"« Je contribue à la friperie solidaire de l’établissement. »",qui:"Un apprenant ou l’association des apprenants l’émet et le propose à chaque participant. Chacun reçoit le même badge et le documente avec sa propre contribution."},
   pratique:{nom:"De pratique",c:"var(--prairie)",court:"Une pratique qu’on partage et qu’on fait grandir avec d’autres.",ex:"« Je pratique le maraîchage sur sol vivant. »",qui:"On le rejoint. Il relie des gens qui font la même chose, apprenants comme adultes : des apprenants, leur enseignante, l’agricultrice qui les accueille."},
   role:{nom:"De rôle",c:"var(--ardoise)",court:"Un rôle qui existe dans l’établissement.",ex:"Délégué de classe, sentinelle, éco-délégué.",qui:"Défini par l’établissement, parce que le rôle est reconnu par tous.",inst:true},
-  reconnaissance:{nom:"De reconnaissance",c:"var(--lin)",court:"Un badge que tu émets toi-même vers quelqu’un d’autre.",ex:"« Je reconnais mon maître de stage comme transmetteur de son métier. »",qui:"Toi, ton groupe ou l’association des apprenants l’émettez."}
+  reconnaissance:{nom:"De reconnaissance",c:"var(--lin)",court:"Un badge que tu émets toi-même vers quelqu’un d’autre.",ex:"« Je reconnais mon maître de stage comme transmetteur de son métier. »",qui:"Toi, ton équipe ou l’association des apprenants l’émettez."}
 };
 
 const ICONES = {
@@ -483,7 +491,7 @@ const VIE = [
 const JEU = [
   {s:"Ton copain te dit : « merci d’avoir pris ma place à l’astreinte ».",ok:["informel"],fb:"Un merci, ça se garde comme ça. Pas besoin de badge."},
   {s:"Depuis six mois, tu soignes les chèvres tous les week-ends et tu aimerais pouvoir le montrer à un futur employeur.",ok:["individuel"],fb:"Ça compte dans la durée, d’autres peuvent en témoigner : un badge individuel a du sens."},
-  {s:"Ta classe a organisé le marché de producteurs de l’établissement.",ok:["collectif"],fb:"C’est le groupe qui l’a fait : un badge collectif, que chacun peut garder."},
+  {s:"Avec d’autres apprenants, tu as monté une friperie solidaire dans l’établissement.",ok:["collectif"],fb:"Un projet mené à plusieurs : un badge collectif. Chacun reçoit le même badge et y raconte sa propre contribution."},
   {s:"Avec d’autres apprenants, tu t’occupes du rucher et vous échangez vos astuces, même avec des apiculteurs du coin.",ok:["pratique"],fb:"Une pratique partagée, qui grandit avec d’autres : un badge de pratique."},
   {s:"Tu as été élu délégué de ta classe.",ok:["role"],fb:"Ce rôle existe dans l’établissement : c’est un badge de rôle, défini par l’institution."},
   {s:"Tu veux dire à ton maître de stage qu’il t’a vraiment transmis son métier.",ok:["reconnaissance","informel"],fb:"Les deux marchent. Un merci sincère suffit souvent. Si tu veux que ça compte aussi pour lui, émets-lui un badge de reconnaissance."}
@@ -583,7 +591,7 @@ const PARCOURS = {
     modele:"Pendant mon stage chez vous, vous m’avez transmis [geste, savoir-faire, façon de travailler].\nVous l’avez fait en [comment : en me laissant essayer, en expliquant pourquoi…].\nAujourd’hui, grâce à ça, je [ce que ça a changé pour toi]."},
   "reco-partenaire":{porte:"reconnaitre",t:"Reconnaître un partenaire",
     intro:"Une association, une ferme, une commune vous a accueillis ou aidés ? Votre groupe peut la reconnaître.",
-    fam:["reconnaissance","collectif"],
+    fam:["reconnaissance"],famNote:"Votre équipe ou l’association des apprenants l’émet vers le partenaire.",
     ex:["L’AMAP qui vous a confié un stand.","La commune qui a prêté une salle pour votre projet.","La ferme voisine qui accueille vos visites chaque année."],
     inf:["Une carte signée par la classe.","Une invitation à votre marché ou à vos portes ouvertes.","Un article dans le journal de l’établissement."],
     et:[
@@ -596,7 +604,7 @@ const PARCOURS = {
   demander:{porte:null,t:"Oser demander",
     intro:"Tu as fait quelque chose qui compte, et quelqu’un l’a vu ? Tu peux lui demander d’en témoigner. Ce n’est pas réclamer une note : c’est inviter quelqu’un à dire ce qu’il a vu.",
     fam:["individuel","collectif","pratique"],famNote:"Un endossement peut renforcer tous ces badges.",
-    ex:["Demander à ton maître d’apprentissage d’endosser ton badge « soins aux veaux ».","Demander au responsable de l’AMAP de témoigner pour le badge collectif de ta classe."],
+    ex:["Demander à ton maître d’apprentissage d’endosser ton badge « soins aux veaux ».","Demander au responsable de l’AMAP de témoigner sur ta contribution au projet collectif."],
     inf:["Un « tu as bien géré » à l’oral te suffit ? Garde-le, c’est déjà beaucoup."],
     et:[
       {t:"Choisis ce que tu veux faire reconnaître",d:"Une seule chose à la fois, dite en une phrase."},
@@ -615,7 +623,7 @@ const PARCOURS = {
       {t:"Repérez un engagement qui n’est reconnu nulle part",d:"Ce que des apprenants font, souvent dans l’ombre, et qui compte."},
       {t:"Nommez-le ensemble",d:"Un nom qui vous ressemble, avec un verbe d’action."},
       {t:"Dites ce qui le montre",d:"Pas des critères d’examen : les traces et les témoignages qui disent « oui, c’est bien ça »."},
-      {t:"Décidez qui peut le recevoir et qui peut l’endosser",d:"Des apprenants, des adultes, des partenaires du territoire."},
+      {t:"Décidez à qui le proposer et qui peut l’endosser",d:"Toutes les personnes qui ont participé, apprenants comme adultes. Chacun recevra le même badge et y racontera sa propre contribution, avec ses propres endossements."},
       {t:"Proposez-le à l’ALESA ou au comité des apprenants",d:"C’est l’association des apprenants qui peut l’émettre et le faire connaître."},
       {t:"Faites-le vivre",d:"Et supprimez-le s’il ne sert plus à personne."}
     ]},
@@ -717,7 +725,7 @@ familles(){
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, les familles</p>
     <h2>Il n’y a pas qu’une sorte de badge.</h2>
-    <p class="intro">Certains parlent de toi, d’autres d’un groupe, d’autres encore d’une pratique partagée. Et certains, c’est toi qui les donnes.</p>
+    <p class="intro">Certains parlent de ce que tu fais seul, d’autres d’un projet mené à plusieurs, d’autres encore d’une pratique partagée. Et certains, c’est toi qui les donnes.</p>
     <div class="familles">${Object.entries(FAMILLES).map(([k,f])=>`
       <article class="famille coins${f.inst?" inst":""}">
         ${badgeSVG(k,88)}
@@ -844,17 +852,18 @@ const EXEMPLES={
     reconnait:RECONNAIT_ECO,
     preuves:["Photos du composteur installé avec l’équipe du self","Compte rendu de l’opération « zéro plastique » (2 pages)","Vidéo d’une minute présentée au conseil d’administration"],
     endos:[{regard:"Regard d’une professionnelle",qui:"Mme Leroy, gestionnaire du self",txt:"Inès a convaincu toute l’équipe de cuisine. Le compost fonctionne depuis six mois."},{regard:"Regard d’un pair",qui:"Tom, camarade d’internat",txt:"Elle a tenu la collecte chaque semaine, même pendant les examens."},{regard:"Regard d’un partenaire",qui:"Association Les Jardins partagés",txt:"Nous récupérons le compost de l’établissement pour nos parcelles."}]},
-  coll:{onglet:"Le badge de la classe",famille:"collectif",nom:"Je suis écoresponsable",emetteur:"Établissement agricole de [ville]",detLabel:"Détenteur",detenteur:"La classe de 1re STAV (24 apprenants)",date:"Délivré le 2 juin 2026. Vérifiable en ligne.",
-    description:"La classe a mené un projet contre le gaspillage alimentaire au self, de l’enquête auprès des apprenants jusqu’à la mise en place de nouvelles portions.",
-    reconnait:RECONNAIT_ECO,
-    preuves:["Résultats de la pesée des déchets, avant et après","Affiches de sensibilisation créées par la classe","Article paru dans le journal de la commune"],
-    endos:[{regard:"Regard d’un professionnel",qui:"Le chef de cuisine de l’établissement",txt:"Les déchets du self ont baissé d’un tiers grâce au travail de la classe."},{regard:"Regard d’un partenaire",qui:"La mairie de [commune]",txt:"Le projet a inspiré l’école primaire voisine."}]}
+  coll:{onglet:"Un badge de projet",sous:"le même badge, chacun sa contribution",famille:"collectif",nom:"Je contribue à la friperie solidaire",emetteur:"Jade, apprenante en BTSA DATR, au nom de l’équipe du projet",detLabel:"Détenteur",detenteur:"Hugo, apprenant en BTSA DATR. Badge proposé aux 14 personnes qui ont participé au projet.",date:"Délivré le 20 mai 2026. Vérifiable en ligne.",
+    description:"Une friperie solidaire au sein de l’établissement, conçue et animée par des apprenants dans une démarche d’économie sociale et solidaire.",
+    reconnait:"L’engagement dans la conception et l’animation de la friperie solidaire. Le badge est proposé à toutes les personnes qui ont participé : chacune le documente avec sa propre contribution.",
+    preuves:["Le tableau de suivi financier qu’Hugo a construit et tenu pendant six mois","Le pitch du projet qu’il a présenté au jury d’un appel à projets","Photos des ventes du jeudi"],
+    endos:[{regard:"Regard d’un professionnel",qui:"M. Perrin, gérant d’une ressourcerie partenaire",txt:"Hugo a construit un suivi des ventes digne d’une petite entreprise. Ses chiffres nous ont aidés à fixer les prix."},{regard:"Regard d’une enseignante",qui:"Mme Garnier, enseignante en économie",txt:"Hugo a défendu le modèle économique du projet devant un jury, avec des arguments précis."}],
+    autres:[{qui:"Léa",contrib:"a accueilli et conseillé la clientèle lors des ventes.",endos:"Endossée par une bénévole de l’association de quartier."},{qui:"Jade",contrib:"a coordonné l’équipe et conçu la communication du projet.",endos:"Endossée par la ressourcerie partenaire et par sa formatrice."},{qui:"Tom",contrib:"a trié et préparé les vêtements chaque semaine.",endos:"Endossé par deux camarades de l’équipe."}]}
 };
 const ROLES={
   image:["Image","image","Le visuel du badge. Il se reconnaît d’un coup d’œil."],
   nom:["Nom","name","Ce que le badge reconnaît, en quelques mots."],
   emetteur:["Émetteur","issuer","Qui délivre le badge : un établissement, une association, un groupe, toi."],
-  detenteur:["Détenteur","recipient","À qui il appartient : une personne ou un collectif."],
+  detenteur:["Détenteur","recipient","À qui il appartient : toujours une personne. Un badge collectif est proposé à chaque participant."],
   description:["Description","description","Ce que le badge raconte, en deux ou trois phrases."],
   reconnait:["Ce qu’il reconnaît","criteria","Ce que quelqu’un comprend en ouvrant le badge. Ce n’est pas une épreuve à réussir."],
   preuves:["Preuves","evidence","Ce qui montre que c’est vrai : photos, récits, documents, vidéos."],
@@ -892,15 +901,19 @@ function ficheHTML(d,roles){
       ${d.date?ligne("date",esc(d.date),roles):""}
     </div></div>`;
 }
+function panneauAnatomie(k){
+  const e=EXEMPLES[k];
+  return ficheHTML({...e,exemple:k==="indiv"},true)+(e.autres?`<div class="autres-porteurs"><h3>Le même badge, porté par d’autres participants</h3><ul>${e.autres.map(a=>`<li>${badgeSVG("collectif",44)}<div><strong>${a.qui}</strong> ${a.contrib}<span>${a.endos}</span></div></li>`).join("")}</ul><p class="note">Même nom, même description, même émetteur. Mais des preuves et des endossements différents : chacun raconte sa part.</p></div>`:"");
+}
 function vueAnatomie(){
   return `<section class="anatomie" aria-labelledby="titre-anatomie">
     <h2 id="titre-anatomie">Ouvre un badge</h2>
-    <p class="intro">Voici un vrai badge de l’enseignement agricole, ouvert comme dans un portfolio. Chaque information a un rôle. Les mots en petit sont ceux du standard Open Badges, utiles si tu vas plus loin.</p>
+    <p class="intro">Voici deux badges ouverts comme dans un portfolio : un vrai badge de l’enseignement agricole, et un badge de projet mené à plusieurs. Chaque information a un rôle. Les mots en petit sont ceux du standard Open Badges, utiles si tu vas plus loin.</p>
     <div class="onglets" role="tablist" aria-label="Version du badge">
-      ${Object.entries(EXEMPLES).map(([k,e],i)=>`<button role="tab" type="button" id="tab-${k}" aria-controls="panneau-anatomie" aria-selected="${i===0}" data-ex="${k}">${e.onglet}<span>${k==="indiv"?"une personne":"un collectif"}</span></button>`).join("")}
+      ${Object.entries(EXEMPLES).map(([k,e],i)=>`<button role="tab" type="button" id="tab-${k}" aria-controls="panneau-anatomie" aria-selected="${i===0}" data-ex="${k}">${e.onglet}<span>${e.sous||"une personne"}</span></button>`).join("")}
     </div>
-    <div id="panneau-anatomie" role="tabpanel" aria-labelledby="tab-indiv">${ficheHTML({...EXEMPLES.indiv,exemple:true},true)}</div>
-    <p class="note">Le même badge peut reconnaître une personne ou un collectif. Ce qui change : le détenteur, la description, les preuves et les témoins.</p>
+    <div id="panneau-anatomie" role="tabpanel" aria-labelledby="tab-indiv">${panneauAnatomie("indiv")}</div>
+    <p class="note">Un badge collectif n’est pas délivré à un groupe : c’est le même badge, proposé à chaque personne qui a participé. Chacun le documente avec sa propre contribution et reçoit ses propres endossements.</p>
   </section>`;
 }
 
@@ -928,12 +941,12 @@ const BUILD={
     fiche:v=>({famille:v.famille,nom:v.nom,emetteur:v.prenom?`${v.prenom} (badge auto-déclaré)`:"",detenteur:v.prenom,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter",image:v.image})},
   collectif:{titre:"Construire notre badge",intro:"Vous créez un badge que d’autres pourront recevoir. Chaque étape du parcours devient une information du badge.",
     sections:[
-      {t:"Repérez l’engagement et nommez-le",ch:[{...CH.nom,label:"Le nom du badge",ph:"Je fais vivre la radio de l’établissement"},{...CH.description,ph:"Les apprenants qui préparent, animent et diffusent les émissions de la radio de l’établissement."}]},
-      {t:"Dites ce qui le montre",ch:[{...CH.reconnait,label:"Ce que le badge reconnaît",ph:"L’engagement régulier dans la vie de la radio : préparer, animer, transmettre."},{...CH.preuves,label:"Les preuves qu’on pourra joindre",aide:"Une par ligne : ce qu’un apprenant pourra montrer pour recevoir ce badge.",ph:"Un enregistrement d’émission\nLe conducteur préparé\nUn témoignage d’auditeur"}]},
-      {t:"Qui peut le recevoir, qui peut l’endosser",ch:[{id:"pour",label:"Qui peut le recevoir ?",type:"text",ph:"Tous les apprenants de l’établissement"},{...CH.temoins,label:"Qui peut l’endosser ?",aide:"Une par ligne.",ph:"Les animateurs de la radio\nLa radio associative locale"}]},
-      {t:"Proposez-le",ch:[{id:"emetteur",label:"Qui l’émet ?",type:"radio",options:["L’association des apprenants (ALESA ou équivalent)","Notre groupe","L’établissement"]},{...CH.famille},{...CH.image}]},
+      {t:"Repérez le projet et nommez-le",html:`<p class="aide">Un badge collectif est proposé à chaque personne qui a participé. Chacun recevra le même badge et le documentera avec sa propre contribution.</p>`,ch:[{...CH.nom,label:"Le nom du badge",ph:"Je contribue à la friperie solidaire"},{...CH.description,ph:"Une friperie solidaire au sein de l’établissement, conçue et animée par des apprenants."}]},
+      {t:"Dites ce qui le montre",ch:[{...CH.reconnait,label:"Ce que le badge reconnaît",ph:"L’engagement dans la conception et l’animation de la friperie solidaire."},{...CH.preuves,label:"Ce que chacun pourra joindre sur sa contribution",aide:"Une par ligne : des exemples de preuves, que chaque participant choisira selon sa part du projet.",ph:"Un document produit pour le projet\nDes photos d’une action menée\nUn court récit de sa contribution"}]},
+      {t:"Qui peut le recevoir, qui peut l’endosser",ch:[{id:"pour",label:"À qui sera-t-il proposé ?",type:"text",ph:"Toutes les personnes qui ont participé au projet"},{...CH.temoins,label:"Qui peut l’endosser ?",aide:"Une par ligne.",ph:"Les animateurs de la radio\nLa radio associative locale"}]},
+      {t:"Proposez-le",ch:[{id:"emetteur",label:"Qui l’émet ?",type:"radio",options:["Un apprenant, au nom de l’équipe du projet","L’association des apprenants (ALESA ou équivalent)"]},{...CH.famille},{...CH.image}]},
       {t:"Faites-le vivre",ch:[CH.visibilite]}],
-    fiche:v=>({famille:v.famille,nom:v.nom,emetteur:v.emetteur,detLabel:"Peut être reçu par",detenteur:v.pour,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),preuvesLabel:"Preuves attendues",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Peuvent l’endosser",image:v.image})},
+    fiche:v=>({famille:v.famille,nom:v.nom,emetteur:v.emetteur,detLabel:"Proposé à",detenteur:v.pour,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),preuvesLabel:"Exemples de preuves",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Peuvent l’endosser",image:v.image})},
   reconnaissance:{titre:"Construire le badge de reconnaissance",intro:"Tu émets un badge vers quelqu’un d’autre. Chaque étape du parcours devient une information du badge.",
     sections:[
       {t:"Qui veux-tu reconnaître ?",ch:[{id:"destinataire",label:"La personne ou la structure",type:"text",ph:"M. Durand, maître de stage à la ferme des Tilleuls"}]},
@@ -1305,7 +1318,7 @@ function brancher(v){
   if(v==="badge-cest-quoi"){
     document.querySelectorAll(".carte").forEach(b=>b.addEventListener("click",()=>b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true")));
     const tabs=[...document.querySelectorAll(".onglets [role=tab]")],pan=document.getElementById("panneau-anatomie");
-    const sel=t=>{tabs.forEach(x=>{x.setAttribute("aria-selected",x===t);x.tabIndex=x===t?0:-1;});pan.setAttribute("aria-labelledby",t.id);pan.innerHTML=ficheHTML({...EXEMPLES[t.dataset.ex],exemple:true},true);};
+    const sel=t=>{tabs.forEach(x=>{x.setAttribute("aria-selected",x===t);x.tabIndex=x===t?0:-1;});pan.setAttribute("aria-labelledby",t.id);pan.innerHTML=panneauAnatomie(t.dataset.ex);};
     tabs.forEach((t,i)=>{t.tabIndex=i===0?0:-1;t.addEventListener("click",()=>sel(t));t.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){const n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];n.focus();sel(n);}});});
   }
   if(v==="vie-badge"){
