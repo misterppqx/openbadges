@@ -378,6 +378,24 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .autres-porteurs li span{display:block;font-size:.9rem;color:var(--doux);margin-top:.3rem}
 @media (max-width:860px){.autres-porteurs ul{grid-template-columns:1fr}}
 
+/* ---------- fiche d’animation ---------- */
+.anim-cadre{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+.anim-cadre > div{background:var(--teinte);border-radius:14px;padding:1rem 1.2rem}
+.anim-cadre h3{font-size:1.1rem;margin-bottom:.3rem}
+.anim-cadre p{margin:0}
+.deroule{list-style:none;padding:0;margin:0 0 1.5rem;max-width:78ch}
+.deroule li{display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;padding:.9rem 0;border-bottom:1px solid #CFE3E1}
+.duree{font-family:"Baloo 2",sans-serif;font-weight:800;color:var(--encre);font-size:1.15rem}
+.deroule p{margin:.2rem 0 0}
+@media (max-width:860px){.anim-cadre{grid-template-columns:1fr}}
+@media print{
+  .top,.angles,.regles,footer,.pas-imprime{display:none!important}
+  main{padding:0}
+  body{font-size:11pt}
+  .fiche-animation a{color:inherit;text-decoration:none}
+  .anim-cadre > div{border:1px solid #999}
+}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -429,7 +447,7 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 </section>
 
 <footer>
-  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. Les badges, eux, sont pour tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
+  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. Les badges, eux, sont pour tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#animer">Animer un atelier</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
 </footer>
 
 <script>
@@ -502,7 +520,7 @@ const PORTES = [
   {id:"reconnaitre",t:"Reconnaître quelqu’un",d:"Ton maître de stage, un camarade, un adulte, un partenaire.",c:"var(--lin)"},
   {id:"demander",t:"Demander à être reconnu",d:"Oser demander à quelqu’un de témoigner.",c:"var(--ciel)"},
   {id:"creer",t:"Créer un badge avec d’autres",d:"Inventer le badge qui manque dans ton établissement.",c:"var(--pomme)"},
-  {id:"passeur",t:"Aider d’autres apprenants",d:"Devenir passeur de reconnaissance.",c:"var(--prairie)"}
+  {id:"role",t:"Faire reconnaître mon rôle",d:"Délégué, éco-délégué, sentinelle, élu de l’ALESA, passeur…",c:"var(--ardoise)"}
 ];
 
 const CADRES = {
@@ -518,7 +536,7 @@ const CADRES = {
     fam:["individuel","collectif"],
     traces:"L’affiche, le programme, des photos, les messages reçus, un petit récit écrit le soir même.",
     temoins:"Le CPE, un surveillant, l’animateur de l’association des apprenants, les camarades qui étaient là."},
-  stage:{t:"Mon terrain",s:"En stage, en apprentissage ou en job",
+  stage:{t:"Mon terrain",s:"En stage, en apprentissage ou en job",lienDemande:"demander-maitre",
     ex:["J’ai tenu seul le stand au marché.","J’ai pris en charge un lot d’animaux pendant deux semaines.","J’accueille les clients à la ferme.","J’ai fait les vendanges."],
     inf:["Ton maître de stage qui te confie un peu plus chaque semaine.","Le client qui revient te demander conseil."],
     fam:["individuel","pratique"],
@@ -537,16 +555,16 @@ function etapesFaire(c){
   return [
     {t:"Nomme ce que tu fais",d:"Une phrase qui commence par « Je… », avec un verbe d’action. Pas « je suis motivé » : « j’ai assuré l’astreinte seul pendant trois week-ends »."},
     {t:"Garde des traces",d:c.traces},
-    {t:"Demande un témoignage",d:c.temoins+" Le parcours « Demander à être reconnu » t’aide à formuler ta demande.",lien:"demander"},
+    {t:"Demande un témoignage",d:c.temoins+" Le parcours « Demander à être reconnu » t’aide à formuler ta demande.",lien:c.lienDemande||"demander"},
     {t:"Choisis ta famille de badge",d:"Ici, souvent : "+c.fam.map(k=>FAMILLES[k].nom.toLowerCase()).join(" ou ")+". Ton enseignant d’ESC, le CDI ou l’association des apprenants peuvent t’aider à le créer."},
     {t:"Décide à qui tu le montres",d:"Un maître de stage, un employeur, une école, ta famille… ou personne pour l’instant. Ton badge t’attend."}
   ];
 }
 
 const CIBLES = {
+  tuteur:{t:"Mon maître de stage",s:"Ton maître de stage ou d’apprentissage, ton employeur. Son regard compte en premier."},
   pair:{t:"Un camarade",s:"Il ou elle a fait quelque chose qui compte."},
   adulte:{t:"Un adulte de l’établissement",s:"Un enseignant, une formatrice, un surveillant, un agent de l’exploitation…"},
-  tuteur:{t:"Mon maître de stage",s:"Ton maître de stage ou d’apprentissage, ton employeur."},
   partenaire:{t:"Un partenaire",s:"Une asso, une ferme, une commune du territoire."}
 };
 
@@ -608,7 +626,7 @@ const PARCOURS = {
     inf:["Un « tu as bien géré » à l’oral te suffit ? Garde-le, c’est déjà beaucoup."],
     et:[
       {t:"Choisis ce que tu veux faire reconnaître",d:"Une seule chose à la fois, dite en une phrase."},
-      {t:"Choisis qui l’a vu",d:"Maître de stage, enseignant, camarade, responsable d’association : quelqu’un qui était là."},
+      {t:"Choisis qui l’a vu",d:"Maître de stage, enseignant, camarade, responsable d’association : quelqu’un qui était là. Pour ton maître de stage ou d’apprentissage, une version dédiée existe.",lien:"demander-maitre"},
       {t:"Prépare ta demande",d:"Courte, concrète, polie. Le modèle ci-dessous peut t’aider."},
       {t:"Demande",d:"De vive voix d’abord, c’est plus simple. Puis par écrit si besoin."},
       {t:"Si on te dit non, ou si personne ne répond",d:"Relance une fois. Puis demande à quelqu’un d’autre. Ce que tu as fait reste vrai, même sans réponse."}
@@ -627,7 +645,7 @@ const PARCOURS = {
       {t:"Proposez-le à l’ALESA ou au comité des apprenants",d:"C’est l’association des apprenants qui peut l’émettre et le faire connaître."},
       {t:"Faites-le vivre",d:"Et supprimez-le s’il ne sert plus à personne."}
     ]},
-  passeur:{porte:null,t:"Passeur de reconnaissance",
+  passeur:{porte:"role",t:"Passeur de reconnaissance",
     intro:"Tu es en terminale, en BTS ou en deuxième année d’apprentissage ? Tu peux aider d’autres apprenants à voir ce qu’ils savent faire.",
     fam:["reconnaissance","individuel"],famNote:"Ton rôle de passeur peut lui-même être reconnu par ceux que tu accompagnes.",
     ex:["Aider un apprenant de seconde à raconter son premier stage.","Accompagner un apprenti de CAPa qui ne voit pas tout ce qu’il sait déjà faire."],
@@ -792,7 +810,7 @@ faire(){
     <p class="fil"><a href="#parcours">Les parcours</a> › Faire reconnaître ce que je fais</p>
     <h2>Dans quel cadre ?</h2>
     <p class="intro">Ce que tu fais compte partout, pas seulement en cours.</p>
-    <ul class="sous-choix">${Object.entries(CADRES).map(([k,c])=>`<li><a class="coins" href="#faire-${k}"><strong>${c.t}</strong><span>${c.s}</span></a></li>`).join("")}</ul>
+    <ul class="sous-choix">${Object.entries(CADRES).map(([k,c])=>`<li><a class="coins" href="#faire-${k}"><strong>${c.t}</strong><span>${c.s}</span></a></li>`).join("")}<li><a class="coins" href="#recu-projet"><strong>J’ai reçu un badge de projet</strong><span>Raconte ta part : ta contribution, tes preuves, tes témoins.</span></a></li></ul>
   </div>`;
 },
 reconnaitre(){
@@ -1115,7 +1133,7 @@ Object.keys(ROLES_DEF).filter(k=>k!=="passeur").forEach(k=>{
       {t:"Fais-le vivre",d:"Ajoute des preuves au fil de l’année. Le rôle s’arrête un jour, le badge reste à toi."}
     ]};
 });
-PORTES.push({id:"role",t:"Faire reconnaître mon rôle",d:"Délégué, éco-délégué, sentinelle, élu de l’ALESA…",c:"var(--ardoise)"});
+
 Object.assign(T,{"etre-reconnu":1,"ecrire-endossement":2,role:3,adultes:0,"a-propos":0});
 
 VUES["etre-reconnu"]=()=>`<div class="wrap vue">
@@ -1166,7 +1184,7 @@ VUES.adultes=()=>`<div class="wrap vue">
     <section><h3>Les badges, c’est aussi pour vous</h3><p>Les badges ne sont pas réservés aux apprenants. Vos pratiques, vos projets et vos engagements peuvent eux aussi être reconnus, par vos collègues, par vos partenaires et par les apprenants. Un adulte qui a lui-même des badges accompagne mieux ceux des autres.</p></section>
     <section><h3>Accompagner la création d’un badge</h3><p>Aider à trouver les mots, repérer les traces, suggérer des témoins : c’est le travail du passeur, qu’il soit adulte ou apprenant. Les temps de suivi de stage ou d’alternance, l’ESC, le CDI, la vie scolaire et l’association des apprenants sont des lieux naturels pour cela.</p></section>
     <section><h3>Ce qu’il vaut mieux éviter</h3><ul><li>Noter un badge, ou le rendre obligatoire.</li><li>Le lier à un examen, au contrôle continu ou à une procédure d’orientation.</li><li>Fixer des objectifs chiffrés de badges par classe.</li><li>Écrire le badge à la place de l’apprenant.</li></ul></section>
-    <section><h3>Animer un atelier de découverte</h3><p>Ce site peut servir de support à un atelier, en lycée agricole comme en MFR : le parcours de découverte en grand groupe, puis la page des trois regards par groupes de trois, chacun jouant un rôle (professionnel, formateur, apprenant) et écrivant son regard sur une même situation.</p></section>
+    <section><h3>Animer un atelier de découverte</h3><p>Ce site peut servir de support à un atelier, en lycée agricole comme en MFR : le parcours de découverte en grand groupe, puis la page des trois regards par groupes de trois, chacun jouant un rôle (professionnel, formateur, apprenant). <a href="#animer">Voir la fiche de déroulé, à imprimer</a>.</p></section>
     <section><h3>Aller plus loin</h3><p>Formations, Générateur d’image et carte des badges de l’enseignement agricole : <a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">openbadges.educagri.fr</a>.</p></section>
   </div>
   <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#mille-facons">Voir le parcours des apprenants</a></div>
@@ -1188,7 +1206,86 @@ VUES["a-propos"]=()=>`<div class="wrap vue">
   <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#adultes">Pour les adultes</a></div>
 </div>`;
 
-BUILD.individuel.btn=BUILD.collectif.btn="Construire mon badge";BUILD.reconnaissance.btn="Construire le badge de reconnaissance";
+BUILD.individuel.btn=BUILD.collectif.btn="Construire mon badge";
+/* ---------- compléments : badge de projet reçu, demande au maître de stage, fiche d’animation ---------- */
+BUILD.contribution={titre:"Documenter ma contribution",intro:"Tu as reçu un badge de projet, le même que les autres participants. Ce qui le rend à toi : ta contribution, tes preuves et tes endossements.",
+  btn:"Documenter ma contribution",quoi:"ton badge",
+  sections:[
+    {t:"Le badge reçu",ch:[{id:"nom",label:"Le nom du badge",type:"text",ph:"Je contribue à la friperie solidaire"},{id:"emetteur",label:"Qui te l’a proposé ?",type:"text",ph:"Jade, au nom de l’équipe du projet"},{id:"description",label:"La description du badge",aide:"Elle est la même pour tous les participants : recopie-la.",type:"textarea",ph:"Une friperie solidaire au sein de l’établissement, conçue et animée par des apprenants."}]},
+    {t:"Ta part du projet",ch:[{id:"prenom",label:"Ton prénom",type:"text",ph:"Hugo"},{id:"contrib",label:"Ta contribution, en une ou deux phrases",aide:"Ce que toi, tu as fait. Commence par « j’ai… ».",type:"textarea",ph:"J’ai construit et tenu le tableau de suivi financier pendant six mois."}]},
+    {t:"Tes preuves",ch:[{id:"preuves",label:"Tes traces",aide:"Une par ligne, liées à ta contribution.",type:"textarea",ph:"Le tableau de suivi financier\nLe pitch présenté au jury"}]},
+    {t:"Tes témoins",ch:[{id:"temoins",label:"À qui demander un endossement ?",aide:"Une par ligne. Pense d’abord aux professionnels qui t’ont vu agir : partenaires, maître de stage.",type:"textarea",ph:"M. Perrin, ressourcerie partenaire\nMme Garnier, enseignante en économie"}]},
+    {t:"Décide à qui tu le montres",ch:[CH.visibilite]}],
+  fiche:v=>({famille:"collectif",nom:v.nom,emetteur:v.emetteur,detenteur:v.prenom,description:v.description,reconnait:"",preuves:[...(v.contrib?["Ma contribution : "+v.contrib]:[]),...lignes(v.preuves)],preuvesLabel:"Ma contribution et mes preuves",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter",image:v.image})};
+PARCOURS["recu-projet"]={porte:"faire",t:"J’ai reçu un badge de projet",
+  intro:"Tu as participé à un projet mené à plusieurs, et on t’a proposé le badge du projet. Tous les participants ont le même. Ce qui le rend à toi, c’est ce que tu y racontes.",
+  fam:["collectif"],famNote:"Même nom, même description pour tous. Mais tes preuves et tes endossements sont les tiens.",
+  ex:["Hugo a tenu les comptes de la friperie solidaire.","Léa a accueilli et conseillé la clientèle.","Tom a trié les vêtements chaque semaine."],
+  inf:["Le merci de l’équipe à la fin du projet.","Le souvenir d’un moment réussi ensemble."],
+  et:[
+    {t:"Accepte le badge",d:"Il t’est proposé, tu n’es pas obligé de l’accepter. Si tu l’acceptes, il est à toi."},
+    {t:"Raconte ta contribution",d:"Ce que toi, tu as fait dans le projet. Pas ce que le groupe a fait : ta part."},
+    {t:"Ajoute tes preuves",d:"Les traces de ta contribution : un document, des photos, un récit."},
+    {t:"Demande tes propres endossements",d:"Aux personnes qui t’ont vu agir, d’abord aux professionnels et partenaires du projet.",lien:"ecrire-endossement"},
+    {t:"Montre-le si tu veux",d:"À un maître de stage, une école, un employeur : ton badge raconte ta part d’un projet collectif."}
+  ]};
+TYPE_BUILD["recu-projet"]="contribution";
+
+BUILD["demande-ms"]={titre:"Demander l’endossement de mon maître de stage",intro:"Le regard de ton maître de stage ou d’apprentissage est celui qui compte le plus pour ton parcours. Prépare ta demande : le message se construit à droite.",
+  btn:"Préparer ma demande",guide:true,quoi:"ta demande",
+  sections:[
+    {t:"Ton badge",ch:[{id:"badge",label:"Le nom de ton badge",type:"text",ph:"Je conduis la traite et le soin des veaux"},{id:"fait",label:"Ce que tu as fait chez lui ou chez elle",aide:"Commence par « j’ai… ».",type:"textarea",ph:"j’ai assuré la traite du matin deux jours par semaine"},{id:"quand",label:"Quand",type:"text",ph:"depuis le mois de janvier"}]},
+    {t:"Ton maître de stage",ch:[{id:"qui",label:"Son nom",type:"text",ph:"Claire"},{id:"lien",label:"Sa structure",type:"text",ph:"élevage laitier, à [commune]"}]},
+    {t:"Ta demande",ch:[{id:"prenom",label:"Ton prénom",type:"text",ph:"Lucas"},{id:"conseils",label:"Joindre les quatre ingrédients d’un bon endossement",type:"radio",options:["Oui, ça l’aidera","Non"]}]},
+    {t:"Le bon moment",html:`<p class="aide">À la fin du stage ou d’une période d’alternance, de vive voix d’abord. Ton formateur ou ton enseignant peut aussi en parler lors de la visite de stage.</p>`}],
+  message:v=>`Bonjour ${v.qui||"[nom]"},\n\n${v.quand?`${v.quand.charAt(0).toUpperCase()+v.quand.slice(1)}, `:""}${v.fait||"[ce que tu as fait]"}, et vous m’avez vu travailler.\nJ’ai créé un badge « ${v.badge||"[nom du badge]"} » pour garder une trace de ce que j’ai appris chez vous. Votre regard de professionnel compte beaucoup pour moi : accepteriez-vous d’écrire quelques lignes sur ce que vous avez observé ?${v.conseils==="Non"?"":"\n\n"+TEXTE_INGREDIENTS}\n\nMerci pour tout ce que vous m’avez transmis,\n${v.prenom||"[ton prénom]"}`,
+  apercu:v=>`<div class="message-apercu"><p class="msg-a">À : ${esc(v.qui||"…")}${v.lien?`, ${esc(v.lien)}`:""}</p><pre>${esc(BUILD["demande-ms"].message(v))}</pre></div>`};
+PARCOURS["demander-maitre"]={porte:null,t:"Demander l’endossement de mon maître de stage",
+  intro:"Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Demander son endossement, c’est aussi reconnaître son rôle de maître de stage.",
+  fam:["individuel","pratique","collectif"],famNote:"Son endossement peut renforcer tous tes badges.",
+  ex:["Lucas demande à Claire, l’agricultrice qui l’accueille en apprentissage, d’endosser son badge « traite et soin des veaux ».","Maëlle demande à l’animatrice de la résidence d’endosser son badge « ateliers pour personnes âgées »."],
+  inf:["Un « tu as bien travaillé » le dernier jour : garde-le, c’est déjà beaucoup."],
+  et:[
+    {t:"Choisis le badge",d:"Celui qui raconte ce que tu as fait chez ton maître de stage."},
+    {t:"Choisis le moment",d:"À la fin du stage ou d’une période d’alternance. Pas en plein coup de feu."},
+    {t:"Demande de vive voix",d:"Puis envoie ton message écrit, avec les quatre ingrédients pour l’aider."},
+    {t:"Pense aux autres regards",d:"Ton formateur ou ton enseignant peut ajouter le sien, et toi le tien. Ensemble, ils disent plus que chacun.",lien:"ecrire-endossement"},
+    {t:"Reconnais-le en retour",d:"Tu peux, toi aussi, reconnaître ton maître de stage comme transmetteur de son métier.",lien:"reco-tuteur"}
+  ]};
+TYPE_BUILD["demander-maitre"]="demande-ms";
+
+VUES.animer=()=>`<div class="wrap vue fiche-animation">
+  <p class="temps">Pour les adultes</p>
+  <h2>Animer un atelier de découverte</h2>
+  <p class="intro">Une séance d’environ 1 h 40 pour découvrir la reconnaissance et les badges, en lycée agricole comme en MFR. Le site sert de support : projeté pour le groupe, puis sur téléphone ou ordinateur pour chacun.</p>
+  <div class="actions pas-imprime"><button class="btn plein" type="button" id="btn-imprimer">Imprimer cette fiche</button></div>
+  <div class="anim-cadre">
+    <div><h3>Pour qui</h3><p>Un groupe de 8 à 30 apprenants, idéalement au retour d’une période de stage ou d’alternance.</p></div>
+    <div><h3>Matériel</h3><p>Un vidéoprojecteur. Des téléphones ou ordinateurs pour le temps des parcours (facultatif). Des feuilles pour l’exercice des trois regards.</p></div>
+    <div><h3>Animation</h3><p>Un enseignant, une formatrice, un CPE ou un animateur. Un maître de stage invité, si possible.</p></div>
+  </div>
+  <h3 class="sous-titre">Déroulé</h3>
+  <ol class="deroule">
+    <li><span class="duree">10 min</span><div><strong>Les mille façons</strong><p>Projeter <a href="#mille-facons">la galerie</a>. Demander : « La dernière fois qu’on t’a reconnu sans le dire ? » Quelques réponses à l’oral.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Noté, validé, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
+    <li><span class="duree">15 min</span><div><strong>Ouvre un badge</strong><p>Projeter <a href="#badge-cest-quoi">les deux badges</a>. Montrer qu’un badge de projet est le même pour tous, mais que chacun y raconte sa part.</p></div></li>
+    <li><span class="duree">25 min</span><div><strong>Les trois regards, par groupes de trois</strong><p>Chaque groupe choisit une situation de stage vécue par l’un d’eux. Un joue le professionnel, un le formateur, un l’apprenant. Chacun écrit son regard avec les quatre ingrédients de <a href="#ecrire-endossement">l’endossement</a>. Mise en commun : qu’est-ce que chaque regard voit que les autres ne voient pas ?</p></div></li>
+    <li><span class="duree">25 min</span><div><strong>Les parcours</strong><p>Chacun choisit une porte dans <a href="#parcours">les parcours</a> et va jusqu’à l’atelier. Ceux qui le souhaitent téléchargent leur fiche ou leur demande d’endossement.</p></div></li>
+    <li><span class="duree">15 min</span><div><strong>Clôture</strong><p>Tour de table : « Un regard que je vais demander, ou que je vais donner. » Rappeler les règles : c’est toi qui décides, rien n’est noté.</p></div></li>
+  </ol>
+  <h3 class="sous-titre">Version courte, 50 minutes</h3>
+  <p class="prose">Les mille façons (10 min), Ouvre un badge (10 min), les trois regards (20 min), clôture (10 min).</p>
+  <h3 class="sous-titre">Points de vigilance</h3>
+  <ul class="prose">
+    <li>Le badge reste volontaire : personne n’est obligé de créer ou de montrer quoi que ce soit.</li>
+    <li>Rien n’est noté, ni pendant l’atelier ni après.</li>
+    <li>Dans les exemples et les preuves, pas d’informations personnelles sur d’autres personnes.</li>
+    <li>En MFR ou en apprentissage, partir de la dernière période en entreprise. Inviter un maître de stage donne tout son sens à l’exercice des trois regards.</li>
+  </ul>
+  <div class="suite pas-imprime"><a class="btn" href="#adultes">Retour à la page adultes</a><a class="btn plein" href="#mille-facons">Commencer le parcours</a></div>
+</div>`;
+Object.assign(T,{animer:0});
+BUILD.reconnaissance.btn="Construire le badge de reconnaissance";
 
 const BROUILLONS={};
 function lignes(t){return String(t||"").split("\n").map(s=>s.trim()).filter(Boolean);}
@@ -1222,8 +1319,8 @@ function vueConstruire(pid){
     ${cfg.guide?guideEndos():""}
     <section class="recap" aria-labelledby="titre-export">
       <h2 id="titre-export">Garder ${cfg.quoi||"la fiche de ton badge"}</h2>
-      <p>${type==="demande"?"Rien n’est enregistré ici. Télécharge ou copie ton message, puis envoie-le à la personne, ou lis-le-lui de vive voix.":`Rien n’est enregistré ici. Télécharge ou copie la fiche, puis crée ${type==="endossement"?"ton endossement":"le badge"} sur la plateforme de ton établissement.`}</p>
-      <div class="actions"><button class="btn petit" type="button" id="btn-txt">Télécharger en .txt</button><button class="btn petit" type="button" data-copie="fiche">${type==="demande"?"Copier le message":"Copier la fiche"}</button></div>
+      <p>${cfg.message?"Rien n’est enregistré ici. Télécharge ou copie ton message, puis envoie-le à la personne, ou lis-le-lui de vive voix.":`Rien n’est enregistré ici. Télécharge ou copie la fiche, puis crée ${type==="endossement"?"ton endossement":"le badge"} sur la plateforme de ton établissement.`}</p>
+      <div class="actions"><button class="btn petit" type="button" id="btn-txt">Télécharger en .txt</button><button class="btn petit" type="button" data-copie="fiche">${cfg.message?"Copier le message":"Copier la fiche"}</button></div>
       <p class="statut" aria-live="polite" id="statut-fiche"></p>
       <div class="copie-secours" id="secours-fiche"><textarea readonly></textarea></div>
     </section>
@@ -1233,7 +1330,7 @@ function vueConstruire(pid){
 function texteFiche(pid){
   const type=TYPE_BUILD[pid],v=BROUILLONS[pid]||{},d=BUILD[type].fiche(v);
   const L=[];const add=(k,t,x)=>L.push(`${k}${t?` (${t})`:""} : ${x||"à compléter"}`);
-  if(type==="demande"){return "DEMANDE D’ENDOSSEMENT\nPréparée avec « Mille façons de reconnaître »\n\nÀ : "+(v.qui||"à compléter")+(v.lien?", "+v.lien:"")+"\n\n"+BUILD.demande.message(v);}
+  if(BUILD[type].message){return "DEMANDE D’ENDOSSEMENT\nPréparée avec « Mille façons de reconnaître »\n\nÀ : "+(v.qui||"à compléter")+(v.lien?", "+v.lien:"")+"\n\n"+BUILD[type].message(v);}
   if(type==="endossement"){
     L.push("ENDOSSEMENT","Préparé avec « Mille façons de reconnaître »","");
     add("Pour","recipient",v.pourqui);add("Badge concerné","",v.badge);add("Ce que j’ai vu","",v.vu);add("Quand","",v.quand);add("Ce que ça montre","",v.montre);add("Témoin","endorser",v.moi);
@@ -1266,7 +1363,7 @@ function brancherConstruire(pid){
   });
   form.addEventListener("submit",e=>e.preventDefault());
   const st=document.getElementById("statut-fiche"),sec=document.getElementById("secours-fiche");
-  const nomFichier=()=>{const base=(type==="endossement"?"endossement-":type==="demande"?"demande-":"badge-")+((val.nom||val.badge||"mon-badge").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,50)||"mon-badge");return base+".txt";};
+  const nomFichier=()=>{const base=(type==="endossement"?"endossement-":BUILD[type].message?"demande-":"badge-")+((val.nom||val.badge||"mon-badge").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,50)||"mon-badge");return base+".txt";};
   const btn=document.getElementById("btn-txt");
   if(DL) btn.hidden=false;
   btn.addEventListener("click",async()=>{
@@ -1304,6 +1401,7 @@ function afficher(){
 }
 
 function brancher(v){
+  if(v==="animer"){const b=document.getElementById("btn-imprimer");b.addEventListener("click",()=>{try{window.print();}catch(e){}});}
   if(v==="boussole"){
     const form=document.getElementById("form-boussole"),out=document.getElementById("verdict");
     form.addEventListener("change",()=>{
