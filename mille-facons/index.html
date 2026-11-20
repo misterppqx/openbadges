@@ -354,6 +354,30 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .pied a{color:var(--bocage);font-weight:700}
 @media (max-width:860px){.trio{grid-template-columns:1fr}}
 
+/* ---------- fil rouge des regards ---------- */
+.fil-rouge{margin-top:2rem}
+.fil-situation{max-width:68ch;margin-bottom:.3rem}
+.fil-badge{color:var(--encre);margin-bottom:1rem}
+.regards{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:1rem;align-items:start}
+.regard{background:#fff;border:2px solid #CFE3E1;border-radius:14px;padding:1.1rem 1.2rem}
+.regard.premier{border:3px solid var(--bocage);background:#fff}
+.regard-tag{display:inline-block;background:var(--colza);color:var(--encre);font-weight:800;font-size:.85rem;border-radius:6px;padding:.1rem .55rem;margin-bottom:.5rem}
+.regard h4,.retour-sens h4{margin:0 0 .4rem;font-family:"Baloo 2",sans-serif;font-size:1.15rem;color:var(--encre)}
+.regard blockquote{margin:0 0 .6rem;font-style:italic}
+.regard-qui{margin:0;font-weight:700;font-size:.95rem;border-left:4px solid var(--ciel);padding-left:.5rem;border-radius:0}
+.retour-sens{margin-top:1rem;background:var(--teinte);border-radius:14px;padding:1rem 1.2rem}
+.retour-sens ul{margin:0;padding-left:1.1rem}
+.endos-regard{display:inline-block;font-size:.8rem;font-weight:700;color:var(--bocage);background:var(--teinte);border-radius:6px;padding:0 .45rem;margin-bottom:.15rem}
+@media (max-width:860px){.regards{grid-template-columns:1fr}}
+
+.autres-porteurs{margin-top:1.2rem;background:var(--teinte);border-radius:14px;padding:1.1rem 1.3rem}
+.autres-porteurs h3{margin:0 0 .6rem;font-size:1.15rem}
+.autres-porteurs ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.autres-porteurs li{display:flex;gap:.7rem;align-items:flex-start;background:#fff;border-radius:12px;padding:.8rem}
+.autres-porteurs li svg{flex:none}
+.autres-porteurs li span{display:block;font-size:.9rem;color:var(--doux);margin-top:.3rem}
+@media (max-width:860px){.autres-porteurs ul{grid-template-columns:1fr}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -405,17 +429,17 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 </section>
 
 <footer>
-  <div class="wrap">Un guide pour les jeunes de l’enseignement agricole. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
+  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. Les badges, eux, sont pour tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
 </footer>
 
 <script>
 /* ================= DONNÉES ================= */
 const FAMILLES = {
   individuel:{nom:"Individuel",c:"var(--colza)",court:"Ce que toi, tu sais faire ou as fait.",ex:"« Je sais conduire la traite seul. »",qui:"Tu le crées toi-même, ou quelqu’un te le propose."},
-  collectif:{nom:"Collectif",c:"var(--pomme)",court:"Ce qu’un groupe a fait ensemble.",ex:"« Notre classe a monté le marché de producteurs du lycée. »",qui:"Le groupe le crée, et chacun peut le garder dans ses badges."},
-  pratique:{nom:"De pratique",c:"var(--prairie)",court:"Une pratique qu’on partage et qu’on fait grandir avec d’autres.",ex:"« Je pratique le maraîchage sur sol vivant. »",qui:"On le rejoint. Il relie des gens qui font la même chose, au lycée ou ailleurs."},
+  collectif:{nom:"Collectif",c:"var(--pomme)",court:"Un badge de projet, proposé à toutes les personnes qui y ont participé.",ex:"« Je contribue à la friperie solidaire de l’établissement. »",qui:"Un apprenant ou l’association des apprenants l’émet et le propose à chaque participant. Chacun reçoit le même badge et le documente avec sa propre contribution."},
+  pratique:{nom:"De pratique",c:"var(--prairie)",court:"Une pratique qu’on partage et qu’on fait grandir avec d’autres.",ex:"« Je pratique le maraîchage sur sol vivant. »",qui:"On le rejoint. Il relie des gens qui font la même chose, apprenants comme adultes : des apprenants, leur enseignante, l’agricultrice qui les accueille."},
   role:{nom:"De rôle",c:"var(--ardoise)",court:"Un rôle qui existe dans l’établissement.",ex:"Délégué de classe, sentinelle, éco-délégué.",qui:"Défini par l’établissement, parce que le rôle est reconnu par tous.",inst:true},
-  reconnaissance:{nom:"De reconnaissance",c:"var(--lin)",court:"Un badge que tu émets toi-même vers quelqu’un d’autre.",ex:"« Je reconnais mon maître de stage comme transmetteur de son métier. »",qui:"Toi, ton groupe ou l’association des élèves l’émettez."}
+  reconnaissance:{nom:"De reconnaissance",c:"var(--lin)",court:"Un badge que tu émets toi-même vers quelqu’un d’autre.",ex:"« Je reconnais mon maître de stage comme transmetteur de son métier. »",qui:"Toi, ton équipe ou l’association des apprenants l’émettez."}
 };
 
 const ICONES = {
@@ -433,7 +457,7 @@ function puce(cle){const f=FAMILLES[cle];return `<span class="puce-badge"><i sty
 
 const GALERIE = [
   {f:"Remplacer",s:"Le copain qui te remplace à l’astreinte quand tu es malade."},
-  {f:"Demander ton avis",s:"La prof qui te demande ce que tu penses du prochain TP."},
+  {f:"Demander ton avis",s:"La formatrice qui te demande ce que tu penses du prochain TP."},
   {f:"Faire confiance",s:"L’éleveur qui te laisse seul avec le troupeau pour la première fois."},
   {f:"Dire bravo",s:"Le surveillant qui te glisse « bien géré, hier soir »."},
   {f:"Demander conseil",s:"Les secondes qui viennent te demander comment régler la herse."},
@@ -450,7 +474,7 @@ const BOUSSOLE = [
 ];
 
 const CARTES = [
-  {t:"Il est à toi.",v:"Tu le gardes, tu choisis à qui tu le montres. Personne ne peut te le reprendre, même si tu changes de lycée."},
+  {t:"Il est à toi.",v:"Tu le gardes, tu choisis à qui tu le montres. Personne ne peut te le reprendre, même si tu changes d’établissement."},
   {t:"Il vit.",v:"Tu peux ajouter des preuves au fil du temps : une photo, un récit, une nouvelle expérience. Il évolue avec toi."},
   {t:"Il grandit avec les autres.",v:"Chaque personne qui témoigne de ce que tu as fait, c’est un endossement. Plus il y en a, plus ton badge parle."},
   {t:"Ce n’est pas une note.",v:"Un badge dit « voilà ce que je fais ». Il ne dit pas « voilà ce que je vaux ». Personne ne le corrige."}
@@ -459,7 +483,7 @@ const CARTES = [
 const VIE = [
   {t:"Je le crée",d:"Inès revient de trois semaines dans une ferme bio au Danemark avec Erasmus. Elle crée son badge : « J’ai travaillé dans une ferme bio à l’étranger, en anglais. »"},
   {t:"J’ajoute des preuves",d:"Son carnet de bord, des photos des serres, une courte vidéo où elle présente la ferme en anglais."},
-  {t:"On l’endosse",d:"La fermière danoise écrit trois lignes. L’enseignante qui accompagnait le groupe aussi. Une camarade raconte comment Inès a géré la récolte un jour de pluie."},
+  {t:"On l’endosse",d:"L’agricultrice danoise écrit trois lignes. L’enseignante qui accompagnait le groupe aussi. Une camarade raconte comment Inès a géré la récolte un jour de pluie."},
   {t:"Il évolue",d:"Un an plus tard, Inès fait un stage en maraîchage bio en France. Elle l’ajoute : son badge raconte maintenant une pratique, pas seulement un voyage."},
   {t:"Je le montre si je veux",d:"Pour son entrée en BTS, elle choisit de le montrer. À ses copains, elle n’en parle pas. C’est elle qui décide."}
 ];
@@ -467,18 +491,18 @@ const VIE = [
 const JEU = [
   {s:"Ton copain te dit : « merci d’avoir pris ma place à l’astreinte ».",ok:["informel"],fb:"Un merci, ça se garde comme ça. Pas besoin de badge."},
   {s:"Depuis six mois, tu soignes les chèvres tous les week-ends et tu aimerais pouvoir le montrer à un futur employeur.",ok:["individuel"],fb:"Ça compte dans la durée, d’autres peuvent en témoigner : un badge individuel a du sens."},
-  {s:"Ta classe a organisé le marché de producteurs du lycée.",ok:["collectif"],fb:"C’est le groupe qui l’a fait : un badge collectif, que chacun peut garder."},
-  {s:"Avec d’autres élèves, tu t’occupes du rucher et vous échangez vos astuces, même avec des apiculteurs du coin.",ok:["pratique"],fb:"Une pratique partagée, qui grandit avec d’autres : un badge de pratique."},
+  {s:"Avec d’autres apprenants, tu as monté une friperie solidaire dans l’établissement.",ok:["collectif"],fb:"Un projet mené à plusieurs : un badge collectif. Chacun reçoit le même badge et y raconte sa propre contribution."},
+  {s:"Avec d’autres apprenants, tu t’occupes du rucher et vous échangez vos astuces, même avec des apiculteurs du coin.",ok:["pratique"],fb:"Une pratique partagée, qui grandit avec d’autres : un badge de pratique."},
   {s:"Tu as été élu délégué de ta classe.",ok:["role"],fb:"Ce rôle existe dans l’établissement : c’est un badge de rôle, défini par l’institution."},
   {s:"Tu veux dire à ton maître de stage qu’il t’a vraiment transmis son métier.",ok:["reconnaissance","informel"],fb:"Les deux marchent. Un merci sincère suffit souvent. Si tu veux que ça compte aussi pour lui, émets-lui un badge de reconnaissance."}
 ];
 
 const PORTES = [
-  {id:"faire",t:"Faire reconnaître ce que je fais",d:"Sur l’exploitation, au lycée, en stage ou ailleurs.",c:"var(--colza)"},
-  {id:"reconnaitre",t:"Reconnaître quelqu’un",d:"Un camarade, un adulte, ton tuteur, un partenaire.",c:"var(--lin)"},
+  {id:"faire",t:"Faire reconnaître ce que je fais",d:"Sur l’exploitation, dans l’établissement, en stage ou ailleurs.",c:"var(--colza)"},
+  {id:"reconnaitre",t:"Reconnaître quelqu’un",d:"Ton maître de stage, un camarade, un adulte, un partenaire.",c:"var(--lin)"},
   {id:"demander",t:"Demander à être reconnu",d:"Oser demander à quelqu’un de témoigner.",c:"var(--ciel)"},
-  {id:"creer",t:"Créer un badge avec d’autres",d:"Inventer le badge qui manque dans ton lycée.",c:"var(--pomme)"},
-  {id:"passeur",t:"Aider d’autres jeunes",d:"Devenir passeur de reconnaissance.",c:"var(--prairie)"}
+  {id:"creer",t:"Créer un badge avec d’autres",d:"Inventer le badge qui manque dans ton établissement.",c:"var(--pomme)"},
+  {id:"passeur",t:"Aider d’autres apprenants",d:"Devenir passeur de reconnaissance.",c:"var(--prairie)"}
 ];
 
 const CADRES = {
@@ -488,18 +512,18 @@ const CADRES = {
     fam:["individuel","pratique"],
     traces:"Des photos (avec l’accord des personnes présentes), ta fiche de suivi, le carnet d’astreinte, une courte vidéo du geste.",
     temoins:"Le chef d’exploitation, l’agent de l’atelier, un camarade d’astreinte."},
-  "vie-lycee":{t:"Ma vie au lycée",s:"À l’internat, dans les clubs, dans la vie de l’établissement",
-    ex:["J’ai organisé une soirée à l’internat.","J’anime le club photo.","J’ai accueilli les familles aux portes ouvertes.","Je tiens la radio du lycée avec d’autres."],
+  "vie-lycee":{t:"Ma vie dans l’établissement",s:"À l’internat, dans les clubs, dans la vie de l’établissement",
+    ex:["J’ai organisé une soirée à l’internat.","J’anime le club photo.","J’ai accueilli les familles aux portes ouvertes.","Je tiens la radio de l’établissement avec d’autres."],
     inf:["Les copains qui viennent te voir quand ça ne va pas.","Le CPE qui te dit « bien joué »."],
     fam:["individuel","collectif"],
     traces:"L’affiche, le programme, des photos, les messages reçus, un petit récit écrit le soir même.",
-    temoins:"Le CPE, un surveillant, l’animateur de l’association des élèves, les camarades qui étaient là."},
+    temoins:"Le CPE, un surveillant, l’animateur de l’association des apprenants, les camarades qui étaient là."},
   stage:{t:"Mon terrain",s:"En stage, en apprentissage ou en job",
     ex:["J’ai tenu seul le stand au marché.","J’ai pris en charge un lot d’animaux pendant deux semaines.","J’accueille les clients à la ferme.","J’ai fait les vendanges."],
-    inf:["Le tuteur qui te confie un peu plus chaque semaine.","Le client qui revient te demander conseil."],
+    inf:["Ton maître de stage qui te confie un peu plus chaque semaine.","Le client qui revient te demander conseil."],
     fam:["individuel","pratique"],
     traces:"Ton carnet ou rapport de stage, des photos, le planning de ce que tu as géré.",
-    temoins:"Ton maître de stage ou d’apprentissage, des collègues, parfois un client fidèle.",
+    temoins:"Ton maître de stage ou d’apprentissage d’abord : son regard de professionnel est celui qui compte le plus. Puis des collègues, parfois un client fidèle.",
     note:"Ce n’est pas l’évaluation de ton stage : c’est ce que toi, tu veux garder."},
   ailleurs:{t:"Ailleurs aussi",s:"Dans une asso, un club, la ferme familiale, chez les pompiers…",
     ex:["Je suis jeune sapeur-pompier.","J’entraîne les plus jeunes au club de foot.","J’aide à la ferme familiale pendant les vacances.","Je joue dans une troupe de théâtre."],
@@ -514,15 +538,15 @@ function etapesFaire(c){
     {t:"Nomme ce que tu fais",d:"Une phrase qui commence par « Je… », avec un verbe d’action. Pas « je suis motivé » : « j’ai assuré l’astreinte seul pendant trois week-ends »."},
     {t:"Garde des traces",d:c.traces},
     {t:"Demande un témoignage",d:c.temoins+" Le parcours « Demander à être reconnu » t’aide à formuler ta demande.",lien:"demander"},
-    {t:"Choisis ta famille de badge",d:"Ici, souvent : "+c.fam.map(k=>FAMILLES[k].nom.toLowerCase()).join(" ou ")+". Ton enseignant d’ESC, le CDI ou l’association des élèves peuvent t’aider à le créer."},
+    {t:"Choisis ta famille de badge",d:"Ici, souvent : "+c.fam.map(k=>FAMILLES[k].nom.toLowerCase()).join(" ou ")+". Ton enseignant d’ESC, le CDI ou l’association des apprenants peuvent t’aider à le créer."},
     {t:"Décide à qui tu le montres",d:"Un maître de stage, un employeur, une école, ta famille… ou personne pour l’instant. Ton badge t’attend."}
   ];
 }
 
 const CIBLES = {
   pair:{t:"Un camarade",s:"Il ou elle a fait quelque chose qui compte."},
-  adulte:{t:"Un adulte du lycée",s:"Un prof, un surveillant, un agent de l’exploitation…"},
-  tuteur:{t:"Mon tuteur",s:"Ton maître de stage, d’apprentissage, ton employeur."},
+  adulte:{t:"Un adulte de l’établissement",s:"Un enseignant, une formatrice, un surveillant, un agent de l’exploitation…"},
+  tuteur:{t:"Mon maître de stage",s:"Ton maître de stage ou d’apprentissage, ton employeur."},
   partenaire:{t:"Un partenaire",s:"Une asso, une ferme, une commune du territoire."}
 };
 
@@ -540,47 +564,47 @@ const PARCOURS = {
       {t:"Laisse-le décider",d:"Le badge est à lui : c’est lui qui garde ton endossement et qui choisit de le montrer."}
     ],
     modele:"J’ai vu [prénom] [ce qu’il ou elle a fait] pendant [période].\nCe qui m’a marqué : [un détail concret].\nPour moi, ça montre qu’il ou elle sait [ce que ça montre]."},
-  "reco-adulte":{porte:"reconnaitre",t:"Reconnaître un adulte du lycée",
-    intro:"Un adulte du lycée fait plus que son travail pour toi ? Les jeunes aussi peuvent reconnaître les adultes.",
+  "reco-adulte":{porte:"reconnaitre",t:"Reconnaître un adulte de l’établissement",
+    intro:"Un adulte de l’établissement fait plus que son travail pour toi ? Les apprenants aussi peuvent reconnaître les adultes.",
     fam:["reconnaissance"],
     ex:["L’agent de l’exploitation qui prend le temps de montrer le geste.","Le surveillant d’internat qui organise les soirées.","La documentaliste qui t’a aidé à trouver ton stage."],
     inf:["Un merci en face.","Un mot signé par la classe.","Lui redemander conseil : c’est déjà dire qu’il compte."],
     et:[
       {t:"Choisis ce que tu veux reconnaître",d:"Pas la personne en général : ce qu’elle fait, concrètement."},
-      {t:"Embarque d’autres élèves",d:"Une reconnaissance portée par plusieurs a plus de poids. Parles-en à ta classe ou aux délégués."},
-      {t:"Passez par l’association des élèves",d:"L’ALESA ou le comité jeunes peut émettre le badge au nom des élèves."},
+      {t:"Embarque d’autres apprenants",d:"Une reconnaissance portée par plusieurs a plus de poids. Parles-en à ta classe ou aux délégués."},
+      {t:"Passez par l’association des apprenants",d:"L’ALESA ou le comité des apprenants peut émettre le badge au nom des apprenants."},
       {t:"Écrivez pourquoi",d:"Ce que cet adulte fait, et ce que ça change pour vous."},
       {t:"Remettez-le",d:"En personne, c’est mieux. L’adulte choisit ensuite ce qu’il en fait."}
     ]},
-  "reco-tuteur":{porte:"reconnaitre",t:"Reconnaître mon tuteur",
-    intro:"Ton maître de stage ou ton employeur t’a vraiment transmis quelque chose ? Tu peux le reconnaître comme transmetteur.",
+  "reco-tuteur":{porte:"reconnaitre",t:"Reconnaître mon maître de stage",
+    intro:"Ton maître de stage ou d’apprentissage t’a transmis son métier ? Son regard de professionnel est souvent celui qui compte le plus pour toi. Tu peux, toi aussi, reconnaître le sien : c’est aussi une reconnaissance de son rôle.",
     fam:["reconnaissance"],
     ex:["Il t’a laissé gérer la vente au marché.","Elle t’a expliqué pourquoi, pas seulement comment."],
-    inf:["Le remercier à la fin du stage.","Lui donner des nouvelles un an après.","Parler de lui à ton prochain tuteur."],
+    inf:["Le remercier à la fin du stage.","Lui donner des nouvelles un an après.","Parler de lui à ton prochain maître de stage."],
     et:[
       {t:"Note ce qu’il t’a transmis",d:"Les gestes, les façons de faire, la confiance accordée."},
       {t:"Choisis le moment",d:"À la fin du stage, ou plus tard, quand tu te rends compte de ce que ça t’a apporté."},
-      {t:"Émets-lui un badge de reconnaissance",d:"Avec l’aide de ton enseignant, du CDI ou de l’association des élèves."},
+      {t:"Émets-lui un badge de reconnaissance",d:"Avec l’aide de ton enseignant, du CDI ou de l’association des apprenants."},
       {t:"Écris ton témoignage",d:"Trois phrases : ce qu’il t’a transmis, comment, ce que ça a changé pour toi."},
-      {t:"Envoie-le",d:"Un tuteur reconnu par ses stagiaires peut le montrer à son tour : c’est aussi une reconnaissance de son métier."}
+      {t:"Envoie-le",d:"Un maître de stage reconnu par ses stagiaires peut le montrer à son tour : c’est aussi une reconnaissance de son métier."}
     ],
     modele:"Pendant mon stage chez vous, vous m’avez transmis [geste, savoir-faire, façon de travailler].\nVous l’avez fait en [comment : en me laissant essayer, en expliquant pourquoi…].\nAujourd’hui, grâce à ça, je [ce que ça a changé pour toi]."},
   "reco-partenaire":{porte:"reconnaitre",t:"Reconnaître un partenaire",
     intro:"Une association, une ferme, une commune vous a accueillis ou aidés ? Votre groupe peut la reconnaître.",
-    fam:["reconnaissance","collectif"],
+    fam:["reconnaissance"],famNote:"Votre équipe ou l’association des apprenants l’émet vers le partenaire.",
     ex:["L’AMAP qui vous a confié un stand.","La commune qui a prêté une salle pour votre projet.","La ferme voisine qui accueille vos visites chaque année."],
-    inf:["Une carte signée par la classe.","Une invitation à votre marché ou à vos portes ouvertes.","Un article dans le journal du lycée."],
+    inf:["Une carte signée par la classe.","Une invitation à votre marché ou à vos portes ouvertes.","Un article dans le journal de l’établissement."],
     et:[
-      {t:"Rassemblez votre groupe",d:"La classe, le club, les élèves qui ont participé."},
+      {t:"Rassemblez votre groupe",d:"La classe, le club, les apprenants qui ont participé."},
       {t:"Dites ce que ce partenaire a rendu possible",d:"Sans lui, qu’est-ce qui ne se serait pas fait ?"},
-      {t:"Émettez le badge au nom du groupe",d:"Avec l’association des élèves ou l’enseignant qui suit le projet."},
+      {t:"Émettez le badge au nom du groupe",d:"Avec l’association des apprenants ou l’enseignant qui suit le projet."},
       {t:"Remettez-le lors d’un moment partagé",d:"Une visite, un marché, une fête de fin d’année."},
       {t:"Gardez le lien",d:"Le partenaire peut à son tour endosser vos badges collectifs."}
     ]},
   demander:{porte:null,t:"Oser demander",
     intro:"Tu as fait quelque chose qui compte, et quelqu’un l’a vu ? Tu peux lui demander d’en témoigner. Ce n’est pas réclamer une note : c’est inviter quelqu’un à dire ce qu’il a vu.",
     fam:["individuel","collectif","pratique"],famNote:"Un endossement peut renforcer tous ces badges.",
-    ex:["Demander à ton maître d’apprentissage d’endosser ton badge « soins aux veaux ».","Demander au responsable de l’AMAP de témoigner pour le badge collectif de ta classe."],
+    ex:["Demander à ton maître d’apprentissage d’endosser ton badge « soins aux veaux ».","Demander au responsable de l’AMAP de témoigner sur ta contribution au projet collectif."],
     inf:["Un « tu as bien géré » à l’oral te suffit ? Garde-le, c’est déjà beaucoup."],
     et:[
       {t:"Choisis ce que tu veux faire reconnaître",d:"Une seule chose à la fois, dite en une phrase."},
@@ -591,22 +615,22 @@ const PARCOURS = {
     ],
     modele:"Bonjour [nom],\nPendant [période], j’ai [ce que tu as fait], et vous m’avez vu le faire.\nJ’ai créé un badge pour garder une trace de cette expérience. Accepteriez-vous d’écrire quelques lignes sur ce que vous avez observé ?\nMerci beaucoup,\n[ton prénom]"},
   creer:{porte:null,t:"Inventer nos badges",
-    intro:"Il se passe des choses dans votre lycée que personne ne reconnaît ? Créez ensemble le badge qui manque.",
+    intro:"Il se passe des choses dans votre établissement que personne ne reconnaît ? Créez ensemble le badge qui manque.",
     fam:["collectif","pratique"],
-    ex:["Les élèves qui tiennent la radio du lycée.","Ceux qui accueillent les nouveaux à l’internat.","Le groupe qui soigne le rucher."],
+    ex:["Les apprenants qui tiennent la radio de l’établissement.","Ceux qui accueillent les nouveaux à l’internat.","Le groupe qui soigne le rucher."],
     inf:["Tout ne mérite pas un badge. Si c’est ponctuel et que le plaisir suffit, laissez-le vivre comme ça."],
     et:[
-      {t:"Repérez un engagement qui n’est reconnu nulle part",d:"Ce que des élèves font, souvent dans l’ombre, et qui compte."},
+      {t:"Repérez un engagement qui n’est reconnu nulle part",d:"Ce que des apprenants font, souvent dans l’ombre, et qui compte."},
       {t:"Nommez-le ensemble",d:"Un nom qui vous ressemble, avec un verbe d’action."},
       {t:"Dites ce qui le montre",d:"Pas des critères d’examen : les traces et les témoignages qui disent « oui, c’est bien ça »."},
-      {t:"Décidez qui peut le recevoir et qui peut l’endosser",d:"Des élèves, des adultes, des partenaires du territoire."},
-      {t:"Proposez-le à l’ALESA ou au comité jeunes",d:"C’est l’association des élèves qui peut l’émettre et le faire connaître."},
+      {t:"Décidez à qui le proposer et qui peut l’endosser",d:"Toutes les personnes qui ont participé, apprenants comme adultes. Chacun recevra le même badge et y racontera sa propre contribution, avec ses propres endossements."},
+      {t:"Proposez-le à l’ALESA ou au comité des apprenants",d:"C’est l’association des apprenants qui peut l’émettre et le faire connaître."},
       {t:"Faites-le vivre",d:"Et supprimez-le s’il ne sert plus à personne."}
     ]},
   passeur:{porte:null,t:"Passeur de reconnaissance",
-    intro:"Tu es en terminale, en BTS ou en deuxième année d’apprentissage ? Tu peux aider de plus jeunes à voir ce qu’ils savent faire.",
+    intro:"Tu es en terminale, en BTS ou en deuxième année d’apprentissage ? Tu peux aider d’autres apprenants à voir ce qu’ils savent faire.",
     fam:["reconnaissance","individuel"],famNote:"Ton rôle de passeur peut lui-même être reconnu par ceux que tu accompagnes.",
-    ex:["Aider un élève de seconde à raconter son premier stage.","Accompagner un apprenti de CAPa qui ne voit pas tout ce qu’il sait déjà faire."],
+    ex:["Aider un apprenant de seconde à raconter son premier stage.","Accompagner un apprenti de CAPa qui ne voit pas tout ce qu’il sait déjà faire."],
     inf:["Écouter un camarade raconter son stage.","Lui dire « ça, tu sais le faire »."],
     et:[
       {t:"Écoute",d:"Fais raconter, avec des questions simples : qu’est-ce que tu as fait ? avec qui ? qu’est-ce qui était difficile ?"},
@@ -643,7 +667,7 @@ accueil(){
         <a class="btn plein" href="#mille-facons">Je découvre</a>
         <a class="btn" href="#parcours">Je connais déjà les badges</a>
       </div>
-      <p class="lien-adultes">Vous êtes un adulte qui accompagne des jeunes ? <a href="#adultes">Une page est faite pour vous.</a></p>
+      <p class="lien-adultes">Vous êtes maître de stage, enseignant, formatrice ? La reconnaissance est une relation : <a href="#adultes">une page est faite pour vous</a>.</p>
     </div>
     <div class="prairie" aria-hidden="true">${html.join("")}</div>
   </section></div>`;
@@ -652,13 +676,13 @@ accueil(){
   return `<div class="wrap vue">
     <p class="temps">Temps 1 sur 3</p>
     <h2>Tu es reconnu plus souvent que tu ne le crois.</h2>
-    <p class="intro">Chaque jour, au lycée, en stage, à la maison, des gens te reconnaissent sans le dire. Et toi aussi, tu reconnais les autres.</p>
+    <p class="intro">Chaque jour, dans l’établissement, en stage, à la maison, des gens te reconnaissent sans le dire. Et toi aussi, tu reconnais les autres.</p>
     <div class="legende"><span><i class="pastille-inf"></i>Pointillés : de la reconnaissance informelle</span><span><i class="pastille-badge"></i>Plein : un badge</span></div>
     <ul class="galerie">${GALERIE.map(g=>`<li><span class="forme">${g.f}</span><p>${g.s}</p></li>`).join("")}</ul>
     <p class="message-fort">Tout ça, c’est de la reconnaissance. Garde-la comme elle est.</p>
     <p class="prose">Pas besoin d’en faire un badge. Un merci reste un merci. Mais pense un instant à ta propre vie :</p>
     <div class="reflexion">
-      <div><label for="r1">La dernière fois qu’on t’a reconnu sans le dire ?</label><textarea id="r1" placeholder="Par exemple : mon tuteur m’a confié la vente seul…"></textarea></div>
+      <div><label for="r1">La dernière fois qu’on t’a reconnu sans le dire ?</label><textarea id="r1" placeholder="Par exemple : mon maître de stage m’a confié la vente seul…"></textarea></div>
       <div><label for="r2">La dernière fois que toi, tu as reconnu quelqu’un ?</label><textarea id="r2" placeholder="Par exemple : j’ai remercié la surveillante…"></textarea></div>
     </div>
     <p class="note">Ce que tu écris ici n’est enregistré nulle part. C’est juste pour y penser.</p>
@@ -701,7 +725,7 @@ familles(){
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, les familles</p>
     <h2>Il n’y a pas qu’une sorte de badge.</h2>
-    <p class="intro">Certains parlent de toi, d’autres d’un groupe, d’autres encore d’une pratique partagée. Et certains, c’est toi qui les donnes.</p>
+    <p class="intro">Certains parlent de ce que tu fais seul, d’autres d’un projet mené à plusieurs, d’autres encore d’une pratique partagée. Et certains, c’est toi qui les donnes.</p>
     <div class="familles">${Object.entries(FAMILLES).map(([k,f])=>`
       <article class="famille coins${f.inst?" inst":""}">
         ${badgeSVG(k,88)}
@@ -775,7 +799,7 @@ reconnaitre(){
   return `<div class="wrap vue">
     <p class="fil"><a href="#parcours">Les parcours</a> › Reconnaître quelqu’un</p>
     <h2>Qui veux-tu reconnaître ?</h2>
-    <p class="intro">La reconnaissance va dans tous les sens : entre jeunes, des jeunes vers les adultes, vers le territoire.</p>
+    <p class="intro">La reconnaissance va dans tous les sens : entre apprenants, des apprenants vers les adultes, vers le territoire, et entre adultes aussi.</p>
     <ul class="sous-choix">${Object.entries(CIBLES).map(([k,c])=>`<li><a class="coins" href="#reco-${k}"><strong>${c.t}</strong><span>${c.s}</span></a></li>`).join("")}</ul>
   </div>`;
 }
@@ -823,22 +847,23 @@ const BADGE_ECO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtW
 const URL_GENERATEUR="https://openbadges.educagri.fr/generateur/";
 const RECONNAIT_ECO="L’engagement d’un jeune volontaire dans des actions, individuelles ou collectives, au service des Objectifs de développement durable. Le badge reconnaît l’engagement lui-même : il n’y a pas d’épreuve à réussir.";
 const EXEMPLES={
-  indiv:{onglet:"Le badge d’Inès",famille:"individuel",nom:"Je suis écoresponsable",emetteur:"Lycée agricole de [ville], enseignement agricole",detLabel:"Détenteur",detenteur:"Inès, élève de 1re STAV",date:"Délivré le 14 mars 2026. Vérifiable en ligne.",
-    description:"Inès s’engage dans des actions concrètes pour réduire l’impact de la vie au lycée sur l’environnement. Elle a lancé le compost du self et anime l’opération « zéro plastique » à l’internat.",
+  indiv:{onglet:"Le badge d’Inès",famille:"individuel",nom:"Je suis écoresponsable",emetteur:"Établissement agricole de [ville]",detLabel:"Détenteur",detenteur:"Inès, apprenante en 1re STAV",date:"Délivré le 14 mars 2026. Vérifiable en ligne.",
+    description:"Inès s’engage dans des actions concrètes pour réduire l’impact de la vie de l’établissement sur l’environnement. Elle a lancé le compost du self et anime l’opération « zéro plastique » à l’internat.",
     reconnait:RECONNAIT_ECO,
     preuves:["Photos du composteur installé avec l’équipe du self","Compte rendu de l’opération « zéro plastique » (2 pages)","Vidéo d’une minute présentée au conseil d’administration"],
-    endos:[{qui:"Mme Leroy, gestionnaire du self",txt:"Inès a convaincu toute l’équipe de cuisine. Le compost fonctionne depuis six mois."},{qui:"Tom, camarade d’internat",txt:"Elle a tenu la collecte chaque semaine, même pendant les examens."},{qui:"Association Les Jardins partagés",txt:"Nous récupérons le compost du lycée pour nos parcelles."}]},
-  coll:{onglet:"Le badge de la classe",famille:"collectif",nom:"Je suis écoresponsable",emetteur:"Lycée agricole de [ville], enseignement agricole",detLabel:"Détenteur",detenteur:"La classe de 1re STAV (24 élèves)",date:"Délivré le 2 juin 2026. Vérifiable en ligne.",
-    description:"La classe a mené un projet contre le gaspillage alimentaire au self, de l’enquête auprès des élèves jusqu’à la mise en place de nouvelles portions.",
-    reconnait:RECONNAIT_ECO,
-    preuves:["Résultats de la pesée des déchets, avant et après","Affiches de sensibilisation créées par la classe","Article paru dans le journal de la commune"],
-    endos:[{qui:"Le chef de cuisine du lycée",txt:"Les déchets du self ont baissé d’un tiers grâce au travail de la classe."},{qui:"La mairie de [commune]",txt:"Le projet a inspiré l’école primaire voisine."}]}
+    endos:[{regard:"Regard d’une professionnelle",qui:"Mme Leroy, gestionnaire du self",txt:"Inès a convaincu toute l’équipe de cuisine. Le compost fonctionne depuis six mois."},{regard:"Regard d’un pair",qui:"Tom, camarade d’internat",txt:"Elle a tenu la collecte chaque semaine, même pendant les examens."},{regard:"Regard d’un partenaire",qui:"Association Les Jardins partagés",txt:"Nous récupérons le compost de l’établissement pour nos parcelles."}]},
+  coll:{onglet:"Un badge de projet",sous:"le même badge, chacun sa contribution",famille:"collectif",nom:"Je contribue à la friperie solidaire",emetteur:"Jade, apprenante en BTSA DATR, au nom de l’équipe du projet",detLabel:"Détenteur",detenteur:"Hugo, apprenant en BTSA DATR. Badge proposé aux 14 personnes qui ont participé au projet.",date:"Délivré le 20 mai 2026. Vérifiable en ligne.",
+    description:"Une friperie solidaire au sein de l’établissement, conçue et animée par des apprenants dans une démarche d’économie sociale et solidaire.",
+    reconnait:"L’engagement dans la conception et l’animation de la friperie solidaire. Le badge est proposé à toutes les personnes qui ont participé : chacune le documente avec sa propre contribution.",
+    preuves:["Le tableau de suivi financier qu’Hugo a construit et tenu pendant six mois","Le pitch du projet qu’il a présenté au jury d’un appel à projets","Photos des ventes du jeudi"],
+    endos:[{regard:"Regard d’un professionnel",qui:"M. Perrin, gérant d’une ressourcerie partenaire",txt:"Hugo a construit un suivi des ventes digne d’une petite entreprise. Ses chiffres nous ont aidés à fixer les prix."},{regard:"Regard d’une enseignante",qui:"Mme Garnier, enseignante en économie",txt:"Hugo a défendu le modèle économique du projet devant un jury, avec des arguments précis."}],
+    autres:[{qui:"Léa",contrib:"a accueilli et conseillé la clientèle lors des ventes.",endos:"Endossée par une bénévole de l’association de quartier."},{qui:"Jade",contrib:"a coordonné l’équipe et conçu la communication du projet.",endos:"Endossée par la ressourcerie partenaire et par sa formatrice."},{qui:"Tom",contrib:"a trié et préparé les vêtements chaque semaine.",endos:"Endossé par deux camarades de l’équipe."}]}
 };
 const ROLES={
   image:["Image","image","Le visuel du badge. Il se reconnaît d’un coup d’œil."],
   nom:["Nom","name","Ce que le badge reconnaît, en quelques mots."],
-  emetteur:["Émetteur","issuer","Qui délivre le badge : un lycée, une association, un groupe, toi."],
-  detenteur:["Détenteur","recipient","À qui il appartient : une personne ou un collectif."],
+  emetteur:["Émetteur","issuer","Qui délivre le badge : un établissement, une association, un groupe, toi."],
+  detenteur:["Détenteur","recipient","À qui il appartient : toujours une personne. Un badge collectif est proposé à chaque participant."],
   description:["Description","description","Ce que le badge raconte, en deux ou trois phrases."],
   reconnait:["Ce qu’il reconnaît","criteria","Ce que quelqu’un comprend en ouvrant le badge. Ce n’est pas une épreuve à réussir."],
   preuves:["Preuves","evidence","Ce qui montre que c’est vrai : photos, récits, documents, vidéos."],
@@ -872,19 +897,23 @@ function ficheHTML(d,roles){
       ${ligne("description",d.description?esc(d.description):vide("Ce que le badge raconte"),roles)}
       ${ligne("reconnait",d.reconnait?esc(d.reconnait):vide("Ce qu’il reconnaît"),roles)}
       ${ligne("preuves",(d.preuves||[]).length?`<ul>${d.preuves.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>`:vide("Tes traces"),roles,d.preuvesLabel)}
-      ${ligne("endos",(d.endos||[]).length?`<ul class="liste-endos">${d.endos.map(e=>`<li><strong>${esc(e.qui)}</strong>${e.txt?`<span>« ${esc(e.txt)} »</span>`:`<span class="a-remplir">Témoignage à demander</span>`}</li>`).join("")}</ul>`:vide("Les personnes qui pourront témoigner"),roles,d.endosLabel)}
+      ${ligne("endos",(d.endos||[]).length?`<ul class="liste-endos">${d.endos.map(e=>`<li>${e.regard?`<span class="endos-regard">${esc(e.regard)}</span>`:""}<strong>${esc(e.qui)}</strong>${e.txt?`<span>« ${esc(e.txt)} »</span>`:`<span class="a-remplir">Témoignage à demander</span>`}</li>`).join("")}</ul>`:vide("Les personnes qui pourront témoigner"),roles,d.endosLabel)}
       ${d.date?ligne("date",esc(d.date),roles):""}
     </div></div>`;
+}
+function panneauAnatomie(k){
+  const e=EXEMPLES[k];
+  return ficheHTML({...e,exemple:k==="indiv"},true)+(e.autres?`<div class="autres-porteurs"><h3>Le même badge, porté par d’autres participants</h3><ul>${e.autres.map(a=>`<li>${badgeSVG("collectif",44)}<div><strong>${a.qui}</strong> ${a.contrib}<span>${a.endos}</span></div></li>`).join("")}</ul><p class="note">Même nom, même description, même émetteur. Mais des preuves et des endossements différents : chacun raconte sa part.</p></div>`:"");
 }
 function vueAnatomie(){
   return `<section class="anatomie" aria-labelledby="titre-anatomie">
     <h2 id="titre-anatomie">Ouvre un badge</h2>
-    <p class="intro">Voici un vrai badge de l’enseignement agricole, ouvert comme dans un portfolio. Chaque information a un rôle. Les mots en petit sont ceux du standard Open Badges, utiles si tu vas plus loin.</p>
+    <p class="intro">Voici deux badges ouverts comme dans un portfolio : un vrai badge de l’enseignement agricole, et un badge de projet mené à plusieurs. Chaque information a un rôle. Les mots en petit sont ceux du standard Open Badges, utiles si tu vas plus loin.</p>
     <div class="onglets" role="tablist" aria-label="Version du badge">
-      ${Object.entries(EXEMPLES).map(([k,e],i)=>`<button role="tab" type="button" id="tab-${k}" aria-controls="panneau-anatomie" aria-selected="${i===0}" data-ex="${k}">${e.onglet}<span>${k==="indiv"?"une personne":"un collectif"}</span></button>`).join("")}
+      ${Object.entries(EXEMPLES).map(([k,e],i)=>`<button role="tab" type="button" id="tab-${k}" aria-controls="panneau-anatomie" aria-selected="${i===0}" data-ex="${k}">${e.onglet}<span>${e.sous||"une personne"}</span></button>`).join("")}
     </div>
-    <div id="panneau-anatomie" role="tabpanel" aria-labelledby="tab-indiv">${ficheHTML({...EXEMPLES.indiv,exemple:true},true)}</div>
-    <p class="note">Le même badge peut reconnaître une personne ou un collectif. Ce qui change : le détenteur, la description, les preuves et les témoins.</p>
+    <div id="panneau-anatomie" role="tabpanel" aria-labelledby="tab-indiv">${panneauAnatomie("indiv")}</div>
+    <p class="note">Un badge collectif n’est pas délivré à un groupe : c’est le même badge, proposé à chaque personne qui a participé. Chacun le documente avec sa propre contribution et reçoit ses propres endossements.</p>
   </section>`;
 }
 
@@ -892,7 +921,7 @@ function vueAnatomie(){
 const CH={
   prenom:{id:"prenom",label:"Ton prénom",type:"text",ph:"Inès"},
   nom:{id:"nom",label:"Le nom de ton badge",aide:"Court, avec un verbe d’action ou une affirmation.",type:"text",ph:"J’assure l’astreinte du troupeau"},
-  description:{id:"description",label:"Description",aide:"Ce que tu fais, où, depuis quand. Deux ou trois phrases.",type:"textarea",ph:"Depuis septembre, je m’occupe seul de l’astreinte du week-end sur l’exploitation du lycée…"},
+  description:{id:"description",label:"Description",aide:"Ce que tu fais, où, depuis quand. Deux ou trois phrases.",type:"textarea",ph:"Depuis septembre, je m’occupe seul de l’astreinte du week-end sur l’exploitation de l’établissement…"},
   reconnait:{id:"reconnait",label:"Ce que ton badge reconnaît",aide:"Ce que quelqu’un comprendra en l’ouvrant : quel engagement, quelle pratique, quel savoir-faire.",type:"textarea",ph:"La capacité à prendre en charge seul le soin d’animaux, en toute sécurité."},
   preuves:{id:"preuves",label:"Tes preuves",aide:"Une par ligne : photo, récit, document, vidéo…",type:"textarea",ph:"Photos de la traite\nCarnet d’astreinte de l’hiver\nRécit d’une mise bas"},
   temoins:{id:"temoins",label:"Les personnes à qui demander un témoignage",aide:"Une par ligne : nom, et son lien avec toi.",type:"textarea",ph:"M. Martin, chef d’exploitation\nLéo, camarade d’astreinte"},
@@ -912,24 +941,24 @@ const BUILD={
     fiche:v=>({famille:v.famille,nom:v.nom,emetteur:v.prenom?`${v.prenom} (badge auto-déclaré)`:"",detenteur:v.prenom,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter",image:v.image})},
   collectif:{titre:"Construire notre badge",intro:"Vous créez un badge que d’autres pourront recevoir. Chaque étape du parcours devient une information du badge.",
     sections:[
-      {t:"Repérez l’engagement et nommez-le",ch:[{...CH.nom,label:"Le nom du badge",ph:"Je fais vivre la radio du lycée"},{...CH.description,ph:"Les élèves qui préparent, animent et diffusent les émissions de la radio du lycée."}]},
-      {t:"Dites ce qui le montre",ch:[{...CH.reconnait,label:"Ce que le badge reconnaît",ph:"L’engagement régulier dans la vie de la radio : préparer, animer, transmettre."},{...CH.preuves,label:"Les preuves qu’on pourra joindre",aide:"Une par ligne : ce qu’un élève pourra montrer pour recevoir ce badge.",ph:"Un enregistrement d’émission\nLe conducteur préparé\nUn témoignage d’auditeur"}]},
-      {t:"Qui peut le recevoir, qui peut l’endosser",ch:[{id:"pour",label:"Qui peut le recevoir ?",type:"text",ph:"Tous les élèves, apprentis et étudiants du lycée"},{...CH.temoins,label:"Qui peut l’endosser ?",aide:"Une par ligne.",ph:"Les animateurs de la radio\nLa radio associative locale"}]},
-      {t:"Proposez-le",ch:[{id:"emetteur",label:"Qui l’émet ?",type:"radio",options:["L’association des élèves (ALESA)","Notre groupe","Le lycée"]},{...CH.famille},{...CH.image}]},
+      {t:"Repérez le projet et nommez-le",html:`<p class="aide">Un badge collectif est proposé à chaque personne qui a participé. Chacun recevra le même badge et le documentera avec sa propre contribution.</p>`,ch:[{...CH.nom,label:"Le nom du badge",ph:"Je contribue à la friperie solidaire"},{...CH.description,ph:"Une friperie solidaire au sein de l’établissement, conçue et animée par des apprenants."}]},
+      {t:"Dites ce qui le montre",ch:[{...CH.reconnait,label:"Ce que le badge reconnaît",ph:"L’engagement dans la conception et l’animation de la friperie solidaire."},{...CH.preuves,label:"Ce que chacun pourra joindre sur sa contribution",aide:"Une par ligne : des exemples de preuves, que chaque participant choisira selon sa part du projet.",ph:"Un document produit pour le projet\nDes photos d’une action menée\nUn court récit de sa contribution"}]},
+      {t:"Qui peut le recevoir, qui peut l’endosser",ch:[{id:"pour",label:"À qui sera-t-il proposé ?",type:"text",ph:"Toutes les personnes qui ont participé au projet"},{...CH.temoins,label:"Qui peut l’endosser ?",aide:"Une par ligne.",ph:"Les animateurs de la radio\nLa radio associative locale"}]},
+      {t:"Proposez-le",ch:[{id:"emetteur",label:"Qui l’émet ?",type:"radio",options:["Un apprenant, au nom de l’équipe du projet","L’association des apprenants (ALESA ou équivalent)"]},{...CH.famille},{...CH.image}]},
       {t:"Faites-le vivre",ch:[CH.visibilite]}],
-    fiche:v=>({famille:v.famille,nom:v.nom,emetteur:v.emetteur,detLabel:"Peut être reçu par",detenteur:v.pour,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),preuvesLabel:"Preuves attendues",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Peuvent l’endosser",image:v.image})},
+    fiche:v=>({famille:v.famille,nom:v.nom,emetteur:v.emetteur,detLabel:"Proposé à",detenteur:v.pour,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),preuvesLabel:"Exemples de preuves",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Peuvent l’endosser",image:v.image})},
   reconnaissance:{titre:"Construire le badge de reconnaissance",intro:"Tu émets un badge vers quelqu’un d’autre. Chaque étape du parcours devient une information du badge.",
     sections:[
       {t:"Qui veux-tu reconnaître ?",ch:[{id:"destinataire",label:"La personne ou la structure",type:"text",ph:"M. Durand, maître de stage à la ferme des Tilleuls"}]},
       {t:"Ce que tu veux reconnaître",ch:[{...CH.nom,label:"Le nom du badge",ph:"Transmetteur de son métier"},{...CH.description,ph:"Pendant mon stage, il m’a laissé gérer la vente au marché et m’a expliqué pourquoi on fait les choses."},{...CH.reconnait,ph:"La transmission d’un savoir-faire, avec patience et confiance."}]},
       {t:"Ce qu’il ou elle a fait",ch:[{...CH.preuves,label:"Ce qui le montre",aide:"Une par ligne : des moments, des gestes, des résultats.",ph:"Il m’a confié le stand seul dès la 3e semaine\nIl a pris le temps de m’expliquer la conduite du troupeau"}]},
       {t:"Qui d’autre peut en témoigner ?",ch:[{...CH.temoins,label:"D’autres témoins",aide:"Une par ligne. Facultatif.",ph:"Clara, stagiaire l’an dernier"}]},
-      {t:"Émettez le badge",ch:[{id:"emetteur",label:"Qui l’émet ?",type:"radio",options:["Moi","Notre classe","L’association des élèves (ALESA)"]},{...CH.image},{...CH.visibilite}]}],
+      {t:"Émettez le badge",ch:[{id:"emetteur",label:"Qui l’émet ?",type:"radio",options:["Moi","Notre classe","L’association des apprenants (ALESA ou équivalent)"]},{...CH.image},{...CH.visibilite}]}],
     fiche:v=>({famille:"reconnaissance",nom:v.nom,emetteur:v.emetteur,detLabel:"Destinataire",detenteur:v.destinataire,description:v.description,reconnait:v.reconnait,preuves:lignes(v.preuves),preuvesLabel:"Ce qui le montre",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Autres témoins",image:v.image})},
   endossement:{titre:"Écrire mon endossement",intro:"Tu ne crées pas de badge : tu témoignes sur celui de quelqu’un d’autre. Ton endossement viendra s’ajouter à son badge.",
     sections:[
       {t:"Sur quel badge ?",ch:[{id:"pourqui",label:"Pour qui ?",type:"text",ph:"Lina"},{id:"badge",label:"Le nom de son badge",type:"text",ph:"J’explique les TP aux secondes"}]},
-      {t:"Ce que tu as vu",ch:[{id:"vu",label:"Ce que tu as vu",type:"textarea",ph:"Elle a passé plusieurs pauses à réexpliquer le TP de chimie des sols à trois élèves de seconde."},{id:"quand",label:"Quand",type:"text",ph:"Pendant tout le premier trimestre"},{id:"montre",label:"Ce que ça montre",type:"textarea",ph:"Elle sait transmettre avec patience."}]},
+      {t:"Ce que tu as vu",ch:[{id:"vu",label:"Ce que tu as vu",type:"textarea",ph:"Elle a passé plusieurs pauses à réexpliquer le TP de chimie des sols à trois apprenants de seconde."},{id:"quand",label:"Quand",type:"text",ph:"Pendant tout le premier trimestre"},{id:"montre",label:"Ce que ça montre",type:"textarea",ph:"Elle sait transmettre avec patience."}]},
       {t:"Qui témoigne ?",ch:[{id:"moi",label:"Ton nom et ton lien avec la personne",type:"text",ph:"Hugo, camarade de classe"}]}],
     fiche:v=>({famille:"individuel",nom:v.badge,detenteur:v.pourqui,description:"",reconnait:"",preuves:[],endos:(v.moi||v.vu)?[{qui:v.moi||"Toi",txt:[v.vu,v.quand?`(${v.quand})`:"",v.montre?`Pour moi, ça montre que : ${v.montre}`:""].filter(Boolean).join(" ")}]:[],endosLabel:"Ton endossement"})}
 };
@@ -943,27 +972,50 @@ const INGREDIENTS=[
   {k:"qui",t:"Qui tu es",d:"Ton nom et ton lien avec la personne : c’est ce qui donne du poids à ton témoignage."}
 ];
 const ENDOS_EX=[
-  {de:"Un camarade",badge:"J’explique les TP aux secondes",pour:"Lina",seg:[
-    ["J’ai vu Lina réexpliquer le TP de chimie des sols à trois élèves de seconde, en partant de leurs questions plutôt que du cours. ","vu"],
-    ["C’était pendant ses pauses, tout le premier trimestre. ","quand"],
-    ["Pour moi, ça montre qu’elle sait transmettre avec patience, et qu’elle donne envie de comprendre. ","montre"],
-    ["Hugo, camarade de 1re STAV","qui"]]},
-  {de:"Un maître de stage",badge:"Je tiens seule le stand au marché",pour:"Inès",seg:[
-    ["Inès a tenu seule le stand du samedi : accueil des clients, caisse, conseils sur les légumes de saison. ","vu"],
-    ["Dès la troisième semaine de stage, au marché de [ville], y compris un matin de très forte affluence. ","quand"],
-    ["Elle sait garder son calme, compter juste et parler du produit. Je la reprendrais en saison sans hésiter. ","montre"],
-    ["M. Durand, maraîcher, son maître de stage","qui"]]},
-  {de:"Un adulte du lycée",badge:"Je fais vivre la radio du lycée",pour:"L’équipe de la radio",seg:[
-    ["Chaque jeudi, l’équipe prépare, enregistre et diffuse une émission de vingt minutes, en invitant des élèves et des adultes. ","vu"],
-    ["Depuis la rentrée, au foyer de l’internat. ","quand"],
-    ["Ces élèves savent travailler à plusieurs, tenir un rendez-vous et donner la parole aux autres. ","montre"],
-    ["Mme Bernard, CPE, qui accompagne le projet","qui"]]},
-  {de:"Un partenaire du territoire",badge:"Je suis écoresponsable",pour:"La classe de 1re STAV",seg:[
-    ["La classe nous livre le compost du self et a aidé à aménager quatre nouvelles parcelles. ","vu"],
-    ["Chaque mois depuis l’automne, dans nos jardins du quartier. ","quand"],
-    ["Leur engagement a un effet concret au-delà du lycée : des familles cultivent grâce à eux. ","montre"],
-    ["Association Les Jardins partagés","qui"]]}
+  {de:"Une agricultrice, maître d’apprentissage",badge:"Je conduis la traite et le soin des veaux",pour:"Lucas",seg:[
+    ["Lucas assure seul la traite du matin deux jours par semaine. Il a repéré une mammite avant qu’elle ne s’aggrave et m’a prévenue tout de suite. ","vu"],
+    ["Depuis janvier, sur notre élevage laitier, où il est en apprentissage. ","quand"],
+    ["Il est fiable et attentif aux animaux : quand je m’absente une demi-journée, je lui confie l’élevage. ","montre"],
+    ["Claire, agricultrice, sa maître d’apprentissage","qui"]]}
 ];
+const FIL=[
+  {id:"exploitation",onglet:"Alternance sur une exploitation",
+   situation:"Lucas est apprenti en bac pro Conduite et gestion de l’entreprise agricole. Il alterne entre son centre de formation et un élevage laitier.",
+   badge:"Je conduis la traite et le soin des veaux",
+   regards:[
+    {role:"Le regard du professionnel",qui:"Claire, agricultrice, sa maître d’apprentissage",txt:"Depuis janvier, Lucas assure seul la traite du matin deux jours par semaine. Il a repéré une mammite avant qu’elle ne s’aggrave. Quand je m’absente une demi-journée, je lui confie l’élevage."},
+    {role:"Le regard du formateur",qui:"M. Roux, formateur",txt:"Lucas explique à son groupe pourquoi il adapte la ration des veaux. Il relie ce qu’il voit sur l’exploitation au cours de zootechnie, et ses questions font avancer toute la classe."},
+    {role:"Le regard de l’apprenant",qui:"Lucas",txt:"Je conduis la traite du matin et je m’occupe des veaux. J’ai appris à repérer une vache qui ne va pas bien. Ce qui m’a le plus appris : la première fois que Claire m’a laissé seul."}],
+   retour:["Lucas émet un badge de reconnaissance à Claire, « Transmettre son métier » : elle prend le temps d’expliquer pourquoi, pas seulement comment.","M. Roux endosse ce badge : Claire accueille des apprentis depuis dix ans, c’est une vraie partenaire de formation."]},
+  {id:"services",onglet:"Stage de services en milieu rural",
+   situation:"Maëlle prépare un bac pro Services aux personnes et animation dans les territoires. En stage dans une résidence pour personnes âgées d’un bourg rural, elle anime des ateliers.",
+   badge:"J’anime des ateliers pour des personnes âgées",
+   regards:[
+    {role:"Le regard du professionnel",qui:"Mme Hamel, animatrice, sa maître de stage",txt:"Maëlle a préparé et animé seule quatre ateliers mémoire. Elle s’adapte à chaque résident et a gardé son calme quand une résidente s’est sentie mal. Je lui confierais un groupe sans hésiter."},
+    {role:"Le regard de l’enseignante",qui:"Mme Vasseur, enseignante",txt:"Maëlle a construit ses ateliers à partir de la démarche vue en cours, puis les a fait évoluer après chaque séance. Son bilan devant la classe était précis, y compris sur ce qui n’avait pas marché."},
+    {role:"Le regard de l’apprenante",qui:"Maëlle",txt:"J’anime des ateliers mémoire pour des personnes âgées. J’ai appris à préparer une séance, et surtout à la changer quand le groupe ne suit pas."}],
+   retour:["Maëlle émet un badge de reconnaissance à Mme Hamel : « Elle m’a laissée essayer, puis m’a aidée à comprendre ce qui avait marché. »","Mme Vasseur endosse ce badge : la résidence accueille chaque année des stagiaires de l’établissement."]}
+];
+function panneauFil(f){
+  return `<p class="fil-situation">${f.situation}</p>
+    <p class="fil-badge">Son badge : <strong>« ${f.badge} »</strong></p>
+    <div class="regards">${f.regards.map((r,i)=>`<article class="regard${i===0?" premier":""}">${i===0?`<span class="regard-tag">Le premier regard qui compte</span>`:""}<h4>${r.role}</h4><blockquote>« ${r.txt} »</blockquote><p class="regard-qui">${r.qui}</p></article>`).join("")}</div>
+    <div class="retour-sens"><h4>Et dans l’autre sens</h4><ul>${f.retour.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+}
+function filRouge(){
+  return `<section class="fil-rouge" aria-labelledby="titre-fil">
+    <h3 id="titre-fil" class="sous-titre">Une même expérience, trois regards</h3>
+    <p class="prose">Le professionnel voit le métier. L’enseignant ou le formateur voit le lien avec la formation. L’apprenant dit ce qu’il fait. Aucun regard ne suffit seul : le badge rend visible celui de chacun. Pour un apprenant, le premier qui compte est celui du professionnel.</p>
+    <div class="onglets" role="tablist" aria-label="Situation">${FIL.map((f,i)=>`<button role="tab" type="button" id="fil-${f.id}" aria-controls="panneau-fil" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-fil="${i}">${f.onglet}</button>`).join("")}</div>
+    <div id="panneau-fil" role="tabpanel" aria-labelledby="fil-${FIL[0].id}">${panneauFil(FIL[0])}</div>
+  </section>`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-fil]");if(!b)return;
+  const tabs=[...b.parentNode.querySelectorAll("[data-fil]")];
+  tabs.forEach(t=>{t.setAttribute("aria-selected",t===b);t.tabIndex=t===b?0:-1;});
+  const p=document.getElementById("panneau-fil");p.setAttribute("aria-labelledby",b.id);p.innerHTML=panneauFil(FIL[+b.dataset.fil]);
+});
 function exempleEndos(e){
   return `<figure class="endos-ex"><figcaption><span class="endos-de">${e.de}</span> sur le badge « ${e.badge} » de ${e.pour}</figcaption>
     <blockquote>${e.seg.map(([t,k])=>`<mark class="ing-${k}">${t}</mark>`).join("")}</blockquote></figure>`;
@@ -974,11 +1026,10 @@ function guideEndos(){
     <p class="intro">Un endossement, c’est une reconnaissance écrite. Bien le rédiger s’apprend : c’est une compétence en soi. Il tient en quatre ingrédients.</p>
     <ol class="ingredients">${INGREDIENTS.map(i=>`<li class="ing-${i.k}"><strong>${i.t}</strong><span>${i.d}</span></li>`).join("")}</ol>
     <div class="compare">
-      <div class="faible"><h3>Trop vague</h3><blockquote>« Lina est super sympa et très gentille. »</blockquote><p>Gentil, mais personne ne sait ce que Lina a fait, ni qui le dit.</p></div>
+      <div class="faible"><h3>Trop vague</h3><blockquote>« Lucas est motivé et très gentil. »</blockquote><p>Gentil, mais personne ne sait ce que Lucas a fait, ni qui le dit.</p></div>
       <div class="fort"><h3>Qui parle</h3>${exempleEndos(ENDOS_EX[0])}</div>
     </div>
-    <h3 class="sous-titre">D’autres exemples</h3>
-    <div class="exemples-endos">${ENDOS_EX.slice(1).map(exempleEndos).join("")}</div>
+    ${filRouge()}
   </section>`;
 }
 const TEXTE_INGREDIENTS="Pour vous aider, un bon témoignage dit :\n"+INGREDIENTS.map(i=>`- ${i.t.toLowerCase()} : ${i.d.charAt(0).toLowerCase()+i.d.slice(1)}`).join("\n");
@@ -988,7 +1039,7 @@ BUILD.demande={titre:"Préparer ma demande d’endossement",intro:"Tu demandes �
   btn:"Préparer ma demande",guide:true,quoi:"ta demande",
   sections:[
     {t:"Ce que tu veux faire reconnaître",ch:[{id:"badge",label:"Le nom de ton badge",type:"text",ph:"Je soigne les veaux de l’exploitation"},{id:"fait",label:"Ce que tu as fait",aide:"Commence par « j’ai… » ou « je… ».",type:"textarea",ph:"j’ai pris en charge le soin des veaux pendant les vacances de février"},{id:"quand",label:"Quand",type:"text",ph:"pendant les vacances de février"}]},
-    {t:"Qui l’a vu",ch:[{id:"qui",label:"La personne à qui tu demandes",type:"text",ph:"M. Martin"},{id:"lien",label:"Son lien avec toi",type:"text",ph:"chef d’exploitation du lycée"}]},
+    {t:"Qui l’a vu",ch:[{id:"qui",label:"La personne à qui tu demandes",type:"text",ph:"M. Martin"},{id:"lien",label:"Son lien avec toi",type:"text",ph:"chef d’exploitation de l’établissement"}]},
     {t:"Ta demande",ch:[{id:"prenom",label:"Ton prénom",type:"text",ph:"Inès"},{id:"conseils",label:"Joindre les quatre ingrédients d’un bon endossement",type:"radio",options:["Oui, ça l’aidera","Non"]}]},
     {t:"Si personne ne répond",html:`<p class="aide">Relance une fois, poliment. Puis demande à quelqu’un d’autre qui était là. Ce que tu as fait reste vrai, même sans réponse.</p>`}],
   message:v=>`Bonjour ${v.qui||"[nom]"},\n\n${v.quand?`${v.quand.charAt(0).toUpperCase()+v.quand.slice(1)}, `:""}${v.fait||"[ce que tu as fait]"}, et vous m’avez vu le faire.\nJ’ai créé un badge « ${v.badge||"[nom du badge]"} » pour garder une trace de cette expérience. Accepteriez-vous d’écrire quelques lignes sur ce que vous avez observé ?${v.conseils==="Non"?"":"\n\n"+TEXTE_INGREDIENTS}\n\nMerci beaucoup,\n${v.prenom||"[ton prénom]"}`,
@@ -997,38 +1048,38 @@ BUILD.endossement.guide=true;BUILD.endossement.btn="Écrire mon endossement";BUI
 BUILD.role={titre:"Mon badge de passeur",intro:"« Passeur de reconnaissance » est un badge de rôle : son nom et ce qu’il reconnaît sont définis par l’établissement. Toi, tu apportes tes preuves et tes témoins.",
   btn:"Demander mon badge de passeur",quoi:"la fiche de ton badge",
   sections:[
-    {t:"Le badge, tel que l’établissement l’a défini",html:`<div class="defini"><p><strong>Nom :</strong> Passeur de reconnaissance</p><p><strong>Émetteur :</strong> le lycée, avec l’association des élèves</p><p><strong>Description :</strong> Le détenteur accompagne d’autres jeunes pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.</p><p><strong>Ce qu’il reconnaît :</strong> la capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.</p><p class="aide">Ces champs ne se modifient pas : c’est ce qui distingue un badge de rôle.</p></div>`},
+    {t:"Le badge, tel que l’établissement l’a défini",html:`<div class="defini"><p><strong>Nom :</strong> Passeur de reconnaissance</p><p><strong>Émetteur :</strong> l’établissement, avec l’association des apprenants</p><p><strong>Description :</strong> Le détenteur accompagne d’autres apprenants pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.</p><p><strong>Ce qu’il reconnaît :</strong> la capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.</p><p class="aide">Ces champs ne se modifient pas : c’est ce qui distingue un badge de rôle.</p></div>`},
     {t:"Qui es-tu ?",ch:[{id:"prenom",label:"Ton prénom et ta classe",type:"text",ph:"Yanis, BTS ACSE 2e année"}]},
-    {t:"Ceux que tu as accompagnés",ch:[{id:"preuves",label:"Tes accompagnements",aide:"Un par ligne : qui, quoi, quand. Sans détails personnels.",type:"textarea",ph:"Un élève de seconde, pour raconter son premier stage (octobre)\nDeux apprentis de CAPa, pour leur badge « soins aux animaux » (janvier)"}]},
-    {t:"Qui peut en témoigner ?",ch:[{id:"temoins",label:"Tes témoins",aide:"Un par ligne. Les jeunes accompagnés sont les mieux placés.",type:"textarea",ph:"Noah, élève de seconde accompagné\nMme Petit, enseignante d’ESC référente"}]},
+    {t:"Ceux que tu as accompagnés",ch:[{id:"preuves",label:"Tes accompagnements",aide:"Un par ligne : qui, quoi, quand. Sans détails personnels.",type:"textarea",ph:"Un apprenant de seconde, pour raconter son premier stage (octobre)\nDeux apprentis de CAPa, pour leur badge « soins aux animaux » (janvier)"}]},
+    {t:"Qui peut en témoigner ?",ch:[{id:"temoins",label:"Tes témoins",aide:"Un par ligne. Les apprenants accompagnés sont les mieux placés.",type:"textarea",ph:"Noah, apprenant de seconde accompagné\nMme Petit, enseignante d’ESC référente"}]},
     {t:"Décide à qui tu le montres",ch:[CH.visibilite]}],
-  fiche:v=>({famille:"role",nom:"Passeur de reconnaissance",emetteur:"Le lycée, avec l’association des élèves",detenteur:v.prenom,description:"Le détenteur accompagne d’autres jeunes pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.",reconnait:"La capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.",preuves:lignes(v.preuves),preuvesLabel:"Accompagnements",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter"})};
+  fiche:v=>({famille:"role",nom:"Passeur de reconnaissance",emetteur:"L’établissement, avec l’association des apprenants",detenteur:v.prenom,description:"Le détenteur accompagne d’autres apprenants pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.",reconnait:"La capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.",preuves:lignes(v.preuves),preuvesLabel:"Accompagnements",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter"})};
 TYPE_BUILD.demander="demande";TYPE_BUILD.passeur="role";
 
 /* ================= COMPLÉMENTS : RÔLES, PAGES ADULTES, À PROPOS ================= */
 const ROLES_DEF={
-  passeur:{nom:"Passeur de reconnaissance",court:"Tu aides d’autres jeunes à voir ce qu’ils savent faire.",emetteur:"Le lycée, avec l’association des élèves",
-    description:"Le détenteur accompagne d’autres jeunes pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.",
+  passeur:{nom:"Passeur de reconnaissance",court:"Tu aides d’autres apprenants à voir ce qu’ils savent faire.",emetteur:"L’établissement, avec l’association des apprenants",
+    description:"Le détenteur accompagne d’autres apprenants pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.",
     reconnait:"La capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.",
-    preuvesLabel:"Tes accompagnements",preuvesPh:"Un élève de seconde, pour raconter son premier stage (octobre)\nDeux apprentis de CAPa, pour leur badge « soins aux animaux » (janvier)",
-    temoinsPh:"Noah, élève de seconde accompagné\nMme Petit, enseignante d’ESC référente"},
-  delegue:{nom:"Délégué de classe",court:"Tu représentes ta classe auprès des adultes.",emetteur:"Le lycée",
+    preuvesLabel:"Tes accompagnements",preuvesPh:"Un apprenant de seconde, pour raconter son premier stage (octobre)\nDeux apprentis de CAPa, pour leur badge « soins aux animaux » (janvier)",
+    temoinsPh:"Noah, apprenant de seconde accompagné\nMme Petit, enseignante d’ESC référente"},
+  delegue:{nom:"Délégué de classe",court:"Tu représentes ta classe auprès des adultes.",emetteur:"L’établissement",
     description:"Le détenteur a été élu par sa classe pour la représenter, porter sa parole aux conseils de classe et faire le lien avec l’équipe éducative.",
     reconnait:"L’engagement à représenter les autres : écouter, faire remonter, rendre compte.",
     preuvesLabel:"Ce que tu as fait dans ce rôle",preuvesPh:"Préparation du conseil de classe du 1er trimestre avec un questionnaire\nCompte rendu fait à la classe après chaque conseil",
     temoinsPh:"M. Leroux, professeur principal\nSarah, déléguée suppléante"},
-  "eco-delegue":{nom:"Éco-délégué",court:"Tu portes des actions pour l’environnement au lycée.",emetteur:"Le lycée",
+  "eco-delegue":{nom:"Éco-délégué",court:"Tu portes des actions pour l’environnement dans l’établissement.",emetteur:"L’établissement",
     description:"Le détenteur porte, avec d’autres, des actions de développement durable dans la vie de l’établissement.",
     reconnait:"L’engagement à faire avancer des actions au service des Objectifs de développement durable, en entraînant les autres.",
     preuvesLabel:"Tes actions",preuvesPh:"Mise en place du tri à l’internat\nAnimation d’un stand lors de la semaine du développement durable",
-    temoinsPh:"La gestionnaire du lycée\nLes éco-délégués des autres classes"},
-  sentinelle:{nom:"Sentinelle",court:"Tu es attentif aux autres et sais vers qui les orienter.",emetteur:"Le lycée",
+    temoinsPh:"La gestionnaire de l’établissement\nLes éco-délégués des autres classes"},
+  sentinelle:{nom:"Sentinelle",court:"Tu es attentif aux autres et sais vers qui les orienter.",emetteur:"L’établissement",
     description:"Le détenteur a été formé pour être attentif à ses camarades et savoir vers quel adulte les orienter quand ça ne va pas.",
     reconnait:"La vigilance bienveillante envers les autres, et la capacité à passer le relais aux bonnes personnes.",
     preuvesLabel:"Ta formation et ton engagement",preuvesPh:"Formation suivie en novembre\nParticipation aux temps d’échange des sentinelles",
-    temoinsPh:"L’infirmière du lycée\nLe CPE référent",
+    temoinsPh:"L’infirmière de l’établissement\nLe CPE référent",
     note:"Ce rôle touche à des situations personnelles : tes preuves ne doivent jamais contenir d’informations sur les camarades que tu as aidés."},
-  alesa:{nom:"Élu au bureau de l’ALESA",court:"Tu fais vivre l’association des élèves.",emetteur:"L’ALESA, avec le lycée",
+  alesa:{nom:"Élu au bureau de l’ALESA",court:"Tu fais vivre l’association des apprenants.",emetteur:"L’ALESA, avec l’établissement",
     description:"Le détenteur a été élu au bureau de l’association des lycéens, étudiants, stagiaires et apprentis. Il participe à ses décisions et à ses projets.",
     reconnait:"L’engagement associatif : décider à plusieurs, gérer un projet, rendre compte aux adhérents.",
     preuvesLabel:"Ce que tu as fait au bureau",preuvesPh:"Organisation de la soirée de Noël de l’internat\nSuivi du budget du foyer",
@@ -1060,7 +1111,7 @@ Object.keys(ROLES_DEF).filter(k=>k!=="passeur").forEach(k=>{
       {t:"Vérifie que le badge existe",d:"Demande à ton CPE, à ton professeur principal ou à l’ALESA si ton établissement délivre ce badge, et comment."},
       {t:"Rassemble tes preuves",d:"Ce que tu as fait dans ce rôle : actions, comptes rendus, moments importants."},
       {t:"Demande des témoignages",d:"Aux camarades et aux adultes qui t’ont vu agir. Le guide « Écrire un endossement » peut les aider.",lien:"ecrire-endossement"},
-      {t:"Demande ton badge",d:"Auprès de l’émetteur : le lycée ou l’ALESA."},
+      {t:"Demande ton badge",d:"Auprès de l’émetteur : l’établissement ou l’ALESA."},
       {t:"Fais-le vivre",d:"Ajoute des preuves au fil de l’année. Le rôle s’arrête un jour, le badge reste à toi."}
     ]};
 });
@@ -1070,18 +1121,18 @@ Object.assign(T,{"etre-reconnu":1,"ecrire-endossement":2,role:3,adultes:0,"a-pro
 VUES["etre-reconnu"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, être reconnu</p>
   <h2>Noté, validé, reconnu : ce n’est pas la même chose.</h2>
-  <p class="intro">Les trois existent dans ta vie de lycéen, d’apprenti ou d’étudiant. Ils ne s’opposent pas, mais ils ne disent pas la même chose de toi. Ce site parle du troisième.</p>
+  <p class="intro">Les trois existent dans ta vie d’apprenant, en formation, en stage ou en apprentissage. Ils ne s’opposent pas, mais ils ne disent pas la même chose de toi. Ce site parle du troisième.</p>
   <div class="trio">
     <article class="trio-col"><h3>Être noté</h3><dl><dt>Qui décide ?</dt><dd>Un enseignant, un jury.</dd><dt>Sur quoi ?</dt><dd>Une épreuve, un barème.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un chiffre.</dd></dl></article>
     <article class="trio-col"><h3>Être validé</h3><dl><dt>Qui décide ?</dt><dd>Une institution, selon un référentiel.</dd><dt>Sur quoi ?</dt><dd>Des critères fixés à l’avance.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un diplôme, une attestation.</dd></dl></article>
-    <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : entre jeunes, des jeunes vers les adultes, vers le territoire.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, et parfois un badge qui t’appartient.</dd></dl></article>
+    <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir : d’abord les professionnels, puis tes enseignants et formateurs, tes pairs.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : du professionnel vers toi, de toi vers ton maître de stage, entre apprenants, entre adultes aussi.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, et parfois un badge qui t’appartient.</dd></dl></article>
   </div>
   <h3 class="sous-titre">Une même situation, trois regards</h3>
-  <p class="prose">Pendant ton stage, tu as tenu seul le stand du marché tous les samedis.</p>
+  <p class="prose">Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.</p>
   <ul class="trois-regards">
-    <li><strong>Noté :</strong> ton rapport de stage a obtenu 14 sur 20.</li>
-    <li><strong>Validé :</strong> ton stage compte pour ton diplôme.</li>
-    <li><strong>Reconnu :</strong> ton maître de stage te confie le stand la saison suivante, une cliente revient pour tes conseils, et tu crées un badge que ton maître de stage endosse.</li>
+    <li><strong>Noté :</strong> son dossier d’alternance obtient 14 sur 20.</li>
+    <li><strong>Validé :</strong> sa période en entreprise compte pour son diplôme.</li>
+    <li><strong>Reconnu :</strong> Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente, et endosse son badge. Son formateur et Lucas lui-même y ajoutent leur regard. <a href="#ecrire-endossement">Voir les trois regards</a>.</li>
   </ul>
   ${suite("mille-facons","Les mille façons","boussole","Et quand ça compte pour la suite ?")}
 </div>`;
@@ -1089,7 +1140,7 @@ VUES["etre-reconnu"]=()=>`<div class="wrap vue">
 VUES["ecrire-endossement"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 2 sur 3, l’endossement</p>
   <h2>Endosser, c’est reconnaître par écrit.</h2>
-  <p class="intro">Un endossement, c’est un témoignage ajouté au badge de quelqu’un d’autre. C’est une des formes de reconnaissance les plus fortes : quelqu’un prend le temps de dire ce qu’il a vu, et signe.</p>
+  <p class="intro">Un endossement, c’est un témoignage ajouté au badge de quelqu’un d’autre. C’est une des formes de reconnaissance les plus fortes : quelqu’un prend le temps de dire ce qu’il a vu, et signe. Pour un apprenant, le premier qui compte est celui du professionnel.</p>
   <div class="guide-seul">${guideEndos().replace('<h2 id="titre-guide">Écrire un endossement qui parle</h2>','<h2 id="titre-guide" class="visually-hidden">Écrire un endossement qui parle</h2>')}</div>
   <div class="actions"><a class="btn plein" href="#construire-reco-pair">Écrire un endossement pour un camarade</a><a class="btn" href="#construire-demander">Demander un endossement</a></div>
   ${suite("vie-badge","La vie d’un badge","jeu","Un petit jeu pour finir")}
@@ -1105,25 +1156,28 @@ VUES.role=()=>`<div class="wrap vue">
 
 VUES.adultes=()=>`<div class="wrap vue">
   <p class="temps">Pour les adultes</p>
-  <h2>Vous accompagnez des jeunes ?</h2>
-  <p class="intro">Enseignants, CPE, surveillants, agents de l’exploitation, maîtres de stage ou d’apprentissage, partenaires : cette page est pour vous. Le reste du site s’adresse aux jeunes, en les tutoyant.</p>
+  <h2>La reconnaissance est une relation. Vous en faites partie.</h2>
+  <p class="intro">Maîtres de stage et d’apprentissage, enseignants, formatrices et formateurs, équipes de vie scolaire, agents de l’exploitation, partenaires : cette page est pour vous. Le reste du site s’adresse aux apprenants, en les tutoyant.</p>
   <div class="adultes">
-    <section><h3>Reconnaître sans évaluer</h3><p>La reconnaissance ouverte ne remplace ni la note ni la certification. Elle rend visible ce qui ne se voit pas ailleurs : l’engagement, les savoir-faire acquis en stage, à l’internat, dans une association. Le jeune en reste l’acteur : c’est lui qui décide de créer un badge, de le documenter et de le montrer.</p></section>
-    <section><h3>Répondre à une demande d’endossement</h3><p>Un jeune peut vous demander de témoigner sur son badge. Quelques lignes suffisent, si elles disent :</p>
-      <ol class="liste-ing">${INGREDIENTS.map(i=>`<li><strong>${i.t.replace("tu as vu","vous avez vu").replace("Qui tu es","Qui vous êtes")}</strong> : ${(i.d.charAt(0).toLowerCase()+i.d.slice(1)).replace(/\bton\b/g,"votre")}</li>`).join("")}</ol>
-      <p>Des exemples sont sur la page <a href="#ecrire-endossement">« Endosser, c’est reconnaître par écrit »</a>.</p></section>
-    <section><h3>Accompagner la création d’un badge</h3><p>Aider à trouver les mots, repérer les traces, suggérer des témoins : c’est le travail du passeur, qu’il soit adulte ou jeune. L’ESC, le CDI, la vie scolaire et l’ALESA sont des lieux naturels pour ces temps d’accompagnement.</p></section>
-    <section><h3>Ce qu’il vaut mieux éviter</h3><ul><li>Noter un badge, ou le rendre obligatoire.</li><li>Le lier à un examen, au contrôle continu ou à une procédure d’orientation.</li><li>Fixer des objectifs chiffrés de badges par classe.</li><li>Écrire le badge à la place du jeune.</li></ul></section>
+    <section><h3>Maîtres de stage et d’apprentissage : votre regard compte en premier</h3><p>Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Quelques lignes de votre part sur son badge pèsent plus qu’une appréciation générale. Votre rôle mérite lui aussi d’être reconnu : par les apprenants que vous accueillez, et par l’établissement qui vous les confie.</p></section>
+    <section><h3>Trois regards sur un même badge</h3><p>Le professionnel voit le métier. L’enseignant ou le formateur voit le lien avec la formation. L’apprenant dit ce qu’il fait. Le badge rend visible le regard de chacun, et la relation va dans les deux sens. Deux exemples sont sur la page <a href="#ecrire-endossement">« Endosser, c’est reconnaître par écrit »</a>.</p></section>
+    <section><h3>Répondre à une demande d’endossement</h3><p>Un apprenant peut vous demander de témoigner sur son badge. Quelques lignes suffisent, si elles disent :</p>
+      <ol class="liste-ing">${INGREDIENTS.map(i=>`<li><strong>${i.t.replace("tu as vu","vous avez vu").replace("Qui tu es","Qui vous êtes")}</strong> : ${(i.d.charAt(0).toLowerCase()+i.d.slice(1)).replace(/\bton\b/g,"votre")}</li>`).join("")}</ol></section>
+    <section><h3>Les badges, c’est aussi pour vous</h3><p>Les badges ne sont pas réservés aux apprenants. Vos pratiques, vos projets et vos engagements peuvent eux aussi être reconnus, par vos collègues, par vos partenaires et par les apprenants. Un adulte qui a lui-même des badges accompagne mieux ceux des autres.</p></section>
+    <section><h3>Accompagner la création d’un badge</h3><p>Aider à trouver les mots, repérer les traces, suggérer des témoins : c’est le travail du passeur, qu’il soit adulte ou apprenant. Les temps de suivi de stage ou d’alternance, l’ESC, le CDI, la vie scolaire et l’association des apprenants sont des lieux naturels pour cela.</p></section>
+    <section><h3>Ce qu’il vaut mieux éviter</h3><ul><li>Noter un badge, ou le rendre obligatoire.</li><li>Le lier à un examen, au contrôle continu ou à une procédure d’orientation.</li><li>Fixer des objectifs chiffrés de badges par classe.</li><li>Écrire le badge à la place de l’apprenant.</li></ul></section>
+    <section><h3>Animer un atelier de découverte</h3><p>Ce site peut servir de support à un atelier, en lycée agricole comme en MFR : le parcours de découverte en grand groupe, puis la page des trois regards par groupes de trois, chacun jouant un rôle (professionnel, formateur, apprenant) et écrivant son regard sur une même situation.</p></section>
     <section><h3>Aller plus loin</h3><p>Formations, Générateur d’image et carte des badges de l’enseignement agricole : <a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">openbadges.educagri.fr</a>.</p></section>
   </div>
-  <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#mille-facons">Voir le parcours des jeunes</a></div>
+  <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#mille-facons">Voir le parcours des apprenants</a></div>
 </div>`;
 
 VUES["a-propos"]=()=>`<div class="wrap vue">
   <h2>À propos</h2>
   <div class="prose">
-    <p>« Mille façons de reconnaître » est un guide pour les jeunes de l’enseignement agricole : lycéens, apprentis, étudiants. Il les aide à repérer les mille façons dont ils sont reconnus, à comprendre comment est construit un badge numérique, et à construire le leur, ou à reconnaître les autres.</p>
+    <p>« Mille façons de reconnaître » est un guide d’abord pour les apprenants de l’enseignement agricole, en lycée comme en maison familiale rurale. Il peut servir de support à un atelier de découverte de la reconnaissance et des badges. Il les aide à repérer les mille façons dont ils sont reconnus, à comprendre comment est construit un badge numérique, et à construire le leur, ou à reconnaître les autres.</p>
     <p>Il s’inscrit dans la démarche d’<a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA, Reconnaissance et Open badges pour l’Enseignement Agricole</a>, et dans les principes de la reconnaissance ouverte.</p>
+    <p>Les badges, eux, ne sont pas réservés aux apprenants : maîtres de stage, enseignants, formateurs et partenaires peuvent aussi être reconnus. La reconnaissance est une relation entre tous ceux qui partagent une expérience.</p>
     <h3>Vos données</h3>
     <p>Ce site n’enregistre rien. Il ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne fait appel à aucun service extérieur : les polices sont hébergées avec le site. Ce que vous écrivez dans les formulaires reste dans votre navigateur et disparaît quand vous fermez la page.</p>
     <h3>Une plateforme au choix</h3>
@@ -1264,7 +1318,7 @@ function brancher(v){
   if(v==="badge-cest-quoi"){
     document.querySelectorAll(".carte").forEach(b=>b.addEventListener("click",()=>b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true")));
     const tabs=[...document.querySelectorAll(".onglets [role=tab]")],pan=document.getElementById("panneau-anatomie");
-    const sel=t=>{tabs.forEach(x=>{x.setAttribute("aria-selected",x===t);x.tabIndex=x===t?0:-1;});pan.setAttribute("aria-labelledby",t.id);pan.innerHTML=ficheHTML({...EXEMPLES[t.dataset.ex],exemple:true},true);};
+    const sel=t=>{tabs.forEach(x=>{x.setAttribute("aria-selected",x===t);x.tabIndex=x===t?0:-1;});pan.setAttribute("aria-labelledby",t.id);pan.innerHTML=panneauAnatomie(t.dataset.ex);};
     tabs.forEach((t,i)=>{t.tabIndex=i===0?0:-1;t.addEventListener("click",()=>sel(t));t.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){const n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];n.focus();sel(n);}});});
   }
   if(v==="vie-badge"){
