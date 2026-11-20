@@ -405,14 +405,15 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .jeu-quoi .options button[aria-pressed="true"]{background:var(--encre);border-color:var(--encre);color:#fff}
 .jeu-quoi .options button.juste{box-shadow:0 0 0 3px var(--colza)}
 .jeu-quoi .options .voir{border-style:dashed}
-.cercles-zone{display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:center;margin:1.5rem 0}
-.cercles{position:relative;width:360px;height:360px}
+.cercles-zone{display:grid;grid-template-columns:420px 1fr;gap:2rem;align-items:center;margin:1.5rem 0}
+.cercles{position:relative;width:400px;height:400px}
 .cercle{position:absolute;border-radius:50%;border:3px solid var(--bocage);cursor:pointer;font:inherit;display:flex;justify-content:center;align-items:flex-start;padding-top:.7rem;color:var(--encre);font-weight:800}
 .cercle span{font-family:"Baloo 2",sans-serif;font-size:1.05rem;background:#fff;padding:0 .4rem;border-radius:6px}
-.cercle.c3{inset:0;background:#F2F8F7}
-.cercle.c2{inset:45px;background:#DFF1EE}
-.cercle.c1{inset:90px;background:#BFE3DC}
-.cercle.c0{inset:135px;background:var(--colza);align-items:center;padding-top:0}
+.cercle.c4{inset:0;background:#fff;border-color:var(--pomme);border-style:dashed}
+.cercle.c3{inset:40px;background:#F2F8F7}
+.cercle.c2{inset:80px;background:#DFF1EE}
+.cercle.c1{inset:120px;background:#BFE3DC}
+.cercle.c0{inset:160px;background:var(--colza);align-items:center;padding-top:0}
 .cercle[aria-pressed="true"]{border-color:var(--pomme);border-width:4px}
 .cercle-detail{background:#fff;border:3px solid var(--bocage);border-radius:16px;padding:1.3rem 1.4rem}
 .cercle-ex{font-style:italic;color:var(--bocage);margin:0}
@@ -451,7 +452,7 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .ligne-badge th,.ligne-badge td{border-bottom:none;color:var(--encre)!important;font-weight:800}
 .legende-formes{display:flex;gap:1.2rem;font-size:.92rem;color:var(--doux)}
 .pause{font-weight:800;color:var(--encre);background:var(--teinte);display:inline-block;padding:.3rem .9rem;border-radius:8px}
-@media (max-width:860px){.quoi,.ressentis{grid-template-columns:1fr 1fr}.cercles-zone,.mesure{grid-template-columns:1fr}.cercles{width:300px;height:300px;margin:auto}.cercle.c2{inset:38px}.cercle.c1{inset:76px}.cercle.c0{inset:114px}}
+@media (max-width:860px){.quoi,.ressentis{grid-template-columns:1fr 1fr}.cercles-zone,.mesure{grid-template-columns:1fr}.cercles{width:320px;height:320px;margin:auto}.cercle.c3{inset:32px}.cercle.c2{inset:64px}.cercle.c1{inset:96px}.cercle.c0{inset:128px}}
 @media (max-width:520px){.quoi,.ressentis{grid-template-columns:1fr}}
 
 .quoi{grid-template-columns:repeat(4,1fr)}
@@ -1344,7 +1345,8 @@ const CERCLES=[
   {k:"soi",t:"Toi",d:"Se reconnaître soi-même : savoir dire ce que tu sais faire, t’accorder de la valeur, voir le chemin parcouru. C’est souvent la reconnaissance la plus difficile.",ex:"« Cette fois, je l’ai fait seul, et je l’ai bien fait. »"},
   {k:"proches",t:"Les autres",d:"La reconnaissance entre personnes : tes camarades, ta famille, tes amis, ton maître de stage, tes collègues. Elle passe par un regard, un mot, une confiance.",ex:"« Je peux compter sur toi. »"},
   {k:"orga",t:"Les organisations",d:"L’établissement, l’entreprise, l’association : elles reconnaissent par des rôles, des responsabilités, des places qu’elles te donnent.",ex:"Être élu délégué, recevoir les clés de l’atelier."},
-  {k:"societe",t:"La société",d:"Les droits, les diplômes, les métiers reconnus. Et au fond, la reconnaissance de chacun comme une personne, quelle que soit sa réussite : on est un être humain avant d’être un élève, un salarié ou un résultat.",ex:"Le droit d’être écouté, le respect dû à chacun."}
+  {k:"societe",t:"La société",d:"Ton territoire, ton pays : les droits, les diplômes, les métiers reconnus, et la place faite aux engagements citoyens, associatifs, culturels.",ex:"Une commune qui remercie les jeunes bénévoles, un engagement reconnu par une association."},
+  {k:"universel",t:"Tout être humain",d:"Le cercle le plus large, et le plus important. Chaque personne a une valeur propre, quels que soient ses notes, ses diplômes, son origine, ses croyances, sa réussite ou ses difficultés. Avant d’être un élève, un apprenti, un salarié ou un résultat, on est un être humain, digne d’être écouté, respecté et soutenu. Cette reconnaissance-là ne se mérite pas : elle est due à chacun.",ex:"« Tu comptes, toi aussi. »"}
 ];
 const RANGER=["Un sourire","Un merci sincère","La confiance de ton maître de stage","Un 15 sur 20","Un diplôme"];
 const RESSENTIS=[
@@ -1399,14 +1401,14 @@ document.addEventListener("click",async e=>{
 VUES["qui-reconnait"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
   <h2>Qui reconnaît ? Toi d’abord, et tous les autres.</h2>
-  <p class="intro">Tu viens d’écrire ce que toi, les autres, ton établissement et la société peuvent te reconnaître. Ce sont les cercles de la reconnaissance : elle part de toi et s’élargit, comme des cercles dans l’eau. Clique sur chaque cercle.</p>
+  <p class="intro">Tu viens d’écrire ce que toi, les autres, ton établissement et la société peuvent te reconnaître. Ce sont les cercles de la reconnaissance : elle part de toi et s’élargit, comme des cercles dans l’eau, jusqu’à tout être humain. Clique sur chaque cercle.</p>
   <div class="cercles-zone">
     <div class="cercles" role="group" aria-label="Les cercles de la reconnaissance">
-      ${CERCLES.slice().reverse().map((c,i)=>`<button type="button" class="cercle c${3-i}" data-cercle="${CERCLES.indexOf(c)}" aria-pressed="${c.k==="soi"}"><span>${c.t}</span></button>`).join("")}
+      ${CERCLES.slice().reverse().map((c,i)=>`<button type="button" class="cercle c${CERCLES.length-1-i}" data-cercle="${CERCLES.indexOf(c)}" aria-pressed="${c.k==="soi"}"><span>${c.t}</span></button>`).join("")}
     </div>
     <div class="cercle-detail" id="cercle-detail" aria-live="polite">${detailCercle(0)}</div>
   </div>
-  <p class="message-fort">Au fond, chacun a droit à être reconnu pour son humanité, avant tout le reste.</p>
+  <p class="message-fort">Tous les cercles comptent. Mais le dernier les contient tous : chacun a droit à être reconnu pour son humanité. Ce rappel vaut d’autant plus dans les temps troublés.</p>
   <label for="r-qui1" class="lab-like">Qui t’a reconnu cette semaine ? Dans quel cercle était-il ?</label>
   <textarea id="r-qui1"></textarea>
   <p class="note">Rien n’est enregistré.</p>
@@ -1499,7 +1501,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <ol class="deroule">
     <li><span class="duree">10 min</span><div><strong>Les mille façons</strong><p>Projeter <a href="#mille-facons">la galerie</a>. Demander : « La dernière fois qu’on t’a reconnu sans le dire ? » Quelques réponses à l’oral.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Ce qui est reconnu</strong><p>Projeter <a href="#ce-qui-est-reconnu">les exemples</a> et en faire ajouter par le groupe. Puis laisser chacun écrire pour lui-même, sans partage obligatoire : que te reconnais-tu ? que peux-tu reconnaître à quelqu’un ? que peuvent te reconnaître ton établissement, ton entreprise, ton territoire ?</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Qui reconnaît</strong><p>Parcourir <a href="#qui-reconnait">les cercles</a>, de soi à la société. Laisser un temps d’écriture individuelle : « Qui t’a reconnu cette semaine ? T’es-tu reconnu ? »</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Qui reconnaît</strong><p>Parcourir <a href="#qui-reconnait">les cercles</a>, de soi à la société, jusqu’au cercle de tout être humain : s’y arrêter. Laisser un temps d’écriture individuelle : « Qui t’a reconnu cette semaine ? T’es-tu reconnu ? »</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Égales, mais pas mesurables</strong><p>Faire <a href="#egales">ranger les cinq reconnaissances</a> à deux ou trois volontaires, puis comparer leurs ordres. Débat : peut-on comparer un sourire et un diplôme ?</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Noté, certifié, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
     <li><span class="duree">15 min</span><div><strong>Ce que ça fait, et qui agit</strong><p>Lire <a href="#ce-que-ca-fait">les témoignages</a>, recueillir des ressentis, puis présenter <a href="#acteur">le défi du jour</a>. Chacun choisit une personne à reconnaître avant la fin de la journée.</p></div></li>
