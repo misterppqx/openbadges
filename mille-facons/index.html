@@ -398,10 +398,10 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 
 /* ---------- temps 1 : reconnaître ---------- */
 .quoi{list-style:none;padding:0;margin:1.5rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.quoi li{background:var(--teinte);border-radius:14px;padding:1rem 1.1rem;border:2px dashed #BFD9D6}
-.quoi strong{display:block;font-family:"Baloo 2",sans-serif;font-size:1.25rem;color:var(--encre)}
-.quoi span{display:block}
-.quoi em{display:block;margin-top:.4rem;color:var(--bocage);font-size:.95rem}
+.quoi > li{background:var(--teinte);border-radius:14px;padding:1rem 1.1rem;border:2px dashed #BFD9D6}
+.quoi > li > strong{display:block;font-family:"Baloo 2",sans-serif;font-size:1.25rem;color:var(--encre)}
+.quoi > li > span{display:block}
+.quoi > li > em{display:block;margin-top:.4rem;color:var(--bocage);font-size:.95rem}
 .jeu-quoi .options button[aria-pressed="true"]{background:var(--encre);border-color:var(--encre);color:#fff}
 .jeu-quoi .options button.juste{box-shadow:0 0 0 3px var(--colza)}
 .jeu-quoi .options .voir{border-style:dashed}
@@ -453,6 +453,16 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .pause{font-weight:800;color:var(--encre);background:var(--teinte);display:inline-block;padding:.3rem .9rem;border-radius:8px}
 @media (max-width:860px){.quoi,.ressentis{grid-template-columns:1fr 1fr}.cercles-zone,.mesure{grid-template-columns:1fr}.cercles{width:300px;height:300px;margin:auto}.cercle.c2{inset:38px}.cercle.c1{inset:76px}.cercle.c0{inset:114px}}
 @media (max-width:520px){.quoi,.ressentis{grid-template-columns:1fr}}
+
+.quoi{grid-template-columns:repeat(4,1fr)}
+.quoi > li ul{margin:.4rem 0 0;padding-left:1.1rem;font-size:.97rem}
+.quoi > li ul li{margin-bottom:.15rem}
+.ecrire-soi{margin-top:1.5rem;max-width:760px}
+.ecrire-soi .ch > label{font-size:1.1rem}
+.pistes{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 .6rem}
+.pistes button{font:inherit;font-size:.92rem;padding:.3rem .8rem;border-radius:999px;border:2px solid #BFD9D6;background:#fff;cursor:pointer}
+.pistes button[aria-pressed="true"]{background:var(--teinte);border-color:var(--bocage)}
+@media (max-width:860px){.quoi{grid-template-columns:1fr 1fr}}
 
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
@@ -1315,19 +1325,20 @@ TYPE_BUILD["demander-maitre"]="demande-ms";
 
 /* ================= TEMPS 1 : RECONNAÎTRE ================= */
 const QUOI=[
-  {k:"competence",t:"Des compétences",d:"Savoir agir dans une situation réelle.",ex:"Conduire la traite seul."},
-  {k:"aptitude",t:"Des aptitudes",d:"Une qualité que tu as ou que tu développes.",ex:"La patience, le sens de l’observation."},
-  {k:"engagement",t:"Des engagements",d:"T’investir pour les autres ou pour une cause.",ex:"Être éco-délégué, bénévole au club."},
-  {k:"apprentissage",t:"Des apprentissages",d:"Le chemin parcouru, ce que tu as appris.",ex:"La première fois que tu as réussi seul."},
-  {k:"geste",t:"Des gestes",d:"Un acte précis, parfois minuscule.",ex:"Remplacer un copain à l’astreinte."},
-  {k:"contribution",t:"Des contributions",d:"Ta part dans quelque chose de collectif.",ex:"Tenir les comptes de la friperie solidaire."}
+  {t:"Ce que tu as appris",ex:["À reconnaître une vache qui ne va pas bien","Tes premiers mots d’anglais en mobilité","Ce que tu as compris d’une erreur"]},
+  {t:"Ce que tu sais faire",ex:["Régler seul le semoir","Tenir la caisse au marché","Animer un atelier pour des personnes âgées"]},
+  {t:"Tes qualités",ex:["La patience avec les animaux","Ton calme quand ça s’agite","Ton sens de l’humour qui détend le groupe"]},
+  {t:"Ce que tu as réalisé",ex:["Le stand monté pour les portes ouvertes","Un potager remis en état","Une vidéo sur ton stage"]},
+  {t:"Tes engagements",ex:["Pompier volontaire","Éco-délégué","Bénévole au club ou au comité des fêtes"]},
+  {t:"Ce que tu donnes aux autres",ex:["Un coup de main à l’astreinte","L’accueil des nouveaux à l’internat","Ton aide pour réviser"]},
+  {t:"Ton chemin",ex:["Ton changement d’orientation","La reprise de la ferme familiale qui se prépare","Le chemin parcouru depuis la seconde"]},
+  {t:"Tes valeurs et tes passions",ex:["Le respect du vivant","La musique, la pêche, les chevaux","L’envie de t’installer un jour"]}
 ];
-const QUOI_SIT=[
-  {s:"Tu as aidé un nouveau à trouver sa place à l’internat.",ok:["geste","engagement"]},
-  {s:"Après trois semaines de stage, tu sais régler seul le semoir.",ok:["competence","apprentissage"]},
-  {s:"Tu restes calme quand un animal panique.",ok:["aptitude"]},
-  {s:"Tu as préparé l’affiche du marché de producteurs avec ton équipe.",ok:["contribution"]},
-  {s:"Tu participes chaque semaine aux réunions de l’association des apprenants.",ok:["engagement"]}
+const ECRIRE=[
+  {id:"soi",q:"Que te reconnais-tu à toi-même ?",ph:"Je sais… / J’ai appris… / Je suis fier de…"},
+  {id:"autre",q:"Que peux-tu reconnaître à quelqu’un ?",ph:"À ma camarade, sa patience avec les veaux… / À mon maître de stage, le temps qu’il prend pour expliquer…"},
+  {id:"orga",q:"Que peut te reconnaître ton établissement, ou ton entreprise de stage ?",ph:"Mon rôle de délégué… / Le travail que j’ai fait pendant la saison…"},
+  {id:"societe",q:"Que peuvent te reconnaître ton territoire, la société, ton pays ?",aide:"C’est plus difficile. Quelques pistes, à cliquer :",pistes:["ton engagement citoyen","ton engagement associatif","ton engagement culturel","ton engagement sportif","ton action pour l’environnement","ton rôle dans la vie du village ou du quartier","ton aide à des personnes isolées","ta participation à un conseil de jeunes"]}
 ];
 const CERCLES=[
   {k:"soi",t:"Toi",d:"Se reconnaître soi-même : savoir dire ce que tu sais faire, t’accorder de la valeur, voir le chemin parcouru. C’est souvent la reconnaissance la plus difficile.",ex:"« Cette fois, je l’ai fait seul, et je l’ai bien fait. »"},
@@ -1355,23 +1366,40 @@ function cellForme(v){return `<td class="cf cf-${v}"><i class="pt pt-${v}" aria-
 
 VUES["ce-qui-est-reconnu"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
-  <h2>On reconnaît bien plus que des compétences.</h2>
-  <p class="intro">Quand quelqu’un te reconnaît, qu’est-ce qu’il reconnaît, au juste ? Ce que tu sais faire, mais pas seulement.</p>
-  <ul class="quoi">${QUOI.map(q=>`<li><strong>${q.t}</strong><span>${q.d}</span><em>${q.ex}</em></li>`).join("")}</ul>
-  <h3 class="sous-titre">À toi : qu’est-ce qui est reconnu ici ?</h3>
-  <p class="prose">Pour chaque situation, choisis une ou plusieurs réponses, puis compare.</p>
-  <ol class="jeu jeu-quoi">${QUOI_SIT.map((q,i)=>`<li data-qs="${i}"><p class="sit">${q.s}</p><div class="options">${QUOI.map(c=>`<button type="button" aria-pressed="false" data-qk="${c.k}">${c.t.replace("Des ","")}</button>`).join("")}<button type="button" class="voir" data-voir="${i}">Comparer</button></div><p class="retour" hidden aria-live="polite"></p></li>`).join("")}</ol>
-  <p class="message-fort">Une même situation peut reconnaître plusieurs choses à la fois.</p>
-  <label for="r-quoi" class="lab-like">Et toi : qu’est-ce qu’on a reconnu chez toi récemment ?</label>
-  <textarea id="r-quoi" placeholder="Un geste, une aptitude, un engagement…"></textarea>
-  <p class="note">Ce que tu écris ici n’est enregistré nulle part.</p>
+  <h2>Tu es bien plus que tes notes.</h2>
+  <p class="intro">Quand quelqu’un te reconnaît, qu’est-ce qu’il reconnaît ? Pas seulement ce que tu sais faire. Voici des exemples, avec des mots simples.</p>
+  <ul class="quoi">${QUOI.map(q=>`<li><strong>${q.t}</strong><ul>${q.ex.map(x=>`<li>${x}</li>`).join("")}</ul></li>`).join("")}</ul>
+  <p class="message-fort">Souvent, une même chose est reconnue de plusieurs façons à la fois.</p>
+  <section class="ecrire-soi" aria-labelledby="titre-ecrire">
+    <h3 id="titre-ecrire" class="sous-titre">À toi d’écrire, pour toi-même</h3>
+    <p class="prose">Prends le temps. Il n’y a pas de bonne réponse, et personne ne lira ce que tu écris.</p>
+    ${ECRIRE.map(e=>`<div class="ch"><label for="e-${e.id}">${e.q}</label>${e.aide?`<p class="aide">${e.aide}</p><div class="pistes">${e.pistes.map(p=>`<button type="button" data-piste="${e.id}">${p}</button>`).join("")}</div>`:""}<textarea id="e-${e.id}" placeholder="${e.ph||""}"></textarea></div>`).join("")}
+    <div class="actions"><button type="button" class="btn petit" id="copier-reponses">Copier mes réponses</button><button type="button" class="btn petit" id="telecharger-reponses">Télécharger en .txt</button></div>
+    <p class="statut" id="statut-reponses" aria-live="polite"></p>
+    <div class="copie-secours" id="secours-reponses"><textarea readonly></textarea></div>
+    <p class="note">Rien n’est enregistré : si tu veux garder tes réponses, copie-les ou télécharge-les.</p>
+  </section>
   ${suite("mille-facons","Les mille façons","qui-reconnait","Qui reconnaît ?")}
 </div>`;
+
+function texteReponses(){return "Ce qu’on peut me reconnaître\n\n"+ECRIRE.map(e=>e.q+"\n"+((document.getElementById("e-"+e.id)||{}).value||"")).join("\n\n");}
+document.addEventListener("click",async e=>{
+  const pi=e.target.closest("[data-piste]");
+  if(pi){const ta=document.getElementById("e-"+pi.dataset.piste);ta.value=ta.value?ta.value.replace(/\s*$/,"")+", "+pi.textContent:pi.textContent.charAt(0).toUpperCase()+pi.textContent.slice(1);pi.setAttribute("aria-pressed","true");return;}
+  const st=document.getElementById("statut-reponses");
+  if(e.target.closest("#copier-reponses")){const txt=texteReponses(),sec=document.getElementById("secours-reponses");
+    try{await navigator.clipboard.writeText(txt);st.textContent="Réponses copiées.";sec.classList.remove("on");}
+    catch(err){sec.classList.add("on");const ta=sec.querySelector("textarea");ta.value=txt;ta.focus();ta.select();st.textContent="La copie automatique n’a pas marché : le texte est sélectionné ci-dessous.";}return;}
+  if(e.target.closest("#telecharger-reponses")){
+    try{if(DL){await DL.save({filename:"ce-qu-on-peut-me-reconnaitre.txt",data:texteReponses()});}
+      else{const url=URL.createObjectURL(new Blob([texteReponses()],{type:"text/plain;charset=utf-8"}));const l=document.createElement("a");l.href=url;l.download="ce-qu-on-peut-me-reconnaitre.txt";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+      st.textContent="Fichier téléchargé.";}catch(err){st.textContent="Le téléchargement n’a pas marché : utilise « Copier mes réponses ».";}}
+});
 
 VUES["qui-reconnait"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
   <h2>Qui reconnaît ? Toi d’abord, et tous les autres.</h2>
-  <p class="intro">La reconnaissance part de toi et s’élargit, comme des cercles dans l’eau. Clique sur chaque cercle.</p>
+  <p class="intro">Tu viens d’écrire ce que toi, les autres, ton établissement et la société peuvent te reconnaître. Ce sont les cercles de la reconnaissance : elle part de toi et s’élargit, comme des cercles dans l’eau. Clique sur chaque cercle.</p>
   <div class="cercles-zone">
     <div class="cercles" role="group" aria-label="Les cercles de la reconnaissance">
       ${CERCLES.slice().reverse().map((c,i)=>`<button type="button" class="cercle c${3-i}" data-cercle="${CERCLES.indexOf(c)}" aria-pressed="${c.k==="soi"}"><span>${c.t}</span></button>`).join("")}
@@ -1379,10 +1407,8 @@ VUES["qui-reconnait"]=()=>`<div class="wrap vue">
     <div class="cercle-detail" id="cercle-detail" aria-live="polite">${detailCercle(0)}</div>
   </div>
   <p class="message-fort">Au fond, chacun a droit à être reconnu pour son humanité, avant tout le reste.</p>
-  <div class="reflexion">
-    <div><label for="r-qui1">Qui t’a reconnu cette semaine ?</label><textarea id="r-qui1"></textarea></div>
-    <div><label for="r-qui2">Et toi, t’es-tu reconnu ? Pour quoi ?</label><textarea id="r-qui2"></textarea></div>
-  </div>
+  <label for="r-qui1" class="lab-like">Qui t’a reconnu cette semaine ? Dans quel cercle était-il ?</label>
+  <textarea id="r-qui1"></textarea>
   <p class="note">Rien n’est enregistré.</p>
   ${suite("ce-qui-est-reconnu","Ce qui est reconnu","egales","Toutes les reconnaissances se valent-elles ?")}
 </div>`;
@@ -1448,12 +1474,6 @@ VUES.formes=()=>`<div class="wrap vue">
 Object.assign(T,{"ce-qui-est-reconnu":1,"qui-reconnait":1,egales:1,"ce-que-ca-fait":1,acteur:1,formes:2});
 
 document.addEventListener("click",e=>{
-  const qk=e.target.closest("[data-qk]");
-  if(qk){qk.setAttribute("aria-pressed",qk.getAttribute("aria-pressed")==="true"?"false":"true");return;}
-  const vo=e.target.closest("[data-voir]");
-  if(vo){const li=vo.closest("li"),q=QUOI_SIT[+vo.dataset.voir],ret=li.querySelector(".retour");
-    li.querySelectorAll("[data-qk]").forEach(b=>{const ok=q.ok.includes(b.dataset.qk);b.classList.toggle("juste",ok);});
-    ret.hidden=false;ret.textContent="On y verrait : "+q.ok.map(k=>QUOI.find(c=>c.k===k).t.replace("Des ","").toLowerCase()).join(" et ")+". D’autres réponses se défendent : l’important est d’en parler.";return;}
   const ce=e.target.closest("[data-cercle]");
   if(ce){document.querySelectorAll("[data-cercle]").forEach(b=>b.setAttribute("aria-pressed",b===ce));document.getElementById("cercle-detail").innerHTML=detailCercle(+ce.dataset.cercle);return;}
   const ra=e.target.closest("#ranger [data-r]");
@@ -1478,7 +1498,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <p class="prose">Un temps de réflexion, sans parler de badges. Ne le raccourcissez pas : c’est lui qui donne du sens à la suite.</p>
   <ol class="deroule">
     <li><span class="duree">10 min</span><div><strong>Les mille façons</strong><p>Projeter <a href="#mille-facons">la galerie</a>. Demander : « La dernière fois qu’on t’a reconnu sans le dire ? » Quelques réponses à l’oral.</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Ce qui est reconnu</strong><p>Projeter <a href="#ce-qui-est-reconnu">les six catégories</a>, puis classer les situations en grand groupe. Montrer qu’une situation reconnaît souvent plusieurs choses.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Ce qui est reconnu</strong><p>Projeter <a href="#ce-qui-est-reconnu">les exemples</a> et en faire ajouter par le groupe. Puis laisser chacun écrire pour lui-même, sans partage obligatoire : que te reconnais-tu ? que peux-tu reconnaître à quelqu’un ? que peuvent te reconnaître ton établissement, ton entreprise, ton territoire ?</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Qui reconnaît</strong><p>Parcourir <a href="#qui-reconnait">les cercles</a>, de soi à la société. Laisser un temps d’écriture individuelle : « Qui t’a reconnu cette semaine ? T’es-tu reconnu ? »</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Égales, mais pas mesurables</strong><p>Faire <a href="#egales">ranger les cinq reconnaissances</a> à deux ou trois volontaires, puis comparer leurs ordres. Débat : peut-on comparer un sourire et un diplôme ?</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Noté, certifié, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
