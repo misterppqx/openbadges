@@ -396,6 +396,64 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
   .anim-cadre > div{border:1px solid #999}
 }
 
+/* ---------- temps 1 : reconnaître ---------- */
+.quoi{list-style:none;padding:0;margin:1.5rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.quoi li{background:var(--teinte);border-radius:14px;padding:1rem 1.1rem;border:2px dashed #BFD9D6}
+.quoi strong{display:block;font-family:"Baloo 2",sans-serif;font-size:1.25rem;color:var(--encre)}
+.quoi span{display:block}
+.quoi em{display:block;margin-top:.4rem;color:var(--bocage);font-size:.95rem}
+.jeu-quoi .options button[aria-pressed="true"]{background:var(--encre);border-color:var(--encre);color:#fff}
+.jeu-quoi .options button.juste{box-shadow:0 0 0 3px var(--colza)}
+.jeu-quoi .options .voir{border-style:dashed}
+.cercles-zone{display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:center;margin:1.5rem 0}
+.cercles{position:relative;width:360px;height:360px}
+.cercle{position:absolute;border-radius:50%;border:3px solid var(--bocage);cursor:pointer;font:inherit;display:flex;justify-content:center;align-items:flex-start;padding-top:.7rem;color:var(--encre);font-weight:800}
+.cercle span{font-family:"Baloo 2",sans-serif;font-size:1.05rem;background:#fff;padding:0 .4rem;border-radius:6px}
+.cercle.c3{inset:0;background:#F2F8F7}
+.cercle.c2{inset:45px;background:#DFF1EE}
+.cercle.c1{inset:90px;background:#BFE3DC}
+.cercle.c0{inset:135px;background:var(--colza);align-items:center;padding-top:0}
+.cercle[aria-pressed="true"]{border-color:var(--pomme);border-width:4px}
+.cercle-detail{background:#fff;border:3px solid var(--bocage);border-radius:16px;padding:1.3rem 1.4rem}
+.cercle-ex{font-style:italic;color:var(--bocage);margin:0}
+.ranger{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.ranger button{font:inherit;padding:.6rem 1rem;border-radius:10px;border:2px solid var(--bocage);background:#fff;cursor:pointer;display:inline-flex;gap:.5rem;align-items:center}
+.ranger .rang{display:inline-grid;place-items:center;min-width:1.6rem;height:1.6rem;border-radius:50%;border:2px dashed #BFD9D6;font-weight:800;color:var(--encre)}
+.ranger button.range{background:var(--teinte)}
+.ranger button.range .rang{background:var(--colza);border:none}
+.mesure{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.mesure > div{border-radius:14px;padding:1.1rem 1.3rem;border:2px dashed #BFD9D6}
+.mesure > div.reco{border:3px solid var(--bocage);background:#fff}
+.mesure ul{margin:0;padding-left:1.1rem}
+.ressentis{list-style:none;padding:0;margin:1.5rem 0 .5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.ressentis li{background:#fff;border:2px solid #CFE3E1;border-radius:14px;padding:1rem}
+.ressentis strong{display:block;font-family:"Baloo 2",sans-serif;font-size:1.25rem;color:var(--encre)}
+.ressentis blockquote{margin:.4rem 0;font-style:italic}
+.ressentis span{font-size:.9rem;color:var(--doux)}
+.defi{background:var(--colza);border-radius:16px;padding:1.3rem 1.5rem;max-width:640px}
+.defi h3{margin-bottom:.3rem}
+.defi p#defi-texte{font-size:1.2rem;font-weight:700;color:var(--encre)}
+.defi .btn{border-color:var(--encre)}
+.table-formes{overflow-x:auto;margin:1.5rem 0 .5rem}
+.table-formes table{border-collapse:collapse;width:100%;min-width:640px;background:#fff}
+.table-formes th,.table-formes td{padding:.55rem .8rem;border-bottom:1px solid #CFE3E1;text-align:left}
+.table-formes thead th{color:var(--encre);font-size:.95rem;border-bottom:3px solid var(--bocage)}
+.table-formes tbody th{font-weight:700;color:var(--encre)}
+.cf{font-size:.92rem}
+.pt{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;border:2px solid var(--bocage);margin-right:.4rem;vertical-align:-.05em}
+.pt-oui{background:var(--bocage)}
+.pt-parfois{background:linear-gradient(90deg,var(--bocage) 50%,transparent 50%)}
+.pt-non{border-color:#9aa7a8}
+.ligne-badge .pt{border-color:var(--encre)}.ligne-badge .pt-oui{background:var(--encre)}
+.legende-formes span{display:inline-flex;align-items:center}
+.cf-oui span{color:var(--bocage)}.cf-parfois span{color:#9a8406}.cf-non{color:#8a9597}
+.ligne-badge{background:var(--colza)}
+.ligne-badge th,.ligne-badge td{border-bottom:none;color:var(--encre)!important;font-weight:800}
+.legende-formes{display:flex;gap:1.2rem;font-size:.92rem;color:var(--doux)}
+.pause{font-weight:800;color:var(--encre);background:var(--teinte);display:inline-block;padding:.3rem .9rem;border-radius:8px}
+@media (max-width:860px){.quoi,.ressentis{grid-template-columns:1fr 1fr}.cercles-zone,.mesure{grid-template-columns:1fr}.cercles{width:300px;height:300px;margin:auto}.cercle.c2{inset:38px}.cercle.c1{inset:76px}.cercle.c0{inset:114px}}
+@media (max-width:520px){.quoi,.ressentis{grid-template-columns:1fr}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -423,9 +481,9 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
     </a>
     <nav aria-label="Étapes de la découverte">
       <ol class="progression" id="progression">
-        <li><a href="#mille-facons" data-t="1"><span class="num">1</span><span class="lib">Les mille façons</span></a></li>
-        <li><a href="#boussole" data-t="2"><span class="num">2</span><span class="lib">Le badge</span></a></li>
-        <li><a href="#parcours" data-t="3"><span class="num">3</span><span class="lib">Les parcours</span></a></li>
+        <li><a href="#mille-facons" data-t="1"><span class="num">1</span><span class="lib">Reconnaître</span></a></li>
+        <li><a href="#formes" data-t="2"><span class="num">2</span><span class="lib">Rendre visible</span></a></li>
+        <li><a href="#parcours" data-t="3"><span class="num">3</span><span class="lib">Agir</span></a></li>
       </ol>
     </nav>
   </div>
@@ -704,14 +762,14 @@ accueil(){
       <div><label for="r2">La dernière fois que toi, tu as reconnu quelqu’un ?</label><textarea id="r2" placeholder="Par exemple : j’ai remercié la surveillante…"></textarea></div>
     </div>
     <p class="note">Ce que tu écris ici n’est enregistré nulle part. C’est juste pour y penser.</p>
-    ${suite("accueil","Retour à l’accueil","etre-reconnu","Noté, validé ou reconnu ?")}
+    ${suite("accueil","Retour à l’accueil","ce-qui-est-reconnu","Qu’est-ce qu’on reconnaît ?")}
   </div>`;
 },
 boussole(){
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, la boussole</p>
     <h2>Est-ce que ça mérite un badge ?</h2>
-    <p class="intro">Pense à quelque chose que tu fais ou que tu as fait. Réponds à ces quatre questions, sans réfléchir trop longtemps.</p>
+    <p class="intro">Le sourire et le merci se suffisent à eux-mêmes. Mais certaines reconnaissances ont besoin d’être rendues visibles. Pense à quelque chose que tu fais ou que tu as fait, et réponds à ces quatre questions, sans réfléchir trop longtemps.</p>
     <form class="boussole" id="form-boussole">${BOUSSOLE.map((q,i)=>`
       <fieldset><legend>${q}</legend>
         <div class="choix-bin">
@@ -721,7 +779,7 @@ boussole(){
       </fieldset>`).join("")}
     </form>
     <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux quatre questions pour voir où tu en es.</p></div>
-    ${suite("etre-reconnu","Noté, validé, reconnu","badge-cest-quoi","Un badge, c’est quoi ?")}
+    ${suite("formes","Les formes de la reconnaissance","badge-cest-quoi","Un badge, c’est quoi ?")}
   </div>`;
 },
 "badge-cest-quoi"(){
@@ -1137,22 +1195,22 @@ Object.keys(ROLES_DEF).filter(k=>k!=="passeur").forEach(k=>{
 Object.assign(T,{"etre-reconnu":1,"ecrire-endossement":2,role:3,adultes:0,"a-propos":0});
 
 VUES["etre-reconnu"]=()=>`<div class="wrap vue">
-  <p class="temps">Temps 1 sur 3, être reconnu</p>
-  <h2>Noté, validé, reconnu : ce n’est pas la même chose.</h2>
+  <p class="temps">Temps 1 sur 3, reconnaître</p>
+  <h2>Noté, certifié, reconnu : ce n’est pas la même chose.</h2>
   <p class="intro">Les trois existent dans ta vie d’apprenant, en formation, en stage ou en apprentissage. Ils ne s’opposent pas, mais ils ne disent pas la même chose de toi. Ce site parle du troisième.</p>
   <div class="trio">
     <article class="trio-col"><h3>Être noté</h3><dl><dt>Qui décide ?</dt><dd>Un enseignant, un jury.</dd><dt>Sur quoi ?</dt><dd>Une épreuve, un barème.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un chiffre.</dd></dl></article>
-    <article class="trio-col"><h3>Être validé</h3><dl><dt>Qui décide ?</dt><dd>Une institution, selon un référentiel.</dd><dt>Sur quoi ?</dt><dd>Des critères fixés à l’avance.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un diplôme, une attestation.</dd></dl></article>
+    <article class="trio-col"><h3>Être certifié</h3><dl><dt>Qui décide ?</dt><dd>Un organisme habilité, selon un référentiel.</dd><dt>Sur quoi ?</dt><dd>Des critères fixés à l’avance, les mêmes pour tous.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un diplôme, un certificat, des crédits.</dd></dl></article>
     <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir : d’abord les professionnels, puis tes enseignants et formateurs, tes pairs.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : du professionnel vers toi, de toi vers ton maître de stage, entre apprenants, entre adultes aussi.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, et parfois un badge qui t’appartient.</dd></dl></article>
   </div>
   <h3 class="sous-titre">Une même situation, trois regards</h3>
   <p class="prose">Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.</p>
   <ul class="trois-regards">
     <li><strong>Noté :</strong> son dossier d’alternance obtient 14 sur 20.</li>
-    <li><strong>Validé :</strong> sa période en entreprise compte pour son diplôme.</li>
+    <li><strong>Certifié :</strong> sa période en entreprise compte pour l’obtention de son diplôme.</li>
     <li><strong>Reconnu :</strong> Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente, et endosse son badge. Son formateur et Lucas lui-même y ajoutent leur regard. <a href="#ecrire-endossement">Voir les trois regards</a>.</li>
   </ul>
-  ${suite("mille-facons","Les mille façons","boussole","Et quand ça compte pour la suite ?")}
+  ${suite("egales","Égales, mais pas mesurables","ce-que-ca-fait","Ce que la reconnaissance fait")}
 </div>`;
 
 VUES["ecrire-endossement"]=()=>`<div class="wrap vue">
@@ -1254,27 +1312,191 @@ PARCOURS["demander-maitre"]={porte:null,t:"Demander l’endossement de mon maît
   ]};
 TYPE_BUILD["demander-maitre"]="demande-ms";
 
+
+/* ================= TEMPS 1 : RECONNAÎTRE ================= */
+const QUOI=[
+  {k:"competence",t:"Des compétences",d:"Savoir agir dans une situation réelle.",ex:"Conduire la traite seul."},
+  {k:"aptitude",t:"Des aptitudes",d:"Une qualité que tu as ou que tu développes.",ex:"La patience, le sens de l’observation."},
+  {k:"engagement",t:"Des engagements",d:"T’investir pour les autres ou pour une cause.",ex:"Être éco-délégué, bénévole au club."},
+  {k:"apprentissage",t:"Des apprentissages",d:"Le chemin parcouru, ce que tu as appris.",ex:"La première fois que tu as réussi seul."},
+  {k:"geste",t:"Des gestes",d:"Un acte précis, parfois minuscule.",ex:"Remplacer un copain à l’astreinte."},
+  {k:"contribution",t:"Des contributions",d:"Ta part dans quelque chose de collectif.",ex:"Tenir les comptes de la friperie solidaire."}
+];
+const QUOI_SIT=[
+  {s:"Tu as aidé un nouveau à trouver sa place à l’internat.",ok:["geste","engagement"]},
+  {s:"Après trois semaines de stage, tu sais régler seul le semoir.",ok:["competence","apprentissage"]},
+  {s:"Tu restes calme quand un animal panique.",ok:["aptitude"]},
+  {s:"Tu as préparé l’affiche du marché de producteurs avec ton équipe.",ok:["contribution"]},
+  {s:"Tu participes chaque semaine aux réunions de l’association des apprenants.",ok:["engagement"]}
+];
+const CERCLES=[
+  {k:"soi",t:"Toi",d:"Se reconnaître soi-même : savoir dire ce que tu sais faire, t’accorder de la valeur, voir le chemin parcouru. C’est souvent la reconnaissance la plus difficile.",ex:"« Cette fois, je l’ai fait seul, et je l’ai bien fait. »"},
+  {k:"proches",t:"Les autres",d:"La reconnaissance entre personnes : tes camarades, ta famille, tes amis, ton maître de stage, tes collègues. Elle passe par un regard, un mot, une confiance.",ex:"« Je peux compter sur toi. »"},
+  {k:"orga",t:"Les organisations",d:"L’établissement, l’entreprise, l’association : elles reconnaissent par des rôles, des responsabilités, des places qu’elles te donnent.",ex:"Être élu délégué, recevoir les clés de l’atelier."},
+  {k:"societe",t:"La société",d:"Les droits, les diplômes, les métiers reconnus. Et au fond, la reconnaissance de chacun comme une personne, quelle que soit sa réussite : on est un être humain avant d’être un élève, un salarié ou un résultat.",ex:"Le droit d’être écouté, le respect dû à chacun."}
+];
+const RANGER=["Un sourire","Un merci sincère","La confiance de ton maître de stage","Un 15 sur 20","Un diplôme"];
+const RESSENTIS=[
+  {mot:"Confiance",txt:"Quand Claire m’a laissé seul avec le troupeau, j’ai su que j’en étais capable.",qui:"Lucas, apprenti"},
+  {mot:"Envie de continuer",txt:"Le merci d’une résidente à la fin de l’atelier m’a donné envie de revenir.",qui:"Maëlle, en stage"},
+  {mot:"Une place",txt:"Depuis que l’équipe de la friperie compte sur moi, je me sens à ma place.",qui:"Hugo, en BTSA"},
+  {mot:"Oser",txt:"Mon formateur a cité mon travail devant le groupe. Depuis, j’ose davantage prendre la parole.",qui:"Léa, en MFR"}
+];
+const DEFIS=["Dis merci à quelqu’un en précisant pour quoi : « Merci d’avoir… ».","Dis à un camarade : « J’ai vu que tu… » et termine la phrase.","Demande conseil à quelqu’un dont tu admires le travail : c’est déjà le reconnaître.","Raconte à quelqu’un ce qu’un autre a fait de bien, devant lui.","Écris trois lignes pour toi : une chose que tu as réussie cette semaine."];
+let defiIdx=0;
+const FORMES=[
+  ["Un sourire","non","non","non","non"],["Une poignée de main","non","non","non","non"],["Un merci","non","parfois","non","non"],
+  ["Un mot écrit, une carte","oui","parfois","parfois","non"],["Une responsabilité confiée","parfois","oui","non","parfois"],
+  ["Un prix, un trophée","oui","oui","parfois","non"],["Une note","oui","parfois","non","non"],
+  ["Un diplôme, un certificat","oui","oui","oui","non"],["Des crédits de formation","oui","oui","oui","non"],
+  ["Une attestation, une lettre de recommandation","oui","oui","oui","non"],["Un badge numérique","oui","oui","oui","oui"]
+];
+function cellForme(v){return `<td class="cf cf-${v}"><i class="pt pt-${v}" aria-hidden="true"></i>${v}</td>`;}
+
+VUES["ce-qui-est-reconnu"]=()=>`<div class="wrap vue">
+  <p class="temps">Temps 1 sur 3, reconnaître</p>
+  <h2>On reconnaît bien plus que des compétences.</h2>
+  <p class="intro">Quand quelqu’un te reconnaît, qu’est-ce qu’il reconnaît, au juste ? Ce que tu sais faire, mais pas seulement.</p>
+  <ul class="quoi">${QUOI.map(q=>`<li><strong>${q.t}</strong><span>${q.d}</span><em>${q.ex}</em></li>`).join("")}</ul>
+  <h3 class="sous-titre">À toi : qu’est-ce qui est reconnu ici ?</h3>
+  <p class="prose">Pour chaque situation, choisis une ou plusieurs réponses, puis compare.</p>
+  <ol class="jeu jeu-quoi">${QUOI_SIT.map((q,i)=>`<li data-qs="${i}"><p class="sit">${q.s}</p><div class="options">${QUOI.map(c=>`<button type="button" aria-pressed="false" data-qk="${c.k}">${c.t.replace("Des ","")}</button>`).join("")}<button type="button" class="voir" data-voir="${i}">Comparer</button></div><p class="retour" hidden aria-live="polite"></p></li>`).join("")}</ol>
+  <p class="message-fort">Une même situation peut reconnaître plusieurs choses à la fois.</p>
+  <label for="r-quoi" class="lab-like">Et toi : qu’est-ce qu’on a reconnu chez toi récemment ?</label>
+  <textarea id="r-quoi" placeholder="Un geste, une aptitude, un engagement…"></textarea>
+  <p class="note">Ce que tu écris ici n’est enregistré nulle part.</p>
+  ${suite("mille-facons","Les mille façons","qui-reconnait","Qui reconnaît ?")}
+</div>`;
+
+VUES["qui-reconnait"]=()=>`<div class="wrap vue">
+  <p class="temps">Temps 1 sur 3, reconnaître</p>
+  <h2>Qui reconnaît ? Toi d’abord, et tous les autres.</h2>
+  <p class="intro">La reconnaissance part de toi et s’élargit, comme des cercles dans l’eau. Clique sur chaque cercle.</p>
+  <div class="cercles-zone">
+    <div class="cercles" role="group" aria-label="Les cercles de la reconnaissance">
+      ${CERCLES.slice().reverse().map((c,i)=>`<button type="button" class="cercle c${3-i}" data-cercle="${CERCLES.indexOf(c)}" aria-pressed="${c.k==="soi"}"><span>${c.t}</span></button>`).join("")}
+    </div>
+    <div class="cercle-detail" id="cercle-detail" aria-live="polite">${detailCercle(0)}</div>
+  </div>
+  <p class="message-fort">Au fond, chacun a droit à être reconnu pour son humanité, avant tout le reste.</p>
+  <div class="reflexion">
+    <div><label for="r-qui1">Qui t’a reconnu cette semaine ?</label><textarea id="r-qui1"></textarea></div>
+    <div><label for="r-qui2">Et toi, t’es-tu reconnu ? Pour quoi ?</label><textarea id="r-qui2"></textarea></div>
+  </div>
+  <p class="note">Rien n’est enregistré.</p>
+  ${suite("ce-qui-est-reconnu","Ce qui est reconnu","egales","Toutes les reconnaissances se valent-elles ?")}
+</div>`;
+function detailCercle(i){const c=CERCLES[i];return `<h3>${c.t}</h3><p>${c.d}</p><p class="cercle-ex">${c.ex}</p>`;}
+
+VUES.egales=()=>`<div class="wrap vue">
+  <p class="temps">Temps 1 sur 3, reconnaître</p>
+  <h2>Toutes ont de la valeur. Aucune ne se mesure sur la même échelle.</h2>
+  <p class="intro">Essaie de ranger ces reconnaissances de la moins importante à la plus importante. Clique-les dans l’ordre.</p>
+  <div class="ranger" id="ranger">${RANGER.map((r,i)=>`<button type="button" data-r="${i}"><span class="rang"></span>${r}</button>`).join("")}</div>
+  <div class="actions"><button type="button" class="btn petit" id="ranger-reset">Recommencer</button></div>
+  <div class="verdict vide" id="ranger-verdict" aria-live="polite"><p>Range les cinq pour voir la suite.</p></div>
+  <div class="mesure">
+    <div><h3>Quand on mesure</h3><p>On compare sur une même échelle : une note, un barème, un classement. C’est utile pour certifier, sélectionner, s’assurer d’un niveau. Mais la mesure crée une hiérarchie : 15 vaut plus que 12.</p></div>
+    <div class="reco"><h3>Quand on reconnaît</h3><p>On ne classe pas. Un sourire et un diplôme disent chacun quelque chose de vrai, à un moment, pour quelqu’un. Ils ont tous les deux de la valeur, mais pas la même, et pas sur la même échelle.</p></div>
+  </div>
+  ${suite("qui-reconnait","Qui reconnaît ?","etre-reconnu","Noté, certifié, reconnu")}
+</div>`;
+
+VUES["ce-que-ca-fait"]=()=>`<div class="wrap vue">
+  <p class="temps">Temps 1 sur 3, reconnaître</p>
+  <h2>Être reconnu, ça change quelque chose.</h2>
+  <p class="intro">Pas besoin de grands discours : chacun sait ce qu’il ressent quand ce qu’il fait est vu, et quand il ne l’est pas.</p>
+  <ul class="ressentis">${RESSENTIS.map(r=>`<li><strong>${r.mot}</strong><blockquote>« ${r.txt} »</blockquote><span>${r.qui}</span></li>`).join("")}</ul>
+  <p class="note">Les témoignages sont des exemples.</p>
+  <p class="prose">À l’inverse, quand ce qu’on fait n’est jamais vu, on peut finir par douter de soi. Ce n’est pas une fatalité : souvent, on n’a pas encore trouvé qui pouvait le voir, ou on ne s’est pas encore autorisé à le dire.</p>
+  <label for="r-ressenti" class="lab-like">Comment t’es-tu senti la dernière fois qu’on t’a reconnu ?</label>
+  <textarea id="r-ressenti"></textarea>
+  <p class="note">Rien n’est enregistré.</p>
+  ${suite("etre-reconnu","Noté, certifié, reconnu","acteur","Et toi, que peux-tu faire ?")}
+</div>`;
+
+VUES.acteur=()=>`<div class="wrap vue">
+  <p class="temps">Temps 1 sur 3, reconnaître</p>
+  <h2>Tu es acteur de ta reconnaissance. Et de celle des autres.</h2>
+  <p class="intro">La reconnaissance ne tombe pas du ciel. Elle se donne, elle se demande, elle se cultive.</p>
+  <div class="mesure">
+    <div class="reco"><h3>Pour toi</h3><ul><li>Oser dire ce que tu fais, avec des mots précis.</li><li>Garder des traces de ce que tu réussis.</li><li>Demander un regard à ceux qui t’ont vu agir.</li></ul></div>
+    <div class="reco"><h3>Pour les autres</h3><ul><li>Remarquer ce qu’ils font.</li><li>Leur dire, précisément : « Merci d’avoir… », « J’ai vu que tu… ».</li><li>Témoigner pour eux quand ça compte.</li></ul></div>
+  </div>
+  <div class="defi"><h3>Le défi du jour</h3><p id="defi-texte">${DEFIS[0]}</p><button type="button" class="btn petit" id="defi-autre">Une autre idée</button><p class="note">Pas besoin de badge pour ça.</p></div>
+  <p class="message-fort">Mais comment reconnaître ? Sous quelle forme ?</p>
+  ${suite("ce-que-ca-fait","Ce que la reconnaissance fait","formes","Les formes de la reconnaissance")}
+</div>`;
+
+/* ================= TEMPS 2 : RENDRE VISIBLE ================= */
+VUES.formes=()=>`<div class="wrap vue">
+  <p class="temps">Temps 2 sur 3, rendre visible</p>
+  <h2>La reconnaissance prend mille formes.</h2>
+  <p class="intro">Un sourire, une poignée de main, un prix, un diplôme… Passe-les au crible de quatre questions. Que reste-t-il d’un sourire un an après ? Et d’un diplôme ?</p>
+  <div class="table-formes"><table>
+    <caption class="visually-hidden">Les formes de la reconnaissance passées au crible de quatre questions</caption>
+    <thead><tr><th scope="col">La forme</th><th scope="col">Elle dure&nbsp;?</th><th scope="col">D’autres peuvent la voir&nbsp;?</th><th scope="col">Elle circule avec toi&nbsp;?</th><th scope="col">Elle peut évoluer&nbsp;?</th></tr></thead>
+    <tbody>${FORMES.map((f,i)=>`<tr${i===FORMES.length-1?' class="ligne-badge"':''}><th scope="row">${f[0]}</th>${f.slice(1).map(cellForme).join("")}</tr>`).join("")}</tbody>
+  </table></div>
+  <p class="legende-formes"><span><i class="pt pt-oui"></i>oui</span><span><i class="pt pt-parfois"></i>parfois</span><span><i class="pt pt-non"></i>non</span></p>
+  <div class="mesure">
+    <div><h3>Les formes légères</h3><p>Le sourire, la poignée de main, le merci n’ont besoin de rien de plus. Ils sont parfaits comme ils sont : garde-les ainsi.</p></div>
+    <div class="reco"><h3>Quand il faut rendre visible</h3><p>Quand une reconnaissance doit compter dans ton parcours personnel, scolaire ou professionnel, te suivre, et grandir avec les regards des autres, il faut une forme qui le permette. C’est là que le badge est pertinent : il dure, il se montre, il circule, il évolue, et il reste à toi.</p></div>
+  </div>
+  ${suite("acteur","Acteur de la reconnaissance","boussole","Est-ce que ça mérite un badge ?")}
+</div>`;
+Object.assign(T,{"ce-qui-est-reconnu":1,"qui-reconnait":1,egales:1,"ce-que-ca-fait":1,acteur:1,formes:2});
+
+document.addEventListener("click",e=>{
+  const qk=e.target.closest("[data-qk]");
+  if(qk){qk.setAttribute("aria-pressed",qk.getAttribute("aria-pressed")==="true"?"false":"true");return;}
+  const vo=e.target.closest("[data-voir]");
+  if(vo){const li=vo.closest("li"),q=QUOI_SIT[+vo.dataset.voir],ret=li.querySelector(".retour");
+    li.querySelectorAll("[data-qk]").forEach(b=>{const ok=q.ok.includes(b.dataset.qk);b.classList.toggle("juste",ok);});
+    ret.hidden=false;ret.textContent="On y verrait : "+q.ok.map(k=>QUOI.find(c=>c.k===k).t.replace("Des ","").toLowerCase()).join(" et ")+". D’autres réponses se défendent : l’important est d’en parler.";return;}
+  const ce=e.target.closest("[data-cercle]");
+  if(ce){document.querySelectorAll("[data-cercle]").forEach(b=>b.setAttribute("aria-pressed",b===ce));document.getElementById("cercle-detail").innerHTML=detailCercle(+ce.dataset.cercle);return;}
+  const ra=e.target.closest("#ranger [data-r]");
+  if(ra){if(ra.dataset.pos)return;const n=document.querySelectorAll("#ranger [data-pos]").length+1;ra.dataset.pos=n;ra.querySelector(".rang").textContent=n;ra.classList.add("range");
+    if(n===RANGER.length){const v=document.getElementById("ranger-verdict");v.className="verdict peut";v.innerHTML="<p><strong>Difficile ?</strong>C’est normal. Comparer un sourire et un diplôme, c’est comme comparer un goût et une distance. Chacun avait sans doute un ordre différent, et personne n’a tort.</p>";}
+    return;}
+  if(e.target.closest("#ranger-reset")){document.querySelectorAll("#ranger [data-r]").forEach(b=>{delete b.dataset.pos;b.querySelector(".rang").textContent="";b.classList.remove("range");});const v=document.getElementById("ranger-verdict");v.className="verdict vide";v.innerHTML="<p>Range les cinq pour voir la suite.</p>";return;}
+  if(e.target.closest("#defi-autre")){defiIdx=(defiIdx+1)%DEFIS.length;document.getElementById("defi-texte").textContent=DEFIS[defiIdx];}
+});
+
 VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <p class="temps">Pour les adultes</p>
   <h2>Animer un atelier de découverte</h2>
-  <p class="intro">Une séance d’environ 1 h 40 pour découvrir la reconnaissance et les badges, en lycée agricole comme en MFR. Le site sert de support : projeté pour le groupe, puis sur téléphone ou ordinateur pour chacun.</p>
+  <p class="intro">Une séance longue, d’environ 2 h 40 pause comprise, pour découvrir la reconnaissance puis les badges, en lycée agricole comme en MFR. Le site sert de support : projeté pour le groupe, puis sur téléphone ou ordinateur pour chacun.</p>
   <div class="actions pas-imprime"><button class="btn plein" type="button" id="btn-imprimer">Imprimer cette fiche</button></div>
   <div class="anim-cadre">
     <div><h3>Pour qui</h3><p>Un groupe de 8 à 30 apprenants, idéalement au retour d’une période de stage ou d’alternance.</p></div>
     <div><h3>Matériel</h3><p>Un vidéoprojecteur. Des téléphones ou ordinateurs pour le temps des parcours (facultatif). Des feuilles pour l’exercice des trois regards.</p></div>
     <div><h3>Animation</h3><p>Un enseignant, une formatrice, un CPE ou un animateur. Un maître de stage invité, si possible.</p></div>
   </div>
-  <h3 class="sous-titre">Déroulé</h3>
+  <h3 class="sous-titre">Temps 1 : Reconnaître (65 min)</h3>
+  <p class="prose">Un temps de réflexion, sans parler de badges. Ne le raccourcissez pas : c’est lui qui donne du sens à la suite.</p>
   <ol class="deroule">
     <li><span class="duree">10 min</span><div><strong>Les mille façons</strong><p>Projeter <a href="#mille-facons">la galerie</a>. Demander : « La dernière fois qu’on t’a reconnu sans le dire ? » Quelques réponses à l’oral.</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Noté, validé, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
-    <li><span class="duree">15 min</span><div><strong>Ouvre un badge</strong><p>Projeter <a href="#badge-cest-quoi">les deux badges</a>. Montrer qu’un badge de projet est le même pour tous, mais que chacun y raconte sa part.</p></div></li>
-    <li><span class="duree">25 min</span><div><strong>Les trois regards, par groupes de trois</strong><p>Chaque groupe choisit une situation de stage vécue par l’un d’eux. Un joue le professionnel, un le formateur, un l’apprenant. Chacun écrit son regard avec les quatre ingrédients de <a href="#ecrire-endossement">l’endossement</a>. Mise en commun : qu’est-ce que chaque regard voit que les autres ne voient pas ?</p></div></li>
-    <li><span class="duree">25 min</span><div><strong>Les parcours</strong><p>Chacun choisit une porte dans <a href="#parcours">les parcours</a> et va jusqu’à l’atelier. Ceux qui le souhaitent téléchargent leur fiche ou leur demande d’endossement.</p></div></li>
-    <li><span class="duree">15 min</span><div><strong>Clôture</strong><p>Tour de table : « Un regard que je vais demander, ou que je vais donner. » Rappeler les règles : c’est toi qui décides, rien n’est noté.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Ce qui est reconnu</strong><p>Projeter <a href="#ce-qui-est-reconnu">les six catégories</a>, puis classer les situations en grand groupe. Montrer qu’une situation reconnaît souvent plusieurs choses.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Qui reconnaît</strong><p>Parcourir <a href="#qui-reconnait">les cercles</a>, de soi à la société. Laisser un temps d’écriture individuelle : « Qui t’a reconnu cette semaine ? T’es-tu reconnu ? »</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Égales, mais pas mesurables</strong><p>Faire <a href="#egales">ranger les cinq reconnaissances</a> à deux ou trois volontaires, puis comparer leurs ordres. Débat : peut-on comparer un sourire et un diplôme ?</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Noté, certifié, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
+    <li><span class="duree">15 min</span><div><strong>Ce que ça fait, et qui agit</strong><p>Lire <a href="#ce-que-ca-fait">les témoignages</a>, recueillir des ressentis, puis présenter <a href="#acteur">le défi du jour</a>. Chacun choisit une personne à reconnaître avant la fin de la journée.</p></div></li>
   </ol>
-  <h3 class="sous-titre">Version courte, 50 minutes</h3>
-  <p class="prose">Les mille façons (10 min), Ouvre un badge (10 min), les trois regards (20 min), clôture (10 min).</p>
+  <p class="pause">Pause, 10 min</p>
+  <h3 class="sous-titre">Temps 2 : Rendre visible (50 min)</h3>
+  <ol class="deroule">
+    <li><span class="duree">10 min</span><div><strong>Les formes de la reconnaissance</strong><p>Passer <a href="#formes">les formes au crible</a> avec le groupe. Faire formuler la conclusion par les apprenants : quand faut-il rendre visible ?</p></div></li>
+    <li><span class="duree">5 min</span><div><strong>La boussole</strong><p>Chacun pense à une reconnaissance qui compte et répond aux questions de <a href="#boussole">la boussole</a>.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Ouvre un badge</strong><p>Projeter <a href="#badge-cest-quoi">les deux badges</a>. Montrer qu’un badge de projet est le même pour tous, mais que chacun y raconte sa part.</p></div></li>
+    <li><span class="duree">25 min</span><div><strong>Les trois regards, par groupes de trois</strong><p>Chaque groupe choisit une situation de stage vécue par l’un d’eux. Un joue le professionnel, un le formateur, un l’apprenant. Chacun écrit son regard avec les quatre ingrédients de <a href="#ecrire-endossement">l’endossement</a>. Mise en commun : qu’est-ce que chaque regard voit que les autres ne voient pas ?</p></div></li>
+  </ol>
+  <h3 class="sous-titre">Temps 3 : Agir (35 min)</h3>
+  <ol class="deroule">
+    <li><span class="duree">25 min</span><div><strong>Les parcours</strong><p>Chacun choisit une porte dans <a href="#parcours">les parcours</a> et va jusqu’à l’atelier. Ceux qui le souhaitent téléchargent leur fiche ou leur demande d’endossement.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Clôture</strong><p>Tour de table : « Un regard que je vais demander, ou que je vais donner. » Rappeler les règles : c’est toi qui décides, rien n’est noté.</p></div></li>
+  </ol>
   <h3 class="sous-titre">Points de vigilance</h3>
   <ul class="prose">
     <li>Le badge reste volontaire : personne n’est obligé de créer ou de montrer quoi que ce soit.</li>
