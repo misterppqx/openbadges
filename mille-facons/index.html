@@ -335,6 +335,25 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .defini p{margin:0 0 .4rem}
 @media (max-width:860px){.ingredients{grid-template-columns:1fr 1fr}.compare,.exemples-endos{grid-template-columns:1fr}}
 
+/* ---------- compléments ---------- */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+.trio-col{background:var(--teinte);border-radius:14px;padding:1.2rem 1.3rem;border:2px dashed #BFD9D6}
+.trio-col.reco{background:#fff;border:3px solid var(--bocage)}
+.trio-col dl{margin:0}
+.trio-col dt{font-weight:800;color:var(--encre);font-size:.92rem;margin-top:.6rem}
+.trio-col dd{margin:0}
+.trois-regards{padding-left:1.2rem;max-width:68ch}
+.trois-regards li{margin-bottom:.5rem}
+.guide-seul .guide-endos{margin-top:1rem;padding-top:0;border-top:none}
+.adultes{display:grid;gap:1.4rem;max-width:72ch;margin-top:1.5rem}
+.adultes section{border-left:5px solid var(--ciel);padding-left:1.1rem;border-radius:0}
+.adultes ul,.liste-ing{padding-left:1.2rem}
+.alerte{background:#FCE4DD;border-radius:10px;padding:.7rem .9rem;color:var(--texte)!important}
+.lien-adultes{margin-top:1.2rem;font-size:1rem;color:var(--doux)}
+.pied{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.6rem}
+.pied a{color:var(--bocage);font-weight:700}
+@media (max-width:860px){.trio{grid-template-columns:1fr}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -386,7 +405,7 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 </section>
 
 <footer>
-  <div class="wrap">Un guide pour les jeunes de l’enseignement agricole. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.</div>
+  <div class="wrap">Un guide pour les jeunes de l’enseignement agricole. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
 </footer>
 
 <script>
@@ -624,6 +643,7 @@ accueil(){
         <a class="btn plein" href="#mille-facons">Je découvre</a>
         <a class="btn" href="#parcours">Je connais déjà les badges</a>
       </div>
+      <p class="lien-adultes">Vous êtes un adulte qui accompagne des jeunes ? <a href="#adultes">Une page est faite pour vous.</a></p>
     </div>
     <div class="prairie" aria-hidden="true">${html.join("")}</div>
   </section></div>`;
@@ -642,7 +662,7 @@ accueil(){
       <div><label for="r2">La dernière fois que toi, tu as reconnu quelqu’un ?</label><textarea id="r2" placeholder="Par exemple : j’ai remercié la surveillante…"></textarea></div>
     </div>
     <p class="note">Ce que tu écris ici n’est enregistré nulle part. C’est juste pour y penser.</p>
-    ${suite("accueil","Retour à l’accueil","boussole","Et quand ça compte pour la suite ?")}
+    ${suite("accueil","Retour à l’accueil","etre-reconnu","Noté, validé ou reconnu ?")}
   </div>`;
 },
 boussole(){
@@ -659,7 +679,7 @@ boussole(){
       </fieldset>`).join("")}
     </form>
     <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux quatre questions pour voir où tu en es.</p></div>
-    ${suite("mille-facons","Les mille façons","badge-cest-quoi","Un badge, c’est quoi ?")}
+    ${suite("etre-reconnu","Noté, validé, reconnu","badge-cest-quoi","Un badge, c’est quoi ?")}
   </div>`;
 },
 "badge-cest-quoi"(){
@@ -715,7 +735,7 @@ familles(){
         <li data-i="${i}"><button type="button" aria-expanded="false"><span class="n">${i+1}</span><span><strong>${v.t}</strong><span class="detail">${v.d}</span></span></button></li>`).join("")}
       </ol>
     </div>
-    ${suite("familles","Les familles","jeu","Un petit jeu pour finir")}
+    ${suite("familles","Les familles","ecrire-endossement","Écrire un endossement")}
   </div>`;
 },
 jeu(){
@@ -731,7 +751,7 @@ jeu(){
       </li>`).join("")}
     </ol>
     <p class="score" id="score" aria-live="polite"></p>
-    ${suite("vie-badge","La vie d’un badge","parcours","Passer aux parcours")}
+    ${suite("ecrire-endossement","Écrire un endossement","parcours","Passer aux parcours")}
   </div>`;
 },
 parcours(){
@@ -740,7 +760,7 @@ parcours(){
     <h2>Qu’est-ce que tu veux faire ?</h2>
     <p class="intro">Choisis une porte. Chaque parcours te dit quel badge pourrait aller, ce qui peut rester informel, et les étapes pour avancer.</p>
     <ul class="portes">${PORTES.map(p=>`<li><a class="coins" href="#${p.id}" style="--c:${p.c}"><span><strong>${p.t}</strong><span class="desc">${p.d}</span></span><span class="fl" aria-hidden="true">›</span></a></li>`).join("")}</ul>
-    <div class="perdu"><strong>Tu ne sais pas trop ?</strong> Commence par <a href="#mille-facons">les mille façons de reconnaître</a>, ou passe par <a href="#boussole">la boussole</a>.</div>
+    <div class="perdu"><strong>Tu ne sais pas trop ?</strong> Commence par <a href="#mille-facons">les mille façons de reconnaître</a>, ou passe par <a href="#boussole">la boussole</a>. Pour voir comment un badge est construit : <a href="#badge-cest-quoi">ouvre un badge</a>, découvre <a href="#familles">les familles</a> ou <a href="#ecrire-endossement">l’endossement</a>.</div>
   </div>`;
 },
 faire(){
@@ -782,6 +802,7 @@ function vueParcours(id){
         <div class="encart"><h3>Le badge qui peut aller</h3>${p.fam.map(puce).join("")}${p.famNote?`<p class="remarque">${p.famNote}</p>`:""}</div>
         <div class="encart inf"><h3>Ce qui peut rester informel</h3><ul>${p.inf.map(x=>`<li>${x}</li>`).join("")}</ul></div>
         <div class="encart"><h3>Par exemple</h3><ul>${p.ex.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+        <div class="encart"><h3>Pour mieux comprendre</h3><ul><li><a href="#badge-cest-quoi">Ouvre un badge</a></li><li><a href="#familles">Les familles de badges</a></li><li><a href="#ecrire-endossement">Écrire un endossement</a></li></ul></div>
       </aside>
     </div>
     <section class="recap" aria-labelledby="titre-recap">
@@ -983,6 +1004,136 @@ BUILD.role={titre:"Mon badge de passeur",intro:"« Passeur de reconnaissance » 
     {t:"Décide à qui tu le montres",ch:[CH.visibilite]}],
   fiche:v=>({famille:"role",nom:"Passeur de reconnaissance",emetteur:"Le lycée, avec l’association des élèves",detenteur:v.prenom,description:"Le détenteur accompagne d’autres jeunes pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.",reconnait:"La capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.",preuves:lignes(v.preuves),preuvesLabel:"Accompagnements",endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter"})};
 TYPE_BUILD.demander="demande";TYPE_BUILD.passeur="role";
+
+/* ================= COMPLÉMENTS : RÔLES, PAGES ADULTES, À PROPOS ================= */
+const ROLES_DEF={
+  passeur:{nom:"Passeur de reconnaissance",court:"Tu aides d’autres jeunes à voir ce qu’ils savent faire.",emetteur:"Le lycée, avec l’association des élèves",
+    description:"Le détenteur accompagne d’autres jeunes pour qu’ils repèrent, nomment et documentent ce qu’ils savent faire.",
+    reconnait:"La capacité à écouter, à aider à trouver les mots et à laisser l’autre décider, sans faire à sa place.",
+    preuvesLabel:"Tes accompagnements",preuvesPh:"Un élève de seconde, pour raconter son premier stage (octobre)\nDeux apprentis de CAPa, pour leur badge « soins aux animaux » (janvier)",
+    temoinsPh:"Noah, élève de seconde accompagné\nMme Petit, enseignante d’ESC référente"},
+  delegue:{nom:"Délégué de classe",court:"Tu représentes ta classe auprès des adultes.",emetteur:"Le lycée",
+    description:"Le détenteur a été élu par sa classe pour la représenter, porter sa parole aux conseils de classe et faire le lien avec l’équipe éducative.",
+    reconnait:"L’engagement à représenter les autres : écouter, faire remonter, rendre compte.",
+    preuvesLabel:"Ce que tu as fait dans ce rôle",preuvesPh:"Préparation du conseil de classe du 1er trimestre avec un questionnaire\nCompte rendu fait à la classe après chaque conseil",
+    temoinsPh:"M. Leroux, professeur principal\nSarah, déléguée suppléante"},
+  "eco-delegue":{nom:"Éco-délégué",court:"Tu portes des actions pour l’environnement au lycée.",emetteur:"Le lycée",
+    description:"Le détenteur porte, avec d’autres, des actions de développement durable dans la vie de l’établissement.",
+    reconnait:"L’engagement à faire avancer des actions au service des Objectifs de développement durable, en entraînant les autres.",
+    preuvesLabel:"Tes actions",preuvesPh:"Mise en place du tri à l’internat\nAnimation d’un stand lors de la semaine du développement durable",
+    temoinsPh:"La gestionnaire du lycée\nLes éco-délégués des autres classes"},
+  sentinelle:{nom:"Sentinelle",court:"Tu es attentif aux autres et sais vers qui les orienter.",emetteur:"Le lycée",
+    description:"Le détenteur a été formé pour être attentif à ses camarades et savoir vers quel adulte les orienter quand ça ne va pas.",
+    reconnait:"La vigilance bienveillante envers les autres, et la capacité à passer le relais aux bonnes personnes.",
+    preuvesLabel:"Ta formation et ton engagement",preuvesPh:"Formation suivie en novembre\nParticipation aux temps d’échange des sentinelles",
+    temoinsPh:"L’infirmière du lycée\nLe CPE référent",
+    note:"Ce rôle touche à des situations personnelles : tes preuves ne doivent jamais contenir d’informations sur les camarades que tu as aidés."},
+  alesa:{nom:"Élu au bureau de l’ALESA",court:"Tu fais vivre l’association des élèves.",emetteur:"L’ALESA, avec le lycée",
+    description:"Le détenteur a été élu au bureau de l’association des lycéens, étudiants, stagiaires et apprentis. Il participe à ses décisions et à ses projets.",
+    reconnait:"L’engagement associatif : décider à plusieurs, gérer un projet, rendre compte aux adhérents.",
+    preuvesLabel:"Ce que tu as fait au bureau",preuvesPh:"Organisation de la soirée de Noël de l’internat\nSuivi du budget du foyer",
+    temoinsPh:"Le président de l’ALESA\nL’enseignant d’ESC qui accompagne l’association"}
+};
+function roleBuild(k){
+  const r=ROLES_DEF[k];
+  return {titre:k==="passeur"?"Mon badge de passeur":`Mon badge « ${r.nom} »`,
+    intro:`« ${r.nom} » est un badge de rôle : son nom et ce qu’il reconnaît sont définis par l’établissement. Toi, tu apportes tes preuves et tes témoins.`,
+    btn:k==="passeur"?"Demander mon badge de passeur":"Demander mon badge de rôle",quoi:"la fiche de ton badge",
+    sections:[
+      {t:"Le badge, tel que l’établissement l’a défini",html:`<div class="defini"><p><strong>Nom :</strong> ${r.nom}</p><p><strong>Émetteur :</strong> ${r.emetteur}</p><p><strong>Description :</strong> ${r.description}</p><p><strong>Ce qu’il reconnaît :</strong> ${r.reconnait}</p><p class="aide">Ces champs ne se modifient pas : c’est ce qui distingue un badge de rôle. Ton établissement peut les avoir rédigés autrement.</p></div>`},
+      {t:"Qui es-tu ?",ch:[{id:"prenom",label:"Ton prénom et ta classe",type:"text",ph:"Yanis, BTS ACSE 2e année"}]},
+      {t:"Ce que tu as fait dans ce rôle",html:r.note?`<p class="aide alerte">${r.note}</p>`:"",ch:[{id:"preuves",label:r.preuvesLabel,aide:"Une ligne par preuve : quoi, quand.",type:"textarea",ph:r.preuvesPh}]},
+      {t:"Qui peut en témoigner ?",ch:[{id:"temoins",label:"Tes témoins",aide:"Un par ligne : nom, et son lien avec toi.",type:"textarea",ph:r.temoinsPh}]},
+      {t:"Décide à qui tu le montres",ch:[CH.visibilite]}],
+    fiche:v=>({famille:"role",nom:r.nom,emetteur:r.emetteur,detenteur:v.prenom,description:r.description,reconnait:r.reconnait,preuves:lignes(v.preuves),preuvesLabel:r.preuvesLabel,endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter"})};
+}
+BUILD.role=roleBuild("passeur");
+Object.keys(ROLES_DEF).filter(k=>k!=="passeur").forEach(k=>{
+  const r=ROLES_DEF[k],id="role-"+k;
+  BUILD[id]=roleBuild(k);TYPE_BUILD[id]=id;
+  PARCOURS[id]={porte:"role",t:r.nom,intro:r.court+" Ce rôle existe dans ton établissement : il peut être reconnu par un badge de rôle.",
+    fam:["role"],famNote:"Son nom et ce qu’il reconnaît sont définis par l’établissement. Toi, tu apportes tes preuves.",
+    ex:[r.description],
+    inf:["Le merci d’un camarade que tu as aidé.","La confiance des adultes qui te sollicitent."],
+    note:r.note,
+    et:[
+      {t:"Vérifie que le badge existe",d:"Demande à ton CPE, à ton professeur principal ou à l’ALESA si ton établissement délivre ce badge, et comment."},
+      {t:"Rassemble tes preuves",d:"Ce que tu as fait dans ce rôle : actions, comptes rendus, moments importants."},
+      {t:"Demande des témoignages",d:"Aux camarades et aux adultes qui t’ont vu agir. Le guide « Écrire un endossement » peut les aider.",lien:"ecrire-endossement"},
+      {t:"Demande ton badge",d:"Auprès de l’émetteur : le lycée ou l’ALESA."},
+      {t:"Fais-le vivre",d:"Ajoute des preuves au fil de l’année. Le rôle s’arrête un jour, le badge reste à toi."}
+    ]};
+});
+PORTES.push({id:"role",t:"Faire reconnaître mon rôle",d:"Délégué, éco-délégué, sentinelle, élu de l’ALESA…",c:"var(--ardoise)"});
+Object.assign(T,{"etre-reconnu":1,"ecrire-endossement":2,role:3,adultes:0,"a-propos":0});
+
+VUES["etre-reconnu"]=()=>`<div class="wrap vue">
+  <p class="temps">Temps 1 sur 3, être reconnu</p>
+  <h2>Noté, validé, reconnu : ce n’est pas la même chose.</h2>
+  <p class="intro">Les trois existent dans ta vie de lycéen, d’apprenti ou d’étudiant. Ils ne s’opposent pas, mais ils ne disent pas la même chose de toi. Ce site parle du troisième.</p>
+  <div class="trio">
+    <article class="trio-col"><h3>Être noté</h3><dl><dt>Qui décide ?</dt><dd>Un enseignant, un jury.</dd><dt>Sur quoi ?</dt><dd>Une épreuve, un barème.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un chiffre.</dd></dl></article>
+    <article class="trio-col"><h3>Être validé</h3><dl><dt>Qui décide ?</dt><dd>Une institution, selon un référentiel.</dd><dt>Sur quoi ?</dt><dd>Des critères fixés à l’avance.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un diplôme, une attestation.</dd></dl></article>
+    <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : entre jeunes, des jeunes vers les adultes, vers le territoire.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, et parfois un badge qui t’appartient.</dd></dl></article>
+  </div>
+  <h3 class="sous-titre">Une même situation, trois regards</h3>
+  <p class="prose">Pendant ton stage, tu as tenu seul le stand du marché tous les samedis.</p>
+  <ul class="trois-regards">
+    <li><strong>Noté :</strong> ton rapport de stage a obtenu 14 sur 20.</li>
+    <li><strong>Validé :</strong> ton stage compte pour ton diplôme.</li>
+    <li><strong>Reconnu :</strong> ton maître de stage te confie le stand la saison suivante, une cliente revient pour tes conseils, et tu crées un badge que ton maître de stage endosse.</li>
+  </ul>
+  ${suite("mille-facons","Les mille façons","boussole","Et quand ça compte pour la suite ?")}
+</div>`;
+
+VUES["ecrire-endossement"]=()=>`<div class="wrap vue">
+  <p class="temps">Temps 2 sur 3, l’endossement</p>
+  <h2>Endosser, c’est reconnaître par écrit.</h2>
+  <p class="intro">Un endossement, c’est un témoignage ajouté au badge de quelqu’un d’autre. C’est une des formes de reconnaissance les plus fortes : quelqu’un prend le temps de dire ce qu’il a vu, et signe.</p>
+  <div class="guide-seul">${guideEndos().replace('<h2 id="titre-guide">Écrire un endossement qui parle</h2>','<h2 id="titre-guide" class="visually-hidden">Écrire un endossement qui parle</h2>')}</div>
+  <div class="actions"><a class="btn plein" href="#construire-reco-pair">Écrire un endossement pour un camarade</a><a class="btn" href="#construire-demander">Demander un endossement</a></div>
+  ${suite("vie-badge","La vie d’un badge","jeu","Un petit jeu pour finir")}
+</div>`;
+
+VUES.role=()=>`<div class="wrap vue">
+  <p class="fil"><a href="#parcours">Les parcours</a> › Faire reconnaître mon rôle</p>
+  <h2>Quel rôle tiens-tu ?</h2>
+  <p class="intro">Certains rôles existent dans tous les établissements. Ils sont reconnus par des badges de rôle, définis par l’établissement. Toi, tu y ajoutes tes preuves et tes témoins.</p>
+  <ul class="sous-choix">${Object.entries(ROLES_DEF).map(([k,r])=>`<li><a class="coins" href="#${k==="passeur"?"passeur":"role-"+k}"><strong>${r.nom}</strong><span>${r.court}</span></a></li>`).join("")}</ul>
+  <p class="note">Les définitions de ces badges sont des exemples : ton établissement peut les avoir rédigées autrement.</p>
+</div>`;
+
+VUES.adultes=()=>`<div class="wrap vue">
+  <p class="temps">Pour les adultes</p>
+  <h2>Vous accompagnez des jeunes ?</h2>
+  <p class="intro">Enseignants, CPE, surveillants, agents de l’exploitation, maîtres de stage ou d’apprentissage, partenaires : cette page est pour vous. Le reste du site s’adresse aux jeunes, en les tutoyant.</p>
+  <div class="adultes">
+    <section><h3>Reconnaître sans évaluer</h3><p>La reconnaissance ouverte ne remplace ni la note ni la certification. Elle rend visible ce qui ne se voit pas ailleurs : l’engagement, les savoir-faire acquis en stage, à l’internat, dans une association. Le jeune en reste l’acteur : c’est lui qui décide de créer un badge, de le documenter et de le montrer.</p></section>
+    <section><h3>Répondre à une demande d’endossement</h3><p>Un jeune peut vous demander de témoigner sur son badge. Quelques lignes suffisent, si elles disent :</p>
+      <ol class="liste-ing">${INGREDIENTS.map(i=>`<li><strong>${i.t.replace("tu as vu","vous avez vu").replace("Qui tu es","Qui vous êtes")}</strong> : ${(i.d.charAt(0).toLowerCase()+i.d.slice(1)).replace(/\bton\b/g,"votre")}</li>`).join("")}</ol>
+      <p>Des exemples sont sur la page <a href="#ecrire-endossement">« Endosser, c’est reconnaître par écrit »</a>.</p></section>
+    <section><h3>Accompagner la création d’un badge</h3><p>Aider à trouver les mots, repérer les traces, suggérer des témoins : c’est le travail du passeur, qu’il soit adulte ou jeune. L’ESC, le CDI, la vie scolaire et l’ALESA sont des lieux naturels pour ces temps d’accompagnement.</p></section>
+    <section><h3>Ce qu’il vaut mieux éviter</h3><ul><li>Noter un badge, ou le rendre obligatoire.</li><li>Le lier à un examen, au contrôle continu ou à une procédure d’orientation.</li><li>Fixer des objectifs chiffrés de badges par classe.</li><li>Écrire le badge à la place du jeune.</li></ul></section>
+    <section><h3>Aller plus loin</h3><p>Formations, Générateur d’image et carte des badges de l’enseignement agricole : <a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">openbadges.educagri.fr</a>.</p></section>
+  </div>
+  <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#mille-facons">Voir le parcours des jeunes</a></div>
+</div>`;
+
+VUES["a-propos"]=()=>`<div class="wrap vue">
+  <h2>À propos</h2>
+  <div class="prose">
+    <p>« Mille façons de reconnaître » est un guide pour les jeunes de l’enseignement agricole : lycéens, apprentis, étudiants. Il les aide à repérer les mille façons dont ils sont reconnus, à comprendre comment est construit un badge numérique, et à construire le leur, ou à reconnaître les autres.</p>
+    <p>Il s’inscrit dans la démarche d’<a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA, Reconnaissance et Open badges pour l’Enseignement Agricole</a>, et dans les principes de la reconnaissance ouverte.</p>
+    <h3>Vos données</h3>
+    <p>Ce site n’enregistre rien. Il ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne fait appel à aucun service extérieur : les polices sont hébergées avec le site. Ce que vous écrivez dans les formulaires reste dans votre navigateur et disparaît quand vous fermez la page.</p>
+    <h3>Une plateforme au choix</h3>
+    <p>Le site ne dépend d’aucune plateforme de badges. Les fiches téléchargées peuvent être reprises sur celle qu’utilise votre établissement. Pour l’image, utilisez le <a href="${URL_GENERATEUR}" target="_blank" rel="noopener">Générateur Open Badges de l’Aventure du vivant</a>.</p>
+    <h3>Les exemples</h3>
+    <p>Les personnes, les établissements et les témoignages cités en exemple sont fictifs. Le badge « Je suis écoresponsable » est un badge de l’enseignement agricole.</p>
+  </div>
+  <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#adultes">Pour les adultes</a></div>
+</div>`;
+
 BUILD.individuel.btn=BUILD.collectif.btn="Construire mon badge";BUILD.reconnaissance.btn="Construire le badge de reconnaissance";
 
 const BROUILLONS={};
