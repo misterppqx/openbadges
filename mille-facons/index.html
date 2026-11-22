@@ -491,6 +491,22 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .usage p{margin:0 0 .4rem;font-size:.97rem}
 .u-lab{display:block;font-size:.8rem;font-weight:800;color:var(--doux)}
 
+/* ---------- sous-progression ---------- */
+.sous-prog{border-top:1px solid #CFE3E1;background:#fff}
+.sous-prog .wrap{display:flex;align-items:center;gap:1.2rem;padding-top:.45rem;padding-bottom:.5rem;flex-wrap:wrap}
+.sp-texte{margin:0;font-size:.95rem;color:var(--texte);flex:0 1 auto}
+.sp-texte strong{color:var(--encre)}
+.sp-temps{display:inline-block;background:var(--encre);color:#fff;border-radius:6px;padding:0 .5rem;margin-right:.4rem;font-size:.85rem;font-weight:700}
+.sp-segments{list-style:none;margin:0;padding:0;display:flex;gap:4px;flex:1 1 260px;min-width:200px}
+.sp-segments li{flex:1}
+.sp-segments a,.sp-segments li > span{display:block;height:10px;border-radius:5px;background:#DCE8E6;text-decoration:none;position:relative}
+.sp-segments .sp-fait a,.sp-segments .sp-fait > span{background:var(--bocage)}
+.sp-segments .sp-ici > span{background:var(--colza);box-shadow:0 0 0 2px var(--encre)}
+.sp-segments a:hover{background:var(--ciel)}
+.sp-num,.sp-lib{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.sp-segments a:focus-visible{outline:3px solid var(--encre);outline-offset:2px}
+@media print{.sous-prog{display:none!important}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -523,6 +539,12 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
         <li><a href="#parcours" data-t="3"><span class="num">3</span><span class="lib">Agir</span></a></li>
       </ol>
     </nav>
+  </div>
+  <div class="sous-prog" id="sous-prog" hidden>
+    <div class="wrap">
+      <p class="sp-texte" id="sp-texte" aria-live="polite"></p>
+      <ol class="sp-segments" id="sp-segments"></ol>
+    </div>
   </div>
 </header>
 <div class="angles" aria-hidden="true"><svg viewBox="0 0 1440 110" preserveAspectRatio="none"><polygon points="0,0 230,0 0,80" fill="#098284"/><polygon points="40,70 330,48 230,0" fill="#EC5E39"/><polygon points="230,0 520,0 300,30" fill="#61B0AB"/><polygon points="1440,0 1170,0 1440,60" fill="#098284"/><polygon points="1440,60 1240,26 1440,95" fill="#D9BF0B"/><polygon points="1440,95 1320,52 1440,110" fill="#EC5E39"/><polygon points="1170,0 960,0 1250,22" fill="#61B0AB"/></svg></div>
@@ -1748,6 +1770,33 @@ function brancherConstruire(pid){
 }
 
 /* ================= ROUTAGE ================= */
+
+/* ---------- progression dans chaque temps ---------- */
+const ETAPES={
+  1:{nom:"Reconnaître",pages:[["mille-facons","Les mille façons"],["ce-qui-est-reconnu","Ce qui est reconnu"],["qui-reconnait","Qui reconnaît"],["egales","Égales, pas mesurables"],["etre-reconnu","Noté, certifié, reconnu"],["ce-que-ca-fait","Ce que ça fait"],["acteur","Acteur"]]},
+  2:{nom:"Rendre visible",pages:[["formes","Les formes"],["badge-numerique","Le badge numérique"],["badge-cest-quoi","Un badge de plus près"],["familles","Les familles"],["vie-badge","La vie d’un badge"],["ecrire-endossement","L’endossement"],["jeu","Le jeu"],["boussole","La boussole"]]},
+  3:{nom:"Agir",pages:[["parcours","Choisir une porte"],["__parcours","Suivre le parcours"],["__atelier","Construire"]]}
+};
+function etapeDe(v){
+  for(const t of [1,2]){const i=ETAPES[t].pages.findIndex(p=>p[0]===v);if(i>=0)return [t,i];}
+  if(["parcours","faire","reconnaitre","role","simplement"].includes(v))return [3,0];
+  if(v.startsWith("construire-"))return [3,2];
+  if(PARCOURS[v])return [3,1];
+  return null;
+}
+function majSousProgression(v){
+  const box=document.getElementById("sous-prog"),e=etapeDe(v);
+  if(!e){box.hidden=true;return;}
+  const [t,i]=e,E=ETAPES[t],n=E.pages.length;
+  box.hidden=false;
+  document.getElementById("sp-texte").innerHTML=`<span class="sp-temps">${E.nom}</span> Étape ${i+1} sur ${n} : <strong>${E.pages[i][1]}</strong>`;
+  document.getElementById("sp-segments").innerHTML=E.pages.map((p,j)=>{
+    const etat=j<i?"fait":j===i?"ici":"apres";
+    const lien=p[0].startsWith("__")?null:p[0];
+    const inner=`<span class="sp-num">${j+1}</span><span class="sp-lib">${p[1]}</span>`;
+    return `<li class="sp-${etat}">${lien&&j!==i?`<a href="#${lien}" title="${p[1]}">${inner}</a>`:`<span${j===i?' aria-current="step"':''} title="${p[1]}">${inner}</span>`}</li>`;
+  }).join("");
+}
 const REFLEXIONS={};
 const GARDE={"r1":"La dernière fois qu’on t’a reconnu sans le dire ?","r2":"La dernière fois que toi, tu as reconnu quelqu’un ?","e-soi":"Que te reconnais-tu à toi-même ?","e-autre":"Que peux-tu reconnaître à quelqu’un ?","e-orga":"Que peut te reconnaître ton établissement, ou ton entreprise de stage ?","e-societe":"Que peuvent te reconnaître ton territoire, la société, ton pays ?","r-qui1":"Qui t’a reconnu cette semaine ? Dans quel cercle était-il ?","r-ressenti":"Comment t’es-tu senti la dernière fois qu’on t’a reconnu ?","r-qui-reco":"Qui vais-je reconnaître aujourd’hui, et comment ?"};
 document.addEventListener("input",e=>{if(e.target.id&&GARDE[e.target.id]!==undefined)REFLEXIONS[e.target.id]=e.target.value;});
@@ -1766,6 +1815,7 @@ function afficher(){
     if(n===t) a.setAttribute("aria-current","step"); else if(n<t&&t>0) a.classList.add("fait");
   });
   if(cons) brancherConstruire(cons); else brancher(v);
+  majSousProgression(cons?"construire-"+cons:v);
   Object.keys(GARDE).forEach(k=>{const el=document.getElementById(k);if(el&&REFLEXIONS[k])el.value=REFLEXIONS[k];});
   const av=document.getElementById("arrivee-directe");if(av&&!["acteur","badge-numerique"].includes(VUE_PRECEDENTE))av.hidden=false;
   VUE_PRECEDENTE=v;
