@@ -642,6 +642,10 @@ body.test-selection #app *{cursor:crosshair}
 .test-marque{background:var(--choix)!important;outline:3px solid var(--colza);outline-offset:3px}
 @media (max-width:600px){#test-zone{right:.5rem;left:.5rem;width:auto}#test-corps{max-height:65vh}}
 @media print{#test-zone,.test-bandeau{display:none!important}}
+.credits{display:grid;grid-template-columns:max-content 1fr;gap:.4rem 1.2rem;margin:.5rem 0}
+.credits dt{font-weight:700;color:var(--encre)}
+.credits dd{margin:0}
+@media (max-width:600px){.credits{grid-template-columns:1fr;gap:0}.credits dd{margin-bottom:.6rem}}
 </style>
 </head>
 <body>
@@ -1493,6 +1497,14 @@ VUES["a-propos"]=()=>`<div class="wrap vue">
     <p>Le site ne dépend d’aucune plateforme de badges. Les fiches téléchargées peuvent être reprises sur celle qu’utilise votre établissement. Pour l’image, utilisez le <a href="${URL_GENERATEUR}" target="_blank" rel="noopener">Générateur Open Badges de l’Aventure du vivant</a>.</p>
     <h3>Les exemples</h3>
     <p>Les personnes, les établissements et les témoignages cités en exemple sont fictifs. Le badge « Je suis écoresponsable » est un badge de l’enseignement agricole.</p>
+    <h3>Crédits</h3>
+    <dl class="credits">
+      <dt>Conception et contenus</dt><dd>Philippe Petitqueux</dd>
+      <dt>Cadre</dt><dd>Réalisé dans le cadre d’<a href="https://acoustice.educagri.fr/" target="_blank" rel="noopener">acoustice.educagri.fr</a>, un dispositif de l’enseignement agricole (MAASA)</dd>
+      <dt>Soutenu par</dt><dd>Reconnaître – Open Recognition Alliance</dd>
+      <dt>Remerciements</dt><dd>Aux enseignants, formateurs et professionnels qui ont partagé leurs conseils</dd>
+      <dt>Développement assisté par IA</dt><dd>Claude (Anthropic)</dd>
+    </dl>
   </div>
   <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#adultes">Pour les adultes</a></div>
 </div>`;
