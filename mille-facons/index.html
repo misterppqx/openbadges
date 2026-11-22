@@ -689,7 +689,8 @@ const BOUSSOLE = [
   "Est-ce que ça compte pour toi, ou pour quelqu’un, dans la durée ?",
   "Aimerais-tu pouvoir le montrer un jour : à un employeur, une école, ta famille ?",
   "D’autres personnes peuvent-elles en témoigner ?",
-  "Est-ce que ça va continuer, grandir, évoluer ?"
+  "Est-ce que ça va continuer, grandir, évoluer ?",
+  "Est-ce que ça peut être utile à d’autres : ceux qui le verront, ceux qui partagent l’expérience ?"
 ];
 
 const CARTES = [
@@ -708,16 +709,17 @@ const VIE = [
 ];
 
 const JEU = [
-  {s:"Ton copain te dit : « merci d’avoir pris ma place à l’astreinte ».",ok:["informel"],fb:"Un merci, ça se garde comme ça. Pas besoin de badge."},
+  {s:"Ton copain te dit : « merci d’avoir pris ma place à l’astreinte ».",ok:["informel"],fb:"Le plus souvent, un merci se dit, et c’est très bien. S’il compte pour la suite, il peut aussi devenir un endossement sur l’un de tes badges."},
   {s:"Depuis six mois, tu soignes les chèvres tous les week-ends et tu aimerais pouvoir le montrer à un futur employeur.",ok:["individuel"],fb:"Ça compte dans la durée, d’autres peuvent en témoigner : un badge individuel a du sens."},
   {s:"Avec d’autres apprenants, tu as monté une friperie solidaire dans l’établissement.",ok:["collectif"],fb:"Un projet mené à plusieurs : un badge collectif. Chacun reçoit le même badge et y raconte sa propre contribution."},
   {s:"Avec d’autres apprenants, tu t’occupes du rucher et vous échangez vos astuces, même avec des apiculteurs du coin.",ok:["pratique"],fb:"Une pratique partagée, qui grandit avec d’autres : un badge de pratique."},
   {s:"Tu as été élu délégué de ta classe.",ok:["role"],fb:"Ce rôle existe dans l’établissement : c’est un badge de rôle, défini par l’institution."},
-  {s:"Tu veux dire à ton maître de stage qu’il t’a vraiment transmis son métier.",ok:["reconnaissance","informel"],fb:"Les deux marchent. Un merci sincère suffit souvent. Si tu veux que ça compte aussi pour lui, émets-lui un badge de reconnaissance."}
+  {s:"Tu veux dire à ton maître de stage qu’il t’a vraiment transmis son métier.",ok:["reconnaissance","informel"],fb:"Les deux marchent. Un merci sincère, dit en face, se suffit souvent à lui-même. Si tu veux que ça compte aussi pour lui, émets-lui un badge de reconnaissance."}
 ];
 
+const PHRASE_RECO="Toute reconnaissance n’a pas besoin d’un badge : un sourire, un merci peuvent se suffire à eux-mêmes. Et quand tu veux la rendre visible, le badge peut la porter, par exemple sous forme d’endossement.";
 const PORTES = [
-  {id:"simplement",t:"Reconnaître quelqu’un, simplement",d:"Un merci précis, un « j’ai vu que tu… ». Sans badge.",c:"var(--prairie)"},
+  {id:"simplement",t:"Reconnaître quelqu’un, simplement",d:"Un merci précis, un « j’ai vu que tu… ». Dit en face, ou écrit en endossement.",c:"var(--prairie)"},
   {id:"faire",t:"Faire reconnaître ce que je fais",d:"Sur l’exploitation, dans l’établissement, en stage ou ailleurs.",c:"var(--colza)"},
   {id:"reconnaitre",t:"Reconnaître quelqu’un avec un badge",d:"Ton maître de stage, un camarade, un adulte, un partenaire.",c:"var(--lin)"},
   {id:"demander",t:"Demander à être reconnu",d:"Oser demander à quelqu’un de témoigner.",c:"var(--ciel)"},
@@ -825,7 +827,7 @@ const PARCOURS = {
     intro:"Tu as fait quelque chose qui compte, et quelqu’un l’a vu ? Tu peux lui demander d’en témoigner. Ce n’est pas réclamer une note : c’est inviter quelqu’un à dire ce qu’il a vu.",
     fam:["individuel","collectif","pratique"],famNote:"Un endossement peut renforcer tous ces badges.",
     ex:["Demander à ton maître d’apprentissage d’endosser ton badge « soins aux veaux ».","Demander au responsable de l’AMAP de témoigner sur ta contribution au projet collectif."],
-    inf:["Un « tu as bien géré » à l’oral te suffit ? Garde-le, c’est déjà beaucoup."],
+    inf:["Un « tu as bien géré » à l’oral, c’est déjà beaucoup. Tu peux aussi lui proposer de l’écrire sur ton badge."],
     et:[
       {t:"Choisis ce que tu veux faire reconnaître",d:"Une seule chose à la fois, dite en une phrase."},
       {t:"Choisis qui l’a vu",d:"Maître de stage, enseignant, camarade, responsable d’association : quelqu’un qui était là. Pour ton maître de stage ou d’apprentissage, une version dédiée existe.",lien:"demander-maitre"},
@@ -838,7 +840,7 @@ const PARCOURS = {
     intro:"Il se passe des choses dans votre établissement que personne ne reconnaît ? Créez ensemble le badge qui manque.",
     fam:["collectif","pratique"],
     ex:["Les apprenants qui tiennent la radio de l’établissement.","Ceux qui accueillent les nouveaux à l’internat.","Le groupe qui soigne le rucher."],
-    inf:["Tout ne mérite pas un badge. Si c’est ponctuel et que le plaisir suffit, laissez-le vivre comme ça."],
+    inf:["Un badge n’est jamais obligatoire : si le plaisir d’avoir fait ensemble vous suffit, c’est très bien aussi."],
     et:[
       {t:"Repérez un engagement qui n’est reconnu nulle part",d:"Ce que des apprenants font, souvent dans l’ombre, et qui compte."},
       {t:"Nommez-le ensemble",d:"Un nom qui vous ressemble, avec un verbe d’action."},
@@ -852,6 +854,7 @@ const PARCOURS = {
     fam:["reconnaissance","individuel"],famNote:"Ton rôle de passeur peut lui-même être reconnu par ceux que tu accompagnes.",
     ex:["Aider un apprenant de seconde à raconter son premier stage.","Accompagner un apprenti de CAPa qui ne voit pas tout ce qu’il sait déjà faire."],
     inf:["Écouter un camarade raconter son stage.","Lui dire « ça, tu sais le faire »."],
+    infTitre:"Être reconnu par ceux que tu accompagnes",infTexte:"Les apprenants que tu as aidés te remercient ? Leur merci peut devenir un endossement sur ton badge de passeur : ce sont les mieux placés pour dire ce que tu leur as apporté.",
     et:[
       {t:"Écoute",d:"Fais raconter, avec des questions simples : qu’est-ce que tu as fait ? avec qui ? qu’est-ce qui était difficile ?"},
       {t:"Aide à trouver les mots",d:"Un verbe, du concret. « J’ai géré », « j’ai appris à », « je m’occupe de »."},
@@ -915,8 +918,8 @@ accueil(){
 boussole(){
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, avant d’agir</p>
-    <h2>Est-ce que ça mérite un badge ?</h2>
-    <p class="intro">Tu sais maintenant ce qu’est un badge. Mais tout ne mérite pas un badge : le sourire et le merci se suffisent à eux-mêmes. Pense à quelque chose que tu fais ou que tu as fait, et réponds à ces quatre questions, sans réfléchir trop longtemps.</p>
+    <h2>Faut-il le rendre visible ?</h2>
+    <p class="intro">Tu sais maintenant ce qu’est un badge. Toute reconnaissance n’a pas besoin d’un badge : un sourire, un merci peuvent se suffire à eux-mêmes. La vraie question, c’est : as-tu besoin de rendre cette reconnaissance visible, pour qui, et pour quoi faire ? Pense à quelque chose que tu fais ou que tu as fait, et réponds à ces cinq questions, sans réfléchir trop longtemps.</p>
     <form class="boussole" id="form-boussole">${BOUSSOLE.map((q,i)=>`
       <fieldset><legend>${q}</legend>
         <div class="choix-bin">
@@ -925,7 +928,7 @@ boussole(){
         </div>
       </fieldset>`).join("")}
     </form>
-    <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux quatre questions pour voir où tu en es.</p></div>
+    <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux cinq questions pour voir où tu en es.</p></div>
     ${suite("jeu","Devine la famille","parcours","Passer à l’action")}
   </div>`;
 },
@@ -986,11 +989,11 @@ familles(){
   </div>`;
 },
 jeu(){
-  const opts=[["informel","Informel",""],...Object.entries(FAMILLES).map(([k,f])=>[k,f.nom,f.c])];
+  const opts=[["informel","Le dire, simplement",""],...Object.entries(FAMILLES).map(([k,f])=>[k,f.nom,f.c])];
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, le jeu</p>
     <h2>Devine la famille.</h2>
-    <p class="intro">Pour chaque situation : est-ce que ça reste informel, ou quel badge irait bien ? Parfois, plusieurs réponses sont possibles.</p>
+    <p class="intro">Pour chaque situation : est-ce qu’on peut simplement le dire, ou quel badge pourrait le porter ? Parfois, plusieurs réponses sont possibles.</p>
     <ol class="jeu">${JEU.map((q,i)=>`
       <li data-q="${i}"><p class="sit">${q.s}</p>
         <div class="options" role="group" aria-label="Choisis une réponse">${opts.map(o=>`<button type="button" data-r="${o[0]}" class="${o[0]==="informel"?"inf":""}"><i ${o[2]?`style="background:${o[2]}"`:""}></i>${o[1]}</button>`).join("")}</div>
@@ -998,14 +1001,14 @@ jeu(){
       </li>`).join("")}
     </ol>
     <p class="score" id="score" aria-live="polite"></p>
-    ${suite("ecrire-endossement","Écrire un endossement","boussole","Est-ce que ça mérite un badge ?")}
+    ${suite("ecrire-endossement","Écrire un endossement","boussole","Faut-il le rendre visible ?")}
   </div>`;
 },
 parcours(){
   return `<div class="wrap vue">
     <p class="temps">Temps 3 sur 3</p>
     <h2>Qu’est-ce que tu veux faire ?</h2>
-    <p class="intro">Choisis une porte. Chaque parcours te dit quel badge pourrait aller, ce qui peut rester informel, et les étapes pour avancer.</p>
+    <p class="intro">Choisis une porte. Chaque parcours te dit quel badge pourrait aller, comment s’y prend la reconnaissance au quotidien, et les étapes pour avancer.</p>
     <ul class="portes">${PORTES.map(p=>`<li><a class="coins" href="#${p.id}" style="--c:${p.c}"><span><strong>${p.t}</strong><span class="desc">${p.d}</span></span><span class="fl" aria-hidden="true">›</span></a></li>`).join("")}</ul>
     <div class="perdu"><strong>Tu ne sais pas trop ?</strong> Commence par <a href="#mille-facons">les mille façons de reconnaître</a>, ou passe par <a href="#boussole">la boussole</a>. Pour voir comment un badge est construit : <a href="#badge-cest-quoi">ouvre un badge</a>, découvre <a href="#familles">les familles</a> ou <a href="#ecrire-endossement">l’endossement</a>.</div>
   </div>`;
@@ -1047,7 +1050,7 @@ function vueParcours(id){
       </div>
       <aside class="cote">
         <div class="encart"><h3>Le badge qui peut aller</h3>${p.fam.map(puce).join("")}${p.famNote?`<p class="remarque">${p.famNote}</p>`:""}</div>
-        <div class="encart inf"><h3>Ce qui peut rester informel</h3><ul>${p.inf.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+        <div class="encart inf"><h3>${p.infTitre||"La reconnaissance au quotidien"}</h3><p class="remarque">${p.infTexte||PHRASE_RECO}</p><ul>${p.inf.map(x=>`<li>${x}</li>`).join("")}</ul></div>
         <div class="encart"><h3>Par exemple</h3><ul>${p.ex.map(x=>`<li>${x}</li>`).join("")}</ul></div>
         <div class="encart"><h3>Pour mieux comprendre</h3><ul><li><a href="#badge-cest-quoi">Ouvre un badge</a></li><li><a href="#familles">Les familles de badges</a></li><li><a href="#ecrire-endossement">Écrire un endossement</a></li></ul></div>
       </aside>
@@ -1328,12 +1331,14 @@ Object.keys(ROLES_DEF).filter(k=>k!=="passeur").forEach(k=>{
   PARCOURS[id]={porte:"role",t:r.nom,intro:r.court+" Ce rôle existe dans ton établissement : il peut être reconnu par un badge de rôle.",
     fam:["role"],famNote:"Son nom et ce qu’il reconnaît sont définis par l’établissement. Toi, tu apportes tes preuves.",
     ex:[r.description],
-    inf:["Le merci d’un camarade que tu as aidé.","La confiance des adultes qui te sollicitent."],
+    inf:k==="sentinelle"?["Le merci d’un camarade que tu as aidé : il se garde pour toi, il ne s’écrit pas sur ton badge.","La confiance des adultes qui te sollicitent."]:["Le merci d’un camarade que tu représentes.","La confiance des adultes qui te sollicitent."],
+    infTitre:k==="sentinelle"?"Une reconnaissance discrète":"Être reconnu par ceux que tu représentes",
+    infTexte:k==="sentinelle"?"Ton rôle touche à des situations personnelles. Les endossements de ton badge viennent des adultes référents, jamais des camarades aidés : un endossement est public, et il ne doit jamais révéler qui tu as aidé.":"Tes camarades te remercient pour ton rôle ? Ce merci peut devenir un endossement sur ton badge : quelques mots publics et signés, qui disent ce que tu as fait pour eux. Ce n’est pas obligatoire, mais c’est ce qui donne tout son sens à un badge de rôle.",
     note:r.note,
     et:[
       {t:"Vérifie que le badge existe",d:"Demande à ton CPE, à ton professeur principal ou à l’ALESA si ton établissement délivre ce badge, et comment."},
       {t:"Rassemble tes preuves",d:"Ce que tu as fait dans ce rôle : actions, comptes rendus, moments importants."},
-      {t:"Demande des témoignages",d:"Aux camarades et aux adultes qui t’ont vu agir. Le guide « Écrire un endossement » peut les aider.",lien:"ecrire-endossement"},
+      {t:k==="sentinelle"?"Demande des témoignages":"Demande à ceux que tu représentes de témoigner",d:k==="sentinelle"?"Aux adultes référents qui t’accompagnent dans ce rôle. Le guide « Écrire un endossement » peut les aider.":"Un merci écrit sur ton badge, un peu comme un commentaire sous une publication, mais précis et signé. Les adultes qui t’ont vu agir peuvent aussi le faire. Le guide « Écrire un endossement » peut les aider.",lien:"ecrire-endossement"},
       {t:"Demande ton badge",d:"Auprès de l’émetteur : l’établissement ou l’ALESA."},
       {t:"Fais-le vivre",d:"Ajoute des preuves au fil de l’année. Le rôle s’arrête un jour, le badge reste à toi."}
     ]};
@@ -1368,7 +1373,7 @@ VUES["etre-reconnu"]=()=>`<div class="wrap vue">
 VUES["ecrire-endossement"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 2 sur 3, l’endossement</p>
   <h2>Endosser, c’est reconnaître par écrit.</h2>
-  <p class="intro">Un endossement, c’est un témoignage ajouté au badge de quelqu’un d’autre. C’est une des formes de reconnaissance les plus fortes : quelqu’un prend le temps de dire ce qu’il a vu, et signe. Pour un apprenant, le premier qui compte est celui du professionnel.</p>
+  <p class="intro">Un endossement, c’est un témoignage ajouté au badge de quelqu’un d’autre. C’est une des formes de reconnaissance les plus fortes : quelqu’un prend le temps de dire ce qu’il a vu, et signe. Un peu comme un commentaire sous une publication, mais précis, et sur un badge qui t’appartient. Pour un apprenant, le premier qui compte est celui du professionnel.</p>
   <div class="guide-seul">${guideEndos().replace('<h2 id="titre-guide">Écrire un endossement qui parle</h2>','<h2 id="titre-guide" class="visually-hidden">Écrire un endossement qui parle</h2>')}</div>
   <div class="actions"><a class="btn plein" href="#construire-reco-pair">Écrire un endossement pour un camarade</a><a class="btn" href="#construire-demander">Demander un endossement</a></div>
   ${suite("vie-badge","La vie d’un badge","jeu","Un petit jeu pour finir")}
@@ -1388,9 +1393,9 @@ VUES.adultes=()=>`<div class="wrap vue">
   <p class="intro">Maîtres de stage et d’apprentissage, enseignants, formatrices et formateurs, équipes de vie scolaire, agents de l’exploitation, partenaires : cette page est pour vous. Le reste du site s’adresse aux apprenants, en les tutoyant.</p>
   <div class="adultes">
     <section><h3>Avant le badge, la reconnaissance</h3><p>Le site commence par un temps de réflexion, sans badge. Un apprenant est bien plus que ses notes : on reconnaît ce qu’il a appris, ce qu’il sait faire, ses qualités, ses engagements, son chemin. La reconnaissance vient de lui-même, des autres, des organisations, de la société, et d’abord de ce qui est dû à tout être humain. Toutes ces reconnaissances ont de la valeur, sans se mesurer sur la même échelle. Elles peuvent être spontanées, organisées ou officielles (la certification) : elles s’articulent sans s’opposer. Chacun en est acteur. Le badge arrive quand une reconnaissance a besoin d’être rendue visible, de circuler et d’évoluer. <a href="#mille-facons">Voir ce temps de réflexion</a>.</p></section>
-    <section><h3>Maîtres de stage et d’apprentissage : votre regard compte en premier</h3><p>Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Quelques lignes de votre part sur son badge pèsent plus qu’une appréciation générale. Votre rôle mérite lui aussi d’être reconnu : par les apprenants que vous accueillez, et par l’établissement qui vous les confie.</p></section>
+    <section><h3>Maîtres de stage et d’apprentissage : votre regard compte en premier</h3><p>Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Quelques lignes de votre part sur son badge pèsent plus qu’une appréciation générale. Votre rôle a lui aussi toute sa place dans la reconnaissance : par les apprenants que vous accueillez, et par l’établissement qui vous les confie.</p></section>
     <section><h3>Trois regards sur un même badge</h3><p>Le professionnel voit le métier. L’enseignant ou le formateur voit le lien avec la formation. L’apprenant dit ce qu’il fait. Le badge rend visible le regard de chacun, et la relation va dans les deux sens. Deux exemples sont sur la page <a href="#ecrire-endossement">« Endosser, c’est reconnaître par écrit »</a>.</p></section>
-    <section><h3>Répondre à une demande d’endossement</h3><p>Un apprenant peut vous demander de témoigner sur son badge. Quelques lignes suffisent, si elles disent :</p>
+    <section><h3>Répondre à une demande d’endossement</h3><p>Un apprenant peut vous demander de témoigner sur son badge. Un endossement est une <strong>reconnaissance publique</strong>, comme un commentaire sur un réseau social. Mais ses données restent <strong>sous le contrôle de la personne</strong> : elles n’appartiennent pas à une plateforme comme YouTube ou Instagram. Quelques lignes suffisent, si elles disent :</p>
       <ol class="liste-ing">${INGREDIENTS.map(i=>`<li><strong>${i.t.replace("tu as vu","vous avez vu").replace("Qui tu es","Qui vous êtes")}</strong> : ${(i.d.charAt(0).toLowerCase()+i.d.slice(1)).replace(/\bton\b/g,"votre")}</li>`).join("")}</ol></section>
     <section><h3>Les badges, c’est aussi pour vous</h3><p>Les badges ne sont pas réservés aux apprenants. Vos pratiques, vos projets et vos engagements peuvent eux aussi être reconnus, par vos collègues, par vos partenaires et par les apprenants. Un adulte qui a lui-même des badges accompagne mieux ceux des autres.</p></section>
     <section><h3>Accompagner la création d’un badge</h3><p>Aider à trouver les mots, repérer les traces, suggérer des témoins : c’est le travail du passeur, qu’il soit adulte ou apprenant. Les temps de suivi de stage ou d’alternance, l’ESC, le CDI, la vie scolaire et l’association des apprenants sont des lieux naturels pour cela.</p></section>
@@ -1471,7 +1476,7 @@ PARCOURS["demander-maitre"]={porte:null,t:"Demander l’endossement de mon maît
   intro:"Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Demander son endossement, c’est aussi reconnaître son rôle de maître de stage.",
   fam:["individuel","pratique","collectif"],famNote:"Son endossement peut renforcer tous tes badges.",
   ex:["Lucas demande à Claire, l’agricultrice qui l’accueille en apprentissage, d’endosser son badge « traite et soin des veaux ».","Maëlle demande à l’animatrice de la résidence d’endosser son badge « ateliers pour personnes âgées »."],
-  inf:["Un « tu as bien travaillé » le dernier jour : garde-le, c’est déjà beaucoup."],
+  inf:["Un « tu as bien travaillé » le dernier jour, c’est déjà beaucoup. Tu peux aussi lui proposer de l’écrire sur ton badge."],
   et:[
     {t:"Choisis le badge",d:"Celui qui raconte ce que tu as fait chez ton maître de stage."},
     {t:"Choisis le moment",d:"À la fin du stage ou d’une période d’alternance. Pas en plein coup de feu."},
@@ -1699,7 +1704,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">5 min</span><div><strong>Le badge numérique</strong><p>Présenter <a href="#badge-numerique">ce qu’est un badge</a> à partir d’objets connus (écusson, médaille de club). Partir du principe que personne ne connaît.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Ouvre un badge</strong><p>Projeter <a href="#badge-cest-quoi">les deux badges</a>. Montrer qu’un badge de projet est le même pour tous, mais que chacun y raconte sa part.</p></div></li>
     <li><span class="duree">25 min</span><div><strong>Les trois regards, par groupes de trois</strong><p>Chaque groupe choisit une situation de stage vécue par l’un d’eux. Un joue le professionnel, un le formateur, un l’apprenant. Chacun écrit son regard avec les quatre ingrédients de <a href="#ecrire-endossement">l’endossement</a>. Mise en commun : qu’est-ce que chaque regard voit que les autres ne voient pas ?</p></div></li>
-    <li><span class="duree">5 min</span><div><strong>La boussole</strong><p>Maintenant qu’on sait ce qu’est un badge : chacun pense à une reconnaissance qui compte et se demande, avec <a href="#boussole">la boussole</a>, si elle mérite un badge.</p></div></li>
+    <li><span class="duree">5 min</span><div><strong>La boussole</strong><p>Maintenant qu’on sait ce qu’est un badge : chacun pense à une reconnaissance qui compte et se demande, avec <a href="#boussole">la boussole</a>, s’il faut la rendre visible, pour qui et pour quoi faire.</p></div></li>
   </ol>
   <h3 class="sous-titre">Temps 3 : Agir (35 min)</h3>
   <ol class="deroule">
@@ -1737,10 +1742,11 @@ VUES["badge-numerique"]=()=>`<div class="wrap vue">
     </div>
   </div>
   <div class="mesure">
-    <div><h3>Ce que ce n’est pas</h3><ul><li>Pas une note : personne ne te classe.</li><li>Pas un diplôme : il ne remplace pas la certification.</li><li>Pas une obligation : tu décides d’en avoir ou non.</li><li>Pas un « like » : il dit quelque chose de précis, et quelqu’un en témoigne.</li></ul></div>
+    <div><h3>Ce que ce n’est pas</h3><ul><li>Pas une note : personne ne te classe.</li><li>Pas un diplôme : il ne remplace pas la certification.</li><li>Pas une obligation : tu décides d’en avoir ou non.</li></ul></div>
     <div class="reco"><h3>Ce que c’est</h3><p>Une façon de rendre visible une reconnaissance qui compte, pour qu’elle dure, qu’elle circule avec toi, et qu’elle grandisse avec le regard des autres. Une forme parmi d’autres, pour cet usage-là. Il peut porter une reconnaissance spontanée (un badge « Merci »), organisée (un badge de projet) ou officielle, et il peut être proposé dès le début d’un chemin, pas seulement à la fin.</p></div>
   </div>
   <div class="mesure">
+    <div class="reco"><h3>Un peu comme un commentaire</h3><p>Un endossement, c’est un peu comme un commentaire sous une publication : quelqu’un dit publiquement ce qu’il a vu. La différence : il est précis, il est signé, et c’est toi qui gardes la main sur ton badge.</p></div>
     <div class="reco"><h3>Le documenter, c’est réfléchir</h3><p>Ajouter des traces et raconter ce que tu as fait prend un peu de temps. Ce n’est pas du temps perdu : c’est l’occasion de regarder ton chemin et de comprendre ce que tu as appris, comme dans un portfolio.</p></div>
     <div class="reco"><h3>Un badge qui a du sens</h3><p>Ce qui compte, c’est que le badge ait du sens : pour toi, pour ceux qui le verront, et pour tous ceux qui partagent l’expérience. Car un badge ne profite pas qu’à celui qui le reçoit : il peut être utile à toute une communauté.</p></div>
   </div>
@@ -1755,7 +1761,7 @@ function phraseSimple(){const q=SIMPLE.qui||"[prénom]",vu=SIMPLE.vu||"[ce que t
 VUES.simplement=()=>`<div class="wrap vue">
   <p class="fil"><a href="#parcours">Les parcours</a> › Reconnaître quelqu’un, simplement</p>
   <h2>Reconnaître quelqu’un, simplement.</h2>
-  <p class="intro">Pas besoin de badge. Un merci précis, dit au bon moment, est déjà une reconnaissance forte. Ce qui le rend fort : il dit exactement ce que tu as vu.</p>
+  <p class="intro">Un merci précis, dit au bon moment, est déjà une reconnaissance forte. Ce qui le rend fort : il dit exactement ce que tu as vu.</p>
   <div class="mesure">
     <div><h3>Un merci vague</h3><p>« Merci, t’es sympa. »</p></div>
     <div class="reco"><h3>Un merci précis</h3><p>« Merci d’avoir pris ma place à l’astreinte samedi. Grâce à toi, j’ai pu aller voir ma grand-mère. »</p></div>
@@ -1773,7 +1779,7 @@ VUES.simplement=()=>`<div class="wrap vue">
       <div class="actions"><button type="button" class="btn petit" id="copier-simple">Copier la phrase</button></div><p class="statut" id="statut-simple" aria-live="polite"></p></aside>
   </div>
   <p class="message-fort">Et maintenant, dis-le. C’est tout.</p>
-  <p class="prose">Si ce que cette personne a fait compte vraiment pour son parcours, tu pourras aller plus loin : <a href="#reco-pair">endosser son badge</a> ou <a href="#reconnaitre">lui émettre un badge de reconnaissance</a>.</p>
+  <p class="prose">Tu peux aussi l’écrire en endossement sur son badge, pour qu’il reste visible. Si ce que cette personne a fait compte vraiment pour son parcours, tu pourras aller plus loin : <a href="#reco-pair">endosser son badge</a> ou <a href="#reconnaitre">lui émettre un badge de reconnaissance</a>.</p>
   <div class="suite"><a class="btn" href="#parcours">Toutes les portes</a><a class="btn plein" href="#acteur">Revoir le défi du jour</a></div>
 </div>`;
 Object.assign(T,{simplement:3});
@@ -2028,9 +2034,9 @@ function brancher(v){
       const r=BOUSSOLE.map((_,i)=>form.querySelector(`input[name=q${i}]:checked`));
       if(r.some(x=>!x)){return;}
       const oui=r.reduce((s,x)=>s+ +x.value,0);
-      if(oui<=1){out.className="verdict inf";out.innerHTML=`<p><strong>Ça peut rester informel.</strong>Et c’est très bien comme ça. Un merci, une confiance, un souvenir : pas besoin de badge.</p>`;}
-      else if(oui===2){out.className="verdict peut";out.innerHTML=`<p><strong>Peut-être.</strong>Tu peux laisser mûrir. Si ça continue ou si quelqu’un d’autre le remarque, un badge pourra avoir du sens.</p>`;}
-      else{out.className="verdict badge";out.innerHTML=`<p><strong>Un badge peut t’être utile.</strong>Ça compte, ça dure, d’autres peuvent en témoigner. Passe à l’action : choisis un parcours puis choisis un parcours.</p>`;}
+      if(oui<=1){out.className="verdict inf";out.innerHTML=`<p><strong>Tu peux le garder comme ça.</strong>Rien n’oblige à en faire un badge : un merci, une confiance, un souvenir gardent toute leur valeur. Si un jour ça compte pour la suite, tu pourras toujours le rendre visible.</p>`;}
+      else if(oui<=3){out.className="verdict peut";out.innerHTML=`<p><strong>Peut-être.</strong>Tu peux laisser mûrir. Si ça continue, si quelqu’un d’autre le remarque, ou si ça peut servir à d’autres, un badge pourra avoir du sens.</p>`;}
+      else{out.className="verdict badge";out.innerHTML=`<p><strong>Un badge peut t’être utile.</strong>Ça compte, ça dure, d’autres peuvent en témoigner, et ça peut être utile à d’autres. Passe à l’action : choisis un parcours.</p>`;}
     });
   }
   if(v==="badge-cest-quoi"){
