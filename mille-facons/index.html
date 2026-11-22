@@ -419,13 +419,14 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .cercles{position:relative;width:400px;height:400px}
 .cercle{position:absolute;border-radius:50%;border:3px solid var(--bocage);cursor:pointer;font:inherit;display:flex;justify-content:center;align-items:flex-start;padding-top:.7rem;color:var(--encre);font-weight:800}
 .cercle span{font-family:"Baloo 2",sans-serif;font-size:1.05rem;background:#fff;padding:0 .4rem;border-radius:6px}
-.cercle.c4{inset:0;background:#fff;border-color:var(--pomme);border-style:dashed}
+.cercle.c4{inset:0;background:#fff;border-style:dashed}
 .cercle.c3{inset:40px;background:#F2F8F7}
 .cercle.c2{inset:80px;background:#DFF1EE}
 .cercle.c1{inset:120px;background:#BFE3DC}
-.cercle.c0{inset:160px;background:var(--colza);align-items:center;padding-top:0}
-.cercle[aria-pressed="true"]{border-color:var(--pomme);border-width:4px}
-.cercle-detail{background:#fff;border:3px solid var(--bocage);border-radius:16px;padding:1.3rem 1.4rem}
+.cercle.c0{inset:160px;background:#9CD3C8;align-items:center;padding-top:0}
+.cercle[aria-pressed="true"]{border-color:var(--nav);border-width:4px;border-style:solid;background:#FBE4DE}
+.cercle[aria-pressed="true"] span{background:var(--nav);color:#fff}
+.cercle-detail{background:#fff;border:3px solid var(--nav);border-radius:16px;padding:1.3rem 1.4rem}
 .cercle-ex{font-style:italic;color:var(--bocage);margin:0}
 .ranger{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
 .ranger button{font:inherit;padding:.6rem 1rem;border-radius:10px;border:2px solid var(--bocage);background:#fff;cursor:pointer;display:inline-flex;gap:.5rem;align-items:center}
@@ -551,9 +552,7 @@ textarea:focus,.ch input[type=text]:focus{outline:3px solid var(--colza);outline
 .pistes button[aria-pressed="true"]{background:var(--choix);border-color:var(--colza);color:var(--encre)}
 .onglets button[aria-selected="true"]{background:var(--choix);border-color:var(--colza);color:var(--encre)}
 .onglets button[aria-selected="true"] span{color:var(--texte)}
-.cercle[aria-pressed="true"]{border-color:var(--colza);border-width:5px}
-.cercle.c4{border-color:var(--encre)}
-.cercle.c4[aria-pressed="true"]{border-color:var(--colza)}
+.cercle.c4{border-color:var(--bocage)}
 .ranger button.range{background:var(--choix);border-color:var(--colza)}
 .options button.juste{border-color:var(--colza);background:var(--choix)}
 .options button.faux{border-color:#9AA7A8;background:#EEF1F1}
