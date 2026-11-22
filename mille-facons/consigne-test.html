@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mille façons de reconnaître : consigne pour les testeurs</title>
+<style>
+@font-face{font-family:"Nunito";font-weight:400;font-display:swap;src:url(polices/nunito-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Nunito";font-weight:700;font-display:swap;src:url(polices/nunito-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-weight:700;font-display:swap;src:url(polices/baloo-2-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-weight:800;font-display:swap;src:url(polices/baloo-2-latin-800-normal.woff2) format("woff2")}
+:root{--encre:#0C5D6A;--bocage:#098284;--texte:#4E5056;--colza:#D9BF0B;--choix:#FBEFA6;--nav:#C8462A;--teinte:#EEF6F5}
+body{margin:0;font-family:"Nunito",system-ui,sans-serif;color:var(--texte);line-height:1.6;font-size:1.05rem;background:#fff}
+main{max-width:46rem;margin:0 auto;padding:2rem 1.2rem 3rem}
+h1,h2{font-family:"Baloo 2",sans-serif;color:var(--encre);line-height:1.15}
+h1{font-size:2.2rem;margin:0 0 .3rem}
+h2{font-size:1.5rem;margin:2.2rem 0 .6rem}
+.date{color:var(--bocage);margin:0 0 1.5rem}
+a{color:var(--nav)}
+.lien-test{display:block;background:var(--choix);border-left:5px solid var(--colza);padding:.7rem 1rem;font-weight:700;word-break:break-all;margin:.4rem 0}
+table{border-collapse:collapse;width:100%;font-size:.97rem;margin:.6rem 0}
+th,td{border:1px solid #CFE3E1;padding:.5rem .6rem;text-align:left;vertical-align:top}
+thead th{background:var(--teinte);color:var(--encre)}
+tbody th{color:var(--encre);background:#fff}
+ol li,ul li{margin:.45rem 0}
+code{background:var(--teinte);padding:0 .25rem;border-radius:4px}
+.a-completer{background:var(--choix);padding:0 .3rem}
+@media print{.lien-test{border:1px solid #999}}
+</style>
+</head>
+<body>
+<main>
+<h1>Mille façons de reconnaître : consigne pour les testeurs</h1>
+<p class="date">22 novembre 2026</p>
+
+<h2>Pourquoi ce test</h2>
+<p>Nous vous demandons de repérer ce qui n’est pas clair, page par page, avant de diffuser le site dans les lycées agricoles et les MFR.</p>
+<p>« Mille façons de reconnaître » est un mini-site destiné aux apprenants de l’enseignement agricole, de la 4e au BTS. Il sert de support à un atelier de découverte : d’abord réfléchir à la reconnaissance, puis découvrir les badges numériques, enfin passer à l’action.</p>
+<p>Le test est fait uniquement par des adultes : enseignants, formateurs, CPE, maîtres de stage, documentalistes. Vous testez seul, ou vous servez de scribe pour un groupe d’apprenants.</p>
+
+<h2>Deux façons de tester</h2>
+<table>
+<thead><tr><th></th><th>Seul</th><th>Scribe pour des apprenants</th></tr></thead>
+<tbody>
+<tr><th>Qui navigue</th><td>Vous</td><td>Les apprenants, ou vous en projetant le site</td></tr>
+<tr><th>Qui remplit les retours</th><td>Vous</td><td>Vous, avec leurs mots</td></tr>
+<tr><th>Ce que vous notez</th><td>Ce qui vous gêne, en pensant aux apprenants que vous connaissez</td><td>Leurs questions, leurs hésitations, les mots qu’ils ne comprennent pas, ce qui les fait réagir</td></tr>
+<tr><th>Durée conseillée</th><td>45 min à 1 h pour tout le site, ou 20 min pour un seul temps</td><td>Une séance d’atelier : environ 2 h 45, ou un seul temps sur une heure de cours</td></tr>
+</tbody>
+</table>
+<p>En scribe, notez de préférence leurs propres formulations, entre guillemets : « c’est quoi un endossement ? » nous apprend plus que « mot difficile ».</p>
+
+<h2>Pas à pas</h2>
+<ol>
+<li><strong>Ouvrez le lien de test</strong> dans un navigateur récent, sur ordinateur de préférence :
+<a class="lien-test" href="https://misterppqx.github.io/openbadges/mille-facons/?test">https://misterppqx.github.io/openbadges/mille-facons/?test</a>
+Gardez bien <code>?test</code> à la fin : sans lui, le site s’ouvre normalement, sans outil de retour. Un bandeau « Mode test » en haut de l’écran confirme que vous êtes au bon endroit.</li>
+<li><strong>Remplissez votre profil</strong>, une seule fois. Cliquez sur le bouton jaune « Avis sur cette page », en bas à droite, puis indiquez votre rôle et si vous testez seul ou comme scribe. En scribe, choisissez la formation des apprenants : le site adapte aussitôt ses exemples à leur niveau. Le nom de votre structure est facultatif.</li>
+<li><strong>Parcourez le site</strong> comme le ferait un apprenant, dans l’ordre : Temps 1, Temps 2, puis Temps 3. Faites les activités : répondre aux questions, choisir, écrire.</li>
+<li><strong>Sur chaque page, donnez votre avis</strong> dans le panneau : claire, moyennement claire ou pas claire.</li>
+<li><strong>Signalez les passages pas clairs.</strong> Cliquez sur « Signaler un passage pas clair », puis touchez le passage dans la page : il se surligne en jaune. Écrivez ce qui coince dans le champ qui apparaît. Vous pouvez signaler plusieurs passages par page. Touche Échap pour annuler.</li>
+<li><strong>Laissez un commentaire</strong> si vous le souhaitez : ce qui manque, ce qui gêne, ce qui marche bien.</li>
+<li><strong>Téléchargez vos retours</strong> à la fin, avec le bouton « Télécharger mes retours (tableur) ». Vous obtenez un fichier .csv qui s’ouvre dans un tableur.</li>
+</ol>
+<p>Vos retours sont gardés dans votre navigateur au fil du test : vous pouvez recharger la page, faire une pause et revenir plus tard sur le même ordinateur, avec le même navigateur. Pensez tout de même à télécharger avant de fermer définitivement.</p>
+
+<h2>Ce qui nous aide le plus</h2>
+<p>Ce que nous cherchons, c’est ce qui empêche un apprenant de comprendre ou d’avancer.</p>
+<ul>
+<li><strong>Les mots</strong> qu’un apprenant ne comprendrait pas, ou qui sont trop abstraits pour son âge.</li>
+<li><strong>Les consignes</strong> floues : on ne sait pas quoi faire, ni où cliquer.</li>
+<li><strong>Les exemples</strong> qui ne parlent pas à vos apprenants, ou qui ne correspondent pas à leur formation.</li>
+<li><strong>Les enchaînements</strong> : une notion qui arrive trop tôt, une page qui semble manquer, une répétition.</li>
+<li><strong>Ce qui marche bien</strong> : c’est utile aussi, pour ne pas le casser.</li>
+</ul>
+<p>Inutile de corriger l’orthographe page par page : un commentaire suffit. Et si vous avez un doute sur le fond, sur la reconnaissance ou sur les badges, notez-le : c’est précisément ce que nous voulons savoir.</p>
+
+<h2>Données et confidentialité</h2>
+<p>Rien n’est envoyé sur internet : vos retours restent sur votre ordinateur jusqu’à ce que vous transmettiez vous-même le fichier.</p>
+<ul>
+<li><strong>Pas de nom</strong> : le fichier contient votre rôle, votre situation de test et, si vous la donnez, votre structure.</li>
+<li><strong>Pas de données d’apprenants</strong> : en scribe, ne notez ni nom ni information personnelle sur un jeune. Ce que les apprenants écrivent dans les activités du site n’est jamais mis dans le fichier de retours.</li>
+<li><strong>Sur un poste partagé</strong> : à la fin, après le téléchargement, cliquez sur « Tout effacer » dans le panneau pour ne rien laisser dans le navigateur.</li>
+</ul>
+
+<h2>Renvoyer vos retours</h2>
+<p>Envoyez le fichier .csv téléchargé, sans le modifier, à : <strong class="a-completer">[adresse de retour à compléter]</strong>, avant le <strong class="a-completer">[date à compléter]</strong>.</p>
+<p>Gardez son nom d’origine (il commence par « retours-mille-facons- » suivi de la date) : il nous permet de distinguer les envois. Si vous testez plusieurs fois, envoyez un fichier par séance.</p>
+<p>Une question, un souci technique (le bouton n’apparaît pas, le téléchargement ne marche pas) : écrivez à la même adresse.</p>
+<p>Merci pour votre aide.</p>
+</main>
+</body>
+</html>
