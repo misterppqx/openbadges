@@ -580,6 +580,17 @@ textarea:focus,.ch input[type=text]:focus{outline:3px solid var(--colza);outline
 .chemin-reco li:not(:last-child)::after{content:"";position:absolute;right:-.62rem;top:50%;width:.5rem;height:.5rem;border:solid var(--bocage);border-width:0 3px 3px 0;transform:translateY(-50%) rotate(-45deg)}
 @media (max-width:860px){.chemin-reco{grid-template-columns:1fr}.chemin-reco li::after{display:none}}
 
+.autre-forme{margin-top:2rem;padding:1.4rem 1.5rem;border:3px solid var(--bocage);border-radius:16px;background:#fff}
+.autre-forme h3{font-size:1.4rem}
+.video{position:relative;aspect-ratio:16/9;max-width:720px;border-radius:12px;overflow:hidden;background:var(--encre);margin:.8rem 0}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-lancer{position:absolute;inset:0;width:100%;border:0;background:var(--encre);color:#fff;font:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:1rem}
+.video-play{width:72px;height:72px;border-radius:50%;background:var(--nav);position:relative;flex:none}
+.video-play::after{content:"";position:absolute;left:28px;top:22px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #fff}
+.video-texte{font-family:"Baloo 2",sans-serif;font-size:1.4rem;font-weight:800;text-align:left}
+.video-texte small{display:block;font-family:"Nunito",sans-serif;font-size:.85rem;font-weight:400;opacity:.85}
+.video-lancer:hover .video-play{background:#A83A22}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -1399,7 +1410,7 @@ VUES["a-propos"]=()=>`<div class="wrap vue">
     <h3>Le code couleur</h3>
     <div class="code-couleur"><div class="cc-vert"><strong>Vert</strong> : le texte et la structure du site.</div><div class="cc-jaune"><strong>Jaune</strong> : ce que tu choisis, ce que tu écris, ce que tu déposes.</div><div class="cc-rouge"><strong>Rouge</strong> : pour avancer, revenir ou changer de page.</div></div>
     <h3>Vos données</h3>
-    <p>Ce site n’enregistre rien. Il ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne fait appel à aucun service extérieur : les polices sont hébergées avec le site. Ce que vous écrivez dans les formulaires reste dans votre navigateur et disparaît quand vous fermez la page.</p>
+    <p>Ce site n’enregistre rien. Il ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne fait appel à aucun service extérieur : les polices sont hébergées avec le site. Seule exception : la vidéo de présentation du badge, qui ne se charge depuis YouTube (en mode sans cookie publicitaire) que si vous cliquez dessus. Ce que vous écrivez dans les formulaires reste dans votre navigateur et disparaît quand vous fermez la page.</p>
     <h3>Une plateforme au choix</h3>
     <p>Le site ne dépend d’aucune plateforme de badges. Les fiches téléchargées peuvent être reprises sur celle qu’utilise votre établissement. Pour l’image, utilisez le <a href="${URL_GENERATEUR}" target="_blank" rel="noopener">Générateur Open Badges de l’Aventure du vivant</a>.</p>
     <h3>Les exemples</h3>
@@ -1518,16 +1529,14 @@ const USAGES=[
     {f:"Une note",force:"Elle situe un niveau sur une épreuve.",limite:"Un chiffre, sans l’histoire derrière."},
     {f:"Un diplôme, un certificat",force:"Reconnu partout, il ouvre des portes.",limite:"Fixé une fois pour toutes, il ne dit pas tout ce que tu sais."},
     {f:"Des crédits de formation",force:"Ils se capitalisent d’une formation à l’autre.",limite:"Ils comptent des acquis, pas des engagements."},
-    {f:"Une attestation, une lettre de recommandation",force:"La parole d’un professionnel ou d’une structure.",limite:"Écrite une fois, elle n’évolue plus."}]},
-  {pour:"Pour rendre visible et faire circuler",formes:[
-    {f:"Un badge numérique",force:"Il dure, se montre, circule avec toi et s’enrichit du regard des autres.",limite:"Il demande du temps pour le documenter, perd son sens si on en distribue trop, et ne remplace ni un sourire ni un diplôme."}]}
+    {f:"Une attestation, une lettre de recommandation",force:"La parole d’un professionnel ou d’une structure.",limite:"Écrite une fois, elle n’évolue plus."}]}
 ];
 const SITUATIONS_FORMES=[
   {s:"Un camarade t’a dépanné ce matin.",r:"Un merci, un sourire. Pas besoin de plus : c’est parfait comme ça."},
-  {s:"Tu as tenu seul l’élevage pendant une semaine, et ton maître de stage est content.",r:"Une responsabilité confiée la prochaine fois, un mot de sa part. Et si ça doit compter pour la suite de ton parcours, son endossement sur un badge."},
+  {s:"Tu as tenu seul l’élevage pendant une semaine, et ton maître de stage est content.",r:"Une responsabilité confiée la prochaine fois, un mot de sa part. Et si ça doit compter pour la suite de ton parcours, un témoignage écrit ou une attestation."},
   {s:"Tu termines ton bac pro.",r:"Le diplôme. Rien ne le remplace."},
-  {s:"Tu veux montrer à un employeur trois ans d’engagement chez les jeunes sapeurs-pompiers.",r:"Une attestation, une lettre de recommandation, ou un badge enrichi de témoignages. Les deux peuvent se compléter."},
-  {s:"Ta classe a gagné un concours d’innovation.",r:"Un prix pour la classe. Et pour chacun, un badge de projet pour raconter sa part."}
+  {s:"Tu veux montrer à un employeur trois ans d’engagement chez les jeunes sapeurs-pompiers.",r:"Une attestation du centre de secours, une lettre de recommandation. Les deux peuvent se compléter."},
+  {s:"Ta classe a gagné un concours d’innovation.",r:"Un prix pour la classe. Et pour chacun, un mot qui dise sa part dans le projet."}
 ];
 
 VUES["ce-qui-est-reconnu"]=()=>`<div class="wrap vue">
@@ -1639,9 +1648,15 @@ VUES.formes=()=>`<div class="wrap vue">
   <p class="prose">Réfléchis d’abord, puis compare avec nos idées. Souvent, plusieurs formes vont ensemble.</p>
   <ol class="jeu">${SITUATIONS_FORMES.map((x,i)=>`<li><p class="sit">${x.s}</p><button type="button" class="btn petit" data-idee="${i}" aria-expanded="false">Voir des idées</button><p class="retour" id="idee-${i}" hidden>${x.r}</p></li>`).join("")}</ol>
   <div class="mesure">
-    <div><h3>Elles se complètent</h3><p>Un merci, un diplôme et un badge peuvent reconnaître la même personne, pour des choses différentes. Les formes légères sont parfaites comme elles sont : garde-les ainsi.</p></div>
-    <div class="reco"><h3>L’usage du badge</h3><p>Le badge sert quand une reconnaissance doit compter dans ton parcours personnel, scolaire ou professionnel, te suivre, et grandir avec les regards des autres. Tu ne sais pas encore ce que c’est ? C’est normal : on le découvre juste après.</p></div>
+    <div><h3>Elles se complètent</h3><p>Un merci, un diplôme et une attestation peuvent reconnaître la même personne, pour des choses différentes. Chacune a sa place.</p></div>
+    <div class="reco"><h3>Il reste une question</h3><p>Certaines reconnaissances comptent pour ton parcours, mais s’effacent, restent dans un tiroir ou ne te suivent pas. Comment les rendre visibles, les garder avec toi et les enrichir avec le regard des autres ?</p></div>
   </div>
+  <section class="autre-forme" aria-labelledby="titre-autre-forme">
+    <h3 id="titre-autre-forme">Une autre forme existe : le badge numérique</h3>
+    <p class="prose">Plus récente, elle permet de rendre visible n’importe quelle reconnaissance, spontanée, organisée ou officielle, de la garder avec toi et de l’enrichir avec le regard des autres. Regarde la vidéo, puis découvrons-la ensemble.</p>
+    <div class="video" id="video-badge"><button type="button" class="video-lancer" data-video="dgr9E09cq_U"><span class="video-play" aria-hidden="true"></span><span class="video-texte">Regarder la vidéo<small>Elle se charge depuis YouTube quand tu cliques.</small></span></button></div>
+    <p class="note">Tu peux aussi <a href="https://youtu.be/dgr9E09cq_U" target="_blank" rel="noopener">la regarder sur YouTube</a>.</p>
+  </section>
   ${suite("acteur","Acteur de la reconnaissance","badge-numerique","Découvrir le badge numérique")}
 </div>`;
 Object.assign(T,{"ce-qui-est-reconnu":1,"qui-reconnait":1,egales:1,"ce-que-ca-fait":1,acteur:1,formes:2});
@@ -1680,7 +1695,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <p class="pause">Pause, 10 min</p>
   <h3 class="sous-titre">Temps 2 : Rendre visible (55 min)</h3>
   <ol class="deroule">
-    <li><span class="duree">10 min</span><div><strong>Les formes de la reconnaissance</strong><p>Parcourir <a href="#formes">les formes et leurs usages</a>, puis faire réfléchir le groupe : quelle forme pour quelle situation ? Insister : aucune forme n’est meilleure, elles se complètent.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Les formes de la reconnaissance</strong><p>Parcourir <a href="#formes">les formes et leurs usages</a>, puis faire réfléchir le groupe : quelle forme pour quelle situation ? Insister : aucune forme n’est meilleure, elles se complètent. Terminer par la question : comment rendre visible ce qui compte ? et projeter la vidéo du badge numérique.</p></div></li>
     <li><span class="duree">5 min</span><div><strong>Le badge numérique</strong><p>Présenter <a href="#badge-numerique">ce qu’est un badge</a> à partir d’objets connus (écusson, médaille de club). Partir du principe que personne ne connaît.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Ouvre un badge</strong><p>Projeter <a href="#badge-cest-quoi">les deux badges</a>. Montrer qu’un badge de projet est le même pour tous, mais que chacun y raconte sa part.</p></div></li>
     <li><span class="duree">25 min</span><div><strong>Les trois regards, par groupes de trois</strong><p>Chaque groupe choisit une situation de stage vécue par l’un d’eux. Un joue le professionnel, un le formateur, un l’apprenant. Chacun écrit son regard avec les quatre ingrédients de <a href="#ecrire-endossement">l’endossement</a>. Mise en commun : qu’est-ce que chaque regard voit que les autres ne voient pas ?</p></div></li>
@@ -1722,7 +1737,7 @@ VUES["badge-numerique"]=()=>`<div class="wrap vue">
     </div>
   </div>
   <div class="mesure">
-    <div><h3>Ce que ce n’est pas</h3><ul><li>Pas une note : personne ne te classe.</li><li>Pas un diplôme : il ne remplace pas la certification.</li><li>Pas une obligation : tu décides d’en avoir ou non.</li><li>Pas un « like » : il dit quelque chose de précis, et quelqu’un en témoigne.</li></ul></div>
+    <div><h3>Ce que ce n’est pas</h3><ul><li>Pas une note : personne ne te classe.</li><li>Pas un diplôme : il ne remplace pas la certification.</li><li>Pas une obligation : tu décides d’en avoir ou non.</li><li>Pas magique : il demande du temps pour être documenté, et perd son sens si on en distribue trop.</li><li>Pas un « like » : il dit quelque chose de précis, et quelqu’un en témoigne.</li></ul></div>
     <div class="reco"><h3>Ce que c’est</h3><p>Une façon de rendre visible une reconnaissance qui compte, pour qu’elle dure, qu’elle circule avec toi, et qu’elle grandisse avec le regard des autres. Une forme parmi d’autres, pour cet usage-là. Il peut porter une reconnaissance spontanée (un badge « Merci »), organisée (un badge de projet) ou officielle, et il peut être proposé dès le début d’un chemin, pas seulement à la fin.</p></div>
   </div>
   ${suite("formes","Les formes de la reconnaissance","badge-cest-quoi","Regarder un badge de plus près")}
@@ -1767,6 +1782,7 @@ async function telechargerTexte(nom,txt,stId){const st=document.getElementById(s
   try{if(DL){await DL.save({filename:nom,data:txt});}else{const url=URL.createObjectURL(new Blob([txt],{type:"text/plain;charset=utf-8"}));const l=document.createElement("a");l.href=url;l.download=nom;document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}st.textContent="Fichier téléchargé.";}
   catch(err){st.textContent="Le téléchargement n’a pas marché : utilise « Copier ».";}}
 document.addEventListener("click",e=>{
+  const vd=e.target.closest("[data-video]");if(vd){const box=vd.parentNode;box.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${vd.dataset.video}?autoplay=1&rel=0" title="Vidéo : le badge numérique" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;return;}
   const id=e.target.closest("[data-idee]");if(id){const p=document.getElementById("idee-"+id.dataset.idee);p.hidden=!p.hidden;id.setAttribute("aria-expanded",String(!p.hidden));id.textContent=p.hidden?"Voir des idées":"Masquer";return;}
   if(e.target.closest("#copier-simple"))copierTexte(phraseSimple(),"statut-simple");
   if(e.target.closest("#copier-carnet"))copierTexte(texteCarnet(),"statut-carnet","secours-carnet");
