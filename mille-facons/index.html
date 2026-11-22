@@ -614,6 +614,34 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
   .progression .lib{display:none}
   .progression a{padding:.3rem}
 }
+
+/* ---------- mode test ---------- */
+.test-bandeau{background:var(--encre);color:#fff;font-size:.9rem;padding:.4rem 1rem;text-align:center}
+#test-zone{position:fixed;right:1rem;bottom:1rem;z-index:50;width:min(380px,calc(100vw - 2rem));display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+#test-ouvrir{font:inherit;font-weight:700;background:var(--colza);color:var(--encre);border:2px solid var(--encre);border-radius:999px;padding:.6rem 1.2rem;cursor:pointer;box-shadow:0 2px 8px rgba(12,93,106,.25)}
+#test-corps{width:100%;max-height:75vh;overflow:auto;background:#fff;border:3px solid var(--colza);border-radius:16px;padding:1rem 1.1rem;box-shadow:0 4px 20px rgba(12,93,106,.2);font-size:.95rem}
+#test-corps h3{margin:.8rem 0 .3rem;font-size:1.1rem}
+#test-corps label{display:block;margin:.5rem 0}
+#test-corps select,#test-corps input[type=text],#test-corps textarea{display:block;width:100%;font:inherit;margin-top:.2rem;padding:.35rem .5rem;border:2px solid #BFD9D6;border-radius:8px;background:var(--choix-fond)}
+#test-corps fieldset{border:0;padding:0;margin:.5rem 0}
+#test-corps fieldset label{display:flex;gap:.4rem;align-items:center;margin:.2rem 0}
+.test-profil summary{cursor:pointer;font-weight:700;color:var(--encre)}
+.t-q{margin:.3rem 0}
+.t-avis{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.7rem}
+.t-avis button{font:inherit;font-size:.9rem;padding:.3rem .8rem;border-radius:999px;border:2px solid #BFD9D6;background:#fff;cursor:pointer}
+.t-avis button[aria-pressed="true"]{background:var(--choix);border-color:var(--colza)}
+.t-aide{font-size:.85rem;color:var(--doux);margin:.3rem 0}
+.t-passages{padding-left:1.2rem;margin:.6rem 0}
+.t-passages li{margin:.5rem 0}
+.t-passages q{display:block;font-style:italic}
+.t-suppr,.t-lien{font:inherit;font-size:.85rem;background:none;border:0;color:var(--nav);text-decoration:underline;cursor:pointer;padding:.2rem 0}
+.t-pied{border-top:1px solid #CFE3E1;margin-top:.8rem;padding-top:.6rem}
+.t-pied p{margin:.3rem 0}
+body.test-selection #app *{cursor:crosshair}
+.test-survol{outline:3px dashed var(--colza)!important;outline-offset:3px}
+.test-marque{background:var(--choix)!important;outline:3px solid var(--colza);outline-offset:3px}
+@media (max-width:600px){#test-zone{right:.5rem;left:.5rem;width:auto}#test-corps{max-height:65vh}}
+@media print{#test-zone,.test-bandeau{display:none!important}}
 </style>
 </head>
 <body>
@@ -2223,6 +2251,125 @@ function brancher(v){
 window.addEventListener("hashchange",afficher);
 majPiedPublic();
 afficher();
+/* ================= MODE TEST (adresse avec ?test) ================= */
+const MODE_TEST=new URLSearchParams(location.search).has("test");
+const TEST_CLE="mille-facons-retours";
+const TEST_ROLES=["Enseignant·e","Formateur·rice (MFR, CFA)","CPE ou vie scolaire","Maître de stage ou tuteur·rice","Documentaliste","Direction","Autre"];
+let TEST={profil:{role:"",situation:"seul",formation:"",structure:""},pages:{}};
+let TEST_SELECTION=false;
+function testCharger(){try{const t=JSON.parse(localStorage.getItem(TEST_CLE)||"null");if(t&&t.pages)TEST=t;}catch(e){}}
+function testSauver(){try{localStorage.setItem(TEST_CLE,JSON.stringify(TEST));}catch(e){}testCompteur();}
+function testRoute(){return (location.hash||"#accueil").slice(1)||"accueil";}
+function testPage(r){r=r||testRoute();if(!TEST.pages[r])TEST.pages[r]={avis:"",commentaire:"",passages:[],titre:""};return TEST.pages[r];}
+function testTitre(){const h=document.querySelector("#app h2, #app h1");return h?h.innerText.replace(/\s+/g," ").trim():testRoute();}
+function testNb(){return Object.values(TEST.pages).reduce((n,p)=>n+p.passages.length+(p.avis?1:0)+(p.commentaire.trim()?1:0),0);}
+function testCompteur(){const c=document.getElementById("test-nb");if(c)c.textContent=testNb();}
+function testCSV(){
+  const P=TEST.profil,lignes=[["Date","Rôle","Situation","Formation des apprenants","Structure","Public choisi dans le site","Temps","Page","Adresse","Type","Passage","Avis sur la page","Commentaire"]];
+  const sit=P.situation==="scribe"?"Scribe pour des apprenants":"Seul·e";
+  Object.entries(TEST.pages).forEach(([r,p])=>{
+    const t=T[r]!==undefined?T[r]:((PARCOURS[r]||r.startsWith("construire-")||PORTES.some(x=>x.id===r)||["faire","reconnaitre","role","parcours"].includes(r))?3:0);
+    const base=d=>[d,P.role,sit,P.situation==="scribe"?(PUBLICS[P.formation]||""):"",P.structure,PUBLICS[p.public||PUBLIC]||"",t?("Temps "+t):"",p.titre||r,"#"+r];
+    p.passages.forEach(x=>lignes.push([...base(x.date||""),"Passage pas clair",x.texte,"",x.remarque||""]));
+    if(p.avis||p.commentaire.trim())lignes.push([...base(p.date||""),"Avis sur la page","",p.avis,p.commentaire.trim()]);
+  });
+  return "﻿"+lignes.map(l=>l.map(v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`).join(";")).join("\r\n");
+}
+function testTelecharger(){
+  const st=document.getElementById("test-statut");
+  if(!testNb()){st.textContent="Aucun retour pour l’instant.";return;}
+  const nom="retours-mille-facons-"+new Date().toISOString().slice(0,16).replace(/[T:]/g,"-")+".csv";
+  try{const url=URL.createObjectURL(new Blob([testCSV()],{type:"text/csv;charset=utf-8"}));const l=document.createElement("a");l.href=url;l.download=nom;document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+    st.textContent="Fichier téléchargé : "+nom+". Vous pouvez l’importer dans Grist ou l’ouvrir dans un tableur.";}
+  catch(e){st.textContent="Le téléchargement n’a pas marché.";}
+}
+function testPanneau(){
+  const z=document.getElementById("test-corps");if(!z)return;
+  const p=testPage(),P=TEST.profil,profilFait=!!P.role;
+  z.innerHTML=`
+   <details class="test-profil" ${profilFait?"":"open"}><summary>Votre profil${profilFait?` : ${esc(P.role)}`:""}</summary>
+     <label>Vous êtes
+       <select id="t-role"><option value="">Choisir…</option>${TEST_ROLES.map(r=>`<option ${P.role===r?"selected":""}>${r}</option>`).join("")}</select></label>
+     <fieldset><legend>Vous testez</legend>
+       <label><input type="radio" name="t-sit" value="seul" ${P.situation!=="scribe"?"checked":""}> seul·e</label>
+       <label><input type="radio" name="t-sit" value="scribe" ${P.situation==="scribe"?"checked":""}> comme scribe pour des apprenants</label></fieldset>
+     <label ${P.situation==="scribe"?"":"hidden"} id="t-form-l">Leur formation
+       <select id="t-form"><option value="">Choisir…</option>${Object.entries(PUBLICS).map(([k,l])=>`<option value="${k}" ${P.formation===k?"selected":""}>${l}</option>`).join("")}</select></label>
+     <label>Structure (facultatif)<input type="text" id="t-struct" value="${esc(P.structure)}" placeholder="Ex. : lycée agricole, MFR…"></label>
+   </details>
+   <h3>${esc(testTitre())}</h3>
+   <p class="t-q">Cette page est-elle claire ?</p>
+   <div class="t-avis" role="group" aria-label="Avis sur la page">${["Claire","Moyennement claire","Pas claire"].map(a=>`<button type="button" data-tavis="${a}" aria-pressed="${p.avis===a}">${a}</button>`).join("")}</div>
+   <button type="button" class="btn petit" id="t-signaler">${TEST_SELECTION?"Annuler la sélection":"Signaler un passage pas clair"}</button>
+   <p class="t-aide" ${TEST_SELECTION?"":"hidden"}>Touchez le passage dans la page. Échap pour annuler.</p>
+   <ol class="t-passages">${p.passages.map((x,i)=>`<li><q>${esc(x.texte.length>140?x.texte.slice(0,140)+"…":x.texte)}</q>
+     <input type="text" data-tremarque="${i}" value="${esc(x.remarque||"")}" placeholder="Qu’est-ce qui n’est pas clair ? (facultatif)" aria-label="Remarque sur ce passage">
+     <button type="button" class="t-suppr" data-tsuppr="${i}" aria-label="Retirer ce passage">Retirer</button></li>`).join("")}</ol>
+   <label class="t-com">Commentaire sur la page<textarea id="t-com" rows="3" placeholder="Ce qui manque, ce qui gêne, ce qui marche bien…">${esc(p.commentaire)}</textarea></label>
+   <div class="t-pied">
+     <p><strong id="test-nb">${testNb()}</strong> retour(s) au total, gardés dans ce navigateur.</p>
+     <button type="button" class="btn plein petit" id="t-dl">Télécharger mes retours (tableur)</button>
+     <button type="button" class="t-lien" id="t-effacer">Tout effacer</button>
+     <p class="statut" id="test-statut" aria-live="polite"></p>
+   </div>`;
+  document.querySelectorAll(".test-marque").forEach(el=>el.classList.remove("test-marque"));
+}
+function testCible(el){
+  if(!el||el.closest("#test-zone,.test-bandeau"))return null;
+  return el.closest("p,li,h1,h2,h3,h4,button,a,label,legend,summary,figure,td,th,blockquote,.carte,.fiche,.encart")||null;
+}
+function testInit(){
+  if(!MODE_TEST)return;
+  testCharger();
+  document.body.classList.add("mode-test");
+  document.body.insertAdjacentHTML("afterbegin",`<div class="test-bandeau" role="note"><strong>Mode test.</strong> Vos retours restent dans ce navigateur jusqu’à ce que vous les téléchargiez ou les effaciez.</div>`);
+  document.body.insertAdjacentHTML("beforeend",`<aside id="test-zone" aria-label="Donner mon avis">
+    <button type="button" id="test-ouvrir" aria-expanded="false" aria-controls="test-corps">Avis sur cette page</button>
+    <div id="test-corps" hidden></div></aside>`);
+  const corps=document.getElementById("test-corps"),ouvrir=document.getElementById("test-ouvrir");
+  const ouvrirPanneau=o=>{corps.hidden=!o;ouvrir.setAttribute("aria-expanded",o);ouvrir.textContent=o?"Fermer":"Avis sur cette page";if(o)testPanneau();};
+  ouvrir.addEventListener("click",()=>ouvrirPanneau(corps.hidden));
+  window.addEventListener("hashchange",()=>{TEST_SELECTION=false;document.body.classList.remove("test-selection");setTimeout(()=>{testPage().titre=testTitre();if(!corps.hidden)testPanneau();},0);});
+  corps.addEventListener("input",e=>{
+    const t=e.target,p=testPage();p.titre=testTitre();p.public=PUBLIC;
+    if(t.id==="t-com"){p.commentaire=t.value;p.date=new Date().toLocaleString("fr-FR");}
+    else if(t.id==="t-struct")TEST.profil.structure=t.value;
+    else if(t.dataset.tremarque!=null)p.passages[+t.dataset.tremarque].remarque=t.value;
+    testSauver();
+  });
+  corps.addEventListener("change",e=>{
+    const t=e.target;
+    if(t.id==="t-role")TEST.profil.role=t.value;
+    else if(t.name==="t-sit"){TEST.profil.situation=t.value;document.getElementById("t-form-l").hidden=t.value!=="scribe";}
+    else if(t.id==="t-form"){TEST.profil.formation=t.value;if(PUBLICS[t.value]){PUBLIC=t.value;afficher();majPiedPublic();}}
+    testSauver();
+  });
+  corps.addEventListener("click",e=>{
+    const p=testPage();p.titre=testTitre();p.public=PUBLIC;
+    const a=e.target.closest("[data-tavis]");if(a){p.avis=p.avis===a.dataset.tavis?"":a.dataset.tavis;p.date=new Date().toLocaleString("fr-FR");testSauver();testPanneau();return;}
+    const s=e.target.closest("[data-tsuppr]");if(s){p.passages.splice(+s.dataset.tsuppr,1);testSauver();testPanneau();return;}
+    if(e.target.closest("#t-signaler")){TEST_SELECTION=!TEST_SELECTION;document.body.classList.toggle("test-selection",TEST_SELECTION);testPanneau();return;}
+    if(e.target.closest("#t-dl")){testTelecharger();return;}
+    if(e.target.closest("#t-effacer")){
+      const b=e.target.closest("#t-effacer");
+      if(b.dataset.confirme){TEST.pages={};testSauver();testPanneau();document.getElementById("test-statut").textContent="Tous les retours ont été effacés.";}
+      else{b.dataset.confirme="1";b.textContent="Confirmer : tout effacer";}
+    }
+  });
+  document.addEventListener("mouseover",e=>{if(!TEST_SELECTION)return;document.querySelectorAll(".test-survol").forEach(x=>x.classList.remove("test-survol"));const c=testCible(e.target);if(c)c.classList.add("test-survol");});
+  window.addEventListener("click",e=>{
+    if(!TEST_SELECTION)return;const c=testCible(e.target);if(!c)return;
+    e.preventDefault();e.stopPropagation();
+    const texte=(c.innerText||c.textContent||"").replace(/\s+/g," ").trim().slice(0,500);
+    if(texte){const p=testPage();p.titre=testTitre();p.public=PUBLIC;p.passages.push({texte,remarque:"",date:new Date().toLocaleString("fr-FR")});testSauver();}
+    TEST_SELECTION=false;document.body.classList.remove("test-selection");
+    document.querySelectorAll(".test-survol").forEach(x=>x.classList.remove("test-survol"));
+    c.classList.add("test-marque");testPanneau();c.classList.add("test-marque");
+    const r=document.querySelectorAll("[data-tremarque]");if(r.length)r[r.length-1].focus();
+  },true);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&TEST_SELECTION){TEST_SELECTION=false;document.body.classList.remove("test-selection");document.querySelectorAll(".test-survol").forEach(x=>x.classList.remove("test-survol"));testPanneau();}});
+}
+testInit();
 </script>
 </body>
 </html>
