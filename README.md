@@ -18,3 +18,6 @@ Publication avec GitHub Pages : *Settings > Pages > Build and deployment > Deplo
 - **Soutenu par** : Reconnaître – Open Recognition Alliance
 - **Remerciements** : aux enseignants, formateurs et professionnels qui ont partagé leurs conseils
 - **Développement assisté par IA** : Claude (Anthropic)
+- **Licence** : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) (texte complet dans [`LICENSE`](LICENSE)). Vous pouvez reprendre et adapter ce site, en citant la source et en partageant sous la même licence. Exceptions : les polices de `mille-facons/polices/` (licence SIL OFL) et l'image du badge « Je suis écoresponsable », qui appartient à l'enseignement agricole.
+
+Pour citer : *Mille façons de reconnaître*, Philippe Petitqueux, acoustice.educagri.fr, CC BY-SA 4.0, https://misterppqx.github.io/openbadges/mille-facons/
