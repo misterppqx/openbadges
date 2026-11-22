@@ -179,6 +179,11 @@ textarea{width:100%;font:inherit;padding:.8rem;border-radius:var(--r-petit);bord
 .retour{margin:.8rem 0 0;padding-left:.8rem;border-left:4px solid var(--bocage)}
 .retour.non{border-color:var(--pomme)}
 .score{font-weight:700}
+.intention{margin-top:.9rem;padding-top:.8rem;border-top:1px dashed #BFD9D6}
+.intention .int{margin:0 0 .5rem}
+.intention .int span{font-weight:700;color:var(--bocage)}
+.jeu .options button[aria-pressed="true"]{border-color:var(--colza);background:var(--choix)}
+.retenir{margin:1rem 0 0;font-weight:700;color:var(--encre)}
 
 /* ---------- portes ---------- */
 .portes{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:.75rem}
@@ -708,13 +713,48 @@ const VIE = [
   {t:"Je le montre si je veux",d:"Pour son entrée en BTS, elle choisit de le montrer. À ses copains, elle n’en parle pas. C’est elle qui décide."}
 ];
 
+const OPTS_JEU=[["dire","Le dire, simplement"],["endos","Un endossement"],["badge","Un badge"]];
+const RETENIR_MERCI="Le même merci : gardé tel quel quand il suffit, rendu visible quand il peut servir.";
+const RETENIR_VALEUR="Ce que tu fais a de la valeur dans les deux cas. L’intention dit seulement s’il faut le montrer, et à qui.";
+const RETENIR_COLL="Un badge collectif ne profite pas qu’à ceux qui le reçoivent : il peut être utile à toute une communauté.";
+const RETENIR_SENS="La reconnaissance va dans tous les sens : un apprenant aussi peut rendre visible ce qu’un adulte lui a apporté.";
 const JEU = [
-  {s:"Ton copain te dit : « merci d’avoir pris ma place à l’astreinte ».",ok:["informel"],fb:"Le plus souvent, un merci se dit, et c’est très bien. S’il compte pour la suite, il peut aussi devenir un endossement sur l’un de tes badges."},
-  {s:"Depuis six mois, tu soignes les chèvres tous les week-ends et tu aimerais pouvoir le montrer à un futur employeur.",ok:["individuel"],fb:"Ça compte dans la durée, d’autres peuvent en témoigner : un badge individuel a du sens."},
-  {s:"Avec d’autres apprenants, tu as monté une friperie solidaire dans l’établissement.",ok:["collectif"],fb:"Un projet mené à plusieurs : un badge collectif. Chacun reçoit le même badge et y raconte sa propre contribution."},
-  {s:"Avec d’autres apprenants, tu t’occupes du rucher et vous échangez vos astuces, même avec des apiculteurs du coin.",ok:["pratique"],fb:"Une pratique partagée, qui grandit avec d’autres : un badge de pratique."},
-  {s:"Tu as été élu délégué de ta classe.",ok:["role"],fb:"Ce rôle existe dans l’établissement : c’est un badge de rôle, défini par l’institution."},
-  {s:"Tu veux dire à ton maître de stage qu’il t’a vraiment transmis son métier.",ok:["reconnaissance","informel"],fb:"Les deux marchent. Un merci sincère, dit en face, se suffit souvent à lui-même. Si tu veux que ça compte aussi pour lui, émets-lui un badge de reconnaissance."}
+  {s:"Ton copain te dit merci d’avoir pris sa place à l’astreinte du week-end.",r:RETENIR_MERCI,in:[
+    {i:"Ça te fait plaisir, c’est tout.",
+     dire:"Le merci a déjà fait son effet : vous vous sentez reconnus tous les deux. Il n’a besoin de rien d’autre.",
+     endos:"Tu peux, si tu veux en garder la trace. Mais pour l’instant, personne d’autre n’a besoin de le voir.",
+     badge:"C’est possible : un badge peut dire pourquoi, et dans quel contexte. Mais rien ne t’y oblige."},
+    {i:"Tu prépares ton dossier pour un BTS et tu veux montrer qu’on peut compter sur toi.",
+     dire:"Le merci reste entre vous deux. Ceux qui liront ton dossier ne le verront pas.",
+     endos:"Ton copain écrit pourquoi on peut compter sur toi. Son témoignage s’ajoute à ton badge, et ceux qui liront ton dossier pourront le voir.",
+     badge:"Un badge individuel, par exemple « On peut compter sur moi », que tu documentes. Le merci de ton copain peut en devenir le premier endossement."}]},
+  {s:"Depuis six mois, tu soignes les chèvres de l’exploitation de l’établissement chaque week-end.",r:RETENIR_VALEUR,in:[
+    {i:"Tu le fais parce que tu aimes ça.",
+     dire:"Les merci de la responsable de l’exploitation, le plaisir de le faire : c’est déjà une reconnaissance.",
+     endos:"La responsable peut écrire ce qu’elle a vu, si tu en as envie. Ça pourra servir plus tard, sans urgence.",
+     badge:"Tu peux ouvrir un badge pour toi et le compléter au fil du temps. Le documenter, c’est aussi prendre le temps de voir ce que tu as appris."},
+    {i:"Tu cherches une place en alternance dans un élevage caprin.",
+     dire:"Tu pourras le raconter en entretien. Mais sans trace, l’éleveur devra te croire sur parole.",
+     endos:"La responsable de l’exploitation témoigne de ton sérieux. Un éleveur la lira plus volontiers qu’une ligne de CV.",
+     badge:"Un badge individuel, avec des photos, ce que tu fais chaque week-end et les endossements de la responsable : l’éleveur voit ton expérience."}]},
+  {s:"Avec d’autres apprenants, vous avez monté une friperie solidaire dans l’établissement.",r:RETENIR_COLL,in:[
+    {i:"Vous voulez fêter la fin du projet entre vous.",
+     dire:"Un moment ensemble, des merci, des photos : le projet est reconnu par ceux qui l’ont vécu.",
+     endos:"Chacun peut témoigner de ce que l’autre a apporté. C’est une façon de se dire merci qui reste.",
+     badge:"Un badge collectif du projet, proposé à chacun : tout le monde reçoit le même, et raconte sa propre contribution."},
+    {i:"Vous voulez que les apprenants de l’an prochain reprennent la friperie.",
+     dire:"Les nouveaux en entendront parler, mais ce que vous avez appris risque de se perdre.",
+     endos:"Les clients et les adultes de l’établissement témoignent. Ça montre aux suivants que le projet compte.",
+     badge:"Un badge collectif que les apprenants de l’an prochain pourront recevoir à leur tour : la friperie continue, et chacun y ajoute sa part."}]},
+  {s:"Tu veux dire à ton maître de stage qu’il t’a vraiment transmis son métier.",r:RETENIR_SENS,in:[
+    {i:"C’est ton dernier jour de stage, tu veux simplement le remercier.",
+     dire:"Un merci sincère, dit en face : il s’en souviendra. Il peut se suffire à lui-même.",
+     endos:"S’il a déjà un badge de maître de stage, ton merci peut en devenir un endossement.",
+     badge:"Tu peux lui émettre un badge de reconnaissance qui dit ce qu’il t’a transmis. C’est lui qui choisira de le montrer, ou non."},
+    {i:"Il accueille des stagiaires depuis vingt ans, et personne ne l’a jamais reconnu pour ça.",
+     dire:"Il sera touché. Mais ce rôle de transmission restera invisible pour les autres.",
+     endos:"S’il a un badge de maître de stage, ton témoignage s’ajoute à ceux des autres stagiaires : vingt ans de transmission deviennent visibles.",
+     badge:"Un badge de reconnaissance émis par toi, que d’autres anciens stagiaires pourront endosser. Il peut le montrer, s’il le souhaite."}]}
 ];
 
 const PHRASE_RECO="Toute reconnaissance n’a pas besoin d’un badge : un sourire, un merci peuvent se suffire à eux-mêmes. Et quand tu veux la rendre visible, le badge peut la porter, par exemple sous forme d’endossement.";
@@ -929,7 +969,7 @@ boussole(){
       </fieldset>`).join("")}
     </form>
     <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux cinq questions pour voir où tu en es.</p></div>
-    ${suite("jeu","Devine la famille","parcours","Passer à l’action")}
+    ${suite("jeu","Une situation, deux intentions","parcours","Passer à l’action")}
   </div>`;
 },
 "badge-cest-quoi"(){
@@ -989,15 +1029,17 @@ familles(){
   </div>`;
 },
 jeu(){
-  const opts=[["informel","Le dire, simplement",""],...Object.entries(FAMILLES).map(([k,f])=>[k,f.nom,f.c])];
+  const J=jeuP();
   return `<div class="wrap vue">
-    <p class="temps">Temps 2 sur 3, le jeu</p>
-    <h2>Devine la famille.</h2>
-    <p class="intro">Pour chaque situation : est-ce qu’on peut simplement le dire, ou quel badge pourrait le porter ? Parfois, plusieurs réponses sont possibles.</p>
-    <ol class="jeu">${JEU.map((q,i)=>`
+    <p class="temps">Temps 2 sur 3, s’exercer</p>
+    <h2>Une situation, deux intentions.</h2>
+    <p class="intro">Chaque situation revient deux fois, avec une raison différente. Que choisirais-tu ? Il n’y a pas de bonne réponse : regarde ce que ton choix produit, et pour qui.</p>
+    <ol class="jeu">${J.map((q,i)=>`
       <li data-q="${i}"><p class="sit">${q.s}</p>
-        <div class="options" role="group" aria-label="Choisis une réponse">${opts.map(o=>`<button type="button" data-r="${o[0]}" class="${o[0]==="informel"?"inf":""}"><i ${o[2]?`style="background:${o[2]}"`:""}></i>${o[1]}</button>`).join("")}</div>
-        <p class="retour" hidden aria-live="polite"></p>
+        ${q.in.map((n,k)=>`<div class="intention" data-k="${k}"><p class="int"><span>${k?"Ou bien :":"Si…"}</span> ${n.i}</p>
+          <div class="options" role="group" aria-label="Que choisirais-tu ?">${OPTS_JEU.map(o=>`<button type="button" data-r="${o[0]}" aria-pressed="false" class="${o[0]==="dire"?"inf":""}">${o[0]==="dire"?"<i></i>":""}${o[1]}</button>`).join("")}</div>
+          <p class="retour" hidden aria-live="polite"></p></div>`).join("")}
+        <p class="retenir" hidden>${q.r}</p>
       </li>`).join("")}
     </ol>
     <p class="score" id="score" aria-live="polite"></p>
@@ -1376,7 +1418,7 @@ VUES["ecrire-endossement"]=()=>`<div class="wrap vue">
   <p class="intro">Un endossement, c’est un témoignage ajouté au badge de quelqu’un d’autre. C’est une des formes de reconnaissance les plus fortes : quelqu’un prend le temps de dire ce qu’il a vu, et signe. Un peu comme un commentaire sous une publication, mais précis, et sur un badge qui t’appartient. Pour un apprenant, le premier qui compte est celui du professionnel.</p>
   <div class="guide-seul">${guideEndos().replace('<h2 id="titre-guide">Écrire un endossement qui parle</h2>','<h2 id="titre-guide" class="visually-hidden">Écrire un endossement qui parle</h2>')}</div>
   <div class="actions"><a class="btn plein" href="#construire-reco-pair">Écrire un endossement pour un camarade</a><a class="btn" href="#construire-demander">Demander un endossement</a></div>
-  ${suite("vie-badge","La vie d’un badge","jeu","Un petit jeu pour finir")}
+  ${suite("vie-badge","La vie d’un badge","jeu","S’exercer")}
 </div>`;
 
 VUES.role=()=>`<div class="wrap vue">
@@ -1901,7 +1943,7 @@ function brancherConstruire(pid){
 /* ---------- progression dans chaque temps ---------- */
 const ETAPES={
   1:{nom:"Reconnaître",pages:[["mille-facons","Les mille façons"],["ce-qui-est-reconnu","Ce qui est reconnu"],["qui-reconnait","Qui reconnaît"],["egales","Égales, pas mesurables"],["etre-reconnu","Trois façons"],["ce-que-ca-fait","Ce que ça fait"],["acteur","Acteur"]]},
-  2:{nom:"Rendre visible",pages:[["formes","Les formes"],["badge-numerique","Le badge numérique"],["badge-cest-quoi","Un badge de plus près"],["familles","Les familles"],["vie-badge","La vie d’un badge"],["ecrire-endossement","L’endossement"],["jeu","Le jeu"],["boussole","La boussole"]]},
+  2:{nom:"Rendre visible",pages:[["formes","Les formes"],["badge-numerique","Le badge numérique"],["badge-cest-quoi","Un badge de plus près"],["familles","Les familles"],["vie-badge","La vie d’un badge"],["ecrire-endossement","L’endossement"],["jeu","S’exercer"],["boussole","La boussole"]]},
   3:{nom:"Agir",pages:[["parcours","Choisir une porte"],["__parcours","Suivre le parcours"],["__atelier","Construire"]]}
 };
 function etapeDe(v){
@@ -1930,6 +1972,44 @@ let PUBLIC="bac";
 const PUBLICS={college:"4e, 3e ou 2nde pro",bac:"1re ou Tle, Bac pro ou STAV",bts:"BTS"};
 const EX={
  college:{
+  jeu:[
+   {s:"Un camarade te dit merci parce que tu l’as aidé à finir son exposé.",r:RETENIR_MERCI,in:[
+    {i:"Ça te fait plaisir, c’est tout.",
+     dire:"Le merci a fait son effet. Pas besoin de plus.",
+     endos:"Tu peux, pour en garder un souvenir. Mais personne d’autre n’a besoin de le voir.",
+     badge:"C’est possible, mais rien ne t’y oblige."},
+    {i:"Tu veux montrer, pour ton stage, que tu sais aider les autres.",
+     dire:"Le merci reste entre vous. La personne qui t’accueillera en stage ne le saura pas.",
+     endos:"Ton camarade écrit en quelques phrases comment tu l’as aidé. On peut lire son témoignage sur ton badge.",
+     badge:"Un badge « J’aide les autres », que tu complètes avec ce que tu fais. D’autres peuvent témoigner dessus."}]},
+   {s:"Chaque semaine, tu nourris les poules de la micro-ferme de l’établissement.",r:RETENIR_VALEUR,in:[
+    {i:"Tu le fais parce que tu aimes les animaux.",
+     dire:"Le plaisir de le faire, le merci de l’adulte qui s’occupe de la ferme : c’est déjà une reconnaissance.",
+     endos:"L’adulte peut écrire ce qu’il a vu, si tu en as envie. Ça pourra te servir plus tard.",
+     badge:"Tu peux ouvrir un badge pour toi, et ajouter des photos au fil des semaines. Tu verras tout ce que tu as appris."},
+    {i:"Tu cherches un stage dans un élevage.",
+     dire:"Tu pourras le raconter. Mais l’éleveur devra te croire sur parole.",
+     endos:"L’adulte de la micro-ferme témoigne que tu viens chaque semaine. L’éleveur peut le lire.",
+     badge:"Un badge avec tes photos, ce que tu fais et le témoignage de l’adulte : l’éleveur voit que tu as déjà de l’expérience."}]},
+   {s:"Avec ta classe, vous avez préparé un repas pour les parents avec les produits de la ferme.",r:RETENIR_COLL,in:[
+    {i:"Vous voulez fêter ça entre vous.",
+     dire:"Un moment ensemble, des bravo, des photos : c’est déjà reconnu par tous ceux qui étaient là.",
+     endos:"Chacun peut écrire ce qu’un autre a apporté. C’est un merci qui reste.",
+     badge:"Un badge du projet, proposé à chacun : tout le monde a le même, et raconte ce qu’il a fait."},
+    {i:"Vous voulez que les classes de l’an prochain refassent le repas.",
+     dire:"Ils en entendront parler, mais ils ne sauront pas comment vous avez fait.",
+     endos:"Les parents et les adultes de l’établissement témoignent. Ça donne envie aux suivants.",
+     badge:"Un badge du projet que les élèves de l’an prochain pourront recevoir à leur tour, en ajoutant leur part."}]},
+   {s:"Tu veux dire merci à l’agricultrice qui t’a accueilli en stage.",r:RETENIR_SENS,in:[
+    {i:"C’est ton dernier jour, tu veux simplement la remercier.",
+     dire:"Un merci sincère, dit en face : elle s’en souviendra. Ça suffit souvent.",
+     endos:"Si elle a un badge pour l’accueil des stagiaires, ton merci peut s’y ajouter.",
+     badge:"Tu peux lui offrir un badge qui dit ce qu’elle t’a appris. C’est elle qui choisira de le montrer."},
+    {i:"Elle accueille des jeunes chaque année, et personne ne le sait.",
+     dire:"Elle sera touchée. Mais les autres ne sauront rien de tout ce qu’elle fait.",
+     endos:"Si elle a un badge pour l’accueil des stagiaires, ton témoignage s’ajoute à ceux des autres jeunes.",
+     badge:"Un badge que tu lui offres, et que d’autres jeunes pourront confirmer. Elle peut le montrer, si elle le souhaite."}]}
+  ],
   galerie:[
    {f:"Remplacer",s:"Le copain qui nourrit les poules de la micro-ferme à ta place quand tu es absent."},
    {f:"Demander ton avis",s:"La prof qui te demande ce que tu as pensé de la visite de l’exploitation."},
@@ -1963,6 +2043,44 @@ const EX={
   regards:{sit:"Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.",note:"son dossier d’alternance obtient 14 sur 20.",certif:"sa période en entreprise compte pour l’obtention de son diplôme.",reco:"Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente et dit à ses voisins qu’il est fiable. Son formateur cite son travail en exemple, et Lucas lui-même sait ce qu’il a appris."}
  },
  bts:{
+  jeu:[
+   {s:"Un camarade de promo te remercie de l’avoir aidé à préparer son oral.",r:RETENIR_MERCI,in:[
+    {i:"Ça te fait plaisir, c’est tout.",
+     dire:"Le merci a déjà fait son effet. Il n’a besoin de rien d’autre.",
+     endos:"Tu peux, si tu veux en garder la trace. Mais personne d’autre n’a besoin de le voir pour l’instant.",
+     badge:"C’est possible : un badge peut dire pourquoi, et dans quel contexte. Mais rien ne t’y oblige."},
+    {i:"Tu postules pour une licence pro et tu veux montrer que tu sais travailler en équipe.",
+     dire:"Le merci reste entre vous deux. Le jury de sélection ne le verra pas.",
+     endos:"Ton camarade décrit comment tu l’as aidé. Son témoignage s’ajoute à ton badge, visible par le jury si tu le partages.",
+     badge:"Un badge individuel sur le travail en équipe, que tu documentes. Le merci de ton camarade peut en devenir le premier endossement."}]},
+   {s:"Pendant ton stage, tu as mis en place le suivi des données de traite de l’élevage.",r:RETENIR_VALEUR,in:[
+    {i:"Tu l’as fait parce que c’était utile à l’élevage.",
+     dire:"L’éleveur s’en sert tous les jours et te l’a dit : c’est déjà une reconnaissance.",
+     endos:"Ton maître de stage peut écrire ce que ça a changé pour lui, si tu en as envie. Ça servira plus tard.",
+     badge:"Tu peux ouvrir un badge pour toi et le documenter. Mettre par écrit ta démarche, c’est aussi prendre du recul sur ce que tu as appris."},
+    {i:"Tu postules dans une coopérative qui cherche quelqu’un pour accompagner les éleveurs sur le numérique.",
+     dire:"Tu pourras l’expliquer en entretien. Mais sans trace, le recruteur devra te croire sur parole.",
+     endos:"Ton maître de stage témoigne de ce que l’outil a changé sur l’élevage. Un recruteur accorde du poids à ce regard de professionnel.",
+     badge:"Un badge individuel avec ta démarche, le tableau de suivi et les endossements de l’éleveur : le recruteur voit ce que tu sais faire, en situation réelle."}]},
+   {s:"Avec ta promo, vous avez mené un projet pour une CUMA du territoire.",r:RETENIR_COLL,in:[
+    {i:"Vous voulez clore le projet ensemble.",
+     dire:"Une restitution, des merci des adhérents : le projet est reconnu par ceux qui l’ont vécu.",
+     endos:"Chacun peut témoigner de ce que l’autre a apporté. C’est une façon de se dire merci qui reste.",
+     badge:"Un badge collectif du projet, proposé à chacun : tout le monde reçoit le même, et documente sa propre contribution."},
+    {i:"Vous voulez que la CUMA et les promos suivantes puissent s’appuyer sur votre travail.",
+     dire:"Le travail sera connu, mais il risque de rester dans un dossier que personne n’ouvrira.",
+     endos:"Le président de la CUMA et les adhérents témoignent. Ça donne du poids au projet pour ceux qui le reprendront.",
+     badge:"Un badge collectif que les promos suivantes pourront recevoir à leur tour : le projet continue, et chacun y ajoute sa part."}]},
+   {s:"Tu veux dire à ta tutrice en entreprise qu’elle t’a vraiment transmis son métier.",r:RETENIR_SENS,in:[
+    {i:"C’est la fin de ton alternance, tu veux simplement la remercier.",
+     dire:"Un merci sincère, dit en face : elle s’en souviendra. Il peut se suffire à lui-même.",
+     endos:"Si elle a déjà un badge de tutrice, ton merci peut en devenir un endossement.",
+     badge:"Tu peux lui émettre un badge de reconnaissance qui dit ce qu’elle t’a transmis. C’est elle qui choisira de le montrer, ou non."},
+    {i:"Elle forme des alternants depuis vingt ans, et personne ne l’a jamais reconnue pour ça.",
+     dire:"Elle sera touchée. Mais ce rôle de transmission restera invisible pour les autres.",
+     endos:"Si elle a un badge de tutrice, ton témoignage s’ajoute à ceux des autres alternants : vingt ans de transmission deviennent visibles.",
+     badge:"Un badge de reconnaissance émis par toi, que d’autres anciens alternants pourront endosser. Elle peut le montrer, si elle le souhaite."}]}
+  ],
   galerie:[
    {f:"Remplacer",s:"La camarade de promo qui reprend ta partie du dossier quand tu es malade."},
    {f:"Demander ton avis",s:"Ton maître de stage qui te demande ce que tu penses d’un nouveau matériel."},
@@ -1992,6 +2110,7 @@ const EX={
  }
 };
 function ex(k){const v=EX[PUBLIC]&&EX[PUBLIC][k];return v!=null?v:null;}
+function jeuP(){return ex("jeu")||JEU;}
 function galerieP(){return ex("galerie")||GALERIE;}
 function quoiP(){const q=ex("quoi");return q?QUOI.map((x,i)=>({t:x.t,ex:q[i]})):QUOI;}
 function ressentisP(){return ex("ressentis")||RESSENTIS;}
@@ -2057,18 +2176,19 @@ function brancher(v){
     choisir(0);
   }
   if(v==="jeu"){
-    const faits=new Set();let bons=0;
+    const J=jeuP();
     document.querySelectorAll(".jeu > li").forEach(li=>{
-      const q=JEU[+li.dataset.q],ret=li.querySelector(".retour");
-      li.querySelectorAll(".options button").forEach(b=>b.addEventListener("click",()=>{
-        const juste=q.ok.includes(b.dataset.r);
-        li.querySelectorAll(".options button").forEach(x=>x.classList.remove("juste","faux"));
-        b.classList.add(juste?"juste":"faux");
-        ret.hidden=false;ret.className="retour"+(juste?"":" non");
-        ret.textContent=(juste?"Oui. ":"Pas tout à fait. ")+q.fb;
-        if(!faits.has(li.dataset.q)){faits.add(li.dataset.q);if(juste)bons++;}
-        if(faits.size===JEU.length){document.getElementById("score").textContent=`Du premier coup : ${bons} sur ${JEU.length}. Ce qui compte, c’est d’avoir vu qu’il existe plein de façons de reconnaître.`;}
-      }));
+      const q=J[+li.dataset.q];
+      li.querySelectorAll(".intention").forEach(d=>{
+        const n=q.in[+d.dataset.k],ret=d.querySelector(".retour");
+        d.querySelectorAll(".options button").forEach(b=>b.addEventListener("click",()=>{
+          d.querySelectorAll(".options button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+          ret.hidden=false;ret.textContent=n[b.dataset.r];
+          d.dataset.fait="1";
+          if(li.querySelectorAll(".intention[data-fait]").length===q.in.length)li.querySelector(".retenir").hidden=false;
+          if(document.querySelectorAll(".jeu .retenir:not([hidden])").length===J.length)document.getElementById("score").textContent="La situation ne suffit pas à choisir : ce qui compte, c’est pour qui, et pour quoi faire. C’est la question de la boussole, maintenant pour toi.";
+        }));
+      });
     });
   }
   if(PARCOURS[v]){
