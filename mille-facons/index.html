@@ -574,6 +574,12 @@ textarea:focus,.ch input[type=text]:focus{outline:3px solid var(--colza);outline
 .choix-public.petit button{font-size:.85rem;padding:.2rem .7rem}
 .liens-publics code{font-size:.9em}
 
+.chemin-reco{list-style:none;padding:0;margin:1rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;counter-reset:cr}
+.chemin-reco li{background:var(--teinte);border-radius:14px;padding:1rem 1.1rem;position:relative}
+.cr-forme{display:block;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.15rem;color:var(--encre);margin-bottom:.3rem}
+.chemin-reco li:not(:last-child)::after{content:"";position:absolute;right:-.62rem;top:50%;width:.5rem;height:.5rem;border:solid var(--bocage);border-width:0 3px 3px 0;transform:translateY(-50%) rotate(-45deg)}
+@media (max-width:860px){.chemin-reco{grid-template-columns:1fr}.chemin-reco li::after{display:none}}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -631,7 +637,7 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 </section>
 
 <footer>
-  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. Les badges, eux, sont pour tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<div id="pied-public"></div><nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#animer">Animer un atelier</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
+  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. La reconnaissance, elle, concerne tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<div id="pied-public"></div><nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#animer">Animer un atelier</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
 </footer>
 
 <script>
@@ -683,10 +689,10 @@ const CARTES = [
 ];
 
 const VIE = [
-  {t:"Je le crée",d:"Inès revient de trois semaines dans une ferme bio au Danemark avec Erasmus. Elle crée son badge : « J’ai travaillé dans une ferme bio à l’étranger, en anglais. »"},
-  {t:"J’ajoute des preuves",d:"Son carnet de bord, des photos des serres, une courte vidéo où elle présente la ferme en anglais."},
-  {t:"On l’endosse",d:"L’agricultrice danoise écrit trois lignes. L’enseignante qui accompagnait le groupe aussi. Une camarade raconte comment Inès a géré la récolte un jour de pluie."},
-  {t:"Il évolue",d:"Un an plus tard, Inès fait un stage en maraîchage bio en France. Elle l’ajoute : son badge raconte maintenant une pratique, pas seulement un voyage."},
+  {t:"Avant : on me propose le badge",d:"Avant son départ pour trois semaines dans une ferme bio au Danemark avec Erasmus, l’équipe propose à Inès le badge « Je m’engage dans une mobilité ». Il est encore presque vide, mais il dit déjà : je me lance."},
+  {t:"Pendant : j’ajoute mes traces",d:"Au fil des jours, Inès y dépose son carnet de bord, des photos des serres, une courte vidéo où elle présente la ferme en anglais."},
+  {t:"Après : on témoigne",d:"L’agricultrice danoise écrit trois lignes. L’enseignante qui accompagnait le groupe aussi. Une camarade raconte comment Inès a géré la récolte un jour de pluie."},
+  {t:"Plus tard : il évolue",d:"Un an après, Inès fait un stage en maraîchage bio en France. Elle l’ajoute : son badge raconte maintenant une pratique, pas seulement un voyage."},
   {t:"Je le montre si je veux",d:"Pour son entrée en BTS, elle choisit de le montrer. À ses copains, elle n’en parle pas. C’est elle qui décide."}
 ];
 
@@ -946,7 +952,7 @@ familles(){
   return `<div class="wrap vue">
     <p class="temps">Temps 2 sur 3, la vie d’un badge</p>
     <h2>Un badge, ça vit.</h2>
-    <p class="intro">Suis le badge d’Inès, de sa création à aujourd’hui. Clique sur chaque étape.</p>
+    <p class="intro">Un badge n’arrive pas seulement à la fin. Il peut être proposé dès le départ, se remplir en route et continuer à vivre après. Suis le badge d’Inès, avant, pendant et après sa mobilité. Clique sur chaque étape.</p>
     <div class="vie">
       <div class="vie-visuel">
         <svg viewBox="0 0 200 200" role="img" aria-labelledby="vie-titre"><title id="vie-titre">Le badge d’Inès à l’étape choisie</title>
@@ -998,7 +1004,7 @@ faire(){
     <p class="fil"><a href="#parcours">Les parcours</a> › Faire reconnaître ce que je fais</p>
     <h2>Dans quel cadre ?</h2>
     <p class="intro">Ce que tu fais compte partout, pas seulement en cours.</p>
-    <ul class="sous-choix">${Object.entries(CADRES).map(([k,c])=>`<li><a class="coins" href="#faire-${k}"><strong>${c.t}</strong><span>${c.s}</span></a></li>`).join("")}<li><a class="coins" href="#recu-projet"><strong>J’ai reçu un badge de projet</strong><span>Raconte ta part : ta contribution, tes preuves, tes témoins.</span></a></li></ul>
+    <ul class="sous-choix">${Object.entries(CADRES).map(([k,c])=>`<li><a class="coins" href="#faire-${k}"><strong>${c.t}</strong><span>${c.s}</span></a></li>`).join("")}<li><a class="coins" href="#faire-debut"><strong>Je commence quelque chose</strong><span>Un stage, un projet, un engagement : ouvre ton badge dès le départ.</span></a></li><li><a class="coins" href="#recu-projet"><strong>J’ai reçu un badge de projet</strong><span>Raconte ta part : ta contribution, tes preuves, tes témoins.</span></a></li></ul>
   </div>`;
 },
 reconnaitre(){
@@ -1326,20 +1332,25 @@ Object.assign(T,{"etre-reconnu":1,"ecrire-endossement":2,role:3,adultes:0,"a-pro
 
 VUES["etre-reconnu"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
-  <h2>Noté, certifié, reconnu : ce n’est pas la même chose.</h2>
-  <p class="intro">Les trois existent dans ta vie d’apprenant, en formation, en stage ou en apprentissage. Ils ne s’opposent pas, mais ils ne disent pas la même chose de toi. Ce site parle du troisième.</p>
+  <h2>Il y a trois grandes façons de reconnaître.</h2>
+  <p class="intro">Spontanée, organisée, officielle : ce sont trois façons de reconnaître, et elles comptent toutes.</p>
   <div class="trio">
-    <article class="trio-col"><h3>Être noté</h3><dl><dt>Qui décide ?</dt><dd>Un enseignant, un jury.</dd><dt>Sur quoi ?</dt><dd>Une épreuve, un barème.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un chiffre.</dd></dl></article>
-    <article class="trio-col"><h3>Être certifié</h3><dl><dt>Qui décide ?</dt><dd>Un organisme habilité, selon un référentiel.</dd><dt>Sur quoi ?</dt><dd>Des critères fixés à l’avance, les mêmes pour tous.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un diplôme, un certificat, des crédits.</dd></dl></article>
-    <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir : d’abord les professionnels, puis tes enseignants et formateurs, tes pairs.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : du professionnel vers toi, de toi vers ton maître de stage, entre apprenants, entre adultes aussi.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, une confiance, un souvenir qui compte.</dd></dl></article>
+    <article class="trio-col"><h3>Spontanée</h3><dl><dt>Par exemple</dt><dd>Un merci, un sourire, une confiance accordée.</dd><dt>Qui reconnaît ?</dt><dd>N’importe qui, sur le moment.</dd><dt>Ce qui compte</dt><dd>La relation.</dd></dl></article>
+    <article class="trio-col"><h3>Organisée</h3><dl><dt>Par exemple</dt><dd>Un témoignage écrit, une attestation de stage, des félicitations au conseil de classe, le trophée du club.</dd><dt>Qui reconnaît ?</dt><dd>Un groupe, un établissement, une entreprise, avec des règles qu’ils se sont données.</dd><dt>Ce qui compte</dt><dd>Ce que ce groupe trouve important.</dd></dl></article>
+    <article class="trio-col"><h3>Officielle</h3><dl><dt>Par exemple</dt><dd>Un diplôme, un certificat.</dd><dt>Qui reconnaît ?</dt><dd>Une autorité reconnue, selon des règles nationales.</dd><dt>Ce qui compte</dt><dd>Des critères fixés à l’avance, les mêmes pour tous.</dd></dl></article>
   </div>
-  <h3 class="sous-titre">Une même situation, trois regards</h3>
-  <p class="prose">${ex("regards").sit}</p>
-  <ul class="trois-regards">
-    <li><strong>Noté :</strong> ${ex("regards").note}</li>
-    <li><strong>Certifié :</strong> ${ex("regards").certif}</li>
-    <li><strong>Reconnu :</strong> ${ex("regards").reco}</li>
-  </ul>
+  <h3 class="sous-titre">Elles ne s’opposent pas : elles se suivent</h3>
+  <p class="prose">${ex("chemin").sit}</p>
+  <ol class="chemin-reco">
+    <li><span class="cr-forme">Spontanée</span>${ex("chemin").spontane}</li>
+    <li><span class="cr-forme">Organisée</span>${ex("chemin").organise}</li>
+    <li><span class="cr-forme">Officielle</span>${ex("chemin").officiel}</li>
+  </ol>
+  <p class="prose">Le chemin peut aussi aller dans l’autre sens : après un diplôme, ce sont les mercis et les témoignages des collègues qui disent comment on l’exerce.</p>
+  <div class="mesure">
+    <div class="reco"><h3>Tout ne doit pas être officiel pour compter</h3><p>Un merci sincère ou un témoignage précis ont de la valeur, même s’ils ne mènent à aucun diplôme.</p></div>
+    <div><h3>Et la note ?</h3><p>Elle mesure une épreuve, à un moment donné. Elle peut compter pour un diplôme, mais une note ne dit pas tout de toi.</p></div>
+  </div>
   ${suite("egales","Égales, mais pas mesurables","ce-que-ca-fait","Ce que la reconnaissance fait")}
 </div>`;
 
@@ -1365,7 +1376,7 @@ VUES.adultes=()=>`<div class="wrap vue">
   <h2>La reconnaissance est une relation. Vous en faites partie.</h2>
   <p class="intro">Maîtres de stage et d’apprentissage, enseignants, formatrices et formateurs, équipes de vie scolaire, agents de l’exploitation, partenaires : cette page est pour vous. Le reste du site s’adresse aux apprenants, en les tutoyant.</p>
   <div class="adultes">
-    <section><h3>Avant le badge, la reconnaissance</h3><p>Le site commence par un temps de réflexion, sans badge. Un apprenant est bien plus que ses notes : on reconnaît ce qu’il a appris, ce qu’il sait faire, ses qualités, ses engagements, son chemin. La reconnaissance vient de lui-même, des autres, des organisations, de la société, et d’abord de ce qui est dû à tout être humain. Toutes ces reconnaissances ont de la valeur, sans se mesurer sur la même échelle : c’est ce qui les distingue de la note et de la certification. Chacun en est acteur. Le badge n’arrive qu’ensuite, quand une reconnaissance a besoin d’être rendue visible, de circuler et d’évoluer. <a href="#mille-facons">Voir ce temps de réflexion</a>.</p></section>
+    <section><h3>Avant le badge, la reconnaissance</h3><p>Le site commence par un temps de réflexion, sans badge. Un apprenant est bien plus que ses notes : on reconnaît ce qu’il a appris, ce qu’il sait faire, ses qualités, ses engagements, son chemin. La reconnaissance vient de lui-même, des autres, des organisations, de la société, et d’abord de ce qui est dû à tout être humain. Toutes ces reconnaissances ont de la valeur, sans se mesurer sur la même échelle. Elles peuvent être spontanées, organisées ou officielles (la certification) : elles se suivent sans s’opposer. Chacun en est acteur. Le badge n’arrive qu’ensuite, quand une reconnaissance a besoin d’être rendue visible, de circuler et d’évoluer. <a href="#mille-facons">Voir ce temps de réflexion</a>.</p></section>
     <section><h3>Maîtres de stage et d’apprentissage : votre regard compte en premier</h3><p>Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Quelques lignes de votre part sur son badge pèsent plus qu’une appréciation générale. Votre rôle mérite lui aussi d’être reconnu : par les apprenants que vous accueillez, et par l’établissement qui vous les confie.</p></section>
     <section><h3>Trois regards sur un même badge</h3><p>Le professionnel voit le métier. L’enseignant ou le formateur voit le lien avec la formation. L’apprenant dit ce qu’il fait. Le badge rend visible le regard de chacun, et la relation va dans les deux sens. Deux exemples sont sur la page <a href="#ecrire-endossement">« Endosser, c’est reconnaître par écrit »</a>.</p></section>
     <section><h3>Répondre à une demande d’endossement</h3><p>Un apprenant peut vous demander de témoigner sur son badge. Quelques lignes suffisent, si elles disent :</p>
@@ -1421,6 +1432,20 @@ PARCOURS["recu-projet"]={porte:"faire",t:"J’ai reçu un badge de projet",
     {t:"Montre-le si tu veux",d:"À un maître de stage, une école, un employeur : ton badge raconte ta part d’un projet collectif."}
   ]};
 TYPE_BUILD["recu-projet"]="contribution";
+PARCOURS["faire-debut"]={porte:"faire",t:"Je commence quelque chose",
+  intro:"Un stage, une période en entreprise, un projet, un engagement qui démarre ? Tu n’as pas besoin d’attendre la fin : ouvre ton badge dès le départ. Il t’accompagne, et il se remplit en route.",
+  fam:["individuel","pratique"],famNote:"Un badge de projet peut aussi être proposé à toute l’équipe dès le lancement.",
+  ex:["Lucas ouvre son badge le premier jour de son apprentissage sur l’élevage.","Une classe ouvre un badge de projet au lancement de son chef-d’œuvre : chacun le documentera.","Clara ouvre un badge en démarrant son projet technologique."],
+  inf:["Le « bienvenue » de l’équipe le premier jour.","La confiance qu’on t’accorde dès le départ."],
+  et:[
+    {t:"Ouvre ton badge dès le départ",d:"Donne-lui un nom qui dit ce que tu commences : « Je m’engage dans mon premier stage en élevage »."},
+    {t:"Dis ce que tu espères",d:"Ce que tu veux apprendre, ce que tu veux apporter. Tu pourras comparer à la fin."},
+    {t:"Documente en route",d:"Une trace de temps en temps : une photo, quelques lignes, un document. C’est plus facile au fil de l’eau qu’à la fin."},
+    {t:"Demande les témoignages à la fin",d:"Ton maître de stage d’abord : son regard de professionnel compte le plus.",lien:"demander-maitre"},
+    {t:"Fais-le évoluer",d:"Ton badge peut changer de nom en route, et continuer à vivre après."}
+  ]};
+TYPE_BUILD["faire-debut"]="individuel";
+
 
 BUILD["demande-ms"]={titre:"Demander l’endossement de mon maître de stage",intro:"Le regard de ton maître de stage ou d’apprentissage est celui qui compte le plus pour ton parcours. Prépare ta demande : le message se construit à droite.",
   btn:"Préparer ma demande",guide:true,quoi:"ta demande",
@@ -1566,7 +1591,7 @@ VUES.egales=()=>`<div class="wrap vue">
     <div><h3>Quand on mesure</h3><p>On compare sur une même échelle : une note, un barème, un classement. C’est utile pour certifier, sélectionner, s’assurer d’un niveau. Mais la mesure crée une hiérarchie : 15 vaut plus que 12.</p></div>
     <div class="reco"><h3>Quand on reconnaît</h3><p>On ne classe pas. Un sourire et un diplôme disent chacun quelque chose de vrai, à un moment, pour quelqu’un. Ils ont tous les deux de la valeur, mais pas la même, et pas sur la même échelle.</p></div>
   </div>
-  ${suite("qui-reconnait","Qui reconnaît ?","etre-reconnu","Noté, certifié, reconnu")}
+  ${suite("qui-reconnait","Qui reconnaît ?","etre-reconnu","Trois façons de reconnaître")}
 </div>`;
 
 VUES["ce-que-ca-fait"]=()=>`<div class="wrap vue">
@@ -1575,17 +1600,17 @@ VUES["ce-que-ca-fait"]=()=>`<div class="wrap vue">
   <p class="intro">Pas besoin de grands discours : chacun sait ce qu’il ressent quand ce qu’il fait est vu, et quand il ne l’est pas.</p>
   <ul class="ressentis">${ressentisP().map(r=>`<li><strong>${r.mot}</strong><blockquote>« ${r.txt} »</blockquote><span>${r.qui}</span></li>`).join("")}</ul>
   <p class="note">Les témoignages sont des exemples.</p>
-  <p class="prose">À l’inverse, quand ce qu’on fait n’est jamais vu, on peut finir par douter de soi. Ce n’est pas une fatalité : souvent, on n’a pas encore trouvé qui pouvait le voir, ou on ne s’est pas encore autorisé à le dire.</p>
+  <p class="prose">À l’inverse, quand ce qu’on fait n’est jamais vu, on peut finir par douter de soi. Ce n’est pas une fatalité : souvent, on n’a pas encore trouvé qui pouvait le voir, ou on ne s’est pas encore autorisé à le dire. Et ne pas être vu, ou être rabaissé, ça fait mal : chacun peut l’éviter, en regardant vraiment ce que font les autres.</p>
   <label for="r-ressenti" class="lab-like">Comment t’es-tu senti la dernière fois qu’on t’a reconnu ?</label>
   <textarea id="r-ressenti"></textarea>
   <p class="note">Rien n’est enregistré.</p>
-  ${suite("etre-reconnu","Noté, certifié, reconnu","acteur","Et toi, que peux-tu faire ?")}
+  ${suite("etre-reconnu","Trois façons de reconnaître","acteur","Et toi, que peux-tu faire ?")}
 </div>`;
 
 VUES.acteur=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
   <h2>Tu es acteur de ta reconnaissance. Et de celle des autres.</h2>
-  <p class="intro">La reconnaissance ne tombe pas du ciel. Elle se donne, elle se demande, elle se cultive.</p>
+  <p class="intro">La reconnaissance ne tombe pas du ciel. Elle se donne, elle se demande, elle se cultive. Et tout le monde a le pouvoir de reconnaître.</p>
   <div class="mesure">
     <div class="reco"><h3>Pour toi</h3><ul><li>Oser dire ce que tu fais, avec des mots précis.</li><li>Garder des traces de ce que tu réussis.</li><li>Demander un regard à ceux qui t’ont vu agir.</li></ul></div>
     <div class="reco"><h3>Pour les autres</h3><ul><li>Remarquer ce qu’ils font.</li><li>Leur dire, précisément : « Merci d’avoir… », « J’ai vu que tu… ».</li><li>Témoigner pour eux quand ça compte.</li></ul></div>
@@ -1649,7 +1674,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">10 min</span><div><strong>Ce qui est reconnu</strong><p>Projeter <a href="#ce-qui-est-reconnu">les exemples</a> et en faire ajouter par le groupe. Puis laisser chacun écrire pour lui-même, sans partage obligatoire : que te reconnais-tu ? que peux-tu reconnaître à quelqu’un ? que peuvent te reconnaître ton établissement, ton entreprise, ton territoire ?</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Qui reconnaît</strong><p>Parcourir <a href="#qui-reconnait">les cercles</a>, de soi à la société, jusqu’au cercle de tout être humain : s’y arrêter. Laisser un temps d’écriture individuelle : « Qui t’a reconnu cette semaine ? T’es-tu reconnu ? »</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Égales, mais pas mesurables</strong><p>Faire <a href="#egales">ranger les cinq reconnaissances</a> à deux ou trois volontaires, puis comparer leurs ordres. Débat : peut-on comparer un sourire et un diplôme ?</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Noté, certifié, reconnu</strong><p>Projeter <a href="#etre-reconnu">la comparaison</a>. Faire trouver une situation vécue en stage pour chacune des trois colonnes.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Trois façons de reconnaître</strong><p>Projeter <a href="#etre-reconnu">spontanée, organisée, officielle</a>. Faire trouver, dans un stage ou un projet vécu, un exemple de chacune, et montrer qu’elles se suivent. Insister : tout ne doit pas être officiel pour compter.</p></div></li>
     <li><span class="duree">15 min</span><div><strong>Ce que ça fait, et qui agit</strong><p>Lire <a href="#ce-que-ca-fait">les témoignages</a>, recueillir des ressentis, puis présenter <a href="#acteur">le défi du jour</a>. Chacun choisit une personne à reconnaître avant la fin de la journée. Inviter ceux qui le souhaitent à copier ou télécharger leur carnet de reconnaissance.</p></div></li>
   </ol>
   <p class="pause">Pause, 10 min</p>
@@ -1698,7 +1723,7 @@ VUES["badge-numerique"]=()=>`<div class="wrap vue">
   </div>
   <div class="mesure">
     <div><h3>Ce que ce n’est pas</h3><ul><li>Pas une note : personne ne te classe.</li><li>Pas un diplôme : il ne remplace pas la certification.</li><li>Pas une obligation : tu décides d’en avoir ou non.</li><li>Pas un « like » : il dit quelque chose de précis, et quelqu’un en témoigne.</li></ul></div>
-    <div class="reco"><h3>Ce que c’est</h3><p>Une façon de rendre visible une reconnaissance qui compte, pour qu’elle dure, qu’elle circule avec toi, et qu’elle grandisse avec le regard des autres. Une forme parmi d’autres, pour cet usage-là.</p></div>
+    <div class="reco"><h3>Ce que c’est</h3><p>Une façon de rendre visible une reconnaissance qui compte, pour qu’elle dure, qu’elle circule avec toi, et qu’elle grandisse avec le regard des autres. Une forme parmi d’autres, pour cet usage-là. Il peut porter une reconnaissance spontanée (un badge « Merci »), organisée (un badge de projet) ou officielle, et il peut être proposé dès le début d’un chemin, pas seulement à la fin.</p></div>
   </div>
   ${suite("formes","Les formes de la reconnaissance","badge-cest-quoi","Regarder un badge de plus près")}
 </div>`;
@@ -1849,7 +1874,7 @@ function brancherConstruire(pid){
 
 /* ---------- progression dans chaque temps ---------- */
 const ETAPES={
-  1:{nom:"Reconnaître",pages:[["mille-facons","Les mille façons"],["ce-qui-est-reconnu","Ce qui est reconnu"],["qui-reconnait","Qui reconnaît"],["egales","Égales, pas mesurables"],["etre-reconnu","Noté, certifié, reconnu"],["ce-que-ca-fait","Ce que ça fait"],["acteur","Acteur"]]},
+  1:{nom:"Reconnaître",pages:[["mille-facons","Les mille façons"],["ce-qui-est-reconnu","Ce qui est reconnu"],["qui-reconnait","Qui reconnaît"],["egales","Égales, pas mesurables"],["etre-reconnu","Trois façons"],["ce-que-ca-fait","Ce que ça fait"],["acteur","Acteur"]]},
   2:{nom:"Rendre visible",pages:[["formes","Les formes"],["badge-numerique","Le badge numérique"],["badge-cest-quoi","Un badge de plus près"],["familles","Les familles"],["vie-badge","La vie d’un badge"],["ecrire-endossement","L’endossement"],["jeu","Le jeu"],["boussole","La boussole"]]},
   3:{nom:"Agir",pages:[["parcours","Choisir une porte"],["__parcours","Suivre le parcours"],["__atelier","Construire"]]}
 };
@@ -1903,10 +1928,12 @@ const EX={
    {mot:"Envie de continuer",txt:"Le merci de l’animatrice m’a donné envie de revenir à la micro-ferme.",qui:"Inaya, en 3e"},
    {mot:"Une place",txt:"Depuis que la classe compte sur moi pour les poules, je me sens utile.",qui:"Tom, en 2nde pro"},
    {mot:"Oser",txt:"Ma prof a montré mon panneau à toute la classe. Depuis, j’ose davantage.",qui:"Lina, en 4e"}],
+  chemin:{sit:"Nolan, en 4e, s’occupe des poules de la micro-ferme pédagogique pendant tout le trimestre.",spontane:"L’agent de l’exploitation le remercie et lui confie la clé du poulailler.",organise:"Le conseil de classe le félicite pour son engagement à la micro-ferme.",officiel:"Plus tard, son CAPa ou son bac pro reconnaîtra officiellement le métier qu’il a commencé à découvrir ici."},
   regards:{sit:"Nolan, en 4e, s’occupe des poules de la micro-ferme pédagogique pendant tout le trimestre.",note:"son exposé sur l’élevage obtient 15 sur 20.",certif:"en fin de 3e, il passera le diplôme national du brevet.",reco:"l’agent de l’exploitation lui confie la clé du poulailler, et ses camarades viennent lui demander conseil."}
  },
  bac:{
   galerie:null,quoi:null,ph:null,ressentis:null,
+  chemin:{sit:"Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.",spontane:"Claire, l’agricultrice, lui dit merci et lui confie l’élevage quand elle s’absente.",organise:"Claire écrit un témoignage dans son livret d’apprentissage.",officiel:"Son bac pro reconnaît officiellement son métier."},
   regards:{sit:"Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.",note:"son dossier d’alternance obtient 14 sur 20.",certif:"sa période en entreprise compte pour l’obtention de son diplôme.",reco:"Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente et dit à ses voisins qu’il est fiable. Son formateur cite son travail en exemple, et Lucas lui-même sait ce qu’il a appris."}
  },
  bts:{
@@ -1934,6 +1961,7 @@ const EX={
    {mot:"Envie de continuer",txt:"Le retour de l’agricultrice sur mon diagnostic m’a donné envie d’aller plus loin.",qui:"Clara, en BTS"},
    {mot:"Une place",txt:"Dans l’association des étudiants, on compte sur moi : je me sens à ma place.",qui:"Yanis, en BTS"},
    {mot:"Oser",txt:"Après une soutenance saluée par le jury, j’ose présenter mon projet d’installation.",qui:"Manon, en BTS"}],
+  chemin:{sit:"Clara, en BTS, mène son projet technologique sur l’irrigation d’une exploitation maraîchère.",spontane:"L’agricultrice la remercie et applique ses propositions.",organise:"La structure lui remet une attestation, et son projet est présenté aux portes ouvertes de l’établissement.",officiel:"Son BTS certifie officiellement ses compétences."},
   regards:{sit:"Clara, en BTS, mène son projet technologique sur l’irrigation d’une exploitation maraîchère.",note:"son dossier obtient 16 sur 20.",certif:"son projet compte pour l’obtention du BTS.",reco:"l’agricultrice applique ses propositions et la recommande à d’autres exploitants. Son formateur souligne la qualité du travail, et Clara elle-même mesure le chemin parcouru."}
  }
 };
@@ -1993,7 +2021,7 @@ function brancher(v){
   }
   if(v==="vie-badge"){
     const items=[...document.querySelectorAll("#etapes-vie li")];
-    const lg=["Le badge est créé.","Des preuves sont ajoutées à l’intérieur.","Trois personnes l’ont endossé.","Il s’est enrichi d’une nouvelle expérience.","Inès le partage quand elle le décide."];
+    const lg=["Le badge est proposé dès le départ.","Des traces s’ajoutent en route.","Trois personnes l’ont endossé.","Il s’est enrichi d’une nouvelle expérience.","Inès le partage quand elle le décide."];
     const choisir=i=>{
       items.forEach((li,j)=>{li.classList.toggle("active",j===i);li.classList.toggle("passee",j<i);li.querySelector("button").setAttribute("aria-expanded",j===i);});
       document.querySelectorAll(".vie-visuel .couche").forEach(g=>g.style.opacity=(+g.dataset.couche<=i+1)?1:0);
