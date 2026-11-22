@@ -883,10 +883,10 @@ accueil(){
     <p class="temps">Temps 1 sur 3</p>
     <h2>Tu es reconnu plus souvent que tu ne le crois.</h2>
     <p class="intro">Chaque jour, dans l’établissement, en stage, à la maison, des gens te reconnaissent sans le dire. Et toi aussi, tu reconnais les autres.</p>
-    <div class="legende"><span><i class="pastille-inf"></i>Pointillés : de la reconnaissance informelle</span><span><i class="pastille-badge"></i>Plein : un badge</span></div>
+    
     <ul class="galerie">${galerieP().map(g=>`<li><span class="forme">${g.f}</span><p>${g.s}</p></li>`).join("")}</ul>
-    <p class="message-fort">Tout ça, c’est de la reconnaissance. Garde-la comme elle est.</p>
-    <p class="prose">Pas besoin d’en faire un badge. Un merci reste un merci. Mais pense un instant à ta propre vie :</p>
+    <p class="message-fort">Tout ça, c’est de la reconnaissance.</p>
+    <p class="prose">Elle ne fait pas de bruit, elle ne laisse souvent pas de trace, et pourtant elle compte. Pense un instant à ta propre vie :</p>
     <div class="reflexion">
       <div><label for="r1">La dernière fois qu’on t’a reconnu sans le dire ?</label><textarea id="r1" placeholder="Par exemple : mon maître de stage m’a confié la vente seul…"></textarea></div>
       <div><label for="r2">La dernière fois que toi, tu as reconnu quelqu’un ?</label><textarea id="r2" placeholder="Par exemple : j’ai remercié la surveillante…"></textarea></div>
@@ -1331,14 +1331,14 @@ VUES["etre-reconnu"]=()=>`<div class="wrap vue">
   <div class="trio">
     <article class="trio-col"><h3>Être noté</h3><dl><dt>Qui décide ?</dt><dd>Un enseignant, un jury.</dd><dt>Sur quoi ?</dt><dd>Une épreuve, un barème.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un chiffre.</dd></dl></article>
     <article class="trio-col"><h3>Être certifié</h3><dl><dt>Qui décide ?</dt><dd>Un organisme habilité, selon un référentiel.</dd><dt>Sur quoi ?</dt><dd>Des critères fixés à l’avance, les mêmes pour tous.</dd><dt>Dans quel sens ?</dt><dd>De l’institution vers toi.</dd><dt>Ce qu’il en reste</dt><dd>Un diplôme, un certificat, des crédits.</dd></dl></article>
-    <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir : d’abord les professionnels, puis tes enseignants et formateurs, tes pairs.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : du professionnel vers toi, de toi vers ton maître de stage, entre apprenants, entre adultes aussi.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, et parfois un badge qui t’appartient.</dd></dl></article>
+    <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir : d’abord les professionnels, puis tes enseignants et formateurs, tes pairs.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : du professionnel vers toi, de toi vers ton maître de stage, entre apprenants, entre adultes aussi.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, une confiance, un souvenir qui compte.</dd></dl></article>
   </div>
   <h3 class="sous-titre">Une même situation, trois regards</h3>
   <p class="prose">${ex("regards").sit}</p>
   <ul class="trois-regards">
     <li><strong>Noté :</strong> ${ex("regards").note}</li>
     <li><strong>Certifié :</strong> ${ex("regards").certif}</li>
-    <li><strong>Reconnu :</strong> ${ex("regards").reco} <a href="#ecrire-endossement">Voir les trois regards</a>.</li>
+    <li><strong>Reconnu :</strong> ${ex("regards").reco}</li>
   </ul>
   ${suite("egales","Égales, mais pas mesurables","ce-que-ca-fait","Ce que la reconnaissance fait")}
 </div>`;
@@ -1590,7 +1590,7 @@ VUES.acteur=()=>`<div class="wrap vue">
     <div class="reco"><h3>Pour toi</h3><ul><li>Oser dire ce que tu fais, avec des mots précis.</li><li>Garder des traces de ce que tu réussis.</li><li>Demander un regard à ceux qui t’ont vu agir.</li></ul></div>
     <div class="reco"><h3>Pour les autres</h3><ul><li>Remarquer ce qu’ils font.</li><li>Leur dire, précisément : « Merci d’avoir… », « J’ai vu que tu… ».</li><li>Témoigner pour eux quand ça compte.</li></ul></div>
   </div>
-  <div class="defi"><h3>Le défi du jour</h3><p id="defi-texte">${DEFIS[0]}</p><button type="button" class="btn petit" id="defi-autre">Une autre idée</button><label for="r-qui-reco" class="lab-like">Qui vas-tu reconnaître aujourd’hui, et comment ?</label><textarea id="r-qui-reco"></textarea><p class="note">Pas besoin de badge pour ça.</p></div>
+  <div class="defi"><h3>Le défi du jour</h3><p id="defi-texte">${DEFIS[0]}</p><button type="button" class="btn petit" id="defi-autre">Une autre idée</button><label for="r-qui-reco" class="lab-like">Qui vas-tu reconnaître aujourd’hui, et comment ?</label><textarea id="r-qui-reco"></textarea><p class="note">Pas besoin d’outil pour ça : juste toi.</p></div>
   <section class="carnet" aria-labelledby="titre-carnet">
     <h3 id="titre-carnet">Mon carnet de reconnaissance</h3>
     <p>Tout ce que tu as écrit pendant ce temps de réflexion, réuni au même endroit. Garde-le si tu veux : rien n’est enregistré, tout disparaît quand tu fermes la page.</p>
@@ -1903,11 +1903,11 @@ const EX={
    {mot:"Envie de continuer",txt:"Le merci de l’animatrice m’a donné envie de revenir à la micro-ferme.",qui:"Inaya, en 3e"},
    {mot:"Une place",txt:"Depuis que la classe compte sur moi pour les poules, je me sens utile.",qui:"Tom, en 2nde pro"},
    {mot:"Oser",txt:"Ma prof a montré mon panneau à toute la classe. Depuis, j’ose davantage.",qui:"Lina, en 4e"}],
-  regards:{sit:"Nolan, en 4e, s’occupe des poules de la micro-ferme pédagogique pendant tout le trimestre.",note:"son exposé sur l’élevage obtient 15 sur 20.",certif:"en fin de 3e, il passera le diplôme national du brevet.",reco:"l’agent de l’exploitation lui confie la clé du poulailler, ses camarades viennent lui demander conseil, et il peut créer un badge que l’agent vient appuyer d’un témoignage."}
+  regards:{sit:"Nolan, en 4e, s’occupe des poules de la micro-ferme pédagogique pendant tout le trimestre.",note:"son exposé sur l’élevage obtient 15 sur 20.",certif:"en fin de 3e, il passera le diplôme national du brevet.",reco:"l’agent de l’exploitation lui confie la clé du poulailler, et ses camarades viennent lui demander conseil."}
  },
  bac:{
   galerie:null,quoi:null,ph:null,ressentis:null,
-  regards:{sit:"Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.",note:"son dossier d’alternance obtient 14 sur 20.",certif:"sa période en entreprise compte pour l’obtention de son diplôme.",reco:"Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente, et endosse son badge. Son formateur et Lucas lui-même y ajoutent leur regard."}
+  regards:{sit:"Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.",note:"son dossier d’alternance obtient 14 sur 20.",certif:"sa période en entreprise compte pour l’obtention de son diplôme.",reco:"Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente et dit à ses voisins qu’il est fiable. Son formateur cite son travail en exemple, et Lucas lui-même sait ce qu’il a appris."}
  },
  bts:{
   galerie:[
@@ -1934,7 +1934,7 @@ const EX={
    {mot:"Envie de continuer",txt:"Le retour de l’agricultrice sur mon diagnostic m’a donné envie d’aller plus loin.",qui:"Clara, en BTS"},
    {mot:"Une place",txt:"Dans l’association des étudiants, on compte sur moi : je me sens à ma place.",qui:"Yanis, en BTS"},
    {mot:"Oser",txt:"Après une soutenance saluée par le jury, j’ose présenter mon projet d’installation.",qui:"Manon, en BTS"}],
-  regards:{sit:"Clara, en BTS, mène son projet technologique sur l’irrigation d’une exploitation maraîchère.",note:"son dossier obtient 16 sur 20.",certif:"son projet compte pour l’obtention du BTS.",reco:"l’agricultrice applique ses propositions et endosse son badge. Son formateur et Clara elle-même y ajoutent leur regard."}
+  regards:{sit:"Clara, en BTS, mène son projet technologique sur l’irrigation d’une exploitation maraîchère.",note:"son dossier obtient 16 sur 20.",certif:"son projet compte pour l’obtention du BTS.",reco:"l’agricultrice applique ses propositions et la recommande à d’autres exploitants. Son formateur souligne la qualité du travail, et Clara elle-même mesure le chemin parcouru."}
  }
 };
 function ex(k){const v=EX[PUBLIC]&&EX[PUBLIC][k];return v!=null?v:null;}
