@@ -233,7 +233,7 @@ textarea{width:100%;font:inherit;padding:.8rem;border-radius:var(--r-petit);bord
 .hero h1{color:var(--encre)}
 .prairie span{color:var(--encre)}
 .prairie span:nth-child(3n){color:var(--bocage)}
-.prairie span:nth-child(4n){color:var(--pomme)}
+.prairie span:nth-child(4n){color:var(--doux)}
 .prairie span:nth-child(5n){color:var(--ciel)}
 .prairie .badge-mot{box-shadow:0 0 0 4px #fff,0 0 0 7px var(--bocage)}
 .coins{position:relative;background:#fff!important;border:3px solid var(--bocage)!important;border-radius:16px;overflow:hidden}
@@ -566,6 +566,14 @@ textarea:focus,.ch input[type=text]:focus{outline:3px solid var(--colza);outline
 .code-couleur .cc-rouge{border-color:var(--nav);color:var(--nav)}
 @media (max-width:860px){.code-couleur{grid-template-columns:1fr}}
 
+.choix-public{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:1.2rem 0 .2rem}
+.cp-q{font-weight:800;color:var(--encre);margin-right:.3rem}
+.choix-public button{font:inherit;font-size:.95rem;padding:.35rem .9rem;border-radius:999px;border:2px solid #BFD9D6;background:#fff;color:var(--texte);cursor:pointer}
+.choix-public button[aria-pressed="true"]{background:var(--choix);border-color:var(--colza);color:var(--encre);font-weight:700}
+.choix-public.petit{margin:.6rem 0 .2rem}
+.choix-public.petit button{font-size:.85rem;padding:.2rem .7rem}
+.liens-publics code{font-size:.9em}
+
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
 @media (max-width:860px){
@@ -623,7 +631,7 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 </section>
 
 <footer>
-  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. Les badges, eux, sont pour tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#animer">Animer un atelier</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
+  <div class="wrap">Un guide d’abord pour les apprenants de l’enseignement agricole. Les badges, eux, sont pour tout le monde. Aucune donnée n’est enregistrée : ce que tu écris ici reste sur ton écran.<div id="pied-public"></div><nav class="pied" aria-label="Pied de page"><a href="#adultes">Pour les adultes</a><a href="#animer">Animer un atelier</a><a href="#a-propos">À propos</a><a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA</a></nav></div>
 </footer>
 
 <script>
@@ -858,6 +866,8 @@ accueil(){
     <div>
       <h1>Reconnaître, ça se fait de mille façons.</h1>
       <p class="intro">Un merci, une confiance, un conseil demandé… et parfois, un badge. Ici, tu découvres comment reconnaître et être reconnu, à ta façon.</p>
+      ${choixPublicHTML()}
+      <p class="note">Pour adapter les exemples. Tu peux passer cette question, ou changer à tout moment en bas de page.</p>
       <div class="actions">
         <a class="btn plein" href="#mille-facons">Réfléchir à la reconnaissance</a>
         <a class="btn" href="#formes">Découvrir les badges numériques</a>
@@ -874,7 +884,7 @@ accueil(){
     <h2>Tu es reconnu plus souvent que tu ne le crois.</h2>
     <p class="intro">Chaque jour, dans l’établissement, en stage, à la maison, des gens te reconnaissent sans le dire. Et toi aussi, tu reconnais les autres.</p>
     <div class="legende"><span><i class="pastille-inf"></i>Pointillés : de la reconnaissance informelle</span><span><i class="pastille-badge"></i>Plein : un badge</span></div>
-    <ul class="galerie">${GALERIE.map(g=>`<li><span class="forme">${g.f}</span><p>${g.s}</p></li>`).join("")}</ul>
+    <ul class="galerie">${galerieP().map(g=>`<li><span class="forme">${g.f}</span><p>${g.s}</p></li>`).join("")}</ul>
     <p class="message-fort">Tout ça, c’est de la reconnaissance. Garde-la comme elle est.</p>
     <p class="prose">Pas besoin d’en faire un badge. Un merci reste un merci. Mais pense un instant à ta propre vie :</p>
     <div class="reflexion">
@@ -1324,11 +1334,11 @@ VUES["etre-reconnu"]=()=>`<div class="wrap vue">
     <article class="trio-col reco"><h3>Être reconnu</h3><dl><dt>Qui décide ?</dt><dd>Toi, et ceux qui t’ont vu agir : d’abord les professionnels, puis tes enseignants et formateurs, tes pairs.</dd><dt>Sur quoi ?</dt><dd>Ce que tu fais vraiment, dans la vie réelle.</dd><dt>Dans quel sens ?</dt><dd>Dans tous les sens : du professionnel vers toi, de toi vers ton maître de stage, entre apprenants, entre adultes aussi.</dd><dt>Ce qu’il en reste</dt><dd>Une relation, et parfois un badge qui t’appartient.</dd></dl></article>
   </div>
   <h3 class="sous-titre">Une même situation, trois regards</h3>
-  <p class="prose">Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.</p>
+  <p class="prose">${ex("regards").sit}</p>
   <ul class="trois-regards">
-    <li><strong>Noté :</strong> son dossier d’alternance obtient 14 sur 20.</li>
-    <li><strong>Certifié :</strong> sa période en entreprise compte pour l’obtention de son diplôme.</li>
-    <li><strong>Reconnu :</strong> Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente, et endosse son badge. Son formateur et Lucas lui-même y ajoutent leur regard. <a href="#ecrire-endossement">Voir les trois regards</a>.</li>
+    <li><strong>Noté :</strong> ${ex("regards").note}</li>
+    <li><strong>Certifié :</strong> ${ex("regards").certif}</li>
+    <li><strong>Reconnu :</strong> ${ex("regards").reco} <a href="#ecrire-endossement">Voir les trois regards</a>.</li>
   </ul>
   ${suite("egales","Égales, mais pas mesurables","ce-que-ca-fait","Ce que la reconnaissance fait")}
 </div>`;
@@ -1499,12 +1509,12 @@ VUES["ce-qui-est-reconnu"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
   <h2>Tu es bien plus que tes notes.</h2>
   <p class="intro">Quand quelqu’un te reconnaît, qu’est-ce qu’il reconnaît ? Pas seulement ce que tu sais faire. Voici des exemples, avec des mots simples.</p>
-  <ul class="quoi">${QUOI.map(q=>`<li><strong>${q.t}</strong><ul>${q.ex.map(x=>`<li>${x}</li>`).join("")}</ul></li>`).join("")}</ul>
+  <ul class="quoi">${quoiP().map(q=>`<li><strong>${q.t}</strong><ul>${q.ex.map(x=>`<li>${x}</li>`).join("")}</ul></li>`).join("")}</ul>
   <p class="message-fort">Souvent, une même chose est reconnue de plusieurs façons à la fois.</p>
   <section class="ecrire-soi" aria-labelledby="titre-ecrire">
     <h3 id="titre-ecrire" class="sous-titre">À toi d’écrire, pour toi-même</h3>
     <p class="prose">Prends le temps. Il n’y a pas de bonne réponse, et personne ne lira ce que tu écris.</p>
-    ${ECRIRE.map(e=>`<div class="ch"><label for="e-${e.id}">${e.q}</label>${e.aide?`<p class="aide">${e.aide}</p><div class="pistes">${e.pistes.map(p=>`<button type="button" data-piste="${e.id}">${p}</button>`).join("")}</div>`:""}<textarea id="e-${e.id}" placeholder="${e.ph||""}"></textarea></div>`).join("")}
+    ${ECRIRE.map(e=>`<div class="ch"><label for="e-${e.id}">${e.q}</label>${e.aide?`<p class="aide">${e.aide}</p><div class="pistes">${e.pistes.map(p=>`<button type="button" data-piste="${e.id}">${p}</button>`).join("")}</div>`:""}<textarea id="e-${e.id}" placeholder="${phP(e)}"></textarea></div>`).join("")}
     <div class="actions"><button type="button" class="btn petit" id="copier-reponses">Copier mes réponses</button><button type="button" class="btn petit" id="telecharger-reponses">Télécharger en .txt</button></div>
     <p class="statut" id="statut-reponses" aria-live="polite"></p>
     <div class="copie-secours" id="secours-reponses"><textarea readonly></textarea></div>
@@ -1563,7 +1573,7 @@ VUES["ce-que-ca-fait"]=()=>`<div class="wrap vue">
   <p class="temps">Temps 1 sur 3, reconnaître</p>
   <h2>Être reconnu, ça change quelque chose.</h2>
   <p class="intro">Pas besoin de grands discours : chacun sait ce qu’il ressent quand ce qu’il fait est vu, et quand il ne l’est pas.</p>
-  <ul class="ressentis">${RESSENTIS.map(r=>`<li><strong>${r.mot}</strong><blockquote>« ${r.txt} »</blockquote><span>${r.qui}</span></li>`).join("")}</ul>
+  <ul class="ressentis">${ressentisP().map(r=>`<li><strong>${r.mot}</strong><blockquote>« ${r.txt} »</blockquote><span>${r.qui}</span></li>`).join("")}</ul>
   <p class="note">Les témoignages sont des exemples.</p>
   <p class="prose">À l’inverse, quand ce qu’on fait n’est jamais vu, on peut finir par douter de soi. Ce n’est pas une fatalité : souvent, on n’a pas encore trouvé qui pouvait le voir, ou on ne s’est pas encore autorisé à le dire.</p>
   <label for="r-ressenti" class="lab-like">Comment t’es-tu senti la dernière fois qu’on t’a reconnu ?</label>
@@ -1656,6 +1666,9 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">25 min</span><div><strong>Les parcours</strong><p>Chacun choisit une porte dans <a href="#parcours">les parcours</a> et va jusqu’à l’atelier. Ceux qui le souhaitent téléchargent leur fiche ou leur demande d’endossement.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Clôture</strong><p>Tour de table : « Un regard que je vais demander, ou que je vais donner. » Rappeler les règles : c’est toi qui décides, rien n’est noté.</p></div></li>
   </ol>
+  <h3 class="sous-titre">Adapter les exemples à votre groupe</h3>
+  <p class="prose">Partagez le lien qui correspond à votre groupe : le site s’ouvre avec des exemples adaptés. Pour l’instant, l’adaptation concerne le temps 1, Reconnaître.</p>
+  <ul class="prose liens-publics"><li><a href="#public-college">4e, 3e ou 2nde pro</a> : adresse se terminant par <code>#public-college</code></li><li><a href="#public-bac">1re ou Tle, Bac pro ou STAV</a> : <code>#public-bac</code></li><li><a href="#public-bts">BTS</a> : <code>#public-bts</code></li></ul>
   <h3 class="sous-titre">Le code couleur du site</h3>
   <div class="code-couleur"><div class="cc-vert"><strong>Vert</strong> : le texte et la structure du site.</div><div class="cc-jaune"><strong>Jaune</strong> : ce que l’apprenant choisit, écrit, dépose.</div><div class="cc-rouge"><strong>Rouge</strong> : pour avancer, revenir ou changer de page.</div></div>
   <h3 class="sous-titre">Points de vigilance</h3>
@@ -1860,6 +1873,78 @@ function majSousProgression(v){
     return `<li class="sp-${etat}">${lien&&j!==i?`<a href="#${lien}" title="${p[1]}">${inner}</a>`:`<span${j===i?' aria-current="step"':''} title="${p[1]}">${inner}</span>`}</li>`;
   }).join("");
 }
+
+/* ================= PUBLICS ================= */
+let PUBLIC="bac";
+const PUBLICS={college:"4e, 3e ou 2nde pro",bac:"1re ou Tle, Bac pro ou STAV",bts:"BTS"};
+const EX={
+ college:{
+  galerie:[
+   {f:"Remplacer",s:"Le copain qui nourrit les poules de la micro-ferme à ta place quand tu es absent."},
+   {f:"Demander ton avis",s:"La prof qui te demande ce que tu as pensé de la visite de l’exploitation."},
+   {f:"Faire confiance",s:"L’agriculteur qui te laisse donner le biberon au veau pendant la visite."},
+   {f:"Dire bravo",s:"Le surveillant qui te dit « bien joué » après le match du mercredi."},
+   {f:"Demander conseil",s:"Un camarade qui te demande comment tu as réussi ton exposé."},
+   {f:"Raconter",s:"Tes parents qui racontent à la famille ce que tu fais au lycée."},
+   {f:"Revenir",s:"La professionnelle venue en classe qui se souvient de ta question."},
+   {f:"Dire merci",s:"Toi, quand tu remercies l’agent qui s’occupe des animaux avec vous."}],
+  quoi:[
+   ["À reconnaître des races de vaches pendant une visite","À parler devant la classe","Ce que tu as compris d’une erreur"],
+   ["Soigner les animaux de la micro-ferme","Planter et arroser le potager","Utiliser un outil en sécurité"],
+   ["La patience avec les animaux","Ton calme quand ça s’agite","Ton humour qui détend le groupe"],
+   ["La micro-ferme pédagogique","Un panneau pour les portes ouvertes","Une vidéo sur une visite d’exploitation"],
+   ["Délégué de classe","Joueur ou bénévole au club","Un coup de main à la fête du village"],
+   ["Aider un nouveau à l’internat","Prêter tes cours","Expliquer un exercice à un camarade"],
+   ["Ton arrivée dans l’enseignement agricole","Ce que tu as découvert avec le Parcours Avenir","Tes progrès depuis la rentrée"],
+   ["Les animaux","Le sport, la pêche, la musique","Le respect de la nature"]],
+  ph:{soi:"Je sais… / J’ai appris… / Je suis fier de…",autre:"À mon camarade, son aide pour l’exercice… / À l’agent de la ferme, sa patience…",orga:"Mon rôle de délégué… / Ce que j’ai fait pour la micro-ferme…"},
+  ressentis:[
+   {mot:"Confiance",txt:"Quand l’agriculteur m’a laissé nourrir les veaux, je me suis senti capable.",qui:"Nolan, en 4e"},
+   {mot:"Envie de continuer",txt:"Le merci de l’animatrice m’a donné envie de revenir à la micro-ferme.",qui:"Inaya, en 3e"},
+   {mot:"Une place",txt:"Depuis que la classe compte sur moi pour les poules, je me sens utile.",qui:"Tom, en 2nde pro"},
+   {mot:"Oser",txt:"Ma prof a montré mon panneau à toute la classe. Depuis, j’ose davantage.",qui:"Lina, en 4e"}],
+  regards:{sit:"Nolan, en 4e, s’occupe des poules de la micro-ferme pédagogique pendant tout le trimestre.",note:"son exposé sur l’élevage obtient 15 sur 20.",certif:"en fin de 3e, il passera le diplôme national du brevet.",reco:"l’agent de l’exploitation lui confie la clé du poulailler, ses camarades viennent lui demander conseil, et il peut créer un badge que l’agent vient appuyer d’un témoignage."}
+ },
+ bac:{
+  galerie:null,quoi:null,ph:null,ressentis:null,
+  regards:{sit:"Lucas, apprenti, conduit la traite sur l’élevage laitier où il est en alternance.",note:"son dossier d’alternance obtient 14 sur 20.",certif:"sa période en entreprise compte pour l’obtention de son diplôme.",reco:"Claire, l’agricultrice qui l’accueille, lui confie l’élevage quand elle s’absente, et endosse son badge. Son formateur et Lucas lui-même y ajoutent leur regard."}
+ },
+ bts:{
+  galerie:[
+   {f:"Remplacer",s:"La camarade de promo qui reprend ta partie du dossier quand tu es malade."},
+   {f:"Demander ton avis",s:"Ton maître de stage qui te demande ce que tu penses d’un nouveau matériel."},
+   {f:"Faire confiance",s:"L’entreprise qui te confie le suivi d’un client pendant ta période en entreprise."},
+   {f:"Dire bravo",s:"Ton formateur qui souligne la qualité de ta soutenance."},
+   {f:"Demander conseil",s:"Des étudiants de première année qui viennent te demander conseil pour leur stage."},
+   {f:"Raconter",s:"Un ancien maître de stage qui parle de toi à un autre employeur."},
+   {f:"Revenir",s:"Un agriculteur qui te rappelle pour un coup de main pendant la saison."},
+   {f:"Dire merci",s:"Toi, quand tu remercies l’agricultrice qui a accueilli ton projet technologique."}],
+  quoi:[
+   ["À mener une étude de cas réelle","À construire un budget prévisionnel","Ce que t’a appris un projet qui a échoué"],
+   ["Réaliser un diagnostic d’exploitation","Animer une réunion","Proposer l’optimisation d’un système de production"],
+   ["Ton sens de l’organisation","Ta rigueur","Ta capacité à travailler en équipe"],
+   ["Ton projet technologique","Un événement organisé avec ta promo","Un rapport remis à l’entreprise"],
+   ["Le bureau de l’association des étudiants","Pompier volontaire","Bénévole dans une association agricole"],
+   ["Le tutorat des premières années","Un coup de main dans une exploitation voisine","Ton réseau, que tu partages"],
+   ["Ta réorientation après le bac","Ton projet d’installation","Ton expérience en entreprise avant le BTS"],
+   ["Le respect du vivant","L’agriculture de demain","L’envie de t’installer ou de créer"]],
+  ph:{soi:"Je sais… / J’ai appris… / Je suis fier de…",autre:"À mon binôme, sa rigueur sur le dossier… / À mon maître de stage, le temps qu’il m’a consacré…",orga:"Mon travail pendant la période en entreprise… / Mon rôle dans l’association des étudiants…"},
+  ressentis:[
+   {mot:"Confiance",txt:"Mon maître de stage m’a confié un client. J’ai su que j’avais ma place dans le métier.",qui:"Baptiste, en BTS"},
+   {mot:"Envie de continuer",txt:"Le retour de l’agricultrice sur mon diagnostic m’a donné envie d’aller plus loin.",qui:"Clara, en BTS"},
+   {mot:"Une place",txt:"Dans l’association des étudiants, on compte sur moi : je me sens à ma place.",qui:"Yanis, en BTS"},
+   {mot:"Oser",txt:"Après une soutenance saluée par le jury, j’ose présenter mon projet d’installation.",qui:"Manon, en BTS"}],
+  regards:{sit:"Clara, en BTS, mène son projet technologique sur l’irrigation d’une exploitation maraîchère.",note:"son dossier obtient 16 sur 20.",certif:"son projet compte pour l’obtention du BTS.",reco:"l’agricultrice applique ses propositions et endosse son badge. Son formateur et Clara elle-même y ajoutent leur regard."}
+ }
+};
+function ex(k){const v=EX[PUBLIC]&&EX[PUBLIC][k];return v!=null?v:null;}
+function galerieP(){return ex("galerie")||GALERIE;}
+function quoiP(){const q=ex("quoi");return q?QUOI.map((x,i)=>({t:x.t,ex:q[i]})):QUOI;}
+function ressentisP(){return ex("ressentis")||RESSENTIS;}
+function phP(e){const p=ex("ph");return (p&&p[e.id])||e.ph||"";}
+function choixPublicHTML(classe){return `<div class="choix-public ${classe||""}" role="group" aria-label="Ta formation"><span class="cp-q">Tu es en…</span>${Object.entries(PUBLICS).map(([k,l])=>`<button type="button" data-public="${k}" aria-pressed="${PUBLIC===k}">${l}</button>`).join("")}</div>`;}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-public]");if(!b)return;PUBLIC=b.dataset.public;afficher();majPiedPublic();});
+function majPiedPublic(){const z=document.getElementById("pied-public");if(z)z.innerHTML=choixPublicHTML("petit");}
 const REFLEXIONS={};
 const GARDE={"r1":"La dernière fois qu’on t’a reconnu sans le dire ?","r2":"La dernière fois que toi, tu as reconnu quelqu’un ?","e-soi":"Que te reconnais-tu à toi-même ?","e-autre":"Que peux-tu reconnaître à quelqu’un ?","e-orga":"Que peut te reconnaître ton établissement, ou ton entreprise de stage ?","e-societe":"Que peuvent te reconnaître ton territoire, la société, ton pays ?","r-qui1":"Qui t’a reconnu cette semaine ? Dans quel cercle était-il ?","r-ressenti":"Comment t’es-tu senti la dernière fois qu’on t’a reconnu ?","r-qui-reco":"Qui vais-je reconnaître aujourd’hui, et comment ?"};
 document.addEventListener("input",e=>{if(e.target.id&&GARDE[e.target.id]!==undefined)REFLEXIONS[e.target.id]=e.target.value;});
@@ -1867,6 +1952,7 @@ let VUE_PRECEDENTE="";
 function texteCarnet(){return "MON CARNET DE RECONNAISSANCE\nÉcrit avec « Mille façons de reconnaître »\n\n"+Object.entries(GARDE).map(([k,q])=>q+"\n"+(REFLEXIONS[k]||"(pas de réponse)")).join("\n\n");}
 function afficher(){
   let v=(location.hash||"#accueil").slice(1);
+  if(v.startsWith("public-")&&PUBLICS[v.slice(7)]){PUBLIC=v.slice(7);majPiedPublic();location.replace("#accueil");return;}
   const cons=v.startsWith("construire-")&&TYPE_BUILD[v.slice(11)]?v.slice(11):null;
   if(!VUES[v]&&!PARCOURS[v]&&!cons) v="accueil";
   $app.innerHTML=cons?vueConstruire(cons):(VUES[v]?VUES[v]():vueParcours(v));
@@ -1953,6 +2039,7 @@ function brancher(v){
 }
 
 window.addEventListener("hashchange",afficher);
+majPiedPublic();
 afficher();
 </script>
 </body>
