@@ -79,7 +79,7 @@ main:focus{outline:none}
 /* ---------- accueil : la prairie ---------- */
 .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;align-items:center;padding:1rem 0 2rem}
 .prairie{display:flex;flex-wrap:wrap;gap:.3rem .9rem;align-items:baseline;font-family:"Baloo 2",sans-serif;line-height:1.05}
-.prairie span{opacity:0;animation:pousse .6s ease-out forwards;color:var(--bocage)}
+.prairie span{animation:pousse .6s ease-out both;color:var(--bocage)}
 .prairie span:nth-child(3n){color:var(--ardoise)}
 .prairie span:nth-child(4n){color:var(--doux)}
 .prairie .badge-mot{display:inline-grid;place-items:center;width:5.2rem;height:5.2rem;border-radius:50%;background:var(--colza);color:var(--encre)!important;font-weight:800;font-size:1.05rem;box-shadow:0 0 0 4px var(--fond),0 0 0 6px var(--encre)}
@@ -918,10 +918,10 @@ function suite(prec,precLib,suiv,suivLib){
 
 const VUES={
 accueil(){
-  const mots=["merci","faire confiance","demander conseil","remplacer","raconter","revenir","transmettre","écouter","inviter","citer","encourager","dire bravo","montrer le geste","passer le relais","endosser"];
+  const mots=["merci","faire confiance","demander conseil","remplacer","raconter","revenir","transmettre","écouter","inviter","citer","encourager","dire bravo","montrer le geste","passer le relais","témoigner"];
   const tailles=[2.6,1.4,1.9,1.2,2.2,1.5,2.4,1.1,1.6,1.3,1.8,1.5,1.2,2,1.4];
   let html=mots.map((m,i)=>`<span style="font-size:${tailles[i]}rem;font-weight:${tailles[i]>1.8?800:600};animation-delay:${(i*70)}ms">${m}</span>`);
-  html.splice(9,0,`<span class="badge-mot" style="animation-delay:1150ms">badge</span>`);
+  html.splice(9,0,`<span class="badge-mot" style="animation-delay:1150ms">trace</span>`);
   return `<div class="wrap vue"><section class="hero">
     <div>
       <h1>Reconnaître, ça se fait de mille façons.</h1>
