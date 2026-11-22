@@ -27,6 +27,10 @@
   --prairie:#44B9A0;
   --ardoise:#0C5D6A;
   --lin:#61B0AB;
+  --nav:#C8462A;
+  --nav-clair:#EC5E39;
+  --choix:#FBEFA6;
+  --choix-fond:#FFFCEB;
   --r-petit:10px;
   --r-moyen:18px;
 }
@@ -506,6 +510,61 @@ mark.ing-qui{display:block;margin-top:.4rem;font-style:normal;font-weight:700;ba
 .sp-num,.sp-lib{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .sp-segments a:focus-visible{outline:3px solid var(--encre);outline-offset:2px}
 @media print{.sous-prog{display:none!important}}
+
+/* ================= CODE COULEUR ================= */
+/* Vert : le texte et la structure du site. Jaune : ce que l’apprenant choisit, écrit, dépose. Rouge : avancer, changer de page. */
+/* --- Rouge : navigation --- */
+.suite a.btn{border-color:var(--nav);color:var(--nav)}
+.suite a.btn:hover{background:#FDF0EC}
+.suite a.btn.plein{background:var(--nav);border-color:var(--nav);color:#fff}
+.suite a.btn.plein:hover{background:#A83A22;border-color:#A83A22}
+.suite a.btn:not(.plein)::before,.suite a.btn.plein::after{content:"";width:.55em;height:.55em;border:solid currentColor;border-width:0 3px 3px 0;flex:none}
+.suite a.btn:not(.plein)::before{transform:rotate(135deg);margin-right:.15em}
+.suite a.btn.plein::after{transform:rotate(-45deg);margin-left:.15em}
+.hero .actions a.btn{border-color:var(--nav);color:var(--nav)}
+.hero .actions a.btn.plein{background:var(--nav);color:#fff}
+.hero .actions a.btn.plein:hover{background:#A83A22}
+.hero .actions a.btn::after{content:"";width:.5em;height:.5em;border:solid currentColor;border-width:0 3px 3px 0;transform:rotate(-45deg);margin-left:.2em}
+.btn-construire{background:var(--nav)!important;border-color:var(--nav)!important;color:#fff!important}
+.btn-construire::after{content:"";width:.5em;height:.5em;border:solid currentColor;border-width:0 3px 3px 0;transform:rotate(-45deg);margin-left:.3em}
+.portes .fl{color:var(--nav-clair);font-weight:800}
+.sous-choix a{position:relative;padding-right:2.4rem}
+.sous-choix a{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='22' viewBox='0 0 14 22'%3E%3Cpath d='M3 3l8 8-8 8' fill='none' stroke='%23EC5E39' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 1rem center!important}
+.sous-choix a:hover,.portes a:hover{box-shadow:0 0 0 2px var(--nav)}
+.fil a{color:var(--nav)}
+.progression a[aria-current="step"] .num{background:var(--nav-clair);border-color:var(--nav-clair);color:#fff}
+.sp-segments .sp-ici > span{background:var(--nav-clair);box-shadow:0 0 0 2px #fff,0 0 0 3px var(--nav)}
+.sp-segments a:hover{background:var(--nav-clair)}
+.coins::after{background:var(--nav-clair)}
+article.coins::after,.fiche::after{background:var(--ciel)}
+/* --- Jaune : choix et productions de l’apprenant --- */
+textarea,.ch input[type=text]{background:var(--choix-fond)!important;border-color:var(--colza)!important}
+textarea:focus,.ch input[type=text]:focus{outline:3px solid var(--colza);outline-offset:1px}
+.choix-bin input:checked+label{background:var(--choix);border-color:var(--colza);color:var(--encre)}
+.radios input,.etapes input{accent-color:var(--colza)}
+.pistes button[aria-pressed="true"]{background:var(--choix);border-color:var(--colza);color:var(--encre)}
+.onglets button[aria-selected="true"]{background:var(--choix);border-color:var(--colza);color:var(--encre)}
+.onglets button[aria-selected="true"] span{color:var(--texte)}
+.cercle[aria-pressed="true"]{border-color:var(--colza);border-width:5px}
+.cercle.c4{border-color:var(--encre)}
+.cercle.c4[aria-pressed="true"]{border-color:var(--colza)}
+.ranger button.range{background:var(--choix);border-color:var(--colza)}
+.options button.juste{border-color:var(--colza);background:var(--choix)}
+.options button.faux{border-color:#9AA7A8;background:#EEF1F1}
+.retour.non{border-color:#9AA7A8}
+.carnet-ligne p{background:var(--choix-fond);border-left:4px solid var(--colza);padding:.4rem .7rem;border-radius:0}
+.apercu .fiche,.message-apercu{border-color:var(--colza)}
+.apercu h3::before{content:"";display:inline-block;width:.7rem;height:.7rem;border-radius:50%;background:var(--colza);margin-right:.45rem}
+.recap{border-left:8px solid var(--colza)}
+.recap li.coche{text-decoration-color:var(--colza)}
+.defi{background:var(--teinte);border:2px solid var(--bocage)}
+.regard-tag{background:var(--encre);color:#fff}
+.code-couleur{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1rem 0}
+.code-couleur div{border-radius:12px;padding:.8rem 1rem;border:2px solid}
+.code-couleur .cc-vert{border-color:var(--bocage)}
+.code-couleur .cc-jaune{border-color:var(--colza);background:var(--choix-fond)}
+.code-couleur .cc-rouge{border-color:var(--nav);color:var(--nav)}
+@media (max-width:860px){.code-couleur{grid-template-columns:1fr}}
 
 footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
 
@@ -1316,6 +1375,8 @@ VUES["a-propos"]=()=>`<div class="wrap vue">
     <p>« Mille façons de reconnaître » est un guide d’abord pour les apprenants de l’enseignement agricole, en lycée comme en maison familiale rurale. Il peut servir de support à un atelier de découverte de la reconnaissance et des badges. Il les aide à repérer les mille façons dont ils sont reconnus, à comprendre comment est construit un badge numérique, et à construire le leur, ou à reconnaître les autres.</p>
     <p>Il s’inscrit dans la démarche d’<a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">OB-EA, Reconnaissance et Open badges pour l’Enseignement Agricole</a>, et dans les principes de la reconnaissance ouverte.</p>
     <p>Les badges, eux, ne sont pas réservés aux apprenants : maîtres de stage, enseignants, formateurs et partenaires peuvent aussi être reconnus. La reconnaissance est une relation entre tous ceux qui partagent une expérience.</p>
+    <h3>Le code couleur</h3>
+    <div class="code-couleur"><div class="cc-vert"><strong>Vert</strong> : le texte et la structure du site.</div><div class="cc-jaune"><strong>Jaune</strong> : ce que tu choisis, ce que tu écris, ce que tu déposes.</div><div class="cc-rouge"><strong>Rouge</strong> : pour avancer, revenir ou changer de page.</div></div>
     <h3>Vos données</h3>
     <p>Ce site n’enregistre rien. Il ne dépose aucun cookie, n’utilise aucun outil de mesure d’audience et ne fait appel à aucun service extérieur : les polices sont hébergées avec le site. Ce que vous écrivez dans les formulaires reste dans votre navigateur et disparaît quand vous fermez la page.</p>
     <h3>Une plateforme au choix</h3>
@@ -1595,6 +1656,8 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">25 min</span><div><strong>Les parcours</strong><p>Chacun choisit une porte dans <a href="#parcours">les parcours</a> et va jusqu’à l’atelier. Ceux qui le souhaitent téléchargent leur fiche ou leur demande d’endossement.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Clôture</strong><p>Tour de table : « Un regard que je vais demander, ou que je vais donner. » Rappeler les règles : c’est toi qui décides, rien n’est noté.</p></div></li>
   </ol>
+  <h3 class="sous-titre">Le code couleur du site</h3>
+  <div class="code-couleur"><div class="cc-vert"><strong>Vert</strong> : le texte et la structure du site.</div><div class="cc-jaune"><strong>Jaune</strong> : ce que l’apprenant choisit, écrit, dépose.</div><div class="cc-rouge"><strong>Rouge</strong> : pour avancer, revenir ou changer de page.</div></div>
   <h3 class="sous-titre">Points de vigilance</h3>
   <ul class="prose">
     <li>Le badge reste volontaire : personne n’est obligé de créer ou de montrer quoi que ce soit.</li>
