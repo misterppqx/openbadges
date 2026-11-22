@@ -106,6 +106,7 @@ main:focus{outline:none}
 .reflexion label{font-weight:700;display:block;margin-bottom:.4rem}
 textarea{width:100%;font:inherit;padding:.8rem;border-radius:var(--r-petit);border:2px solid #BFD9D6;background:#fff;min-height:6rem;resize:vertical}
 .note{font-size:.95rem;color:var(--doux)}
+.note-saisie{font-size:.9rem;color:var(--doux);border-left:4px solid var(--colza);padding:.2rem 0 .2rem .7rem;margin:1rem 0}
 
 /* ---------- boussole ---------- */
 .boussole{display:grid;gap:.8rem;margin:1.5rem 0;max-width:760px}
@@ -1674,7 +1675,7 @@ VUES.acteur=()=>`<div class="wrap vue">
   <div class="defi"><h3>Le défi du jour</h3><p id="defi-texte">${DEFIS[0]}</p><button type="button" class="btn petit" id="defi-autre">Une autre idée</button><label for="r-qui-reco" class="lab-like">Qui vas-tu reconnaître aujourd’hui, et comment ?</label><textarea id="r-qui-reco"></textarea><p class="note">Pas besoin d’outil pour ça : juste toi.</p></div>
   <section class="carnet" aria-labelledby="titre-carnet">
     <h3 id="titre-carnet">Mon carnet de reconnaissance</h3>
-    <p>Tout ce que tu as écrit pendant ce temps de réflexion, réuni au même endroit. Garde-le si tu veux : rien n’est enregistré, tout disparaît quand tu fermes la page.</p>
+    <p>Tout ce que tu as écrit pendant ce temps de réflexion, réuni au même endroit. Rien n’est envoyé ni enregistré : tout disparaît si tu recharges ou fermes le site. Copie-le ou télécharge-le pour le garder.</p>
     <div id="carnet-apercu">${Object.entries(GARDE).filter(([k])=>k!=="r-qui-reco").map(([k,q])=>`<div class="carnet-ligne"><strong>${q}</strong><p>${REFLEXIONS[k]?esc(REFLEXIONS[k]):`<span class="a-remplir">Pas encore de réponse</span>`}</p></div>`).join("")}</div>
     <div class="actions"><button type="button" class="btn petit" id="copier-carnet">Copier mon carnet</button><button type="button" class="btn petit" id="telecharger-carnet">Télécharger en .txt</button></div>
     <p class="statut" id="statut-carnet" aria-live="polite"></p>
@@ -1727,6 +1728,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
   <div class="anim-cadre">
     <div><h3>Pour qui</h3><p>Un groupe de 8 à 30 apprenants, idéalement au retour d’une période de stage ou d’alternance.</p></div>
     <div><h3>Matériel</h3><p>Un vidéoprojecteur. Des téléphones ou ordinateurs pour le temps des parcours (facultatif). Des feuilles pour l’exercice des trois regards.</p></div>
+    <div><h3>À savoir</h3><p>Rien n’est enregistré. Prévenez les apprenants : recharger ou fermer la page efface ce qu’ils ont écrit. Faites télécharger le carnet avant la fin de la séance.</p></div>
     <div><h3>Animation</h3><p>Un enseignant, une formatrice, un CPE ou un animateur. Un maître de stage invité, si possible.</p></div>
   </div>
   <h3 class="sous-titre">Temps 1 : Reconnaître (65 min)</h3>
@@ -2123,6 +2125,7 @@ const GARDE={"r1":"La dernière fois qu’on t’a reconnu sans le dire ?","r2":
 document.addEventListener("input",e=>{if(e.target.id&&GARDE[e.target.id]!==undefined)REFLEXIONS[e.target.id]=e.target.value;});
 let VUE_PRECEDENTE="";
 function texteCarnet(){return "MON CARNET DE RECONNAISSANCE\nÉcrit avec « Mille façons de reconnaître »\n\n"+Object.entries(GARDE).map(([k,q])=>q+"\n"+(REFLEXIONS[k]||"(pas de réponse)")).join("\n\n");}
+const NOTE_SAISIE="Ce que tu écris reste sur ton écran tant que tu ne recharges pas ou ne fermes pas le site. Rien n’est envoyé ni enregistré : pense à copier ou télécharger ce que tu veux garder.";
 function afficher(){
   let v=(location.hash||"#accueil").slice(1);
   if(v.startsWith("public-")&&PUBLICS[v.slice(7)]){PUBLIC=v.slice(7);majPiedPublic();location.replace("#accueil");return;}
@@ -2138,6 +2141,9 @@ function afficher(){
   });
   if(cons) brancherConstruire(cons); else brancher(v);
   majSousProgression(cons?"construire-"+cons:v);
+  const champ=$app.querySelector("textarea:not([readonly]),input[type=text]");
+  if(champ){let bloc=champ;while(bloc.parentElement&&!bloc.parentElement.classList.contains("vue"))bloc=bloc.parentElement;
+    if(bloc.parentElement){const n=document.createElement("p");n.className="note-saisie";n.textContent=NOTE_SAISIE+(v==="acteur"?" Ton carnet, en bas de cette page, réunit tout ce que tu as écrit.":"");bloc.before(n);}}
   Object.keys(GARDE).forEach(k=>{const el=document.getElementById(k);if(el&&REFLEXIONS[k])el.value=REFLEXIONS[k];});
   const av=document.getElementById("arrivee-directe");if(av&&!["acteur","badge-numerique"].includes(VUE_PRECEDENTE))av.hidden=false;
   VUE_PRECEDENTE=v;
