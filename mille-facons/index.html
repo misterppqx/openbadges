@@ -647,6 +647,14 @@ body.test-selection #app *{cursor:crosshair}
 @media (max-width:600px){.credits{grid-template-columns:1fr;gap:0}.credits dd{margin-bottom:.6rem}}
 
 /* ---------- zoom CPS ---------- */
+.z-dimensions{list-style:none;padding:0;margin:1.2rem 0;display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;max-width:900px}
+.z-dimensions li{background:#fff;border-left:4px solid var(--bocage);border-radius:10px;padding:.6rem .9rem}
+.z-dimensions strong{color:var(--encre)}
+.z-trois{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.z-trois .ch > label{font-family:"Baloo 2",sans-serif;font-size:1.3rem}
+.z-conte{background:var(--teinte);border-radius:16px;padding:1.2rem 1.4rem;margin:1.8rem 0;max-width:760px}
+.z-conte h3{margin:0 0 .5rem}
+@media (max-width:860px){.z-dimensions,.z-trois{grid-template-columns:1fr}}
 .z-familles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
 .z-familles section{background:#fff;border:3px solid var(--bocage);border-radius:16px;padding:1rem 1.2rem}
 .z-familles h3{font-size:1.2rem;margin:0 0 .4rem}
@@ -1112,7 +1120,7 @@ parcours(){
     <p class="intro">Choisis une porte. Chaque parcours te dit quel badge pourrait aller, comment s’y prend la reconnaissance au quotidien, et les étapes pour avancer.</p>
     <ul class="portes">${PORTES.map(p=>`<li><a class="coins" href="#${p.id}" style="--c:${p.c}"><span><strong>${p.t}</strong><span class="desc">${p.d}</span></span><span class="fl" aria-hidden="true">›</span></a></li>`).join("")}</ul>
     <div class="perdu"><strong>Tu ne sais pas trop ?</strong> Commence par <a href="#mille-facons">les mille façons de reconnaître</a>, ou passe par <a href="#boussole">la boussole</a>. Pour voir comment un badge est construit : <a href="#badge-cest-quoi">ouvre un badge</a>, découvre <a href="#familles">les familles</a> ou <a href="#ecrire-endossement">l’endossement</a>.</div>
-    <a class="z-entree coins" href="#cps-mots"><span><strong>Pour aller plus loin : Zoom sur les CPS</strong><span class="desc">Ce qui se joue avec toi et avec les autres, sur le terrain. Et comment le reconnaître sans en faire une liste de qualités.</span></span><span class="fl" aria-hidden="true">›</span></a>
+    <a class="z-entree coins" href="#cps"><span><strong>Pour aller plus loin : Zoom sur les CPS et CEPS</strong><span class="desc">Ce qui se joue en toi, avec les autres et avec le monde. Comment le repérer, le faire voir par d’autres et, si tu veux, le rendre visible.</span></span><span class="fl" aria-hidden="true">›</span></a>
   </div>`;
 },
 faire(){
@@ -1503,7 +1511,7 @@ VUES.adultes=()=>`<div class="wrap vue">
     <section><h3>Accompagner la création d’un badge</h3><p>Aider à trouver les mots, repérer les traces, suggérer des témoins : c’est le travail du passeur, qu’il soit adulte ou apprenant. Les temps de suivi de stage ou d’alternance, l’ESC, le CDI, la vie scolaire et l’association des apprenants sont des lieux naturels pour cela.</p></section>
     <section><h3>Ce qu’il vaut mieux éviter</h3><ul><li>Noter un badge, ou le rendre obligatoire.</li><li>Le lier à un examen, au contrôle continu ou à une procédure d’orientation.</li><li>Fixer des objectifs chiffrés de badges par classe.</li><li>Écrire le badge à la place de l’apprenant.</li></ul></section>
     <section><h3>Animer un atelier de découverte</h3><p>Ce site peut servir de support à un atelier, en lycée agricole comme en MFR : le parcours de découverte en grand groupe, puis la page des trois regards par groupes de trois, chacun jouant un rôle (professionnel, formateur, apprenant). <a href="#animer">Voir la fiche de déroulé, à imprimer</a>.</p></section>
-    <section><h3>Zoom sur les compétences psychosociales</h3><p>Une rubrique complémentaire pour les apprenants, après les trois temps : situations de terrain, retour réflexif avec un ami critique, reconnaissance entre pairs, postures. Pour vous : <a href="#adultes-cps">CPS, reconnaissance et badges</a>, et la fiche <a href="#animer-cps">Animer le Zoom sur les CPS</a>.</p></section>
+    <section><h3>Zoom sur les compétences psychosociales et écopsychosociales</h3><p>Une rubrique complémentaire pour les apprenants, après les trois temps : se reconnaître, le regard de l’ami critique et du professionnel, le lien au monde, garder une trace. Pour vous : <a href="#adultes-cps">CPS, CEPS et reconnaissance</a>, et la fiche <a href="#animer-cps">Animer le Zoom sur les CPS et CEPS</a>.</p></section>
     <section><h3>Aller plus loin</h3><p>Formations, Générateur d’image et carte des badges de l’enseignement agricole : <a href="https://openbadges.educagri.fr/" target="_blank" rel="noopener">openbadges.educagri.fr</a>.</p></section>
   </div>
   <div class="suite"><a class="btn" href="#accueil">Retour à l’accueil</a><a class="btn plein" href="#mille-facons">Voir le parcours des apprenants</a></div>
@@ -1580,9 +1588,9 @@ BUILD["demande-ms"]={titre:"Demander l’endossement de mon maître de stage",in
   sections:[
     {t:"Ton badge",ch:[{id:"badge",label:"Le nom de ton badge",type:"text",ph:"Je conduis la traite et le soin des veaux"},{id:"fait",label:"Ce que tu as fait chez lui ou chez elle",aide:"Commence par « j’ai… ».",type:"textarea",ph:"j’ai assuré la traite du matin deux jours par semaine"},{id:"quand",label:"Quand",type:"text",ph:"depuis le mois de janvier"}]},
     {t:"Ton maître de stage",ch:[{id:"qui",label:"Son nom",type:"text",ph:"Claire"},{id:"lien",label:"Sa structure",type:"text",ph:"élevage laitier, à [commune]"}]},
-    {t:"Ta demande",ch:[{id:"prenom",label:"Ton prénom",type:"text",ph:"Lucas"},{id:"conseils",label:"Joindre les quatre ingrédients d’un bon endossement",type:"radio",options:["Oui, ça l’aidera","Non"]}]},
+    {t:"Ta demande",ch:[{id:"prenom",label:"Ton prénom",type:"text",ph:"Lucas"},{id:"conseils",label:"Joindre les quatre ingrédients d’un bon endossement",type:"radio",options:["Oui, ça l’aidera","Non"]},{id:"regard",label:"Lui demander aussi un retour sur ta façon de faire",aide:"Face aux imprévus, avec l’équipe, et ce que tu pourrais faire autrement.",type:"radio",options:["Oui","Non"]}]},
     {t:"Le bon moment",html:`<p class="aide">À la fin du stage ou d’une période d’alternance, de vive voix d’abord. Ton formateur ou ton enseignant peut aussi en parler lors de la visite de stage.</p>`}],
-  message:v=>`Bonjour ${v.qui||"[nom]"},\n\n${v.quand?`${v.quand.charAt(0).toUpperCase()+v.quand.slice(1)}, `:""}${v.fait||"[ce que tu as fait]"}, et vous m’avez vu travailler.\nJ’ai créé un badge « ${v.badge||"[nom du badge]"} » pour garder une trace de ce que j’ai appris chez vous. Votre regard de professionnel compte beaucoup pour moi : accepteriez-vous d’écrire quelques lignes sur ce que vous avez observé ?${v.conseils==="Non"?"":"\n\n"+TEXTE_INGREDIENTS}\n\nMerci pour tout ce que vous m’avez transmis,\n${v.prenom||"[ton prénom]"}`,
+  message:v=>`Bonjour ${v.qui||"[nom]"},\n\n${v.quand?`${v.quand.charAt(0).toUpperCase()+v.quand.slice(1)}, `:""}${v.fait||"[ce que tu as fait]"}, et vous m’avez vu travailler.\nJ’ai créé un badge « ${v.badge||"[nom du badge]"} » pour garder une trace de ce que j’ai appris chez vous. Votre regard de professionnel compte beaucoup pour moi : accepteriez-vous d’écrire quelques lignes sur ce que vous avez observé ?${v.regard==="Oui"?"\n\nSi vous le souhaitez, vous pouvez aussi me dire ce que vous avez vu dans ma façon de faire face aux imprévus et de travailler avec l’équipe, et ce que je pourrais faire autrement.":""}${v.conseils==="Non"?"":"\n\n"+TEXTE_INGREDIENTS}\n\nMerci pour tout ce que vous m’avez transmis,\n${v.prenom||"[ton prénom]"}`,
   apercu:v=>`<div class="message-apercu"><p class="msg-a">À : ${esc(v.qui||"…")}${v.lien?`, ${esc(v.lien)}`:""}</p><pre>${esc(BUILD["demande-ms"].message(v))}</pre></div>`};
 PARCOURS["demander-maitre"]={porte:null,t:"Demander l’endossement de mon maître de stage",
   intro:"Pour un apprenant, la première reconnaissance qui vaut est celle du professionnel qui l’a vu travailler. Demander son endossement, c’est aussi reconnaître son rôle de maître de stage.",
@@ -1593,6 +1601,7 @@ PARCOURS["demander-maitre"]={porte:null,t:"Demander l’endossement de mon maît
     {t:"Choisis le badge",d:"Celui qui raconte ce que tu as fait chez ton maître de stage."},
     {t:"Choisis le moment",d:"À la fin du stage ou d’une période d’alternance. Pas en plein coup de feu."},
     {t:"Demande de vive voix",d:"Puis envoie ton message écrit, avec les quatre ingrédients pour l’aider."},
+    {t:"Demande-lui aussi un retour sur ta façon de faire",d:"Face aux imprévus, avec l’équipe, et ce que tu pourrais faire autrement : ces compétences se voient dans le geste professionnel.",lien:"cps-regards"},
     {t:"Pense aux autres regards",d:"Ton formateur ou ton enseignant peut ajouter le sien, et toi le tien. Ensemble, ils disent plus que chacun.",lien:"ecrire-endossement"},
     {t:"Reconnais-le en retour",d:"Tu peux, toi aussi, reconnaître ton maître de stage comme transmetteur de son métier.",lien:"reco-tuteur"}
   ]};
@@ -1824,7 +1833,7 @@ VUES.animer=()=>`<div class="wrap vue fiche-animation">
     <li><span class="duree">25 min</span><div><strong>Les parcours</strong><p>Chacun choisit une porte dans <a href="#parcours">les parcours</a> et va jusqu’à l’atelier. Ceux qui le souhaitent téléchargent leur fiche ou leur demande d’endossement.</p></div></li>
     <li><span class="duree">10 min</span><div><strong>Clôture</strong><p>Tour de table : « Un regard que je vais demander, ou que je vais donner. » Rappeler les règles : c’est toi qui décides, rien n’est noté.</p></div></li>
   </ol>
-  <p class="prose">Pour prolonger, une séquence d’environ une heure sur les compétences psychosociales : <a href="#animer-cps">Animer le Zoom sur les CPS</a>.</p>
+  <p class="prose">Pour prolonger, une séquence d’environ 45 minutes sur les compétences psychosociales et écopsychosociales : <a href="#animer-cps">Animer le Zoom sur les CPS et CEPS</a>.</p>
   <h3 class="sous-titre">Adapter les exemples à votre groupe</h3>
   <p class="prose">Partagez le lien qui correspond à votre groupe : le site s’ouvre avec des exemples adaptés. Pour l’instant, l’adaptation concerne le temps 1, Reconnaître.</p>
   <ul class="prose liens-publics"><li><a href="#public-college">4e, 3e ou 2nde pro</a> : adresse se terminant par <code>#public-college</code></li><li><a href="#public-bac">1re ou Tle, Bac pro ou STAV</a> : <code>#public-bac</code></li><li><a href="#public-bts">BTS</a> : <code>#public-bts</code></li></ul>
@@ -1933,7 +1942,7 @@ function vueConstruire(pid){
     return "";
   };
   return `<div class="wrap vue">
-    <p class="fil">${z?`<a href="#cps-mots">Zoom sur les CPS</a> › <a href="#cps-visible">Le rendre visible</a>`:`<a href="#parcours">Les parcours</a> › <a href="#${pid}">${p.t}</a>`} › ${cfg.titre}</p>
+    <p class="fil">${z?`<a href="#cps">Zoom sur les CPS et CEPS</a> › <a href="#cps-trace">Garder une trace</a>`:`<a href="#parcours">Les parcours</a> › <a href="#${pid}">${p.t}</a>`} › ${cfg.titre}</p>
     <h2>${cfg.titre}</h2>
     <p class="intro">${cfg.intro}</p>
     <div class="atelier">
@@ -1953,7 +1962,7 @@ function vueConstruire(pid){
       <p class="statut" aria-live="polite" id="statut-fiche"></p>
       <div class="copie-secours" id="secours-fiche"><textarea readonly></textarea></div>
     </section>
-    ${z?suite("cps-visible","Le rendre visible, si tu veux","accueil","Retour à l’accueil"):suite(pid,"Revenir au parcours","parcours","Voir un autre parcours")}
+    ${z?suite("cps-trace","Garder une trace","accueil","Retour à l’accueil"):suite(pid,"Revenir au parcours","parcours","Voir un autre parcours")}
   </div>`;
 }
 function texteFiche(pid){
@@ -2021,7 +2030,7 @@ const ETAPES={
 };
 function etapeDe(v){
   for(const t of [1,2,"Z"]){const i=ETAPES[t].pages.findIndex(p=>p[0]===v);if(i>=0)return [t,i];}
-  if(v==="construire-cps")return ["Z",6];
+  if(v==="construire-cps")return ["Z",4];
   if(["parcours","faire","reconnaitre","role","simplement"].includes(v))return [3,0];
   if(v.startsWith("construire-"))return [3,2];
   if(PARCOURS[v])return [3,1];
@@ -2290,276 +2299,233 @@ function brancher(v){
   }
 }
 
-/* ================= ZOOM SUR LES CPS ================= */
+/* ================= ZOOM SUR LES CPS ET CEPS ================= */
 const URL_NOTE_CPS="https://chlorofil.fr/fileadmin/user_upload/02-diplomes/referentiels/secondaire/fichiers-communs/ref-comm-da-them-comp-psycho.pdf";
 const URL_GUIDE_SFC="https://next-step4-sfc.eu/wp-content/uploads/2024/11/Les-Open-Badges-au-service-de-la-reconnaissance-des-savoir-faire-comportementaux.pdf";
-const CPS_FAMILLES=[
-  {t:"Penser",mots:["Décider, résoudre un problème","Prendre du recul, garder un esprit critique","Imaginer une autre solution","Savoir ce que tu sais faire"]},
-  {t:"Ressentir",mots:["Reconnaître ce que tu ressens et ce dont tu as besoin","Garder ton calme, gérer le stress","Avoir confiance en toi"]},
-  {t:"Être avec les autres",mots:["Te faire comprendre, écouter","Négocier, dire non quand il le faut","Te mettre à la place de l’autre","Coopérer, défendre une idée"]}
+const URL_RESEDA="https://chlorofil.fr/fileadmin/user_upload/reseaux/reseda/reseda-chemin-faisant.pdf";
+const URL_FLORAC="https://www.institut-agro-montpellier.fr/sites/supagro/files/documents/2026/03/31/Institut-Agro-Campus-Florac-FCC-2026.pdf";
+const CPS_DIMENSIONS=[
+  ["Penser","décider, prendre du recul, imaginer une autre solution."],
+  ["Ressentir","reconnaître ce que tu ressens, garder ton calme, avoir confiance en toi."],
+  ["Être avec les autres","écouter, te faire comprendre, coopérer, dire non quand il le faut."],
+  ["Être attentif à ton corps et au monde","sentir tes limites, prendre soin du vivant et des lieux."]
 ];
-const CPS_SIT_MOTS=[
-  "Tu dois finir de rentrer le foin avant l’orage, et ton collègue veut s’arrêter.",
-  "Un camarade se moque de toi en commentaire sous ta photo.",
-  "En stage, on te confie seul la traite pour la première fois."
-];
-const CPS_TERRAIN=[
-  {t:"Ensilage sous la menace de la pluie",d:"Peu de temps, beaucoup de monde, des avis différents.",j:"le stress, la négociation, la décision"},
-  {t:"Sur un chantier forestier",d:"On te demande d’aller plus vite en prenant un risque.",j:"rester ferme, dire non"},
-  {t:"Un animal en danger",d:"Une urgence, il faut agir vite.",j:"garder son calme"},
-  {t:"À l’écoute d’une personne âgée",d:"Elle te raconte sa vie.",j:"l’écoute, l’empathie"},
-  {t:"En vente ou en animation",d:"Un client mécontent, un groupe à faire participer.",j:"la communication, la négociation"},
-  {t:"Un commentaire blessant sur un réseau social",d:"Répondre, ou non ?",j:"la gestion de ses émotions, le choix de répondre ou non"},
-  {t:"Dans un projet de classe",d:"Faire connaître les actions de l’établissement, de l’AS ou de l’ALESA sur le Web, organiser un débat contradictoire sur le territoire, accueillir une résidence d’artiste, créer un tiers lieu ou un bricolab’, mener un inventaire naturaliste, participer à un chantier école ou à un événement, inventer un jeu coopératif…",j:"la coopération, la négociation, la créativité, la prise de parole"}
-];
-const CPS_QUESTIONS=[
-  ["z-q1","Qu’est-ce qui s’est passé ?"],["z-q2","Comment as-tu réagi à ce moment-là ?"],["z-q3","Qu’as-tu ressenti ?"],
-  ["z-q4","Qu’as-tu mobilisé pour y arriver ? Qui t’a aidé ?"],["z-q5","Aurais-tu pu faire ou dire autrement ?"],["z-q6","Qu’est-ce que tu retiens pour la prochaine fois ?"]
-];
-const CPS_ETIQUETTES=[
-  ["Je sais argumenter","J’ai défendu une position, et écouté les autres, dans le débat contradictoire sur l’avenir de notre territoire."],
-  ["Je suis créatif","J’ai conçu avec ma classe un jeu coopératif sur le bien-être animal."],
-  ["Je sais communiquer","J’ai fait connaître le chantier école sur la page de l’ALESA, en choisissant photos et textes avec l’équipe."],
-  ["Je sais travailler en équipe","J’ai participé à l’ouverture du bricolab’ : collecte, réparation et prêt d’outils."]
-];
+const CPS_PISTES=["En stage","Sur le chantier école","Le débat sur l’avenir du territoire","L’ouverture du bricolab’","L’inventaire de la faune et de la flore","La création d’un jeu coopératif","La page de l’ALESA","Un événement de l’établissement"];
 const CPS_POSTURES=[
   ["Je découvre","Le sujet m’intéresse, j’ai envie d’en savoir plus."],
-  ["J’explore","J’y fais attention quand j’agis, et je réfléchis à la façon dont je fais."],
-  ["J’intègre","Je connais mes forces et mes points faibles, et je m’adapte. Quand quelque chose m’est difficile, je sais sur qui m’appuyer."],
+  ["J’explore","J’y fais attention quand j’agis, et je réfléchis à ma façon de faire."],
+  ["J’intègre","Je connais mes forces et mes points faibles, je m’adapte, et je sais m’appuyer sur d’autres."],
   ["J’accompagne","J’aide les autres à prendre conscience de ce qu’ils savent faire."]
 ];
-const GARDE_CPS={"z-perso":"Ma situation",...Object.fromEntries(CPS_QUESTIONS),"z-ami":"Ce que mon ami critique m’a dit ou demandé","z-reco":"Ce que j’ai vu faire à un camarade",
-  "z-e0":"« Je sais argumenter », en badge de pratique","z-e1":"« Je suis créatif », en badge de pratique","z-e2":"« Je sais communiquer », en badge de pratique","z-e3":"« Je sais travailler en équipe », en badge de pratique",
-  "z-appui":"Sur qui je me suis appuyé","z-aider":"Qui je pourrais aider"};
-const ZOOM={mots:{},situation:null,posture:null};
+const GARDE_CPS={
+  "z-m1":"Un bon moment","z-m2":"Un deuxième bon moment","z-m3":"Un troisième bon moment","z-mdit":"Ce que ces moments disent de moi",
+  "z-sit":"Ma situation","z-aide":"Ce qui m’a aidé à y arriver","z-diff":"Ce qui m’a été difficile","z-appui":"Sur qui je me suis appuyé",
+  "z-ami":"Ce que mon ami critique m’a dit ou demandé","z-pro":"Ma question au professionnel, ou sa réponse","z-reco":"Ce que j’ai vu faire à un camarade",
+  "z-mo1":"Ce que j’ai remarqué autour de moi","z-mo2":"Ce que j’ai remarqué en moi, dans mon corps","z-mo3":"Ce que ça a changé dans ma façon de faire"
+};
 document.addEventListener("input",e=>{if(e.target.id&&GARDE_CPS[e.target.id]!==undefined)REFLEXIONS[e.target.id]=e.target.value;});
-function zSituationTitre(){if(ZOOM.situation==="perso")return "Ma propre situation";const s=CPS_TERRAIN[ZOOM.situation];return s?s.t:"";}
 function texteCarnetCPS(){
-  const L=["MON CARNET DU ZOOM SUR LES CPS","Écrit avec « Mille façons de reconnaître »",""];
-  if(ZOOM.situation!==null)L.push("Ma situation : "+zSituationTitre()+(ZOOM.situation==="perso"&&REFLEXIONS["z-perso"]?"\n"+REFLEXIONS["z-perso"]:""),"");
-  Object.entries(GARDE_CPS).filter(([k])=>k!=="z-perso").forEach(([k,q])=>L.push(q,REFLEXIONS[k]||"(pas de réponse)",""));
-  if(ZOOM.posture)L.push("Ma posture : "+ZOOM.posture);
-  return L.join("\n");
+  return "MON CARNET DU ZOOM SUR LES CPS ET CEPS\nÉcrit avec « Mille façons de reconnaître »\n\n"+Object.entries(GARDE_CPS).map(([k,q])=>q+"\n"+(REFLEXIONS[k]||"(pas de réponse)")).join("\n\n");
 }
-const zTemps=`<p class="temps">Zoom sur les CPS, en complément</p>`;
+const zTemps=`<p class="temps">Zoom sur les CPS et CEPS, en complément</p>`;
+const zChamp=(k,lab,ph)=>`<div class="ch"><label for="${k}">${lab}</label><textarea id="${k}"${ph?` placeholder="${ph}"`:""}></textarea></div>`;
 
-VUES["cps-mots"]=()=>`<div class="wrap vue">
+VUES.cps=()=>`<div class="wrap vue">
   ${zTemps}
-  <h2>Ce qui se joue avec toi et avec les autres.</h2>
-  <p class="intro">Les compétences psychosociales (CPS) désignent les capacités mentales, émotionnelles et sociales qui aident à comprendre ce que l’on ressent, à s’adapter aux situations du quotidien, à coopérer et à faire des choix éclairés. Tu les utilises tous les jours, souvent sans y penser : sur un chantier, en classe, en stage, avec tes amis.</p>
-  <div class="z-familles">${CPS_FAMILLES.map(f=>`<section><h3>${f.t}</h3><ul>${f.mots.map(m=>`<li>${m}</li>`).join("")}</ul></section>`).join("")}</div>
-  <div class="encart inf"><p>Ces mots ne sont pas une liste à cocher. Ce sont des mots pour dire ce que tu fais. Et ils vont souvent ensemble : garder son calme aide à décider, écouter aide à coopérer.</p></div>
-  <h3 class="sous-titre">Quels mots pour cette situation ?</h3>
-  <p class="prose">Choisis les mots qui décrivent chaque situation. Il n’y a pas de bonne réponse.</p>
-  <ol class="jeu z-mots">${CPS_SIT_MOTS.map((s,i)=>`<li><p class="sit">${s}</p>
-    ${CPS_FAMILLES.map((f,fi)=>`<div class="z-ligne"><span class="z-fam">${f.t}</span><div class="pistes" role="group" aria-label="${f.t}">${f.mots.map((m,mi)=>{const k=fi+"-"+mi;return `<button type="button" data-zmot="${i}" data-k="${k}" aria-pressed="${!!(ZOOM.mots[i]||[]).includes(k)}">${m}</button>`;}).join("")}</div></div>`).join("")}
-    <p class="retour" id="zmot-retour-${i}" aria-live="polite" ${(ZOOM.mots[i]||[]).length?"":"hidden"}>${zRetourMots(i)}</p></li>`).join("")}</ol>
-  ${suite("parcours","Revenir aux parcours","cps-terrain","Ça dépend du terrain")}
-</div>`;
-function zRetourMots(i){
-  const ch=ZOOM.mots[i]||[];if(!ch.length)return "";
-  const fams=[...new Set(ch.map(k=>+k.split("-")[0]))].map(f=>CPS_FAMILLES[f].t.toLowerCase());
-  return fams.length>1?`Tu as choisi des mots de ${fams.length} familles : ${fams.join(", ")}. C’est presque toujours le cas : dans une situation, on pense, on ressent et on est avec les autres en même temps.`:`Tous tes mots sont dans la famille « ${fams[0]} ». Regarde les autres familles : y a-t-il aussi quelque chose qui se joue là ?`;
-}
-
-VUES["cps-terrain"]=()=>`<div class="wrap vue">
-  ${zTemps}
-  <h2>Les CPS se voient en situation.</h2>
-  <p class="intro">Décider, ce n’est pas pareil pour un footballeur, une boulangère ou une agricultrice. Une même CPS change selon le métier, le lieu, les personnes. C’est pour ça qu’on la regarde toujours dans une situation précise.</p>
-  <p class="prose">Choisis la situation qui te parle le plus, ou décris la tienne. Tu y reviendras à la page suivante.</p>
-  <ul class="z-cartes" role="list">${CPS_TERRAIN.map((s,i)=>`<li><button type="button" data-zsit="${i}" aria-pressed="${ZOOM.situation===i}"><strong>${s.t}</strong><span>${s.d}</span><em>Se jouent : ${s.j}.</em></button></li>`).join("")}
-    <li><button type="button" data-zsit="perso" aria-pressed="${ZOOM.situation==="perso"}"><strong>Ta propre situation</strong><span>Un moment de stage, de projet, de vie dans l’établissement.</span></button></li></ul>
-  <div class="ch" id="z-perso-bloc" ${ZOOM.situation==="perso"?"":"hidden"}><label for="z-perso">Décris ta situation en quelques mots</label><textarea id="z-perso" placeholder="Par exemple : le jour où j’ai dû présenter notre projet devant les parents…"></textarea></div>
-  <div class="encart inf"><p>Ton maître de stage voit des choses que tes enseignants ne voient pas, et l’inverse. Chaque terrain montre une partie de toi.</p></div>
-  ${suite("cps-mots","Des mots pour dire","cps-retour","Revenir sur ce qu’on a vécu")}
+  <h2>Ce qui se joue en toi, avec les autres et avec le monde.</h2>
+  <p class="intro">Les compétences psychosociales (CPS) désignent les capacités mentales, émotionnelles et sociales qui aident à comprendre ce que l’on ressent, à s’adapter aux situations du quotidien, à coopérer et à faire des choix éclairés. Dans l’enseignement agricole, on parle aussi de compétences écopsychosociales (CEPS) : on y ajoute l’attention à son corps et au monde qui t’entoure, les lieux, les animaux, les plantes, le vivant.</p>
+  <ul class="z-dimensions">${CPS_DIMENSIONS.map(d=>`<li><strong>${d[0]}</strong> : ${d[1]}</li>`).join("")}</ul>
+  <div class="encart inf"><p>Ici, pas de cours sur les CPS : tes enseignants peuvent t’en dire plus. Ce Zoom t’aide à les repérer dans ce que tu fais, à les mettre en mots et, si tu le veux, à les rendre visibles.</p></div>
+  <p class="prose"><strong>Elles se voient dans ce que tu fais</strong> : en stage, sur un chantier école, dans un projet de classe (un débat sur l’avenir du territoire, un bricolab’, un inventaire de la faune et de la flore, un jeu coopératif, la page de l’ALESA…).</p>
+  <ol class="z-ordre"><li><strong>Me reconnaître</strong><span>ce que je fais bien, ce qui m’est difficile</span></li><li><strong>Le regard des autres</strong><span>l’ami critique, le professionnel</span></li><li><strong>Mon lien au monde</strong><span>mon corps, le vivant, les lieux</span></li><li><strong>Garder une trace</strong><span>pour moi, ou pour le montrer</span></li></ol>
+  ${suite("parcours","Revenir aux parcours","cps-moi","Me reconnaître")}
 </div>`;
 
-VUES["cps-retour"]=()=>`<div class="wrap vue">
+VUES["cps-moi"]=()=>`<div class="wrap vue">
   ${zTemps}
-  <h2>Y repenser seul, puis avec un autre.</h2>
-  <p class="intro">Vivre une situation ne suffit pas. Ce qui fait progresser, c’est de prendre un moment, après coup, pour y repenser : ce qui s’est passé, ce que tu as ressenti, ce que tu as fait. Personne ne te notera.</p>
-  <p class="z-sit-choisie">${ZOOM.situation!==null?`Ta situation : <strong>${esc(zSituationTitre())}</strong>${ZOOM.situation==="perso"&&REFLEXIONS["z-perso"]?` : ${esc(REFLEXIONS["z-perso"])}`:""}`:`Tu n’as pas encore choisi de situation : <a href="#cps-terrain">choisis-en une</a>, ou pense à un moment que tu as vécu.`}</p>
-  <section class="ecrire-soi" aria-labelledby="z-seul">
-    <h3 id="z-seul" class="sous-titre">1. Seul</h3>
-    <p class="prose">Réponds aux questions, toutes ou seulement certaines. Tes réponses vont dans ton carnet du Zoom, à la dernière page.</p>
-    ${CPS_QUESTIONS.map(([k,q])=>`<div class="ch"><label for="${k}">${q}</label><textarea id="${k}"></textarea></div>`).join("")}
+  <h2>Ce que je fais bien, ce qui m’est difficile.</h2>
+  <p class="intro">Te reconnaître toi-même, c’est remarquer ce que tu as bien fait, mais aussi ce qui t’a coûté. Les deux comptent.</p>
+  <section class="ecrire-soi" aria-labelledby="z-moments">
+    <h3 id="z-moments" class="sous-titre">Mes trois bons moments</h3>
+    <p class="prose">Pense à une journée de stage, de chantier ou de projet. Note trois moments où tu as fait la bonne chose au bon moment.</p>
+    <div class="z-trois">${zChamp("z-m1","1")}${zChamp("z-m2","2")}${zChamp("z-m3","3")}</div>
+    ${zChamp("z-mdit","Qu’est-ce que ces moments disent de toi ?")}
+    <p class="note">Inspiré du journal des kaïros, tenu chaque soir pendant les itinérances de l’Institut Agro de Florac.</p>
   </section>
+  <section class="z-conte" aria-labelledby="z-conte-titre">
+    <h3 id="z-conte-titre">Le conte du porteur d’eau</h3>
+    <p>Un porteur d’eau porte deux jarres. L’une est fêlée et perd la moitié de son eau à chaque voyage. Elle a honte, et finit par s’excuser. Le porteur lui montre alors le chemin : de son côté seulement, des fleurs ont poussé. Il les a semées en sachant qu’elle les arroserait chaque jour.</p>
+    <p class="message-fort">Un point faible peut devenir une ressource. Et souvent, c’est le regard d’un autre qui le révèle.</p>
+  </section>
+  <section class="ecrire-soi" aria-labelledby="z-sit-titre">
+    <h3 id="z-sit-titre" class="sous-titre">Une situation que tu as vécue</h3>
+    <div class="ch"><label for="z-sit">Laquelle ?</label><p class="aide">Une idée pour commencer :</p><div class="pistes">${CPS_PISTES.map(p=>`<button type="button" data-zpiste="${p}">${p}</button>`).join("")}</div><textarea id="z-sit" placeholder="Par exemple : le jour où on a dû finir le chantier école avant la pluie…"></textarea></div>
+    ${zChamp("z-aide","Ce qui t’a aidé à y arriver")}
+    ${zChamp("z-diff","Ce qui t’a été difficile")}
+    ${zChamp("z-appui","Sur qui tu t’es appuyé")}
+  </section>
+  <div class="encart inf"><p>Connaître ses limites, c’est une force. Une personne qui a du mal à prendre des initiatives, mais qui le sait et s’appuie sur un collègue qui aime ça, réussit très bien.</p></div>
+  ${suite("cps","En bref","cps-regards","Le regard des autres")}
+</div>`;
+
+VUES["cps-regards"]=()=>`<div class="wrap vue">
+  ${zTemps}
+  <h2>Les autres voient ce que tu ne vois pas.</h2>
   <section class="z-ami" aria-labelledby="z-ami-titre">
-    <h3 id="z-ami-titre" class="sous-titre">2. Avec un ami critique</h3>
-    <p class="prose">Seul, on ne voit pas tout. Un ami critique, c’est une personne en qui tu as confiance : un camarade, ton maître de stage, un enseignant. Tu lui racontes ta situation. Il t’écoute, te pose des questions et te dit honnêtement ce qu’il a vu, sans te juger.</p>
+    <h3 id="z-ami-titre" class="sous-titre">L’ami critique</h3>
+    <p class="prose">Une personne en qui tu as confiance, un camarade, un enseignant. Tu lui racontes ta situation. Il t’écoute, te pose des questions et te dit honnêtement ce qu’il a vu, sans te juger.</p>
     <div class="mesure">
+      <div><h3>Les règles de l’écoute</h3><p>Écouter jusqu’au bout, sans interrompre, sans juger, sans donner tout de suite des conseils. Respecter les silences. Puis les rôles s’inversent.</p></div>
       <div class="reco"><h3>Questions pour l’ami critique</h3><ul><li>Qu’est-ce que tu as remarqué dans ce qu’il raconte ?</li><li>Qu’est-ce qui te semble réussi ?</li><li>Qu’est-ce qu’il n’a peut-être pas vu ?</li><li>Quelle question pourrait l’aider à aller plus loin ?</li></ul></div>
-      <div><h3>Les règles</h3><p>C’est toi qui choisis ton ami critique, et ce que tu partages avec lui. Il est bienveillant et honnête à la fois. Puis les rôles peuvent s’inverser : tu deviens l’ami critique de l’autre.</p></div>
     </div>
-    <div class="ch"><label for="z-ami">Ce que ton ami critique t’a dit ou demandé</label><textarea id="z-ami"></textarea></div>
+    ${zChamp("z-ami","Ce que ton ami critique t’a dit ou demandé")}
   </section>
-  <div class="encart inf"><p>Écrire ce que tu as vécu, c’est déjà une façon de te reconnaître toi-même. C’est aussi ce que tu feras si un jour tu documentes un badge.</p></div>
-  ${suite("cps-terrain","Ça dépend du terrain","cps-reconnaitre","Reconnaître, c’est déjà une compétence")}
-</div>`;
-
-VUES["cps-reconnaitre"]=()=>`<div class="wrap vue">
-  ${zTemps}
-  <h2>Reconnaître l’autre, ça s’apprend aussi.</h2>
-  <p class="intro">Remarquer ce qu’un camarade a bien fait, le lui dire, avec les bons mots : c’est une CPS. Elle mobilise l’écoute, l’empathie, la communication. Et elle aide l’autre à prendre conscience de ce qu’il sait faire. Être l’ami critique de quelqu’un, c’est déjà le reconnaître.</p>
-  <h3 class="sous-titre">Décris ce que la personne a fait, pas ce qu’elle est</h3>
+  <section class="z-ami" aria-labelledby="z-pro-titre">
+    <h3 id="z-pro-titre" class="sous-titre">Le regard du professionnel</h3>
+    <p class="prose">Ton maître de stage te voit travailler. Il voit comment tu fais face à un imprévu, comment tu travailles avec l’équipe, comment tu prends soin des animaux ou du matériel. Ces compétences ne se voient pas à côté du métier : elles sont dans le geste professionnel.</p>
+    <div class="mesure"><div class="reco"><h3>Des questions à lui poser</h3><ul><li>Qu’as-tu vu dans ma façon de faire face aux imprévus ?</li><li>Comment je travaille avec l’équipe ?</li><li>Qu’est-ce que je pourrais faire autrement ?</li></ul></div>
+      <div><h3>Pour garder son regard</h3><p>Tu peux lui demander d’écrire quelques lignes sur ton badge. La demande d’endossement reprend ces questions : <a href="#demander-maitre">Demander l’endossement de mon maître de stage</a>.</p></div></div>
+    ${zChamp("z-pro","La question que tu vas lui poser, ou ce qu’il t’a répondu")}
+  </section>
+  <h3 class="sous-titre">Bien dire : décris ce que la personne a fait, pas ce qu’elle est</h3>
   <div class="table-formes"><table><thead><tr><th scope="col">Plutôt que</th><th scope="col">Dis</th></tr></thead><tbody>
-    <tr><td>Tu es organisé.</td><td>Sur le chantier, tu as proposé qu’on se répartisse les rangs, et on a fini avant la pluie.</td></tr>
-    <tr><td>Tu es gentille.</td><td>Quand Paul était perdu pendant les TP, tu as pris le temps de lui réexpliquer.</td></tr>
-    <tr><td>Tu es courageux.</td><td>Tu as dit au chef d’équipe que c’était dangereux, alors que personne n’osait.</td></tr>
+    <tr><td>Tu es organisé.</td><td>Sur le chantier école, tu as proposé qu’on se répartisse les tâches, et on a fini à temps.</td></tr>
+    <tr><td>Tu es créative.</td><td>Pour le jeu coopératif, c’est toi qui as eu l’idée des cartes « aléas météo ».</td></tr>
+    <tr><td>Tu es courageux.</td><td>Pendant le débat, tu as défendu ton avis alors que la salle était contre.</td></tr>
   </tbody></table></div>
-  <p class="message-fort">Une qualité colle une étiquette. Un geste décrit, la personne peut le refaire, et les autres peuvent le reconnaître aussi.</p>
-  <div class="ch"><label for="z-reco">Écris à un camarade ce que tu l’as vu faire, en une ou deux phrases</label><textarea id="z-reco" placeholder="Quand…, tu as…"></textarea></div>
+  ${zChamp("z-reco","Écris à un camarade ce que tu l’as vu faire","Quand…, tu as…")}
   <p class="note">Tu choisis ensuite de le lui dire, de le lui écrire, ou de le garder pour toi.</p>
-  ${suite("cps-retour","Revenir sur ce qu’on a vécu","cps-badge","Un badge n’est pas une liste de qualités")}
+  ${suite("cps-moi","Me reconnaître","cps-monde","Mon lien au monde")}
 </div>`;
 
-VUES["cps-badge"]=()=>`<div class="wrap vue">
+VUES["cps-monde"]=()=>`<div class="wrap vue">
   ${zTemps}
-  <h2>Pas de badge « Empathie ».</h2>
-  <p class="intro">On pourrait imaginer un badge pour chaque CPS : « Calme », « Empathique », « Bon communicant ». Mais une CPS n’existe pas toute seule. Elle se voit dans ce que tu fais, avec d’autres, dans une situation. Et si tu n’avais pas le badge « Calme », ça voudrait dire quoi ? Que tu ne l’es jamais ? Personne ne se résume à une liste de qualités.</p>
-  <ol class="z-ordre"><li><strong>Une personne</strong><span>qui s’engage</span></li><li><strong>Une pratique</strong><span>ce qu’elle fait, avec d’autres</span></li><li><strong>Des CPS</strong><span>que cette pratique a demandées</span></li></ol>
-  <p class="prose">On reconnaît dans cet ordre-là.</p>
-  <h3 class="sous-titre">Transforme ces badges-étiquettes en badges de pratique</h3>
-  <p class="prose">Pour chacun, imagine une situation précise : où, quand, avec qui, ce qui a été fait.</p>
-  ${CPS_ETIQUETTES.map((e,i)=>`<div class="ch"><label for="z-e${i}">« ${e[0]} » devient…</label><textarea id="z-e${i}" placeholder="J’ai…"></textarea></div>`).join("")}
-  <button type="button" class="btn petit" id="z-voir-prop" aria-expanded="false" aria-controls="z-prop">Voir des propositions</button>
-  <div class="table-formes" id="z-prop" hidden><table><thead><tr><th scope="col">Badge-étiquette</th><th scope="col">Badge de pratique</th></tr></thead><tbody>${CPS_ETIQUETTES.map(e=>`<tr><td>${e[0]}</td><td>${e[1]}</td></tr>`).join("")}</tbody></table></div>
-  <div class="encart inf"><p>Un badge de pratique dit où, quand, avec qui. Il peut recevoir des endossements de ceux qui étaient là. Un badge-étiquette, lui, ne prouve rien à personne.</p></div>
-  ${suite("cps-reconnaitre","Reconnaître, c’est déjà une compétence","cps-postures","Où en es-tu ?")}
+  <h2>Attentif à ton corps et au monde qui t’entoure.</h2>
+  <p class="intro">Dans ce que tu fais, tu n’es pas seulement avec des humains. Tu travailles avec des animaux, des plantes, un sol, un paysage, des outils. Et avec ton corps : l’effort, la fatigue, les gestes. Y faire attention, c’est aussi une compétence.</p>
+  <ul class="galerie">${["Remarquer qu’un animal ne va pas bien, avant que ça se voie.","Observer la haie pour l’inventaire de la faune et de la flore, et découvrir ce qu’on n’avait jamais vu.","Sentir qu’il faut faire une pause avant de se blesser sur le chantier école.","Réparer un objet au bricolab’ plutôt que le jeter.","Découvrir un lieu du territoire pendant un projet sportif, culturel ou artistique."].map(x=>`<li><p>${x}</p></li>`).join("")}</ul>
+  <section class="ecrire-soi" aria-labelledby="z-monde-q">
+    <h3 id="z-monde-q" class="sous-titre">Pour ta situation, ou une autre</h3>
+    ${zChamp("z-mo1","Qu’as-tu remarqué autour de toi ?")}
+    ${zChamp("z-mo2","Qu’as-tu remarqué en toi, dans ton corps ?")}
+    ${zChamp("z-mo3","Qu’est-ce que ça a changé dans ta façon de faire ?")}
+  </section>
+  <div class="encart inf"><p>Ce qui touche à ton corps reste à toi. Tu peux le reconnaître pour toi, sans jamais le montrer.</p></div>
+  <p class="note">D’après <a href="${URL_RESEDA}" target="_blank" rel="noopener">Chemin faisant… vers soi, les autres, le monde</a>, RéSéDA, Institut Agro de Florac.</p>
+  ${suite("cps-regards","Le regard des autres","cps-trace","Garder une trace")}
 </div>`;
 
-VUES["cps-postures"]=()=>`<div class="wrap vue">
-  ${zTemps}
-  <h2>Quatre façons d’avancer.</h2>
-  <p class="intro">Plutôt que des niveaux, on peut parler de postures. Elles ne disent pas si tu es « bon » ou « mauvais », mais où tu en es, pour une pratique donnée. Tu peux être à l’aise sur un chantier et découvrir encore ce qui se passe quand tu dois parler devant la classe.</p>
-  <p class="prose">Pour ta situation${ZOOM.situation!==null?` (<strong>${esc(zSituationTitre())}</strong>)`:""}, où en es-tu ?</p>
-  <ul class="z-cartes z-postures" role="list">${CPS_POSTURES.map(p=>`<li><button type="button" data-zpost="${p[0]}" aria-pressed="${ZOOM.posture===p[0]}"><strong>${p[0]}</strong><span>${p[1]}</span></button></li>`).join("")}</ul>
-  <div class="encart inf"><p>« J’intègre » ne veut pas dire tout savoir faire. Une personne qui a du mal à prendre des initiatives, mais qui le sait et qui s’appuie sur un collègue qui aime ça, réussit très bien. Connaître ses limites, c’est une force.</p></div>
-  <div class="reflexion">
-    <div><label for="z-appui">Sur qui t’es-tu appuyé ?</label><textarea id="z-appui"></textarea></div>
-    <div><label for="z-aider">Qui pourrais-tu aider ?</label><textarea id="z-aider"></textarea></div>
-  </div>
-  <p class="note">Postures reprises du projet Erasmus+ NS4-SFC : <a href="${URL_GUIDE_SFC}" target="_blank" rel="noopener">Les Open Badges au service de la reconnaissance des savoir-faire comportementaux</a>, Reconnaître – Open Recognition Alliance.</p>
-  ${suite("cps-badge","Un badge n’est pas une liste de qualités","cps-visible","Le rendre visible, si tu veux")}
-</div>`;
-
-VUES["cps-visible"]=()=>`<div class="wrap vue">
+VUES["cps-trace"]=()=>`<div class="wrap vue">
   ${zTemps}
   <h2>Garder pour toi, ou montrer.</h2>
-  <p class="intro">Ce que tu viens d’écrire a déjà de la valeur, même si personne ne le voit. Certaines choses se vivent dans l’intime : tes émotions, tes relations. Elles peuvent très bien rester là. D’autres peuvent t’être utiles si d’autres les voient : pour un stage, une formation, un engagement.</p>
+  <p class="intro">Ce que tu viens d’écrire a déjà de la valeur, même si personne ne le voit. Ce qui touche à tes émotions, à ton corps, à tes relations peut très bien rester là. D’autres choses peuvent t’être utiles si d’autres les voient : pour un stage, une formation, un engagement.</p>
   <p class="message-fort">As-tu besoin de rendre cette reconnaissance visible ? Pour qui, et pour quoi faire ?</p>
+  <section class="encart inf"><h3>Pas de badge « Empathie »</h3><p>Un badge par CPS ferait croire que ne pas l’avoir, c’est ne pas savoir. On reconnaît une personne qui s’engage, puis ce qu’elle fait, puis les compétences que cela a demandées.</p>
+    <div class="table-formes"><table><thead><tr><th scope="col">Badge-étiquette</th><th scope="col">Badge de pratique</th></tr></thead><tbody>
+      <tr><td>Je sais argumenter</td><td>J’ai défendu une position, et écouté les autres, dans le débat contradictoire sur l’avenir de notre territoire</td></tr>
+      <tr><td>Je respecte le vivant</td><td>J’ai organisé le relevé des oiseaux de la haie du lycée pour l’inventaire naturaliste</td></tr>
+    </tbody></table></div></section>
   <div class="mesure">
-    <div class="reco"><h3>Un badge de pratique</h3><p>La situation, ce que tu as fait, ce que tu as appris, et ceux qui peuvent en témoigner.</p><p class="cercle-ex">« J’ai organisé le relevé des oiseaux de la haie du lycée pour l’inventaire naturaliste », endossé par le naturaliste partenaire et par tes camarades d’équipe.</p></div>
-    <div class="reco"><h3>Un badge de posture</h3><p>« J’explore », « J’intègre » ou « J’accompagne », pour une pratique que tu nommes.</p><p class="cercle-ex">« J’accompagne : j’aide les nouveaux à utiliser les outils du bricolab’ en sécurité. »</p></div>
+    <div class="reco"><h3>Un badge de pratique</h3><p>La situation, ce que tu as fait, ce que tu as appris, et ceux qui peuvent en témoigner : ton ami critique, ton maître de stage, un partenaire. Tu peux, si tu veux, y indiquer où tu en es : je découvre, j’explore, j’intègre, j’accompagne.</p><a class="btn plein" href="#construire-cps">Construire mon badge de pratique</a></div>
+    <div class="reco"><h3>Et à plusieurs : un badge de projet</h3><p>Beaucoup de compétences se voient à plusieurs : coopérer, négocier, s’organiser, tenir ses engagements. Un badge de projet dit « Nous avons réalisé… ». Il est proposé à tous ceux qui ont participé, et chacun le documente avec sa propre part.</p><p class="cercle-ex">« Nous avons ouvert le bricolab’ de l’établissement », proposé par l’ALESA à toute l’équipe ; chacun y raconte ce qu’il a fait, et ce que le projet lui a demandé.</p><a class="btn" href="#construire-creer">Construire notre badge de projet</a></div>
   </div>
   <p class="prose"><strong>À quoi ça peut servir :</strong> dans un dossier de poursuite d’études, auprès d’un employeur, pour l’unité facultative « Engagement citoyen », ou en BTSA pour valoriser un engagement étudiant.</p>
-  <div class="actions"><a class="btn plein" href="#construire-cps">Construire mon badge de pratique</a></div>
-  <p class="note">Tes réponses des pages précédentes rempliront déjà une partie du badge.</p>
   <section class="carnet" aria-labelledby="titre-carnet-cps">
     <h3 id="titre-carnet-cps">Mon carnet du Zoom</h3>
     <p>Tout ce que tu as écrit dans le Zoom, réuni au même endroit. Rien n’est envoyé ni enregistré : tout disparaît si tu recharges ou fermes le site. Copie-le ou télécharge-le pour le garder.</p>
-    <div>${ZOOM.situation!==null?`<div class="carnet-ligne"><strong>Ma situation</strong><p>${esc(zSituationTitre())}${ZOOM.situation==="perso"&&REFLEXIONS["z-perso"]?" : "+esc(REFLEXIONS["z-perso"]):""}</p></div>`:""}${Object.entries(GARDE_CPS).filter(([k])=>k!=="z-perso").map(([k,q])=>`<div class="carnet-ligne"><strong>${q}</strong><p>${REFLEXIONS[k]?esc(REFLEXIONS[k]):`<span class="a-remplir">Pas encore de réponse</span>`}</p></div>`).join("")}${ZOOM.posture?`<div class="carnet-ligne"><strong>Ma posture</strong><p>${ZOOM.posture}</p></div>`:""}</div>
+    <div>${Object.entries(GARDE_CPS).map(([k,q])=>`<div class="carnet-ligne"><strong>${q}</strong><p>${REFLEXIONS[k]?esc(REFLEXIONS[k]):`<span class="a-remplir">Pas encore de réponse</span>`}</p></div>`).join("")}</div>
     <div class="actions"><button type="button" class="btn petit" id="copier-carnet-cps">Copier mon carnet</button><button type="button" class="btn petit" id="telecharger-carnet-cps">Télécharger en .txt</button></div>
     <p class="statut" id="statut-carnet-cps" aria-live="polite"></p>
     <div class="copie-secours" id="secours-carnet-cps"><textarea readonly></textarea></div>
   </section>
   <p class="note">C’est toi qui décides. Tu peux t’arrêter ici.</p>
-  ${suite("cps-postures","Où en es-tu ?","accueil","Retour à l’accueil")}
+  ${suite("cps-monde","Mon lien au monde","accueil","Retour à l’accueil")}
 </div>`;
 
 VUES["adultes-cps"]=()=>`<div class="wrap vue">
   <p class="temps">Pour les adultes</p>
-  <h2>Accompagner les CPS sans les noter.</h2>
-  <p class="intro">Le Zoom sur les CPS prolonge l’atelier « Mille façons de reconnaître ». Il s’appuie sur le document d’accompagnement de l’Inspection de l’enseignement agricole et sur les travaux de la reconnaissance ouverte.</p>
+  <h2>Repérer, documenter, valoriser, sans noter.</h2>
+  <p class="intro">Le Zoom sur les CPS et CEPS prolonge l’atelier « Mille façons de reconnaître ». Il ne fait pas un cours sur les CPS : il montre comment la reconnaissance et les badges aident à les repérer, les documenter et les valoriser, dans les pratiques.</p>
   <div class="adultes">
     <section><h3>Ce que dit l’Inspection</h3><ul>
-      <li>Les CPS ne s’enseignent pas à côté : elles s’intègrent aux apprentissages, de façon explicite et progressive. Elles se construisent dans un collectif.</li>
-      <li>Le geste clé est le va-et-vient entre l’expérience vécue et le retour réflexif.</li>
-      <li>Quatre leviers : rendre les CPS visibles, les articuler avec les « éducations à », valoriser le vécu en entreprise, choisir des méthodes actives.</li>
-      <li>Des points d’appui dans les référentiels : MG2 en CAPa, MG3 et MG4 en Bac pro, questions socialement vives en STAV, conduite de projet et mobilité en BTSA.</li>
-      <li>L’évaluation sommative est écartée : grilles sans note, auto-évaluation, co-évaluation. Les open badges sont cités comme outil de valorisation.</li>
-      <li>La posture de l’adulte fait partie de l’apprentissage : cadre sécurisant, émotions accueillies, réussites valorisées.</li></ul></section>
+      <li>Les CPS s’intègrent aux apprentissages, de façon explicite. Le geste clé est le va-et-vient entre l’expérience vécue et le retour réflexif.</li>
+      <li>Le vécu en entreprise est un levier : entretiens d’explicitation après les stages, émotions, compétences professionnelles et CPS ensemble.</li>
+      <li>L’évaluation sommative est écartée : grilles sans note, auto-évaluation, co-évaluation. Les open badges sont cités comme outil de valorisation.</li></ul></section>
+    <section><h3>Les CEPS, apport de l’enseignement agricole</h3><p>La recherche-action de l’Institut Agro de Florac et de RéSéDA (2016-2021) ajoute aux CPS une dimension écologique : l’attention à son corps et au monde, au vivant, aux lieux. Elle s’appuie sur l’itinérance pédestre et sur des pratiques reprises dans le Zoom : le journal des kaïros, le cercle de parole, l’écoute active, la charte du vivre ensemble. Elle insiste sur les conditions : une équipe stable, un projet pensé sur la durée, des élèves acteurs et auteurs.</p></section>
     <section><h3>Ce qu’apporte la reconnaissance ouverte</h3><ul>
-      <li><strong>Éviter le modèle déficitaire</strong> : un badge par CPS ferait croire que l’absence d’un badge est une incompétence. On reconnaît une personne, puis une pratique, puis des compétences.</li>
-      <li><strong>Le référentiel inversé</strong> : une liste de CPS donne des mots ; c’est la reconnaissance, au fil des parcours, qui construit un référentiel vivant.</li>
-      <li><strong>La symétrie</strong> : les adultes aussi découvrent, explorent, intègrent, accompagnent. Une équipe peut se reconnaître elle-même dans ces postures et former une communauté de pratique.</li>
-      <li><strong>Reconnaître est une CPS</strong> : faire pratiquer la reconnaissance entre pairs, et le rôle d’ami critique, c’est déjà développer les CPS.</li></ul></section>
-    <section><h3>EVARS et santé mentale</h3><p>Les CPS s’articulent naturellement avec l’éducation à la vie affective et relationnelle, et à la sexualité (au moins trois séances par an et par niveau) : se connaître, communiquer, consentir. Ces sujets relèvent de l’intime : le site ne propose pas aux apprenants de les rendre visibles.</p></section>
-    <section><h3>Animer le Zoom</h3><p>Une séquence d’environ une heure, à la suite de l’atelier ou lors d’une séance séparée : <a href="#animer-cps">Animer le Zoom sur les CPS</a>.</p></section>
+      <li><strong>Éviter le modèle déficitaire</strong> : pas un badge par CPS. On reconnaît une personne, puis une pratique, puis des compétences.</li>
+      <li><strong>Le regard des autres</strong> : l’ami critique et le feedback du professionnel rendent visibles des compétences que l’apprenant ne voit pas seul. L’endossement en garde la trace.</li>
+      <li><strong>La dimension collective</strong> : un badge de projet, documenté par chacun, montre les compétences mobilisées à plusieurs.</li>
+      <li><strong>La symétrie</strong> : les adultes aussi découvrent, explorent, intègrent, accompagnent. Une équipe peut se reconnaître elle-même dans ces postures.</li>
+      <li><strong>Reconnaître est une CPS</strong> : faire pratiquer la reconnaissance entre pairs, c’est déjà développer les CPS.</li></ul></section>
+    <section><h3>Les quatre postures</h3><p>Plutôt que des niveaux de maîtrise pour chaque CPS, le projet NS4-SFC propose quatre postures, qui situent une personne dans une pratique donnée.</p>
+      <div class="table-formes"><table><thead><tr><th scope="col">Posture</th><th scope="col">Ce qu’elle décrit</th></tr></thead><tbody>${CPS_POSTURES.map(p=>`<tr><th scope="row">${p[0]}</th><td>${p[1]}</td></tr>`).join("")}</tbody></table></div>
+      <p>Elles ne classent pas les personnes : on peut être à des postures différentes selon les pratiques. « J’intègre » ne veut pas dire tout maîtriser, mais savoir agir avec ses limites. Elles sont proposées en option dans le badge de pratique des apprenants, et valent aussi pour les adultes et les équipes.</p></section>
+    <section><h3>L’intime, EVARS et santé mentale</h3><p>Les CPS s’articulent avec l’éducation à la vie affective et relationnelle, et à la sexualité (au moins trois séances par an et par niveau). Ces sujets, comme ce qui touche au corps, relèvent de l’intime : le site ne propose pas aux apprenants de les rendre visibles.</p></section>
+    <section><h3>Animer le Zoom</h3><p>Une séquence d’environ 45 minutes : <a href="#animer-cps">Animer le Zoom sur les CPS et CEPS</a>.</p></section>
     <section><h3>Ressources</h3><ul>
       <li><a href="${URL_NOTE_CPS}" target="_blank" rel="noopener">Inspection de l’enseignement agricole, document d’accompagnement sur les compétences psychosociales</a> (chlorofil)</li>
+      <li><a href="${URL_RESEDA}" target="_blank" rel="noopener">Chemin faisant… vers soi, les autres, le monde</a>, RéSéDA, Institut Agro de Florac</li>
       <li><a href="${URL_GUIDE_SFC}" target="_blank" rel="noopener">Les Open Badges au service de la reconnaissance des savoir-faire comportementaux</a>, projet NS4-SFC</li></ul></section>
   </div>
-  <div class="suite"><a class="btn" href="#adultes">Pour les adultes</a><a class="btn plein" href="#cps-mots">Voir le Zoom des apprenants</a></div>
+  <div class="suite"><a class="btn" href="#adultes">Pour les adultes</a><a class="btn plein" href="#cps">Voir le Zoom des apprenants</a></div>
 </div>`;
 
 VUES["animer-cps"]=()=>`<div class="wrap vue fiche-animation">
   <p class="temps">Pour les adultes</p>
-  <h2>Animer le Zoom sur les CPS</h2>
-  <p class="intro">Une séquence d’environ une heure, après l’atelier « Mille façons de reconnaître » ou lors d’une séance séparée. Les apprenants ont déjà réfléchi à la reconnaissance et découvert le badge.</p>
+  <h2>Animer le Zoom sur les CPS et CEPS</h2>
+  <p class="intro">Une séquence d’environ 45 minutes, après l’atelier « Mille façons de reconnaître » ou lors d’une séance séparée. Les apprenants ont déjà réfléchi à la reconnaissance et découvert le badge.</p>
   <div class="actions pas-imprime"><button class="btn plein" type="button" id="btn-imprimer">Imprimer cette fiche</button></div>
   <div class="anim-cadre">
     <div><h3>Pour qui</h3><p>Un groupe de 8 à 30 apprenants, idéalement au retour d’un stage ou d’un projet collectif.</p></div>
     <div><h3>Matériel</h3><p>Un vidéoprojecteur. Des téléphones ou ordinateurs pour écrire (facultatif).</p></div>
-    <div><h3>À savoir</h3><p>Rien n’est enregistré. Faites télécharger le carnet du Zoom avant la fin de la séance. Personne n’est obligé de partager ce qu’il écrit.</p></div>
+    <div><h3>À savoir</h3><p>Rien n’est enregistré. Personne n’est obligé de partager ce qu’il écrit. Faites télécharger le carnet du Zoom avant la fin.</p></div>
   </div>
   <ol class="deroule">
-    <li><span class="duree">10 min</span><div><strong>Des mots pour dire</strong><p>Lire la définition des CPS, puis faire choisir <a href="#cps-mots">les mots</a> pour les trois situations. Montrer que les familles se mêlent.</p></div></li>
-    <li><span class="duree">20 min</span><div><strong>Une situation, seul puis avec un ami critique</strong><p>Chacun choisit <a href="#cps-terrain">une situation</a>, y revient seul par écrit avec <a href="#cps-retour">les questions</a>, puis en binôme avec un ami critique. On inverse les rôles.</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Reconnaître un camarade</strong><p>Projeter <a href="#cps-reconnaitre">« plutôt que / dis »</a>. Chacun écrit à un camarade ce qu’il l’a vu faire.</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Badges-étiquettes et badges de pratique</strong><p>Par petits groupes, transformer <a href="#cps-badge">les étiquettes</a> en badges de pratique, puis comparer avec les propositions.</p></div></li>
-    <li><span class="duree">10 min</span><div><strong>Postures, et rendre visible ou non</strong><p>Chacun se situe dans <a href="#cps-postures">les postures</a> pour sa situation, puis décide avec la question de <a href="#cps-visible">la dernière page</a> s’il veut la rendre visible. Ceux qui le souhaitent construisent leur badge de pratique.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>En bref, puis mes trois bons moments</strong><p>Lire <a href="#cps">le résumé</a>. Chacun note trois bons moments d’une journée de stage ou de projet ; ceux qui le veulent en partagent un en cercle.</p></div></li>
+    <li><span class="duree">10 min</span><div><strong>Le porteur d’eau, puis une situation</strong><p>Raconter le conte. Chacun écrit, pour une situation vécue, ce qui l’a aidé, ce qui lui a été difficile, sur qui il s’est appuyé (<a href="#cps-moi">Me reconnaître</a>).</p></div></li>
+    <li><span class="duree">15 min</span><div><strong>L’ami critique</strong><p>En binôme, avec <a href="#cps-regards">les règles de l’écoute</a>. On inverse les rôles. Chacun prépare la question qu’il posera à son maître de stage.</p></div></li>
+    <li><span class="duree">5 min</span><div><strong>Mon lien au monde</strong><p><a href="#cps-monde">Trois questions</a>, chacun pour soi.</p></div></li>
+    <li><span class="duree">5 min</span><div><strong>Garder une trace</strong><p>La question « pour qui, pour quoi faire ? ». Ceux qui le souhaitent construisent leur badge de pratique, un badge de projet, ou téléchargent leur carnet (<a href="#cps-trace">Garder une trace</a>).</p></div></li>
   </ol>
-  <p class="note">Ressources : <a href="${URL_NOTE_CPS}" target="_blank" rel="noopener">document d’accompagnement de l’Inspection sur les CPS</a> ; <a href="${URL_GUIDE_SFC}" target="_blank" rel="noopener">guide NS4-SFC</a>.</p>
-  <div class="suite pas-imprime"><a class="btn" href="#adultes-cps">CPS, reconnaissance et badges</a><a class="btn plein" href="#cps-mots">Voir le Zoom des apprenants</a></div>
+  <p class="note">Pour aller plus loin sur les CEPS : la formation « itinérance pédestre et compétences écopsychosociales » de l’Institut Agro, campus de Florac (<a href="${URL_FLORAC}" target="_blank" rel="noopener">catalogue 2026</a>). Ressources : <a href="${URL_NOTE_CPS}" target="_blank" rel="noopener">document d’accompagnement de l’Inspection</a> ; <a href="${URL_RESEDA}" target="_blank" rel="noopener">carnet RéSéDA</a> ; <a href="${URL_GUIDE_SFC}" target="_blank" rel="noopener">guide NS4-SFC</a>.</p>
+  <div class="suite pas-imprime"><a class="btn" href="#adultes-cps">CPS, CEPS et reconnaissance</a><a class="btn plein" href="#cps">Voir le Zoom des apprenants</a></div>
 </div>`;
-Object.assign(T,{"cps-mots":4,"cps-terrain":4,"cps-retour":4,"cps-reconnaitre":4,"cps-badge":4,"cps-postures":4,"cps-visible":4,"adultes-cps":0,"animer-cps":0,"construire-cps":4});
-ETAPES.Z={nom:"Zoom sur les CPS",pages:[["cps-mots","Des mots pour dire"],["cps-terrain","Ça dépend du terrain"],["cps-retour","Y repenser"],["cps-reconnaitre","Reconnaître"],["cps-badge","Pas une liste de qualités"],["cps-postures","Où en es-tu ?"],["cps-visible","Le rendre visible"]]};
+Object.assign(T,{cps:4,"cps-moi":4,"cps-regards":4,"cps-monde":4,"cps-trace":4,"adultes-cps":0,"animer-cps":0,"construire-cps":4});
+ETAPES.Z={nom:"Zoom sur les CPS et CEPS",pages:[["cps","En bref"],["cps-moi","Me reconnaître"],["cps-regards","Le regard des autres"],["cps-monde","Mon lien au monde"],["cps-trace","Garder une trace"]]};
 
 /* badge de pratique */
 BUILD.pratique={titre:"Mon badge de pratique",quoi:"ton badge de pratique",intro:"Tes réponses du Zoom ont déjà rempli une partie du badge. Complète, corrige ou efface : c’est toi qui décides.",
   sections:[
     {t:"Qui es-tu ?",ch:[CH.prenom]},
     {t:"Nomme ta pratique",ch:[{...CH.nom,aide:"Ce que tu as fait, pas ce que tu es. Avec un verbe d’action.",ph:"J’ai organisé le relevé des oiseaux de la haie du lycée"},{...CH.description,label:"La situation",aide:"Où, quand, avec qui.",ph:"Pendant l’inventaire naturaliste de la classe, au printemps, avec mon équipe et un naturaliste partenaire."}]},
-    {t:"Ce que tu as fait et appris",ch:[{id:"fait",label:"Ce que tu as fait",type:"textarea",ph:"J’ai réparti les points d’observation et tenu le tableau des relevés."},{id:"appris",label:"Ce que tu as appris",type:"textarea",ph:"Prendre la parole pour organiser un groupe, et écouter les idées des autres."},{id:"cps",label:"Les CPS mobilisées",aide:"Avec les mots de la page « Des mots pour dire ».",type:"text",ph:"Coopérer, te faire comprendre, décider"}]},
-    {t:"Ta posture",ch:[{id:"posture",label:"Où en es-tu pour cette pratique ?",type:"radio",options:CPS_POSTURES.map(p=>p[0])}]},
+    {t:"Ce que tu as fait et appris",ch:[{id:"fait",label:"Ce que tu as fait",type:"textarea",ph:"J’ai réparti les points d’observation et tenu le tableau des relevés."},{id:"appris",label:"Ce que tu as appris",type:"textarea",ph:"Prendre la parole pour organiser un groupe, et écouter les idées des autres."},{id:"cps",label:"Les compétences mobilisées",aide:"Avec tes mots : penser, ressentir, être avec les autres, être attentif au monde.",type:"text",ph:"Coopérer, te faire comprendre, observer le vivant"}]},
+    {t:"Où en es-tu ? (facultatif)",ch:[{id:"posture",label:"Ta posture pour cette pratique",type:"radio",options:CPS_POSTURES.map(p=>p[0])}]},
     {t:"Garde des traces",ch:[{...CH.preuves,ph:"Le tableau des relevés\nPhotos de l’équipe sur le terrain"}]},
-    {t:"Qui peut en témoigner ?",ch:[{...CH.temoins,ph:"Le naturaliste partenaire\nMon ami critique"}]},
+    {t:"Qui peut en témoigner ?",ch:[{...CH.temoins,ph:"Le naturaliste partenaire\nMon ami critique\nMon maître de stage"}]},
     {t:"Décide à qui tu le montres",ch:[CH.image,CH.visibilite]}],
   fiche:v=>({famille:"individuel",nom:v.nom,emetteur:v.prenom?`${v.prenom} (badge auto-déclaré)`:"",detenteur:v.prenom,description:v.description,
-    reconnait:[v.fait,v.appris?"Ce que j’ai appris : "+v.appris:"",v.cps?"CPS mobilisées : "+v.cps:"",v.posture?"Posture : "+v.posture:""].filter(Boolean).join("\n"),
+    reconnait:[v.fait,v.appris?"Ce que j’ai appris : "+v.appris:"",v.cps?"Compétences mobilisées : "+v.cps:"",v.posture?"Posture : "+v.posture:""].filter(Boolean).join("\n"),
     preuves:lignes(v.preuves),endos:lignes(v.temoins).map(q=>({qui:q,attente:true})),endosAttente:true,endosLabel:"Témoins à solliciter",image:v.image})};
 TYPE_BUILD.cps="pratique";
 function zPreremplir(){
-  const v=BROUILLONS.cps||(BROUILLONS.cps={famille:"individuel"}),R=REFLEXIONS,s=ZOOM.situation;
-  const sit=[s==="perso"?R["z-perso"]:(CPS_TERRAIN[s]?CPS_TERRAIN[s].t:""),R["z-q1"]].filter(Boolean).join(". ");
+  const v=BROUILLONS.cps||(BROUILLONS.cps={famille:"individuel"}),R=REFLEXIONS;
   const set=(k,x)=>{if(!v[k]&&x)v[k]=x;};
-  set("description",sit);
-  set("fait",[R["z-q2"],R["z-q4"]].filter(Boolean).join("\n"));
-  set("appris",R["z-q6"]);
-  if(s!==null&&s!=="perso")set("cps",CPS_TERRAIN[s].j);
-  set("posture",ZOOM.posture);
+  set("description",R["z-sit"]);
+  set("fait",R["z-aide"]);
+  set("appris",[R["z-mdit"],R["z-mo3"]].filter(Boolean).join("\n"));
+  set("temoins",[R["z-ami"]?"Mon ami critique":"",R["z-pro"]?"Mon maître de stage":""].filter(Boolean).join("\n"));
 }
 
 document.addEventListener("click",async e=>{
-  const m=e.target.closest("[data-zmot]");
-  if(m){const i=+m.dataset.zmot,k=m.dataset.k,l=ZOOM.mots[i]||(ZOOM.mots[i]=[]);const j=l.indexOf(k);if(j>=0)l.splice(j,1);else l.push(k);
-    m.setAttribute("aria-pressed",j<0);const r=document.getElementById("zmot-retour-"+i);r.hidden=!l.length;r.textContent=zRetourMots(i);return;}
-  const s=e.target.closest("[data-zsit]");
-  if(s){const x=s.dataset.zsit==="perso"?"perso":+s.dataset.zsit;ZOOM.situation=ZOOM.situation===x?null:x;
-    document.querySelectorAll("[data-zsit]").forEach(b=>b.setAttribute("aria-pressed",b===s&&ZOOM.situation!==null));
-    const pb=document.getElementById("z-perso-bloc");pb.hidden=ZOOM.situation!=="perso";if(!pb.hidden)document.getElementById("z-perso").focus();return;}
-  const p=e.target.closest("[data-zpost]");
-  if(p){ZOOM.posture=ZOOM.posture===p.dataset.zpost?null:p.dataset.zpost;document.querySelectorAll("[data-zpost]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.zpost===ZOOM.posture));return;}
-  const vp=e.target.closest("#z-voir-prop");
-  if(vp){const t=document.getElementById("z-prop");t.hidden=!t.hidden;vp.setAttribute("aria-expanded",!t.hidden);vp.textContent=t.hidden?"Voir des propositions":"Masquer les propositions";return;}
+  const pi=e.target.closest("[data-zpiste]");
+  if(pi){const ta=document.getElementById("z-sit");ta.value=ta.value?ta.value.replace(/\s*$/,"")+" ; "+pi.dataset.zpiste:pi.dataset.zpiste+" : ";REFLEXIONS["z-sit"]=ta.value;pi.setAttribute("aria-pressed","true");ta.focus();return;}
   const st=document.getElementById("statut-carnet-cps");
   if(e.target.closest("#copier-carnet-cps")){const txt=texteCarnetCPS(),sec=document.getElementById("secours-carnet-cps");
     try{await navigator.clipboard.writeText(txt);st.textContent="Carnet copié.";sec.classList.remove("on");}
     catch(err){sec.classList.add("on");const ta=sec.querySelector("textarea");ta.value=txt;ta.focus();ta.select();st.textContent="La copie automatique n’a pas marché : le texte est sélectionné ci-dessous.";}return;}
   if(e.target.closest("#telecharger-carnet-cps")){
-    try{if(DL){await DL.save({filename:"carnet-zoom-cps.txt",data:texteCarnetCPS()});}
-      else{const url=URL.createObjectURL(new Blob([texteCarnetCPS()],{type:"text/plain;charset=utf-8"}));const l=document.createElement("a");l.href=url;l.download="carnet-zoom-cps.txt";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+    try{if(DL){await DL.save({filename:"carnet-zoom-cps-ceps.txt",data:texteCarnetCPS()});}
+      else{const url=URL.createObjectURL(new Blob([texteCarnetCPS()],{type:"text/plain;charset=utf-8"}));const l=document.createElement("a");l.href=url;l.download="carnet-zoom-cps-ceps.txt";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
       st.textContent="Carnet téléchargé.";}
     catch(err){st.textContent="Le téléchargement n’a pas marché : utilise « Copier mon carnet ».";}
   }
