@@ -1249,7 +1249,7 @@ function vueAnatomie(){
       ${Object.entries(EXEMPLES).map(([k,e],i)=>`<button role="tab" type="button" id="tab-${k}" aria-controls="panneau-anatomie" aria-selected="${i===0}" data-ex="${k}">${e.onglet}<span>${e.sous||"une personne"}</span></button>`).join("")}
     </div>
     <div id="panneau-anatomie" role="tabpanel" aria-labelledby="tab-indiv">${panneauAnatomie("indiv")}</div>
-    <p class="note">Un badge collectif n’est pas délivré à un groupe : c’est le même badge, proposé à chaque personne qui a participé. Chacun le documente avec sa propre contribution et reçoit ses propres endossements.</p>
+    <p class="note">Un badge collectif, c’est le même badge proposé à chaque personne qui a participé. Chacun le documente avec sa propre contribution et reçoit ses propres endossements.</p>
   </section>`;
 }
 
