@@ -2325,16 +2325,19 @@ document.addEventListener("input",e=>{if(e.target.id&&GARDE_CPS[e.target.id]!==u
 function texteCarnetCPS(){
   return "MON CARNET DU ZOOM SUR LES CPS ET CEPS\nÉcrit avec « Mille façons de reconnaître »\n\n"+Object.entries(GARDE_CPS).map(([k,q])=>q+"\n"+(REFLEXIONS[k]||"(pas de réponse)")).join("\n\n");
 }
+const ZTX={bac:{"intro0": "Les compétences psychosociales (CPS) désignent les capacités mentales, émotionnelles et sociales qui aident à comprendre ce que l’on ressent, à s’adapter aux situations du quotidien, à coopérer et à faire des choix éclairés. Dans l’enseignement agricole, on parle aussi de compétences écopsychosociales (CEPS) : on y ajoute l’attention à son corps et au monde qui t’entoure, les lieux, les animaux, les plantes, le vivant.", "encart0": "Ici, pas de cours sur les CPS : tes enseignants peuvent t’en dire plus. Ce Zoom t’aide à les repérer dans ce que tu fais, à les mettre en mots et, si tu le veux, à les rendre visibles.", "voient": "en stage, sur un chantier école, dans un projet de classe (un débat sur l’avenir du territoire, un bricolab’, un inventaire de la faune et de la flore, un jeu coopératif, la page de l’ALESA…).", "moments": "Pense à une journée de stage, de chantier ou de projet. Note trois moments où tu as fait la bonne chose au bon moment.", "sitph": "Par exemple : le jour où on a dû finir le chantier école avant la pluie…", "limites": "Connaître ses limites, c’est une force. Une personne qui a du mal à prendre des initiatives, mais qui le sait et s’appuie sur un collègue qui aime ça, réussit très bien.", "ami": "Une personne en qui tu as confiance, un camarade, un enseignant. Tu lui racontes ta situation. Il t’écoute, te pose des questions et te dit honnêtement ce qu’il a vu, sans te juger.", "regles": "Écouter jusqu’au bout, sans interrompre, sans juger, sans donner tout de suite des conseils. Respecter les silences. Puis les rôles s’inversent.", "qami": ["Qu’est-ce que tu as remarqué dans ce qu’il raconte ?", "Qu’est-ce qui te semble réussi ?", "Qu’est-ce qu’il n’a peut-être pas vu ?", "Quelle question pourrait l’aider à aller plus loin ?"], "proTitre": "Le regard du professionnel", "pro": "Ton maître de stage te voit travailler. Il voit comment tu fais face à un imprévu, comment tu travailles avec l’équipe, comment tu prends soin des animaux ou du matériel. Ces compétences ne se voient pas à côté du métier : elles sont dans le geste professionnel.", "qpro": ["Qu’as-tu vu dans ma façon de faire face aux imprévus ?", "Comment je travaille avec l’équipe ?", "Qu’est-ce que je pourrais faire autrement ?"], "garder": "Tu peux lui demander d’écrire quelques lignes sur ton badge. La demande d’endossement reprend ces questions : <a href=\"#demander-maitre\">Demander l’endossement de mon maître de stage</a>.", "bien": [["Tu es organisé.", "Sur le chantier école, tu as proposé qu’on se répartisse les tâches, et on a fini à temps."], ["Tu es créative.", "Pour le jeu coopératif, c’est toi qui as eu l’idée des cartes « aléas météo »."], ["Tu es courageux.", "Pendant le débat, tu as défendu ton avis alors que la salle était contre."]], "monde": "Dans ce que tu fais, tu n’es pas seulement avec des humains. Tu travailles avec des animaux, des plantes, un sol, un paysage, des outils. Et avec ton corps : l’effort, la fatigue, les gestes. Y faire attention, c’est aussi une compétence.", "mondeEx": ["Remarquer qu’un animal ne va pas bien, avant que ça se voie.", "Observer la haie pour l’inventaire de la faune et de la flore, et découvrir ce qu’on n’avait jamais vu.", "Sentir qu’il faut faire une pause avant de se blesser sur le chantier école.", "Réparer un objet au bricolab’ plutôt que le jeter.", "Découvrir un lieu du territoire pendant un projet sportif, culturel ou artistique."], "trace": "Ce que tu viens d’écrire a déjà de la valeur, même si personne ne le voit. Ce qui touche à tes émotions, à ton corps, à tes relations peut très bien rester là. D’autres choses peuvent t’être utiles si d’autres les voient : pour un stage, une formation, un engagement.", "etiq": [["Je sais argumenter", "J’ai défendu une position, et écouté les autres, dans le débat contradictoire sur l’avenir de notre territoire"], ["Je respecte le vivant", "J’ai organisé le relevé des oiseaux de la haie du lycée pour l’inventaire naturaliste"]], "bpratique": "La situation, ce que tu as fait, ce que tu as appris, et ceux qui peuvent en témoigner : ton ami critique, ton maître de stage, un partenaire. Tu peux, si tu veux, y indiquer où tu en es : je découvre, j’explore, j’intègre, j’accompagne.", "bprojetEx": "« Nous avons ouvert le bricolab’ de l’établissement », proposé par l’ALESA à toute l’équipe ; chacun y raconte ce qu’il a fait, et ce que le projet lui a demandé.", "usage": "dans un dossier de poursuite d’études, auprès d’un employeur, pour l’unité facultative « Engagement citoyen », ou en BTSA pour valoriser un engagement étudiant."},college:{"intro0": "Les compétences psychosociales (CPS), ce sont tes capacités à comprendre ce que tu ressens, à t’adapter quand quelque chose change, à t’entendre avec les autres et à faire de bons choix. Dans l’enseignement agricole, on parle aussi de compétences écopsychosociales (CEPS) : faire attention à ton corps et au monde autour de toi, les animaux, les plantes, la nature.", "dims": [["Penser", "trouver une solution, réfléchir avant d’agir, avoir une autre idée."], ["Ressentir", "savoir ce que tu ressens, rester calme, avoir confiance en toi."], ["Être avec les autres", "écouter, te faire comprendre, aider, oser dire non."], ["Faire attention à ton corps et au monde", "sentir quand tu es fatigué, prendre soin des animaux, des plantes et des lieux."]], "encart0": "Ici, pas de cours : tes professeurs peuvent t’en dire plus. Ce Zoom t’aide à les repérer dans ce que tu fais, à trouver les mots et, si tu veux, à les montrer.", "voient": "en stage, à la micro-ferme, dans un projet de classe (préparer un repas pour les parents, entretenir le jardin, inventer un jeu, partir en sortie nature…).", "moments": "Pense à une journée de stage, à la micro-ferme ou en sortie. Note trois moments où tu as bien fait les choses, au bon moment.", "pistes": ["En stage", "À la micro-ferme", "Le repas pour les parents", "Le jardin de l’établissement", "Une sortie nature", "Un jeu inventé en classe", "Un match ou un tournoi", "Un exposé en groupe"], "sitph": "Par exemple : le jour où une poule s’est échappée de la micro-ferme…", "limites": "Savoir ce qui est difficile pour toi, c’est une force. Tu peux alors demander de l’aide à quelqu’un pour qui c’est facile. Ensemble, vous y arrivez.", "ami": "Un copain, une copine ou un professeur en qui tu as confiance. Tu lui racontes ce que tu as vécu. Il t’écoute, te pose des questions et te dit ce qu’il a remarqué, sans se moquer et sans juger.", "regles": "Écouter jusqu’au bout, sans couper la parole, sans se moquer, sans juger. Puis on échange les rôles.", "qami": ["Qu’est-ce que tu as remarqué dans ce qu’il raconte ?", "Qu’est-ce qui était réussi ?", "Qu’est-ce qu’il n’a peut-être pas vu ?", "Quelle question pourrais-tu lui poser ?"], "proTitre": "Le regard de la personne qui t’accueille en stage", "pro": "Pendant ton stage, la personne qui t’accueille te voit faire. Elle voit si tu poses des questions, si tu aides les autres, si tu fais attention aux animaux ou au matériel. Ce qu’elle remarque compte beaucoup.", "qpro": ["Qu’as-tu remarqué quand il y avait un imprévu ?", "Comment je me suis débrouillé avec l’équipe ?", "Qu’est-ce que je pourrais faire mieux ?"], "garder": "Tu peux lui demander d’écrire quelques lignes : c’est un témoignage. Pour préparer ta demande : <a href=\"#demander-maitre\">Demander un témoignage à la personne qui m’a accueilli</a>.", "bien": [["Tu es gentil.", "Quand j’étais perdu en TP, tu as pris le temps de me réexpliquer."], ["Tu es organisée.", "Pour le repas des parents, tu as fait la liste des courses, et chacun savait quoi apporter."], ["Tu es courageux.", "Tu as osé dire que tu n’étais pas d’accord, poliment, devant toute la classe."]], "monde": "Tu n’es pas seulement avec des humains. Tu t’occupes d’animaux, de plantes, d’un jardin, d’un lieu. Et tu as un corps : il se fatigue, il fait des efforts, il te donne des signaux. Y faire attention, c’est aussi une compétence.", "mondeEx": ["Voir qu’une poule de la micro-ferme ne va pas bien.", "Observer les oiseaux ou les insectes pendant une sortie nature.", "Sentir que tu es fatigué, et faire une pause.", "Réparer un objet au lieu de le jeter.", "Découvrir un endroit près de chez toi pendant une sortie."], "trace": "Ce que tu viens d’écrire compte déjà, même si personne ne le voit. Ce qui touche à tes émotions, à ton corps ou à tes amitiés peut très bien rester pour toi. D’autres choses peuvent t’être utiles si d’autres les voient : pour ton stage, ton orientation, la suite de ta formation.", "etiq": [["Je suis gentil", "Pendant un mois, j’ai aidé un camarade de 4e à s’occuper des poules de la micro-ferme"], ["J’aime la nature", "J’ai participé au comptage des oiseaux du jardin de l’établissement"]], "bpratique": "Ce que tu as fait, où, avec qui, ce que tu as appris, et ceux qui peuvent en témoigner : ton ami critique, la personne qui t’a accueilli en stage, un professeur. Tu peux, si tu veux, y dire où tu en es : je découvre, j’explore, j’intègre, j’accompagne.", "bprojetEx": "« Nous avons préparé le repas des parents avec les produits de la ferme », proposé à toute la classe ; chacun y raconte ce qu’il a fait.", "usage": "pour ton oral de stage, ton Parcours Avenir, ton dossier d’orientation, ou la suite de ta formation."}};
+ZTX.bac.dims=CPS_DIMENSIONS;ZTX.bac.pistes=CPS_PISTES;
+function Z(k){const p=ZTX[PUBLIC];return p&&p[k]!==undefined?p[k]:ZTX.bac[k];}
 const zTemps=`<p class="temps">Zoom sur les CPS et CEPS, en complément</p>`;
 const zChamp=(k,lab,ph)=>`<div class="ch"><label for="${k}">${lab}</label><textarea id="${k}"${ph?` placeholder="${ph}"`:""}></textarea></div>`;
 
 VUES.cps=()=>`<div class="wrap vue">
   ${zTemps}
   <h2>Ce qui se joue en toi, avec les autres et avec le monde.</h2>
-  <p class="intro">Les compétences psychosociales (CPS) désignent les capacités mentales, émotionnelles et sociales qui aident à comprendre ce que l’on ressent, à s’adapter aux situations du quotidien, à coopérer et à faire des choix éclairés. Dans l’enseignement agricole, on parle aussi de compétences écopsychosociales (CEPS) : on y ajoute l’attention à son corps et au monde qui t’entoure, les lieux, les animaux, les plantes, le vivant.</p>
-  <ul class="z-dimensions">${CPS_DIMENSIONS.map(d=>`<li><strong>${d[0]}</strong> : ${d[1]}</li>`).join("")}</ul>
-  <div class="encart inf"><p>Ici, pas de cours sur les CPS : tes enseignants peuvent t’en dire plus. Ce Zoom t’aide à les repérer dans ce que tu fais, à les mettre en mots et, si tu le veux, à les rendre visibles.</p></div>
-  <p class="prose"><strong>Elles se voient dans ce que tu fais</strong> : en stage, sur un chantier école, dans un projet de classe (un débat sur l’avenir du territoire, un bricolab’, un inventaire de la faune et de la flore, un jeu coopératif, la page de l’ALESA…).</p>
+  <p class="intro">${Z("intro0")}</p>
+  <ul class="z-dimensions">${Z("dims").map(d=>`<li><strong>${d[0]}</strong> : ${d[1]}</li>`).join("")}</ul>
+  <div class="encart inf"><p>${Z("encart0")}</p></div>
+  <p class="prose"><strong>Elles se voient dans ce que tu fais</strong> : ${Z("voient")}</p>
   <ol class="z-ordre"><li><strong>Me reconnaître</strong><span>ce que je fais bien, ce qui m’est difficile</span></li><li><strong>Le regard des autres</strong><span>l’ami critique, le professionnel</span></li><li><strong>Mon lien au monde</strong><span>mon corps, le vivant, les lieux</span></li><li><strong>Garder une trace</strong><span>pour moi, ou pour le montrer</span></li></ol>
   ${suite("parcours","Revenir aux parcours","cps-moi","Me reconnaître")}
 </div>`;
@@ -2345,7 +2348,7 @@ VUES["cps-moi"]=()=>`<div class="wrap vue">
   <p class="intro">Te reconnaître toi-même, c’est remarquer ce que tu as bien fait, mais aussi ce qui t’a coûté. Les deux comptent.</p>
   <section class="ecrire-soi" aria-labelledby="z-moments">
     <h3 id="z-moments" class="sous-titre">Mes trois bons moments</h3>
-    <p class="prose">Pense à une journée de stage, de chantier ou de projet. Note trois moments où tu as fait la bonne chose au bon moment.</p>
+    <p class="prose">${Z("moments")}</p>
     <div class="z-trois">${zChamp("z-m1","1")}${zChamp("z-m2","2")}${zChamp("z-m3","3")}</div>
     ${zChamp("z-mdit","Qu’est-ce que ces moments disent de toi ?")}
     <p class="note">Inspiré du journal des kaïros, tenu chaque soir pendant les itinérances de l’Institut Agro de Florac.</p>
@@ -2357,12 +2360,12 @@ VUES["cps-moi"]=()=>`<div class="wrap vue">
   </section>
   <section class="ecrire-soi" aria-labelledby="z-sit-titre">
     <h3 id="z-sit-titre" class="sous-titre">Une situation que tu as vécue</h3>
-    <div class="ch"><label for="z-sit">Laquelle ?</label><p class="aide">Une idée pour commencer :</p><div class="pistes">${CPS_PISTES.map(p=>`<button type="button" data-zpiste="${p}">${p}</button>`).join("")}</div><textarea id="z-sit" placeholder="Par exemple : le jour où on a dû finir le chantier école avant la pluie…"></textarea></div>
+    <div class="ch"><label for="z-sit">Laquelle ?</label><p class="aide">Une idée pour commencer :</p><div class="pistes">${Z("pistes").map(p=>`<button type="button" data-zpiste="${p}">${p}</button>`).join("")}</div><textarea id="z-sit" placeholder="${Z("sitph")}"></textarea></div>
     ${zChamp("z-aide","Ce qui t’a aidé à y arriver")}
     ${zChamp("z-diff","Ce qui t’a été difficile")}
     ${zChamp("z-appui","Sur qui tu t’es appuyé")}
   </section>
-  <div class="encart inf"><p>Connaître ses limites, c’est une force. Une personne qui a du mal à prendre des initiatives, mais qui le sait et s’appuie sur un collègue qui aime ça, réussit très bien.</p></div>
+  <div class="encart inf"><p>${Z("limites")}</p></div>
   ${suite("cps","En bref","cps-regards","Le regard des autres")}
 </div>`;
 
@@ -2371,25 +2374,23 @@ VUES["cps-regards"]=()=>`<div class="wrap vue">
   <h2>Les autres voient ce que tu ne vois pas.</h2>
   <section class="z-ami" aria-labelledby="z-ami-titre">
     <h3 id="z-ami-titre" class="sous-titre">L’ami critique</h3>
-    <p class="prose">Une personne en qui tu as confiance, un camarade, un enseignant. Tu lui racontes ta situation. Il t’écoute, te pose des questions et te dit honnêtement ce qu’il a vu, sans te juger.</p>
+    <p class="prose">${Z("ami")}</p>
     <div class="mesure">
-      <div><h3>Les règles de l’écoute</h3><p>Écouter jusqu’au bout, sans interrompre, sans juger, sans donner tout de suite des conseils. Respecter les silences. Puis les rôles s’inversent.</p></div>
-      <div class="reco"><h3>Questions pour l’ami critique</h3><ul><li>Qu’est-ce que tu as remarqué dans ce qu’il raconte ?</li><li>Qu’est-ce qui te semble réussi ?</li><li>Qu’est-ce qu’il n’a peut-être pas vu ?</li><li>Quelle question pourrait l’aider à aller plus loin ?</li></ul></div>
+      <div><h3>Les règles de l’écoute</h3><p>${Z("regles")}</p></div>
+      <div class="reco"><h3>Questions pour l’ami critique</h3><ul>${Z("qami").map(q=>`<li>${q}</li>`).join("")}</ul></div>
     </div>
     ${zChamp("z-ami","Ce que ton ami critique t’a dit ou demandé")}
   </section>
   <section class="z-ami" aria-labelledby="z-pro-titre">
-    <h3 id="z-pro-titre" class="sous-titre">Le regard du professionnel</h3>
-    <p class="prose">Ton maître de stage te voit travailler. Il voit comment tu fais face à un imprévu, comment tu travailles avec l’équipe, comment tu prends soin des animaux ou du matériel. Ces compétences ne se voient pas à côté du métier : elles sont dans le geste professionnel.</p>
-    <div class="mesure"><div class="reco"><h3>Des questions à lui poser</h3><ul><li>Qu’as-tu vu dans ma façon de faire face aux imprévus ?</li><li>Comment je travaille avec l’équipe ?</li><li>Qu’est-ce que je pourrais faire autrement ?</li></ul></div>
-      <div><h3>Pour garder son regard</h3><p>Tu peux lui demander d’écrire quelques lignes sur ton badge. La demande d’endossement reprend ces questions : <a href="#demander-maitre">Demander l’endossement de mon maître de stage</a>.</p></div></div>
+    <h3 id="z-pro-titre" class="sous-titre">${Z("proTitre")}</h3>
+    <p class="prose">${Z("pro")}</p>
+    <div class="mesure"><div class="reco"><h3>Des questions à lui poser</h3><ul>${Z("qpro").map(q=>`<li>${q}</li>`).join("")}</ul></div>
+      <div><h3>Pour garder son regard</h3><p>${Z("garder")}</p></div></div>
     ${zChamp("z-pro","La question que tu vas lui poser, ou ce qu’il t’a répondu")}
   </section>
   <h3 class="sous-titre">Bien dire : décris ce que la personne a fait, pas ce qu’elle est</h3>
   <div class="table-formes"><table><thead><tr><th scope="col">Plutôt que</th><th scope="col">Dis</th></tr></thead><tbody>
-    <tr><td>Tu es organisé.</td><td>Sur le chantier école, tu as proposé qu’on se répartisse les tâches, et on a fini à temps.</td></tr>
-    <tr><td>Tu es créative.</td><td>Pour le jeu coopératif, c’est toi qui as eu l’idée des cartes « aléas météo ».</td></tr>
-    <tr><td>Tu es courageux.</td><td>Pendant le débat, tu as défendu ton avis alors que la salle était contre.</td></tr>
+    ${Z("bien").map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}
   </tbody></table></div>
   ${zChamp("z-reco","Écris à un camarade ce que tu l’as vu faire","Quand…, tu as…")}
   <p class="note">Tu choisis ensuite de le lui dire, de le lui écrire, ou de le garder pour toi.</p>
@@ -2399,8 +2400,8 @@ VUES["cps-regards"]=()=>`<div class="wrap vue">
 VUES["cps-monde"]=()=>`<div class="wrap vue">
   ${zTemps}
   <h2>Attentif à ton corps et au monde qui t’entoure.</h2>
-  <p class="intro">Dans ce que tu fais, tu n’es pas seulement avec des humains. Tu travailles avec des animaux, des plantes, un sol, un paysage, des outils. Et avec ton corps : l’effort, la fatigue, les gestes. Y faire attention, c’est aussi une compétence.</p>
-  <ul class="galerie">${["Remarquer qu’un animal ne va pas bien, avant que ça se voie.","Observer la haie pour l’inventaire de la faune et de la flore, et découvrir ce qu’on n’avait jamais vu.","Sentir qu’il faut faire une pause avant de se blesser sur le chantier école.","Réparer un objet au bricolab’ plutôt que le jeter.","Découvrir un lieu du territoire pendant un projet sportif, culturel ou artistique."].map(x=>`<li><p>${x}</p></li>`).join("")}</ul>
+  <p class="intro">${Z("monde")}</p>
+  <ul class="galerie">${Z("mondeEx").map(x=>`<li><p>${x}</p></li>`).join("")}</ul>
   <section class="ecrire-soi" aria-labelledby="z-monde-q">
     <h3 id="z-monde-q" class="sous-titre">Pour ta situation, ou une autre</h3>
     ${zChamp("z-mo1","Qu’as-tu remarqué autour de toi ?")}
@@ -2415,18 +2416,17 @@ VUES["cps-monde"]=()=>`<div class="wrap vue">
 VUES["cps-trace"]=()=>`<div class="wrap vue">
   ${zTemps}
   <h2>Garder pour toi, ou montrer.</h2>
-  <p class="intro">Ce que tu viens d’écrire a déjà de la valeur, même si personne ne le voit. Ce qui touche à tes émotions, à ton corps, à tes relations peut très bien rester là. D’autres choses peuvent t’être utiles si d’autres les voient : pour un stage, une formation, un engagement.</p>
+  <p class="intro">${Z("trace")}</p>
   <p class="message-fort">As-tu besoin de rendre cette reconnaissance visible ? Pour qui, et pour quoi faire ?</p>
   <section class="encart inf"><h3>Pas de badge « Empathie »</h3><p>Un badge par CPS ferait croire que ne pas l’avoir, c’est ne pas savoir. On reconnaît une personne qui s’engage, puis ce qu’elle fait, puis les compétences que cela a demandées.</p>
     <div class="table-formes"><table><thead><tr><th scope="col">Badge-étiquette</th><th scope="col">Badge de pratique</th></tr></thead><tbody>
-      <tr><td>Je sais argumenter</td><td>J’ai défendu une position, et écouté les autres, dans le débat contradictoire sur l’avenir de notre territoire</td></tr>
-      <tr><td>Je respecte le vivant</td><td>J’ai organisé le relevé des oiseaux de la haie du lycée pour l’inventaire naturaliste</td></tr>
+      ${Z("etiq").map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}
     </tbody></table></div></section>
   <div class="mesure">
-    <div class="reco"><h3>Un badge de pratique</h3><p>La situation, ce que tu as fait, ce que tu as appris, et ceux qui peuvent en témoigner : ton ami critique, ton maître de stage, un partenaire. Tu peux, si tu veux, y indiquer où tu en es : je découvre, j’explore, j’intègre, j’accompagne.</p><a class="btn plein" href="#construire-cps">Construire mon badge de pratique</a></div>
-    <div class="reco"><h3>Et à plusieurs : un badge de projet</h3><p>Beaucoup de compétences se voient à plusieurs : coopérer, négocier, s’organiser, tenir ses engagements. Un badge de projet dit « Nous avons réalisé… ». Il est proposé à tous ceux qui ont participé, et chacun le documente avec sa propre part.</p><p class="cercle-ex">« Nous avons ouvert le bricolab’ de l’établissement », proposé par l’ALESA à toute l’équipe ; chacun y raconte ce qu’il a fait, et ce que le projet lui a demandé.</p><a class="btn" href="#construire-creer">Construire notre badge de projet</a></div>
+    <div class="reco"><h3>Un badge de pratique</h3><p>${Z("bpratique")}</p><a class="btn plein" href="#construire-cps">Construire mon badge de pratique</a></div>
+    <div class="reco"><h3>Et à plusieurs : un badge de projet</h3><p>Beaucoup de compétences se voient à plusieurs : coopérer, négocier, s’organiser, tenir ses engagements. Un badge de projet dit « Nous avons réalisé… ». Il est proposé à tous ceux qui ont participé, et chacun le documente avec sa propre part.</p><p class="cercle-ex">${Z("bprojetEx")}</p><a class="btn" href="#construire-creer">Construire notre badge de projet</a></div>
   </div>
-  <p class="prose"><strong>À quoi ça peut servir :</strong> dans un dossier de poursuite d’études, auprès d’un employeur, pour l’unité facultative « Engagement citoyen », ou en BTSA pour valoriser un engagement étudiant.</p>
+  <p class="prose"><strong>À quoi ça peut servir :</strong> ${Z("usage")}</p>
   <section class="carnet" aria-labelledby="titre-carnet-cps">
     <h3 id="titre-carnet-cps">Mon carnet du Zoom</h3>
     <p>Tout ce que tu as écrit dans le Zoom, réuni au même endroit. Rien n’est envoyé ni enregistré : tout disparaît si tu recharges ou fermes le site. Copie-le ou télécharge-le pour le garder.</p>
