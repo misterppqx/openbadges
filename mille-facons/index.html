@@ -1766,7 +1766,6 @@ VUES.acteur=()=>`<div class="wrap vue">
 /* ================= TEMPS 2 : RENDRE VISIBLE ================= */
 VUES.formes=()=>`<div class="wrap vue">
   <p class="temps">Temps 2 sur 3, rendre visible</p>
-  <p class="avertissement" id="arrivee-directe" hidden>Tu arrives directement ici ? Les badges n’ont de sens qu’après avoir réfléchi à la reconnaissance. Si tu ne l’as pas encore fait, <a href="#mille-facons">commence par là</a>.</p>
   <h2>La reconnaissance prend mille formes. Chacune a son usage.</h2>
   <p class="intro">Un sourire, une poignée de main, un prix, un diplôme… Aucune forme n’est meilleure que les autres. Chacune sert à quelque chose, avec sa force et sa limite.</p>
   <div class="usages">${USAGES.map(g=>`<section class="usage-groupe"><h3>${g.pour}</h3><div class="usage-formes">${g.formes.map(f=>`<article class="usage"><h4>${f.f}</h4><p><span class="u-lab">Sa force</span>${f.force}</p><p><span class="u-lab">Sa limite</span>${f.limite}</p></article>`).join("")}</div></section>`).join("")}</div>
@@ -2226,7 +2225,6 @@ function afficher(){
   if(champ){let bloc=champ;while(bloc.parentElement&&!bloc.parentElement.classList.contains("vue"))bloc=bloc.parentElement;
     if(bloc.parentElement){const n=document.createElement("p");n.className="note-saisie";n.textContent=NOTE_SAISIE+(v==="acteur"?" Ton carnet, en bas de cette page, réunit tout ce que tu as écrit.":"");bloc.before(n);}}
   [...Object.keys(GARDE),...Object.keys(GARDE_CPS)].forEach(k=>{const el=document.getElementById(k);if(el&&REFLEXIONS[k])el.value=REFLEXIONS[k];});
-  const av=document.getElementById("arrivee-directe");if(av&&!["acteur","badge-numerique"].includes(VUE_PRECEDENTE))av.hidden=false;
   VUE_PRECEDENTE=v;
   window.scrollTo(0,0);
   if(v!=="accueil") $app.focus({preventScroll:true});
