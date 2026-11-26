@@ -86,12 +86,14 @@ main:focus{outline:none}
 .contexte li{margin-bottom:.35rem}
 .entrees{display:flex;flex-wrap:wrap;gap:1rem;margin:0 0 2.2rem}
 .entrees .btn{font-size:1.1rem;padding:1rem 1.8rem}
+.entrees a.btn.plein{background:var(--nav);border-color:var(--nav);color:#fff}
+.entrees a.btn.plein:hover{background:#A9381F;border-color:#A9381F}
 .btn.inactif{border-color:var(--doux);color:var(--doux);cursor:not-allowed;background:transparent}
 .btn.inactif small{font-weight:600;font-size:.8rem;border:1px solid currentColor;border-radius:99px;padding:.05rem .5rem}
 .ressources-accueil{list-style:none;padding:0;margin:.8rem 0 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.ressources-accueil a{display:flex;flex-direction:column;gap:.4rem;height:100%;box-sizing:border-box;padding:1.1rem 1.2rem;border:2px solid var(--encre);border-radius:var(--r-moyen);background:#fff;color:inherit;text-decoration:none}
-.ressources-accueil a:hover,.ressources-accueil a:focus-visible{background:var(--teinte)}
-.ressources-accueil b{font-size:1.1rem;color:var(--encre)}
+.ressources-accueil a{display:flex;flex-direction:column;gap:.4rem;height:100%;box-sizing:border-box;padding:1.1rem 1.2rem;border:2px solid var(--nav);border-radius:var(--r-moyen);background:#fff;color:inherit;text-decoration:none}
+.ressources-accueil a:hover,.ressources-accueil a:focus-visible{background:#FBE4DE}
+.ressources-accueil b{font-size:1.1rem;color:var(--nav)}
 .ressources-accueil span{font-size:.95rem;color:var(--doux)}
 .ressources-accueil .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .testeurs{border-left:6px solid var(--colza);background:#fff;border-radius:0 var(--r-moyen) var(--r-moyen) 0;padding:1rem 1.4rem;max-width:52rem}
