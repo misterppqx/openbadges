@@ -18,7 +18,7 @@
   --encre:#0C5D6A;
   --texte:#4E5056;
   --bocage:#098284;
-  --doux:#5E6A6C;
+  --doux:#4F5B5D;
   --papier:#FFFFFF;
   --teinte:#F2F8F7;
   --ciel:#61B0AB;
@@ -47,7 +47,7 @@ a{color:var(--bocage)}
 :focus-visible{outline:3px solid var(--encre);outline-offset:3px;border-radius:6px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
 .prose{max-width:62ch}
-.intro{font-size:1.25rem;color:var(--doux);max-width:58ch}
+.intro{font-size:1.25rem;color:var(--texte);max-width:58ch}
 
 /* ---------- en-tête ---------- */
 .top{position:sticky;top:0;z-index:5;margin-top:0;background:color-mix(in srgb,var(--fond) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid #CFE3E1}
@@ -148,6 +148,14 @@ textarea{width:100%;font:inherit;padding:.8rem;border-radius:var(--r-petit);bord
 .verdict.inf{border:2px dashed var(--ardoise);background:#F2F8F7}
 .verdict.peut{border:2px solid var(--colza);background:#FBF6DA}
 .verdict.badge{background:var(--colza)}
+.verdict.suites{display:block;border:2px solid var(--encre);background:#fff}
+.suites-liste{list-style:none;padding:0;margin:1rem 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.suites-liste li{border:2px dashed #BFD9D6;border-radius:var(--r-petit);padding:.8rem 1rem;display:flex;flex-direction:column;gap:.3rem}
+.suites-liste li.en-avant{border:2px solid var(--colza);background:#FFFCEB}
+.suites-liste b{font-family:"Baloo 2",sans-serif;font-size:1.15rem;color:var(--encre)}
+.suites-liste .sb-tag{align-self:flex-start;font-size:.8rem;font-weight:700;background:var(--colza);color:var(--encre);border-radius:99px;padding:.05rem .6rem}
+.suites-liste a{color:var(--nav);font-weight:700;align-self:flex-start}
+@media (max-width:860px){.suites-liste{grid-template-columns:1fr}}
 .verdict p{margin:0}
 .verdict strong{display:block;font-family:"Baloo 2",sans-serif;font-size:1.3rem;margin-bottom:.2rem}
 
@@ -160,7 +168,7 @@ textarea{width:100%;font:inherit;padding:.8rem;border-radius:var(--r-petit);bord
 .carte .verso{background:#fff;transform:rotateY(180deg);border:2px solid var(--encre)}
 .carte[aria-pressed="true"] .recto{transform:rotateY(-180deg)}
 .carte[aria-pressed="true"] .verso{transform:rotateY(0)}
-.carte .indice{font-size:.9rem;opacity:.8}
+.carte .indice{font-size:.9rem}
 @media (prefers-reduced-motion:reduce){
   .carte .verso{display:none;transform:none}
   .carte[aria-pressed="true"] .verso{display:flex}
@@ -266,7 +274,7 @@ textarea{width:100%;font:inherit;padding:.8rem;border-radius:var(--r-petit);bord
 .prairie span{color:var(--encre)}
 .prairie span:nth-child(3n){color:var(--bocage)}
 .prairie span:nth-child(4n){color:var(--doux)}
-.prairie span:nth-child(5n){color:var(--ciel)}
+.prairie span:nth-child(5n){color:#2F8C88}
 .prairie .badge-mot{box-shadow:0 0 0 4px #fff,0 0 0 7px var(--bocage)}
 .coins{position:relative;background:#fff!important;border:3px solid var(--bocage)!important;border-radius:16px;overflow:hidden}
 .coins::before,.coins::after{content:"";position:absolute;pointer-events:none}
@@ -636,8 +644,12 @@ footer{color:var(--doux);font-size:.95rem;padding:1.5rem 0 2.5rem}
   .vie-visuel{position:static}
   .parcours{grid-template-columns:1fr}
   .cote{position:static}
-  .progression .lib{display:none}
-  .progression a{padding:.3rem}
+  .top nav{flex:1 1 100%}
+  .progression{flex-wrap:nowrap;justify-content:space-between;gap:.3rem}
+  .progression li{flex:1 1 0;min-width:0}
+  .progression a{padding:.3rem .4rem .3rem .3rem;gap:.35rem;font-size:.85rem;line-height:1.15;border-radius:14px;height:100%}
+  .progression .num{flex:none}
+  .progression .lib{display:block}
 }
 
 /* ---------- mode test ---------- */
@@ -1046,9 +1058,9 @@ apprenants(){
       <p class="note">Pour adapter les exemples. Tu peux passer cette question, ou changer à tout moment en bas de page.</p>
       <div class="actions">
         <a class="btn plein" href="#mille-facons">Réfléchir à la reconnaissance</a>
-        <a class="btn" href="#formes">Découvrir les badges numériques</a>
+        <a class="btn" href="#formes">Voir les formes de reconnaissance</a>
       </div>
-      <p class="avertissement">Les badges n’ont de sens qu’après avoir réfléchi à la reconnaissance. Ne commence par « Découvrir les badges numériques » que si tu as déjà fait ce temps de réflexion, par exemple lors d’un premier atelier.</p>
+      <p class="avertissement">Les badges n’ont de sens qu’après avoir réfléchi à la reconnaissance. Ne commence par « Voir les formes de reconnaissance » que si tu as déjà fait ce temps de réflexion, par exemple lors d’un premier atelier.</p>
       <p class="lien-adultes">Vous êtes maître de stage, enseignant, formatrice ? La reconnaissance est une relation : <a href="#adultes">une page est faite pour vous</a>.</p>
     </div>
     <div class="prairie" aria-hidden="true">${html.join("")}</div>
@@ -1084,7 +1096,7 @@ boussole(){
         </div>
       </fieldset>`).join("")}
     </form>
-    <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux cinq questions pour voir où tu en es.</p></div>
+    <div class="verdict vide" id="verdict" aria-live="polite"><p>Réponds aux cinq questions pour voir les suites possibles.</p></div>
     ${suite("jeu","Une situation, deux intentions","parcours","Passer à l’action")}
   </div>`;
 },
@@ -1176,7 +1188,7 @@ faire(){
   return `<div class="wrap vue">
     <p class="fil"><a href="#parcours">Les parcours</a> › Faire reconnaître ce que je fais</p>
     <h2>Dans quel cadre ?</h2>
-    <p class="intro">Ce que tu fais compte partout, pas seulement en cours.</p>
+    <p class="intro">Ce que tu fais peut compter ailleurs aussi, pas seulement en cours : en stage, au club, chez toi, dans un engagement.</p>
     <ul class="sous-choix">${Object.entries(CADRES).map(([k,c])=>`<li><a class="coins" href="#faire-${k}"><strong>${c.t}</strong><span>${c.s}</span></a></li>`).join("")}<li><a class="coins" href="#faire-debut"><strong>Je commence quelque chose</strong><span>Un stage, un projet, un engagement : ouvre ton badge dès le départ.</span></a></li><li><a class="coins" href="#recu-projet"><strong>J’ai reçu un badge de projet</strong><span>Raconte ta part : ta contribution, tes preuves, tes témoins.</span></a></li></ul>
   </div>`;
 },
@@ -1909,7 +1921,7 @@ VUES["badge-numerique"]=()=>`<div class="wrap vue">
       <div><h3>Qui peut en créer ?</h3><p>Tout le monde : toi, un groupe, un établissement, une entreprise, une association. Pas seulement une école.</p></div>
       <div><h3>Où est-il rangé ?</h3><p>Dans un espace en ligne à toi, comme une collection. Il te suit, même quand tu quittes l’établissement.</p></div>
       <div><h3>Comment le montrer ?</h3><p>Par un lien, dans un CV, un portfolio, un dossier de candidature. C’est toi qui choisis à qui.</p></div>
-      <div><h3>Pourquoi « ouvert » ?</h3><p>Les badges suivent un format commun, Open Badges : ils se lisent et se vérifient partout, quelle que soit la plateforme qui les a créés.</p></div>
+      <div><h3>Pourquoi « ouvert » ?</h3><p>Les badges suivent un format commun, Open Badges : ils peuvent être lus et vérifiés avec tous les outils compatibles, quelle que soit la plateforme qui les a créés. Vérifier un badge confirme d’où il vient et qu’il n’a pas été modifié ; ce que la personne sait faire, ce sont les preuves et les témoignages qu’il contient qui le montrent.</p></div>
     </div>
   </div>
   <div class="mesure">
@@ -2255,6 +2267,7 @@ document.addEventListener("input",e=>{if(e.target.id&&GARDE[e.target.id]!==undef
 let VUE_PRECEDENTE="";
 function texteCarnet(){return "MON CARNET DE RECONNAISSANCE\nÉcrit avec « Mille façons de reconnaître »\n\n"+Object.entries(GARDE).map(([k,q])=>q+"\n"+(REFLEXIONS[k]||"(pas de réponse)")).join("\n\n");}
 const NOTE_SAISIE="Ce que tu écris reste sur ton écran tant que tu ne recharges pas ou ne fermes pas le site. Rien n’est envoyé ni enregistré : pense à copier ou télécharger ce que tu veux garder.";
+const TITRE_SITE="Mille façons de reconnaître";
 function afficher(){
   let v=(location.hash||"#accueil").slice(1);
   if(v.startsWith("public-")&&PUBLICS[v.slice(7)]){PUBLIC=v.slice(7);majPiedPublic();location.replace("#apprenants");return;}
@@ -2274,6 +2287,8 @@ function afficher(){
   if(champ){let bloc=champ;while(bloc.parentElement&&!bloc.parentElement.classList.contains("vue"))bloc=bloc.parentElement;
     if(bloc.parentElement){const n=document.createElement("p");n.className="note-saisie";n.textContent=NOTE_SAISIE+(v==="acteur"?" Ton carnet, en bas de cette page, réunit tout ce que tu as écrit.":"");bloc.before(n);}}
   [...Object.keys(GARDE),...Object.keys(GARDE_CPS)].forEach(k=>{const el=document.getElementById(k);if(el&&REFLEXIONS[k])el.value=REFLEXIONS[k];});
+  const titre=$app.querySelector("h1,h2");
+  document.title=(v==="accueil"||!titre)?TITRE_SITE:titre.textContent.replace(/\s+/g," ").trim()+" – "+TITRE_SITE;
   VUE_PRECEDENTE=v;
   window.scrollTo(0,0);
   if(v!=="accueil") $app.focus({preventScroll:true});
@@ -2286,10 +2301,15 @@ function brancher(v){
     form.addEventListener("change",()=>{
       const r=BOUSSOLE.map((_,i)=>form.querySelector(`input[name=q${i}]:checked`));
       if(r.some(x=>!x)){return;}
-      const oui=r.reduce((s,x)=>s+ +x.value,0);
-      if(oui<=1){out.className="verdict inf";out.innerHTML=`<p><strong>Tu peux le garder comme ça.</strong>Rien n’oblige à en faire un badge : un merci, une confiance, un souvenir gardent toute leur valeur. Si un jour ça compte pour la suite, tu pourras toujours le rendre visible.</p>`;}
-      else if(oui<=3){out.className="verdict peut";out.innerHTML=`<p><strong>Peut-être.</strong>Tu peux laisser mûrir. Si ça continue, si quelqu’un d’autre le remarque, ou si ça peut servir à d’autres, un badge pourra avoir du sens.</p>`;}
-      else{out.className="verdict badge";out.innerHTML=`<p><strong>Un badge peut t’être utile.</strong>Ça compte, ça dure, d’autres peuvent en témoigner, et ça peut être utile à d’autres. Passe à l’action : choisis un parcours.</p>`;}
+      const o=r.map(x=>x.value==="1");
+      const suites=[
+        {t:"Remercier",d:"Dire merci, à celui qui t’a reconnu ou à celui que tu reconnais. Ça suffit souvent.",l:"#reconnaitre",ok:false},
+        {t:"Garder une trace pour toi",d:"Quelques mots, une date, une photo : pour t’en souvenir quand tu en auras besoin.",ok:o[0]||o[3]},
+        {t:"Demander un témoignage",d:"Quelqu’un a vu ce que tu fais : demande-lui de l’écrire.",l:"#demander-maitre",ok:o[2]},
+        {t:"Ouvrir un badge",d:"Pour le montrer, le faire grandir avec d’autres, le partager.",l:"#parcours",ok:o[1]&&(o[2]||o[3]||o[4])}
+      ];
+      out.className="verdict suites";
+      out.innerHTML=`<div><p><strong>Plusieurs suites sont possibles.</strong>Il n’y a pas une bonne réponse. Celles qui collent le mieux à tes réponses sont mises en avant ; les autres restent possibles.</p><ul class="suites-liste">${suites.map(x=>`<li class="${x.ok?"en-avant":""}"><b>${x.t}</b>${x.ok?` <span class="sb-tag">d’après tes réponses</span>`:""}<span>${x.d}</span>${x.l?`<a href="${x.l}">J’y vais</a>`:""}</li>`).join("")}</ul></div>`;
     });
   }
   if(v==="badge-cest-quoi"){
